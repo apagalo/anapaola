@@ -182,8 +182,8 @@ nav .nav-links li::after {
   bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
-  height: 4px;
+  width: 3px;
+  height: 3px;
   border-radius: 50%;
   background: var(--dark);
   opacity: 0;
@@ -391,6 +391,7 @@ nav .nav-divider {
 .capabilities > .container > .label,
 .capabilities h2 {
   text-align: center;
+  max-width: none;
 }
 
 .capabilities h2 {
@@ -438,6 +439,7 @@ nav .nav-divider {
 .case-studies > .container > .label,
 .case-studies h2 {
   text-align: center;
+  max-width: none;
 }
 
 .case-studies h2 {
@@ -591,9 +593,15 @@ nav .nav-divider {
 
 .case-content h2 {
   margin-top: var(--space-lg);
-  margin-bottom: var(--space-sm);
-  padding-bottom: var(--space-xs);
+  margin-bottom: 0;
+  padding-bottom: var(--space-sm);
   border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.case-content h2 + p,
+.case-content h2 + ul,
+.case-content h2 + h3 {
+  margin-top: var(--space-md);
 }
 
 .case-content h3 {
@@ -628,7 +636,7 @@ nav .nav-divider {
 }
 
 .diamond-phase {
-  background: var(--sage);
+  background: var(--sage-lighter);
   border-radius: 20px;
   padding: var(--space-md);
   text-align: center;
@@ -648,7 +656,7 @@ nav .nav-divider {
 }
 
 .case-takeaway {
-  background: var(--sage);
+  background: var(--sage-lighter);
   border-radius: 24px;
   padding: var(--space-lg);
   margin-top: var(--space-lg);
