@@ -41,7 +41,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 body {
@@ -136,7 +136,7 @@ nav .container {
 
 nav .nav-name {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 17.6px;
   color: var(--dark);
   display: flex;
   align-items: flex-start;
@@ -161,7 +161,7 @@ nav .nav-links li {
 }
 
 nav .nav-links a {
-  font-size: 0.9rem;
+  font-size: 14.4px;
   font-weight: 500;
   color: var(--dark-soft);
   transition: color 0.2s;
@@ -203,7 +203,7 @@ nav .nav-divider {
 /* === Hero === */
 
 .hero {
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   background-color: var(--sage);
@@ -896,6 +896,8 @@ nav.nav-scrolled {
   border: 1.5px solid var(--peach-light);
   border-radius: 100px;
   padding: 0.55rem 1.6rem;
+  min-width: 160px;
+  text-align: center;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
@@ -1147,7 +1149,7 @@ footer {
   }
 
   nav .nav-links a {
-    font-size: 1.2rem;
+    font-size: 19.2px;
   }
 
   nav .nav-links .nav-divider {
