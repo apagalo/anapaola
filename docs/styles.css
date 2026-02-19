@@ -506,9 +506,8 @@ nav .nav-divider {
   box-shadow: 0 8px 30px rgba(0,0,0,0.08);
 }
 
-.case-card .case-number {
-  font-family: var(--font-body);
-  font-size: 2.5rem;
+.case-card .case-shape {
+  font-size: 24px;
   color: var(--peach-light);
   line-height: 1;
   margin-bottom: var(--space-sm);
@@ -606,12 +605,12 @@ nav .nav-divider {
   padding: calc(84px + var(--space-xl)) 0 var(--space-xl);
 }
 
-.case-hero .case-number {
-  font-family: var(--font-body);
-  font-size: 5rem;
+.case-hero .case-shape {
+  font-size: 48px;
   color: var(--dark);
   opacity: 0.15;
   line-height: 1;
+  margin-bottom: var(--space-xs);
 }
 
 .case-hero h1 {
@@ -877,11 +876,11 @@ nav.nav-scrolled {
 
 /* === Case Card Hover Polish === */
 
-.case-card .case-number {
+.case-card .case-shape {
   transition: color 0.2s ease;
 }
 
-.case-card:hover .case-number {
+.case-card:hover .case-shape {
   color: var(--teal);
 }
 
