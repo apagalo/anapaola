@@ -228,13 +228,13 @@ nav .nav-divider {
 .hero h1 {
   font-family: var(--font-heading);
   font-weight: normal;
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-size: clamp(3.5rem, 7vw, 6rem);
   line-height: 1.05;
   margin-bottom: var(--space-sm);
 }
 
 .hero .tagline {
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   color: var(--dark-soft);
   max-width: 50ch;
   margin-bottom: var(--space-md);
@@ -267,12 +267,17 @@ nav .nav-divider {
 .hero-photo .photo-frame {
   width: 100%;
   max-width: 380px;
-  aspect-ratio: 3/4;
-  border-radius: 12px;
-  border: 4px solid var(--teal);
+  aspect-ratio: 1/1;
   overflow: hidden;
   margin-left: auto;
-  background: var(--teal);
+  clip-path: polygon(
+    50% 0%, 59.83% 13.3%, 75% 6.7%, 76.87% 23.13%,
+    93.3% 25%, 86.7% 40.17%, 100% 50%, 86.7% 59.83%,
+    93.3% 75%, 76.87% 76.87%, 75% 93.3%, 59.83% 86.7%,
+    50% 100%, 40.17% 86.7%, 25% 93.3%, 23.13% 76.87%,
+    6.7% 75%, 13.3% 59.83%, 0% 50%, 13.3% 40.17%,
+    6.7% 25%, 23.13% 23.13%, 25% 6.7%, 40.17% 13.3%
+  );
 }
 
 .hero-photo .photo-frame img {
