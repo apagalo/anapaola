@@ -128,7 +128,7 @@ nav {
   top: 12px;
   left: 0;
   right: 0;
-  max-width: calc(var(--max-width) + 2 * var(--space-md));
+  max-width: var(--max-width);
   margin: 0 auto;
   z-index: 100;
   background: rgba(250, 244, 244, 0.92);
@@ -276,24 +276,12 @@ nav .nav-divider {
   overflow: hidden;
   margin-left: auto;
   clip-path: url(#flower-clip);
-  animation: flowerSpin 30s linear infinite;
 }
 
 .hero-photo .photo-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: flowerSpinReverse 30s linear infinite;
-}
-
-@keyframes flowerSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-@keyframes flowerSpinReverse {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(-360deg); }
 }
 
 .photo-placeholder {
@@ -1017,16 +1005,19 @@ nav.nav-scrolled {
 footer {
   background: var(--dark);
   color: var(--dark-soft);
-  text-align: center;
-  padding: var(--space-lg) 0 var(--space-md);
+  padding: var(--space-md) 0;
   font-size: 0.8rem;
+}
+
+footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .footer-links {
   display: flex;
-  justify-content: center;
   gap: var(--space-md);
-  margin-bottom: var(--space-sm);
 }
 
 .footer-links a {
@@ -1053,7 +1044,7 @@ footer {
   --dark: #fafafa;
   --dark-soft: #a3a3a3;
   --white: #222222;
-  --pillar-bg: #e0e0e0;
+  --pillar-bg: #2a2a2a;
 }
 
 [data-theme="dark"] nav {
@@ -1356,8 +1347,7 @@ html.theme-switching > body {
   .hero .hero-text h1,
   .hero .hero-text .tagline,
   .hero .hero-text .hero-meta,
-  .hero .hero-photo .photo-frame,
-  .hero .hero-photo .photo-frame img {
+  .hero .hero-photo .photo-frame {
     animation: none;
   }
   html.theme-switching > body {
