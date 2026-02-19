@@ -128,7 +128,7 @@ nav {
   top: 12px;
   left: 0;
   right: 0;
-  width: fit-content;
+  max-width: calc(var(--max-width) + 2 * var(--space-md));
   margin: 0 auto;
   z-index: 100;
   background: rgba(250, 244, 244, 0.92);
@@ -140,8 +140,8 @@ nav {
 
 nav .container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: var(--space-lg);
   height: 60px;
   max-width: none;
   padding: 0 var(--space-md);
@@ -276,12 +276,24 @@ nav .nav-divider {
   overflow: hidden;
   margin-left: auto;
   clip-path: url(#flower-clip);
+  animation: flowerSpin 30s linear infinite;
 }
 
 .hero-photo .photo-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  animation: flowerSpinReverse 30s linear infinite;
+}
+
+@keyframes flowerSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes flowerSpinReverse {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
 }
 
 .photo-placeholder {
@@ -302,14 +314,43 @@ nav .nav-divider {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.65rem 1.4rem;
-  border-radius: 6px;
+  padding: 0.75rem 2rem;
+  border-radius: 100px;
   font-size: 0.9rem;
   font-weight: 500;
   font-family: var(--font-body);
   cursor: pointer;
   border: none;
-  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  transition: border-radius 0.5s ease;
+  z-index: -1;
+}
+
+.btn:hover {
+  transform: scale(1.04);
+}
+
+.btn:hover::before {
+  border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
+  animation: liquidBlob 3s ease-in-out infinite;
+}
+
+@keyframes liquidBlob {
+  0%   { border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%; }
+  25%  { border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%; }
+  50%  { border-radius: 55% 45% 60% 40% / 40% 60% 45% 55%; }
+  75%  { border-radius: 40% 60% 45% 55% / 60% 40% 55% 45%; }
+  100% { border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%; }
 }
 
 .btn--primary {
@@ -320,6 +361,7 @@ nav .nav-divider {
 .btn--primary:hover {
   background: var(--teal-light);
   color: var(--white);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .btn--secondary {
@@ -522,7 +564,7 @@ nav .nav-divider {
 .case-card .case-shape[data-shape="diamond"]  { font-size: 28px; }
 .case-card .case-shape[data-shape="triangle"] { font-size: 26px; }
 .case-card .case-shape[data-shape="star"]     { font-size: 30px; }
-.case-card .case-shape[data-shape="target"]   { font-size: 28px; }
+.case-card .case-shape[data-shape="heart"]   { font-size: 28px; }
 .case-card .case-shape[data-shape="spark"]    { font-size: 30px; }
 
 /* Accent colors on hover */
@@ -530,7 +572,7 @@ nav .nav-divider {
 .case-card:hover .case-shape[data-shape="diamond"]  { color: #7BAFD4; }
 .case-card:hover .case-shape[data-shape="triangle"] { color: #EECBB3; }
 .case-card:hover .case-shape[data-shape="star"]     { color: #D4A07B; }
-.case-card:hover .case-shape[data-shape="target"]   { color: #B8A9C9; }
+.case-card:hover .case-shape[data-shape="heart"]   { color: #B8A9C9; }
 .case-card:hover .case-shape[data-shape="spark"]    { color: #8FBFA8; }
 
 .case-card h3 {
@@ -587,36 +629,6 @@ nav .nav-divider {
 
 /* === Contact === */
 
-.contact {
-  background: var(--peach);
-  text-align: center;
-}
-
-.contact h2 {
-  margin-bottom: var(--space-sm);
-}
-
-.contact p {
-  margin: 0 auto var(--space-md);
-  color: var(--dark-soft);
-}
-
-.contact-details {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-lg);
-  flex-wrap: wrap;
-  margin-top: var(--space-md);
-}
-
-.contact-details a {
-  color: var(--teal);
-  font-weight: 500;
-}
-
-.contact-details a:hover {
-  color: var(--teal-light);
-}
 
 /* === Case Study Page === */
 
@@ -635,7 +647,7 @@ nav .nav-divider {
 .case-hero .case-shape[data-shape="diamond"]  { font-size: 56px; color: #7BAFD4; }
 .case-hero .case-shape[data-shape="triangle"] { font-size: 52px; color: #EECBB3; }
 .case-hero .case-shape[data-shape="star"]     { font-size: 60px; color: #D4A07B; }
-.case-hero .case-shape[data-shape="target"]   { font-size: 56px; color: #B8A9C9; }
+.case-hero .case-shape[data-shape="heart"]   { font-size: 56px; color: #B8A9C9; }
 .case-hero .case-shape[data-shape="spark"]    { font-size: 60px; color: #8FBFA8; }
 
 .case-hero h1 {
@@ -911,23 +923,6 @@ nav.nav-scrolled {
   transform: translateX(4px);
 }
 
-/* === Contact Pill Buttons === */
-
-.contact-details a {
-  display: inline-block;
-  border: 1.5px solid var(--teal);
-  border-radius: 100px;
-  padding: 0.55rem 1.6rem;
-  min-width: 160px;
-  text-align: center;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-.contact-details a:hover {
-  background: var(--teal);
-  color: var(--white);
-}
-
 /* === Password Gate Overlay === */
 
 .pw-overlay {
@@ -1023,8 +1018,25 @@ footer {
   background: var(--dark);
   color: var(--dark-soft);
   text-align: center;
-  padding: var(--space-md) 0;
+  padding: var(--space-lg) 0 var(--space-md);
   font-size: 0.8rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.footer-links a {
+  color: var(--sage-light);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--white);
 }
 
 /* === Dark Theme === */
@@ -1232,6 +1244,14 @@ footer {
     padding: 24px 16px;
   }
 
+  /* Shapes colorful by default on mobile (no hover) */
+  .case-card .case-shape[data-shape="circle"]  { color: #A8B28F; }
+  .case-card .case-shape[data-shape="diamond"]  { color: #7BAFD4; }
+  .case-card .case-shape[data-shape="triangle"] { color: #EECBB3; }
+  .case-card .case-shape[data-shape="star"]     { color: #D4A07B; }
+  .case-card .case-shape[data-shape="heart"]    { color: #B8A9C9; }
+  .case-card .case-shape[data-shape="spark"]    { color: #8FBFA8; }
+
   .case-takeaway {
     padding: 24px 16px;
   }
@@ -1336,7 +1356,8 @@ html.theme-switching > body {
   .hero .hero-text h1,
   .hero .hero-text .tagline,
   .hero .hero-text .hero-meta,
-  .hero .hero-photo .photo-frame {
+  .hero .hero-photo .photo-frame,
+  .hero .hero-photo .photo-frame img {
     animation: none;
   }
   html.theme-switching > body {
