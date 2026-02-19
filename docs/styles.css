@@ -188,8 +188,8 @@ nav .nav-links a::after {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
-  height: 4px;
+  width: 3px;
+  height: 3px;
   border-radius: 50%;
   background: var(--dark);
   opacity: 0;
@@ -1279,43 +1279,46 @@ footer .container {
     grid-template-columns: 1fr;
   }
 
-  /* Hamburger button */
+  /* Hamburger — 2 lines, compact, right-aligned */
   .nav-hamburger {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 5px;
-    width: 36px;
-    height: 36px;
+    gap: 6px;
+    width: 28px;
+    height: 28px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 6px;
+    padding: 4px;
     z-index: 201;
+    margin-left: auto;
   }
 
   .nav-hamburger span {
     display: block;
-    width: 22px;
-    height: 2px;
+    width: 18px;
+    height: 1.5px;
     background: var(--dark);
     border-radius: 2px;
     transition: transform 0.3s ease, opacity 0.3s ease;
   }
 
+  /* Hide 3rd line — only 2 lines visible */
+  .nav-hamburger span:nth-child(3) {
+    display: none;
+  }
+
+  /* X close: rotate the 2 lines */
   nav.nav-open .nav-hamburger span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
+    transform: translateY(3.75px) rotate(45deg);
   }
 
   nav.nav-open .nav-hamburger span:nth-child(2) {
-    opacity: 0;
+    transform: translateY(-3.75px) rotate(-45deg);
   }
 
-  nav.nav-open .nav-hamburger span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
-  /* Expanding pill nav — links drop down inside the nav */
+  /* Expanding nav — full width, links below header */
   nav {
     flex-direction: column;
     border-radius: 24px;
@@ -1333,7 +1336,7 @@ footer .container {
   nav .nav-links {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--space-xs);
     max-height: 0;
     overflow: hidden;
@@ -1345,18 +1348,42 @@ footer .container {
   }
 
   nav.nav-open .nav-links {
-    max-height: 300px;
+    max-height: 400px;
     opacity: 1;
-    padding: 0 var(--space-md) var(--space-md);
+    padding: var(--space-xs) var(--space-md) var(--space-md);
   }
 
   nav .nav-links a {
-    font-size: 16px;
-    padding: 0.4rem 0;
+    font-size: 22px;
+    font-weight: 400;
+    padding: 0.3rem 0;
+    padding-bottom: 0;
+  }
+
+  nav .nav-links a::after {
+    display: none;
   }
 
   nav .nav-links .nav-divider {
     display: none;
+  }
+
+  /* Backdrop overlay — blurs content behind open nav */
+  nav::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    z-index: -1;
+  }
+
+  nav.nav-open::before {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 

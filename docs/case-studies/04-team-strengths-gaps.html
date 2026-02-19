@@ -158,6 +158,14 @@
     });
   });
 
+  // Close on overlay click (clicking outside nav content)
+  document.addEventListener('click', function(e) {
+    if (nav.classList.contains('nav-open') && !nav.contains(e.target)) {
+      nav.classList.remove('nav-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+  });
+
   // Close on Escape
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
