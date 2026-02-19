@@ -106,14 +106,19 @@
 (function() {
   var nav = document.querySelector('nav');
   var lastScroll = 0;
+  var isMobile = function() { return window.innerWidth <= 768; };
   window.addEventListener('scroll', function() {
-    var current = window.pageYOffset;
-    if (current > lastScroll && current > 80) {
-      nav.style.transform = 'translateY(-100%)';
+    if (isMobile()) {
+      var current = window.pageYOffset;
+      if (current > lastScroll && current > 80) {
+        nav.style.transform = 'translateY(-100%)';
+      } else {
+        nav.style.transform = 'translateY(0)';
+      }
+      lastScroll = current;
     } else {
       nav.style.transform = 'translateY(0)';
     }
-    lastScroll = current;
   });
 })();
 </script>

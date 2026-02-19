@@ -249,15 +249,44 @@
 (function() {
   var nav = document.querySelector('nav');
   var lastScroll = 0;
+  var isMobile = function() { return window.innerWidth <= 768; };
+
+  // Scroll-hide nav on mobile only
   window.addEventListener('scroll', function() {
-    var current = window.pageYOffset;
-    if (current > lastScroll && current > 80) {
-      nav.style.transform = 'translateY(-100%)';
+    if (isMobile()) {
+      var current = window.pageYOffset;
+      if (current > lastScroll && current > 80) {
+        nav.style.transform = 'translateY(-100%)';
+      } else {
+        nav.style.transform = 'translateY(0)';
+      }
+      lastScroll = current;
     } else {
       nav.style.transform = 'translateY(0)';
     }
-    lastScroll = current;
   });
+
+  // Active section dot indicator
+  var links = document.querySelectorAll('nav .nav-links li');
+  var sections = [];
+  links.forEach(function(li) {
+    var href = li.querySelector('a').getAttribute('href');
+    var sec = document.querySelector(href);
+    if (sec) sections.push({ el: sec, li: li });
+  });
+
+  function updateActive() {
+    var scrollPos = window.pageYOffset + 120;
+    var active = null;
+    sections.forEach(function(s) {
+      if (s.el.offsetTop <= scrollPos) active = s;
+    });
+    links.forEach(function(li) { li.classList.remove('active'); });
+    if (active) active.li.classList.add('active');
+  }
+
+  window.addEventListener('scroll', updateActive);
+  updateActive();
 })();
 </script>
 </body>
