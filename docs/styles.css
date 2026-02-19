@@ -1,16 +1,16 @@
 /* === Ana Paola Portfolio — Design System === */
 
 :root {
-  /* Colors from Figma deck */
-  --sage: #b2b598;
-  --sage-light: #c5c7b0;
-  --sage-lighter: #d5d7c5;
-  --teal: #2d4a47;
-  --teal-light: #3d5e5a;
-  --peach: #e2bda1;
-  --peach-light: #f0d8c4;
-  --cream: #faf8f5;
-  --dark: #2d2d2d;
+  /* Colors */
+  --sage: #A8B28F;
+  --sage-light: #CFCECE;
+  --sage-lighter: #F5F5F5;
+  --teal: #2C423E;
+  --teal-light: #3d5955;
+  --peach: #EECBB3;
+  --peach-light: #f4ddd0;
+  --cream: #F8F6F3;
+  --dark: #2E2E2E;
   --dark-soft: #4a4a4a;
   --white: #ffffff;
 
@@ -122,9 +122,10 @@ nav {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(250, 248, 245, 0.92);
+  background: rgba(248, 246, 243, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.3s ease;
 }
 
 nav .container {
@@ -138,6 +139,15 @@ nav .nav-name {
   font-family: var(--font-heading);
   font-size: 1.1rem;
   color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+nav .nav-smiley {
+  width: 24px;
+  height: auto;
+  display: inline-block;
 }
 
 nav .nav-links {
@@ -214,7 +224,7 @@ nav .nav-links a:hover {
   width: 100%;
   max-width: 380px;
   aspect-ratio: 3/4;
-  border-radius: 20px;
+  border-radius: 28px;
   border: 4px solid var(--teal);
   overflow: hidden;
   margin-left: auto;
@@ -301,7 +311,7 @@ nav .nav-links a:hover {
 .fun-facts {
   background: var(--teal);
   color: var(--white);
-  border-radius: 16px;
+  border-radius: 24px;
   padding: var(--space-lg);
 }
 
@@ -333,8 +343,12 @@ nav .nav-links a:hover {
   background: var(--sage);
 }
 
+.capabilities > .container > .label,
 .capabilities h2 {
   text-align: center;
+}
+
+.capabilities h2 {
   margin-bottom: var(--space-lg);
 }
 
@@ -347,7 +361,7 @@ nav .nav-links a:hover {
 .pillar {
   background: var(--teal);
   color: var(--white);
-  border-radius: 16px;
+  border-radius: 24px;
   padding: var(--space-lg) var(--space-md);
 }
 
@@ -376,8 +390,12 @@ nav .nav-links a:hover {
   background: var(--cream);
 }
 
+.case-studies > .container > .label,
 .case-studies h2 {
   text-align: center;
+}
+
+.case-studies h2 {
   margin-bottom: var(--space-lg);
 }
 
@@ -389,7 +407,7 @@ nav .nav-links a:hover {
 
 .case-card {
   background: var(--white);
-  border-radius: 16px;
+  border-radius: 24px;
   padding: var(--space-lg);
   border: 1px solid rgba(0,0,0,0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -566,7 +584,7 @@ nav .nav-links a:hover {
 
 .diamond-phase {
   background: var(--sage);
-  border-radius: 12px;
+  border-radius: 20px;
   padding: var(--space-md);
   text-align: center;
 }
@@ -586,7 +604,7 @@ nav .nav-links a:hover {
 
 .case-takeaway {
   background: var(--sage);
-  border-radius: 16px;
+  border-radius: 24px;
   padding: var(--space-lg);
   margin-top: var(--space-lg);
 }
@@ -634,6 +652,7 @@ footer {
 
   .hero-photo {
     order: -1;
+    margin-top: var(--space-lg);
   }
 
   .hero-photo .photo-frame {

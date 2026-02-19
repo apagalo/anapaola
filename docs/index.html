@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ana Paola Galvez Lopez — Senior Design Operations</title>
   <meta name="description" content="Senior Design Operations professional building the operational backbone for global design teams. Currently at Electrolux Group, Stockholm.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👸🏽</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Jeju+Myeongjo&display=swap" rel="stylesheet">
@@ -15,7 +16,7 @@
   <!-- Navigation -->
   <nav>
     <div class="container">
-      <a href="#" class="nav-name">Ana Paola</a>
+      <a href="#" class="nav-name">Ana Paola <img src="assets/smiley.svg" alt="" class="nav-smiley"></a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#capabilities">What I Do</a></li>
@@ -44,8 +45,7 @@
       </div>
       <div class="hero-photo">
         <div class="photo-frame">
-          <!-- Replace with Ana's photo: <img src="photo.jpg" alt="Ana Paola Galvez Lopez"> -->
-          <div class="photo-placeholder">Add photo here<br>(photo.jpg)</div>
+          <img src="assets/profile-img.png" alt="Ana Paola Galvez Lopez">
         </div>
       </div>
     </div>
@@ -243,6 +243,21 @@
   } else {
     document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:Inter,sans-serif;color:#2d2d2d;"><p>Access denied.</p></div>';
   }
+})();
+</script>
+<script>
+(function() {
+  var nav = document.querySelector('nav');
+  var lastScroll = 0;
+  window.addEventListener('scroll', function() {
+    var current = window.pageYOffset;
+    if (current > lastScroll && current > 80) {
+      nav.style.transform = 'translateY(-100%)';
+    } else {
+      nav.style.transform = 'translateY(0)';
+    }
+    lastScroll = current;
+  });
 })();
 </script>
 </body>
