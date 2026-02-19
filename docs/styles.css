@@ -126,8 +126,10 @@ section {
 nav {
   position: fixed;
   top: 12px;
-  left: 16px;
-  right: 16px;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  margin: 0 auto;
   z-index: 100;
   background: rgba(250, 244, 244, 0.92);
   backdrop-filter: blur(12px);
@@ -138,9 +140,11 @@ nav {
 
 nav .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: var(--space-lg);
   height: 60px;
+  max-width: none;
+  padding: 0 var(--space-md);
 }
 
 nav .nav-name {
@@ -507,11 +511,27 @@ nav .nav-divider {
 }
 
 .case-card .case-shape {
-  font-size: 24px;
   color: var(--peach-light);
   line-height: 1;
   margin-bottom: var(--space-sm);
+  transition: color 0.2s ease;
 }
+
+/* Optical sizing per shape — visually equal weight */
+.case-card .case-shape[data-shape="circle"]  { font-size: 26px; }
+.case-card .case-shape[data-shape="diamond"]  { font-size: 28px; }
+.case-card .case-shape[data-shape="triangle"] { font-size: 26px; }
+.case-card .case-shape[data-shape="star"]     { font-size: 30px; }
+.case-card .case-shape[data-shape="target"]   { font-size: 28px; }
+.case-card .case-shape[data-shape="spark"]    { font-size: 30px; }
+
+/* Accent colors on hover */
+.case-card:hover .case-shape[data-shape="circle"]  { color: #A8B28F; }
+.case-card:hover .case-shape[data-shape="diamond"]  { color: #7BAFD4; }
+.case-card:hover .case-shape[data-shape="triangle"] { color: #EECBB3; }
+.case-card:hover .case-shape[data-shape="star"]     { color: #D4A07B; }
+.case-card:hover .case-shape[data-shape="target"]   { color: #B8A9C9; }
+.case-card:hover .case-shape[data-shape="spark"]    { color: #8FBFA8; }
 
 .case-card h3 {
   margin-bottom: var(--space-xs);
@@ -606,12 +626,17 @@ nav .nav-divider {
 }
 
 .case-hero .case-shape {
-  font-size: 48px;
-  color: var(--dark);
-  opacity: 0.15;
   line-height: 1;
   margin-bottom: var(--space-xs);
 }
+
+/* Optical sizing + accent colors — hero shapes (visible by default) */
+.case-hero .case-shape[data-shape="circle"]  { font-size: 52px; color: #A8B28F; }
+.case-hero .case-shape[data-shape="diamond"]  { font-size: 56px; color: #7BAFD4; }
+.case-hero .case-shape[data-shape="triangle"] { font-size: 52px; color: #EECBB3; }
+.case-hero .case-shape[data-shape="star"]     { font-size: 60px; color: #D4A07B; }
+.case-hero .case-shape[data-shape="target"]   { font-size: 56px; color: #B8A9C9; }
+.case-hero .case-shape[data-shape="spark"]    { font-size: 60px; color: #8FBFA8; }
 
 .case-hero h1 {
   margin-bottom: var(--space-sm);
@@ -876,13 +901,6 @@ nav.nav-scrolled {
 
 /* === Case Card Hover Polish === */
 
-.case-card .case-shape {
-  transition: color 0.2s ease;
-}
-
-.case-card:hover .case-shape {
-  color: var(--teal);
-}
 
 .case-card .read-more .arrow {
   display: inline-block;
