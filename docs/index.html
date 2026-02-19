@@ -19,7 +19,7 @@
   <defs>
     <clipPath id="flower-clip" clipPathUnits="objectBoundingBox">
       <path d="M0.596 0.143 Q0.75 0.067,0.762 0.238 Q0.933 0.25,0.857 0.404 Q1.0 0.5,0.857 0.596 Q0.933 0.75,0.762 0.762 Q0.75 0.933,0.596 0.857 Q0.5 1.0,0.404 0.857 Q0.25 0.933,0.238 0.762 Q0.067 0.75,0.143 0.596 Q0.0 0.5,0.143 0.404 Q0.067 0.25,0.238 0.238 Q0.25 0.067,0.404 0.143 Q0.5 0.0,0.596 0.143Z">
-        <animateTransform attributeName="transform" type="rotate" from="0 0.5 0.5" to="360 0.5 0.5" dur="30s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="rotate" from="0 0.5 0.5" to="360 0.5 0.5" dur="60s" repeatCount="indefinite"/>
       </path>
     </clipPath>
   </defs>
@@ -290,7 +290,6 @@
     nav.classList.toggle('nav-open');
     var isOpen = nav.classList.contains('nav-open');
     hamburger.setAttribute('aria-expanded', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
   });
 
   // Close on link click
@@ -298,7 +297,6 @@
     link.addEventListener('click', function() {
       nav.classList.remove('nav-open');
       hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
     });
   });
 
@@ -307,7 +305,6 @@
     if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
       nav.classList.remove('nav-open');
       hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
     }
   });
 

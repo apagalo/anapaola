@@ -132,6 +132,10 @@
   <footer>
     <div class="container">
       <p>&copy; 2026 Ana Paola Galvez Lopez</p>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/anapaolagalvez/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:anapaolagalo@gmail.com">Email</a>
+      </div>
     </div>
   </footer>
 
@@ -147,7 +151,6 @@
     nav.classList.toggle('nav-open');
     var isOpen = nav.classList.contains('nav-open');
     hamburger.setAttribute('aria-expanded', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
   });
 
   // Close on link click
@@ -155,7 +158,6 @@
     link.addEventListener('click', function() {
       nav.classList.remove('nav-open');
       hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
     });
   });
 
@@ -164,7 +166,6 @@
     if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
       nav.classList.remove('nav-open');
       hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
     }
   });
 
