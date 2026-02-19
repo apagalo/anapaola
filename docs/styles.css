@@ -15,8 +15,8 @@
   --white: #ffffff;
 
   /* Typography */
-  --font-heading: 'DM Serif Display', Georgia, serif;
-  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Jeju Myeongjo', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'DM Mono', 'SF Mono', monospace;
 
   /* Spacing */
