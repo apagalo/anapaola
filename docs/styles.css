@@ -2,22 +2,21 @@
 
 :root {
   /* Colors */
-  --sage: #A8B28F;
-  --sage-light: #CFCECE;
-  --sage-lighter: #e9e9e9;
-  --teal: #2C423E;
-  --teal-light: #3d5955;
-  --peach: #EECBB3;
-  --peach-light: #f4ddd0;
-  --cream: #F8F6F3;
-  --dark: #2E2E2E;
-  --dark-soft: #4a4a4a;
+  --sage: #f5f5f5;
+  --sage-light: #999999;
+  --sage-lighter: #f5f5f5;
+  --teal: #000000;
+  --teal-light: #333333;
+  --peach: #f0f0f0;
+  --peach-light: #cccccc;
+  --cream: #ffffff;
+  --dark: #000000;
+  --dark-soft: #666666;
   --white: #ffffff;
 
   /* Typography */
-  --font-heading: 'Jeju Myeongjo', Georgia, serif;
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'DM Mono', 'SF Mono', monospace;
 
   /* Spacing */
   --space-xs: 0.5rem;
@@ -28,7 +27,7 @@
   --space-2xl: 8rem;
 
   /* Layout */
-  --max-width: 1100px;
+  --max-width: 1200px;
   --max-width-narrow: 780px;
 }
 
@@ -73,7 +72,7 @@ a:hover {
 
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.2;
   color: var(--dark);
 }
@@ -111,7 +110,7 @@ p {
 }
 
 section {
-  padding: var(--space-xl) 0;
+  padding: var(--space-2xl) 0;
 }
 
 /* === Navigation === */
@@ -122,7 +121,7 @@ nav {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(248, 246, 243, 0.92);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0,0,0,0.06);
   transition: transform 0.3s ease;
@@ -220,7 +219,7 @@ nav .nav-divider {
 
 .hero h1 {
   font-family: var(--font-body);
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(3rem, 6vw, 5rem);
   line-height: 1.05;
   margin-bottom: var(--space-sm);
@@ -242,7 +241,7 @@ nav .nav-divider {
 .hero .hero-meta span {
   font-size: 0.85rem;
   color: var(--dark-soft);
-  background: rgba(255,255,255,0.3);
+  background: rgba(0,0,0,0.06);
   padding: 0.35rem 0.85rem;
   border-radius: 100px;
 }
@@ -261,8 +260,8 @@ nav .nav-divider {
   width: 100%;
   max-width: 380px;
   aspect-ratio: 3/4;
-  border-radius: 28px;
-  border: 12px solid var(--teal);
+  border-radius: 12px;
+  border: 4px solid var(--teal);
   overflow: hidden;
   margin-left: auto;
   background: var(--teal);
@@ -293,7 +292,7 @@ nav .nav-divider {
   align-items: center;
   gap: 0.4rem;
   padding: 0.65rem 1.4rem;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 0.9rem;
   font-weight: 500;
   font-family: var(--font-body);
@@ -352,7 +351,7 @@ nav .nav-divider {
 .fun-facts {
   background: var(--sage-lighter);
   color: var(--dark);
-  border-radius: 24px;
+  border-radius: 12px;
   padding: var(--space-lg);
 }
 
@@ -408,7 +407,7 @@ nav .nav-divider {
 .pillar {
   background: var(--teal);
   color: var(--white);
-  border-radius: 24px;
+  border-radius: 12px;
   padding: 2rem var(--space-md);
 }
 
@@ -455,7 +454,7 @@ nav .nav-divider {
 
 .case-card {
   background: var(--white);
-  border-radius: 24px;
+  border-radius: 12px;
   padding: var(--space-lg);
   border: 1px solid rgba(0,0,0,0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -469,7 +468,7 @@ nav .nav-divider {
 }
 
 .case-card .case-number {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: 2.5rem;
   color: var(--sage);
   line-height: 1;
@@ -571,7 +570,7 @@ nav .nav-divider {
 }
 
 .case-hero .case-number {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: 5rem;
   color: var(--dark);
   opacity: 0.15;
@@ -638,7 +637,7 @@ nav .nav-divider {
 
 .diamond-phase {
   background: var(--sage-lighter);
-  border-radius: 20px;
+  border-radius: 8px;
   padding: var(--space-md);
   text-align: center;
 }
@@ -658,7 +657,7 @@ nav .nav-divider {
 
 .case-takeaway {
   background: var(--sage-lighter);
-  border-radius: 24px;
+  border-radius: 12px;
   padding: var(--space-lg);
   margin-top: var(--space-lg);
 }
@@ -722,7 +721,7 @@ nav .nav-divider {
 
 .tldr-card {
   background: var(--white);
-  border-radius: 24px;
+  border-radius: 12px;
   padding: var(--space-xl) var(--space-lg);
   max-width: 600px;
   width: 90%;
@@ -879,7 +878,7 @@ nav.nav-scrolled {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(46, 46, 46, 0.4);
+  background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
@@ -889,7 +888,7 @@ nav.nav-scrolled {
 
 .pw-card {
   background: var(--white);
-  border-radius: 24px;
+  border-radius: 12px;
   padding: var(--space-xl) var(--space-lg);
   max-width: 400px;
   width: 90%;
@@ -897,7 +896,7 @@ nav.nav-scrolled {
 }
 
 .pw-card h3 {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: 1.4rem;
   margin-bottom: var(--space-xs);
   color: var(--dark);
@@ -914,7 +913,7 @@ nav.nav-scrolled {
   width: 100%;
   padding: 0.7rem 1rem;
   border: 1.5px solid var(--sage-lighter);
-  border-radius: 12px;
+  border-radius: 8px;
   font-family: var(--font-body);
   font-size: 0.95rem;
   outline: none;
@@ -932,7 +931,7 @@ nav.nav-scrolled {
   background: var(--teal);
   color: var(--white);
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 500;
@@ -1103,7 +1102,7 @@ footer {
     gap: var(--space-md);
     position: fixed;
     inset: 0;
-    background: rgba(248, 246, 243, 0.97);
+    background: rgba(255, 255, 255, 0.97);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
