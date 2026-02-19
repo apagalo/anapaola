@@ -56,7 +56,7 @@
 
   <!-- Case Content -->
   <section class="case-content">
-    <div class="container--narrow">
+    <div class="container--narrow reveal">
 
       <h2>Situation</h2>
       <p>Managing a design team of 30 people across multiple product lines means constantly balancing what the team can do today against what it needs to do tomorrow. At Electrolux Group, the Wellbeing and SDA portfolios span a wide range of design disciplines — from industrial design and user research to brand expression and digital interfaces.</p>
@@ -152,12 +152,51 @@
 (function() {
   var key = 'portfolio_auth';
   if (sessionStorage.getItem(key) === 'true') return;
-  var pw = prompt('Enter password to view this portfolio:');
-  if (pw === 'findpeaceinthedetails') {
-    sessionStorage.setItem(key, 'true');
-  } else {
-    document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:Inter,sans-serif;color:#2d2d2d;"><p>Access denied.</p></div>';
+  var overlay = document.createElement('div');
+  overlay.className = 'pw-overlay';
+  overlay.innerHTML =
+    '<div class="pw-card">' +
+      '<h3>Welcome</h3>' +
+      '<p>Enter the password to view this portfolio.</p>' +
+      '<input type="password" id="pw-input" placeholder="Password" autocomplete="off">' +
+      '<button id="pw-submit">Enter</button>' +
+      '<p class="pw-error" id="pw-error">Incorrect password. Try again.</p>' +
+    '</div>';
+  document.body.appendChild(overlay);
+  var input = document.getElementById('pw-input');
+  var btn = document.getElementById('pw-submit');
+  var err = document.getElementById('pw-error');
+  function tryAuth() {
+    if (input.value === 'findpeaceinthedetails') {
+      sessionStorage.setItem(key, 'true');
+      overlay.remove();
+    } else {
+      err.style.display = 'block';
+      input.value = '';
+      input.focus();
+    }
   }
+  btn.addEventListener('click', tryAuth);
+  input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryAuth(); });
+  input.focus();
+})();
+</script>
+<script>
+(function() {
+  var reveals = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(function(el) { el.classList.add('visible'); });
+    return;
+  }
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(function(el) { observer.observe(el); });
 })();
 </script>
 </body>

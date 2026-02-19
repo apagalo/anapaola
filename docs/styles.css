@@ -768,6 +768,200 @@ nav .nav-divider {
   color: var(--dark);
 }
 
+/* === Scroll Reveal === */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger > .reveal:nth-child(2) { transition-delay: 120ms; }
+.reveal-stagger > .reveal:nth-child(3) { transition-delay: 240ms; }
+.reveal-stagger > .reveal:nth-child(4) { transition-delay: 360ms; }
+.reveal-stagger > .reveal:nth-child(5) { transition-delay: 480ms; }
+.reveal-stagger > .reveal:nth-child(6) { transition-delay: 600ms; }
+
+/* === Hero Entrance Animation === */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUpScale {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero .hero-text h1 {
+  animation: fadeUp 0.7s ease both;
+  animation-delay: 0ms;
+}
+
+.hero .hero-text .tagline {
+  animation: fadeUp 0.7s ease both;
+  animation-delay: 150ms;
+}
+
+.hero .hero-text .hero-meta {
+  animation: fadeUp 0.7s ease both;
+  animation-delay: 300ms;
+}
+
+.hero .hero-photo .photo-frame {
+  animation: fadeUpScale 0.8s ease both;
+  animation-delay: 200ms;
+}
+
+/* === Nav Scrolled Shadow === */
+
+nav.nav-scrolled {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* === Case Card Hover Polish === */
+
+.case-card .case-number {
+  transition: color 0.2s ease;
+}
+
+.case-card:hover .case-number {
+  color: var(--teal);
+}
+
+.case-card .read-more .arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.case-card:hover .read-more .arrow {
+  transform: translateX(4px);
+}
+
+/* === Contact Pill Buttons === */
+
+.contact-details a {
+  display: inline-block;
+  border: 1.5px solid var(--peach-light);
+  border-radius: 100px;
+  padding: 0.55rem 1.6rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.contact-details a:hover {
+  background: var(--white);
+  color: var(--teal);
+}
+
+/* === Password Gate Overlay === */
+
+.pw-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(46, 46, 46, 0.4);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+}
+
+.pw-card {
+  background: var(--white);
+  border-radius: 24px;
+  padding: var(--space-xl) var(--space-lg);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.pw-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  margin-bottom: var(--space-xs);
+  color: var(--dark);
+}
+
+.pw-card p {
+  font-size: 0.9rem;
+  color: var(--dark-soft);
+  margin-bottom: var(--space-md);
+  max-width: none;
+}
+
+.pw-card input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1.5px solid var(--sage-lighter);
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+  margin-bottom: var(--space-sm);
+}
+
+.pw-card input:focus {
+  border-color: var(--teal);
+}
+
+.pw-card button {
+  width: 100%;
+  padding: 0.7rem;
+  background: var(--teal);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.pw-card button:hover {
+  background: var(--teal-light);
+}
+
+.pw-error {
+  color: #c0392b;
+  font-size: 0.85rem;
+  margin-top: var(--space-xs);
+  display: none;
+}
+
+/* === Inline Style Cleanup Classes === */
+
+.label--centered {
+  text-align: center;
+  margin-bottom: var(--space-xs);
+}
+
+.resume-btn-wrap {
+  margin-top: var(--space-md);
+}
+
 /* === Footer === */
 
 footer {
@@ -829,5 +1023,19 @@ footer {
 
   nav .nav-links {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero .hero-text h1,
+  .hero .hero-text .tagline,
+  .hero .hero-text .hero-meta,
+  .hero .hero-photo .photo-frame {
+    animation: none;
   }
 }
