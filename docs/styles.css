@@ -1279,6 +1279,19 @@ footer {
   }
 }
 
+/* === Theme Switch Animation === */
+
+@keyframes themeSwitch {
+  0%  { filter: blur(0);    opacity: 1; }
+  40% { filter: blur(12px); opacity: 0.7; }
+  60% { filter: blur(12px); opacity: 0.7; }
+  100%{ filter: blur(0);    opacity: 1; }
+}
+
+html.theme-switching > body {
+  animation: themeSwitch 0.6s ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
@@ -1289,6 +1302,9 @@ footer {
   .hero .hero-text .tagline,
   .hero .hero-text .hero-meta,
   .hero .hero-photo .photo-frame {
+    animation: none;
+  }
+  html.theme-switching > body {
     animation: none;
   }
 }

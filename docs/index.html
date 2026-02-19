@@ -382,11 +382,21 @@
 <script>
 (function() {
   var toggle = document.querySelector('.theme-toggle');
+  var switching = false;
   toggle.addEventListener('click', function() {
-    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    var newTheme = isDark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
+    if (switching) return;
+    switching = true;
+    document.documentElement.classList.add('theme-switching');
+    setTimeout(function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      var newTheme = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    }, 300);
+    setTimeout(function() {
+      document.documentElement.classList.remove('theme-switching');
+      switching = false;
+    }, 600);
   });
 })();
 </script>
