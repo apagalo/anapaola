@@ -178,6 +178,20 @@ nav .nav-links a {
   font-weight: 500;
   color: var(--dark-soft);
   transition: color 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+nav .nav-links a::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--dark);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 nav .nav-links a:hover {
@@ -188,21 +202,7 @@ nav .nav-links li.active a {
   color: var(--dark);
 }
 
-nav .nav-links li::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--dark);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-nav .nav-links li.active::after {
+nav .nav-links li.active a::after {
   opacity: 1;
 }
 
