@@ -179,7 +179,7 @@ nav .nav-links a {
   color: var(--dark-soft);
   transition: color 0.2s;
   position: relative;
-  padding-bottom: 6px;
+  padding-bottom: 10px;
 }
 
 nav .nav-links a::after {
