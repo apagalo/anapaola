@@ -176,17 +176,29 @@ nav .nav-links li.active a {
   color: var(--dark);
 }
 
-nav .nav-links li.active::after {
+nav .nav-links li::after {
   content: '';
   position: absolute;
   bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--dark);
-  transition: all 0.3s ease;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+nav .nav-links li.active::after {
+  opacity: 1;
+}
+
+nav .nav-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(0,0,0,0.15);
+  align-self: center;
 }
 
 /* === Hero === */
@@ -208,8 +220,9 @@ nav .nav-links li.active::after {
 
 .hero h1 {
   font-family: var(--font-body);
-  font-weight: 700;
+  font-weight: 400;
   font-size: clamp(3rem, 6vw, 5rem);
+  line-height: 1.05;
   margin-bottom: var(--space-sm);
 }
 
@@ -249,7 +262,7 @@ nav .nav-links li.active::after {
   max-width: 380px;
   aspect-ratio: 3/4;
   border-radius: 28px;
-  border: 6px solid var(--teal);
+  border: 12px solid var(--teal);
   overflow: hidden;
   margin-left: auto;
   background: var(--teal);
@@ -323,6 +336,10 @@ nav .nav-links li.active::after {
   align-items: start;
 }
 
+.about h2 {
+  margin-bottom: var(--space-sm);
+}
+
 .about p {
   margin-bottom: var(--space-sm);
   color: var(--dark-soft);
@@ -359,6 +376,10 @@ nav .nav-links li.active::after {
   font-weight: 600;
   width: 35%;
   color: var(--sage-light);
+}
+
+.fun-facts tr:last-child td {
+  border-bottom: none;
 }
 
 /* === Capabilities === */
@@ -694,6 +715,13 @@ footer {
 
   .about .container {
     grid-template-columns: 1fr;
+  }
+
+  .about .fun-facts {
+    border-radius: 0;
+    margin: 0 calc(-1 * var(--space-md));
+    padding-bottom: 0;
+    margin-bottom: calc(-1 * var(--space-xl));
   }
 
   .pillars {

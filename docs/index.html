@@ -21,6 +21,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#capabilities">What I Do</a></li>
         <li><a href="#work">Work</a></li>
+        <li class="nav-divider" aria-hidden="true"></li>
         <li><a href="#resume">Resume</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -37,10 +38,6 @@
           <span>Senior Design Operations</span>
           <span>Electrolux Group</span>
           <span>Stockholm</span>
-        </div>
-        <div class="hero-links">
-          <a href="#work" class="btn btn--primary">View my work</a>
-          <a href="#contact" class="btn btn--secondary">Get in touch</a>
         </div>
       </div>
       <div class="hero-photo">
@@ -61,7 +58,6 @@
         <p>My work spans <strong>resource allocation, budget management, workflow design, and cross-functional coordination</strong> — all in service of helping 30 designers across 50+ concurrent projects do their best work.</p>
         <p>I came to DesignOps from an unusual path. I started in marketing and communications in Peru, moved to Stockholm for a university exchange, and discovered that the most impactful work happens at the intersection of <strong>strategy and execution</strong>. That background gives me a natural bridge between creative teams and business leadership.</p>
         <p>I use a <strong>triple diamond design thinking framework</strong> (Understand → Create → Develop) to approach operational challenges. I'm data-driven (Power BI dashboards I built from scratch), collaborative (workshops and cross-functional rituals), and always looking for ways to improve how teams work together.</p>
-        <p><strong>Languages:</strong> Spanish (native), English, Portuguese, French (B2)</p>
       </div>
       <div class="fun-facts">
         <h3>Side facts</h3>
@@ -267,10 +263,12 @@
   });
 
   // Active section dot indicator
-  var links = document.querySelectorAll('nav .nav-links li');
+  var links = document.querySelectorAll('nav .nav-links li:not(.nav-divider)');
   var sections = [];
   links.forEach(function(li) {
-    var href = li.querySelector('a').getAttribute('href');
+    var a = li.querySelector('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
     var sec = document.querySelector(href);
     if (sec) sections.push({ el: sec, li: li });
   });
