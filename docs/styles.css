@@ -4,7 +4,7 @@
   /* Colors — soft monochrome (inspired by kirschberg.co.nz) */
   --sage: #f0eeee;
   --sage-light: #a3a3a3;
-  --sage-lighter: #f5f3f3;
+  --sage-lighter: #ebe7e7;
   --teal: #171717;
   --teal-light: #282828;
   --peach: #f0eeee;
@@ -125,13 +125,14 @@ section {
 
 nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 12px;
+  left: 16px;
+  right: 16px;
   z-index: 100;
   background: rgba(250, 244, 244, 0.92);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 100px;
   transition: transform 0.3s ease;
 }
 
@@ -215,7 +216,7 @@ nav .nav-divider {
   display: flex;
   align-items: center;
   background-color: var(--sage);
-  padding-top: 60px;
+  padding-top: 84px;
 }
 
 .hero .container {
@@ -266,7 +267,7 @@ nav .nav-divider {
 
 .hero-photo .photo-frame {
   width: 100%;
-  max-width: 380px;
+  max-width: 500px;
   aspect-ratio: 1/1;
   overflow: hidden;
   margin-left: auto;
@@ -602,7 +603,7 @@ nav .nav-divider {
 
 .case-hero {
   background: var(--peach);
-  padding: calc(60px + var(--space-xl)) 0 var(--space-xl);
+  padding: calc(84px + var(--space-xl)) 0 var(--space-xl);
 }
 
 .case-hero .case-number {
@@ -870,8 +871,8 @@ nav .nav-divider {
 /* === Nav Scrolled Shadow === */
 
 nav.nav-scrolled {
-  border-bottom-color: rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 /* === Case Card Hover Polish === */
@@ -1028,7 +1029,7 @@ footer {
 
 [data-theme="dark"] nav {
   background: rgba(24, 24, 24, 0.92);
-  border-bottom-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
 [data-theme="dark"] nav .nav-divider {
@@ -1040,8 +1041,8 @@ footer {
 }
 
 [data-theme="dark"] nav.nav-scrolled {
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .hero .hero-meta span {
@@ -1148,7 +1149,7 @@ footer {
   }
 
   .hero-photo .photo-frame {
-    max-width: 250px;
+    max-width: 300px;
     margin: 0 auto;
   }
 
