@@ -191,11 +191,11 @@ nav .nav-links li.active a {
 nav .nav-links li::after {
   content: '';
   position: absolute;
-  bottom: -8px;
+  bottom: -4px;
   left: 50%;
   transform: translateX(-50%);
-  width: 3px;
-  height: 3px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--dark);
   opacity: 0;
