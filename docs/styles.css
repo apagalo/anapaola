@@ -1,18 +1,18 @@
 /* === Ana Paola Portfolio — Design System === */
 
 :root {
-  /* Colors */
-  --sage: #f5f5f5;
-  --sage-light: #999999;
-  --sage-lighter: #f5f5f5;
-  --teal: #000000;
-  --teal-light: #333333;
-  --peach: #f0f0f0;
-  --peach-light: #cccccc;
-  --cream: #ffffff;
-  --dark: #000000;
-  --dark-soft: #666666;
-  --white: #ffffff;
+  /* Colors — soft monochrome (inspired by kirschberg.co.nz) */
+  --sage: #f0eeee;
+  --sage-light: #a3a3a3;
+  --sage-lighter: #f5f3f3;
+  --teal: #171717;
+  --teal-light: #282828;
+  --peach: #f0eeee;
+  --peach-light: #d4d4d4;
+  --cream: #faf4f4;
+  --dark: #171717;
+  --dark-soft: #737373;
+  --white: #fafafa;
 
   /* Typography */
   --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -121,7 +121,7 @@ nav {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(250, 244, 244, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0,0,0,0.06);
   transition: transform 0.3s ease;
@@ -1008,21 +1008,21 @@ footer {
 /* === Dark Theme === */
 
 [data-theme="dark"] {
-  --sage: #1a1a1a;
-  --sage-light: #888888;
-  --sage-lighter: #222222;
-  --teal: #ffffff;
-  --teal-light: #cccccc;
-  --peach: #1e1e1e;
-  --peach-light: #444444;
-  --cream: #111111;
-  --dark: #f0f0f0;
-  --dark-soft: #999999;
-  --white: #181818;
+  --sage: #1e1e1e;
+  --sage-light: #a3a3a3;
+  --sage-lighter: #262626;
+  --teal: #fafafa;
+  --teal-light: #e5e5e5;
+  --peach: #202020;
+  --peach-light: #404040;
+  --cream: #181818;
+  --dark: #fafafa;
+  --dark-soft: #a3a3a3;
+  --white: #222222;
 }
 
 [data-theme="dark"] nav {
-  background: rgba(17, 17, 17, 0.92);
+  background: rgba(24, 24, 24, 0.92);
   border-bottom-color: rgba(255, 255, 255, 0.06);
 }
 
@@ -1031,7 +1031,7 @@ footer {
 }
 
 [data-theme="dark"] nav .nav-smiley {
-  filter: invert(1);
+  filter: invert(0.92);
 }
 
 [data-theme="dark"] nav.nav-scrolled {
@@ -1068,18 +1068,18 @@ footer {
 }
 
 [data-theme="dark"] .pw-card input {
-  background: #222222;
-  color: #f0f0f0;
-  border-color: #333333;
+  background: #262626;
+  color: #fafafa;
+  border-color: #404040;
 }
 
 [data-theme="dark"] .pw-card input:focus {
-  border-color: #ffffff;
+  border-color: #fafafa;
 }
 
 [data-theme="dark"] footer {
-  background: #0a0a0a;
-  color: #666666;
+  background: #141414;
+  color: #737373;
 }
 
 /* === Theme Toggle FAB === */
@@ -1109,7 +1109,7 @@ footer {
 }
 
 [data-theme="dark"] .theme-toggle {
-  background: #222222;
+  background: #262626;
   border-color: rgba(255, 255, 255, 0.12);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
@@ -1254,7 +1254,7 @@ footer {
     gap: var(--space-md);
     position: fixed;
     inset: 0;
-    background: rgba(255, 255, 255, 0.97);
+    background: rgba(250, 244, 244, 0.97);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -1275,7 +1275,7 @@ footer {
   }
 
   [data-theme="dark"] nav .nav-links {
-    background: rgba(17, 17, 17, 0.97);
+    background: rgba(24, 24, 24, 0.97);
   }
 }
 
