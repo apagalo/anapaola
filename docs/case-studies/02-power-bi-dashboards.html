@@ -33,8 +33,26 @@
       <div class="case-number">02</div>
       <h1>Data-Driven Resource Allocation: Power BI Dashboards for Budget & Utilization</h1>
       <p class="problem-statement">A design team of 30 designers juggling 50+ concurrent projects had no clear visibility into capacity, utilization, or budget — forcing 5 design leads to make resource decisions based on intuition and manual Smartsheets data that wasn't structured for management use.</p>
+      <a class="tldr-link" onclick="document.getElementById('tldr').classList.add('active')">TL;DR &rarr;</a>
     </div>
   </section>
+
+  <!-- TLDR Overlay -->
+  <div class="tldr-overlay" id="tldr" onclick="if(event.target===this)this.classList.remove('active')">
+    <div class="tldr-card">
+      <button class="tldr-close" onclick="document.getElementById('tldr').classList.remove('active')">&times;</button>
+      <h3>TL;DR</h3>
+      <p><strong>Problem:</strong> No visibility into team capacity, utilization, or budget. Leads made resource decisions on intuition from unstructured Smartsheets data.</p>
+      <p><strong>What I did:</strong> Self-taught Power BI, researched stakeholder needs, benchmarked tools, and built interactive dashboards from scratch using a triple diamond approach.</p>
+      <p><strong>Impact:</strong></p>
+      <ul>
+        <li>Dashboards used in every planning and decision-making meeting</li>
+        <li>Proactive, data-driven resource allocation across 50+ projects</li>
+        <li>Replaced manual reporting with automated visualizations</li>
+        <li>Established a data-driven operational culture</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- Case Content -->
   <section class="case-content">

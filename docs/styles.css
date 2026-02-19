@@ -4,7 +4,7 @@
   /* Colors */
   --sage: #A8B28F;
   --sage-light: #CFCECE;
-  --sage-lighter: #F5F5F5;
+  --sage-lighter: #e9e9e9;
   --teal: #2C423E;
   --teal-light: #3d5955;
   --peach: #EECBB3;
@@ -683,6 +683,88 @@ nav .nav-divider {
 
 .case-nav a {
   font-weight: 600;
+}
+
+/* === TLDR Overlay === */
+
+.tldr-link {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--teal);
+  margin-top: var(--space-md);
+  cursor: pointer;
+}
+
+.tldr-link:hover {
+  color: var(--teal-light);
+}
+
+.tldr-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.tldr-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tldr-card {
+  background: var(--white);
+  border-radius: 24px;
+  padding: var(--space-xl) var(--space-lg);
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.tldr-card h3 {
+  margin-bottom: var(--space-sm);
+}
+
+.tldr-card p {
+  color: var(--dark-soft);
+  margin-bottom: var(--space-sm);
+  max-width: none;
+}
+
+.tldr-card ul {
+  padding-left: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.tldr-card li {
+  color: var(--dark-soft);
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.tldr-close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--dark-soft);
+  line-height: 1;
+}
+
+.tldr-close:hover {
+  color: var(--dark);
 }
 
 /* === Footer === */

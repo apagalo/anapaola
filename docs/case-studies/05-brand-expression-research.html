@@ -33,8 +33,26 @@
       <div class="case-number">05</div>
       <h1>Brand Expression Research</h1>
       <p class="problem-statement">Electrolux Group's Brand Expression design portfolio needed a stronger foundation of research to inform how the brand was visually and experientially expressed across products and touchpoints — but there was no structured research process in place to guide those decisions.</p>
+      <a class="tldr-link" onclick="document.getElementById('tldr').classList.add('active')">TL;DR &rarr;</a>
     </div>
   </section>
+
+  <!-- TLDR Overlay -->
+  <div class="tldr-overlay" id="tldr" onclick="if(event.target===this)this.classList.remove('active')">
+    <div class="tldr-card">
+      <button class="tldr-close" onclick="document.getElementById('tldr').classList.remove('active')">&times;</button>
+      <h3>TL;DR</h3>
+      <p><strong>Problem:</strong> Brand expression decisions were driven by internal opinion, not external evidence. No structured research program existed.</p>
+      <p><strong>What I did:</strong> Designed a brand research program covering competitive analysis, trend monitoring, and market positioning — with a repeatable methodology and leadership-ready deliverables.</p>
+      <p><strong>Impact:</strong></p>
+      <ul>
+        <li>First structured brand expression research at Electrolux design</li>
+        <li>External evidence base for creative direction</li>
+        <li>Improved brand decisions grounded in competitive intelligence</li>
+        <li>Stronger connection between brand strategy and design execution</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- Case Content -->
   <section class="case-content">

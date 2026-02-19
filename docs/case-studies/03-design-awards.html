@@ -33,8 +33,26 @@
       <div class="case-number">03</div>
       <h1>Design Awards Submission Workflow</h1>
       <p class="problem-statement">Electrolux Group's design organization had no structured process for submitting work to international design awards. Submissions were ad hoc, inconsistent, and dependent on individual initiative — meaning strong work went unrecognized and the design function missed opportunities to build external credibility and internal visibility.</p>
+      <a class="tldr-link" onclick="document.getElementById('tldr').classList.add('active')">TL;DR &rarr;</a>
     </div>
   </section>
+
+  <!-- TLDR Overlay -->
+  <div class="tldr-overlay" id="tldr" onclick="if(event.target===this)this.classList.remove('active')">
+    <div class="tldr-card">
+      <button class="tldr-close" onclick="document.getElementById('tldr').classList.remove('active')">&times;</button>
+      <h3>TL;DR</h3>
+      <p><strong>Problem:</strong> No structured awards process. Strong design work went unrecognized because nobody built the system to surface it.</p>
+      <p><strong>What I did:</strong> Designed an end-to-end awards workflow — nomination, preparation templates, internal review gate, centralized calendar, and results tracking.</p>
+      <p><strong>Impact:</strong></p>
+      <ul>
+        <li>First structured awards program at Electrolux Group design</li>
+        <li>Increased submission volume and quality</li>
+        <li>Raised external visibility through major international awards</li>
+        <li>Repeatable, calendar-driven process that runs independently</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- Case Content -->
   <section class="case-content">

@@ -33,8 +33,26 @@
       <div class="case-number">06</div>
       <h1>Redesigning Design Workflows for Continuous Improvement</h1>
       <p class="problem-statement">As Electrolux Group's design organization scaled to 30 designers managing 50+ concurrent projects, existing workflows hadn't evolved to match. Processes that worked when teams were smaller began to break down — creating handoff gaps, unclear ownership, and inconsistent ways of working across 5 design leads and multiple portfolios.</p>
+      <a class="tldr-link" onclick="document.getElementById('tldr').classList.add('active')">TL;DR &rarr;</a>
     </div>
   </section>
+
+  <!-- TLDR Overlay -->
+  <div class="tldr-overlay" id="tldr" onclick="if(event.target===this)this.classList.remove('active')">
+    <div class="tldr-card">
+      <button class="tldr-close" onclick="document.getElementById('tldr').classList.remove('active')">&times;</button>
+      <h3>TL;DR</h3>
+      <p><strong>Problem:</strong> Workflows grew organically and broke at scale. Handoff friction, knowledge silos, tool fragmentation, and invisible bottlenecks across teams.</p>
+      <p><strong>What I did:</strong> Mapped actual workflows (not theoretical ones), facilitated cross-functional workshops, consolidated platforms on SharePoint, and built continuous improvement loops.</p>
+      <p><strong>Impact:</strong></p>
+      <ul>
+        <li>Reduced handoff friction with clear protocols</li>
+        <li>Increased knowledge sharing via centralized platform</li>
+        <li>Better team alignment through structured workshops</li>
+        <li>Continuous improvement cadence that evolves with the org</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- Case Content -->
   <section class="case-content">

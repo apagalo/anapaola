@@ -33,8 +33,26 @@
       <div class="case-number">01</div>
       <h1>Scaling Design Operations Across a Global Organization</h1>
       <p class="problem-statement">Electrolux Group's Wellbeing and Small Domestic Appliances (SDA) design teams — 30 designers managing 50+ concurrent projects across 5 design leads — operated with no centralized operational structure. Projects lacked visibility, workflows varied by team, and cross-functional coordination relied on informal channels — leading to misaligned priorities, duplicated efforts, and inconsistent delivery timelines.</p>
+      <a class="tldr-link" onclick="document.getElementById('tldr').classList.add('active')">TL;DR &rarr;</a>
     </div>
   </section>
+
+  <!-- TLDR Overlay -->
+  <div class="tldr-overlay" id="tldr" onclick="if(event.target===this)this.classList.remove('active')">
+    <div class="tldr-card">
+      <button class="tldr-close" onclick="document.getElementById('tldr').classList.remove('active')">&times;</button>
+      <h3>TL;DR</h3>
+      <p><strong>Problem:</strong> 30 designers, 50+ projects, zero operational structure. Coordination was scattered across emails and ad hoc meetings.</p>
+      <p><strong>What I did:</strong> Built the DesignOps function from scratch over 3 years — starting with centralized project tracking, then standardizing workflows, then scaling into strategic operations.</p>
+      <p><strong>Impact:</strong></p>
+      <ul>
+        <li>Single operational backbone for the entire design org</li>
+        <li>Reduced coordination overhead for 5 design leads</li>
+        <li>Full portfolio visibility for leadership decision-making</li>
+        <li>DesignOps maturity from ad hoc to strategic function</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- Case Content -->
   <section class="case-content">

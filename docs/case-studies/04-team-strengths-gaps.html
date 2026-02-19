@@ -33,8 +33,26 @@
       <div class="case-number">04</div>
       <h1>Team Strengths &amp; Gaps Analysis</h1>
       <p class="problem-statement">As Electrolux Group's Wellbeing and SDA design teams grew and project demands evolved, there was no structured way to understand the team's collective capabilities, identify skill gaps, or make informed decisions about hiring, training, and project staffing.</p>
+      <a class="tldr-link" onclick="document.getElementById('tldr').classList.add('active')">TL;DR &rarr;</a>
     </div>
   </section>
+
+  <!-- TLDR Overlay -->
+  <div class="tldr-overlay" id="tldr" onclick="if(event.target===this)this.classList.remove('active')">
+    <div class="tldr-card">
+      <button class="tldr-close" onclick="document.getElementById('tldr').classList.remove('active')">&times;</button>
+      <h3>TL;DR</h3>
+      <p><strong>Problem:</strong> No structured view of team capabilities across 30 designers. Staffing was reactive, hiring lacked data, and skill gaps were invisible.</p>
+      <p><strong>What I did:</strong> Led structured conversations with 5 design leads, built a capabilities matrix mapping strengths vs. project needs, and created visual tools for leadership discussions.</p>
+      <p><strong>Impact:</strong></p>
+      <ul>
+        <li>First org-wide view of design team capabilities and gaps</li>
+        <li>Strategic staffing — projects matched to right skills, not just availability</li>
+        <li>Informed hiring priorities based on real capability data</li>
+        <li>Repeatable framework refreshed as the team evolves</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- Case Content -->
   <section class="case-content">
