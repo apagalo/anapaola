@@ -13,9 +13,10 @@
   --dark: #171717;
   --dark-soft: #737373;
   --white: #fafafa;
+  --pillar-bg: #303030;
 
   /* Typography */
-  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Jeju Myeongjo', Georgia, 'Times New Roman', serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* Spacing */
@@ -70,9 +71,16 @@ a:hover {
 
 /* === Typography === */
 
-h1, h2, h3, h4 {
+h1, h2, h3 {
   font-family: var(--font-heading);
-  font-weight: 300;
+  font-weight: normal;
+  line-height: 1.2;
+  color: var(--dark);
+}
+
+h4 {
+  font-family: var(--font-body);
+  font-weight: 600;
   line-height: 1.2;
   color: var(--dark);
 }
@@ -80,7 +88,7 @@ h1, h2, h3, h4 {
 h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
 h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); }
 h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
-h4 { font-size: 1.1rem; font-family: var(--font-body); font-weight: 600; }
+h4 { font-size: 1.1rem; }
 
 p {
   max-width: 65ch;
@@ -218,8 +226,8 @@ nav .nav-divider {
 }
 
 .hero h1 {
-  font-family: var(--font-body);
-  font-weight: 300;
+  font-family: var(--font-heading);
+  font-weight: normal;
   font-size: clamp(3rem, 6vw, 5rem);
   line-height: 1.05;
   margin-bottom: var(--space-sm);
@@ -411,7 +419,7 @@ nav .nav-divider {
     radial-gradient(ellipse at 20% 80%, rgba(255,255,255,0.07) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 60% 60%, rgba(255,255,255,0.04) 0%, transparent 40%),
-    var(--teal);
+    var(--pillar-bg);
   background-size:
     100% 100%,
     100% 100%,
@@ -502,7 +510,7 @@ nav .nav-divider {
 .case-card .case-number {
   font-family: var(--font-body);
   font-size: 2.5rem;
-  color: var(--sage);
+  color: var(--peach-light);
   line-height: 1;
   margin-bottom: var(--space-sm);
 }
@@ -562,19 +570,17 @@ nav .nav-divider {
 /* === Contact === */
 
 .contact {
-  background: var(--teal);
-  color: var(--white);
+  background: var(--peach);
   text-align: center;
 }
 
 .contact h2 {
-  color: var(--white);
   margin-bottom: var(--space-sm);
 }
 
 .contact p {
   margin: 0 auto var(--space-md);
-  color: var(--sage-light);
+  color: var(--dark-soft);
 }
 
 .contact-details {
@@ -586,12 +592,12 @@ nav .nav-divider {
 }
 
 .contact-details a {
-  color: var(--peach-light);
+  color: var(--teal);
   font-weight: 500;
 }
 
 .contact-details a:hover {
-  color: var(--white);
+  color: var(--teal-light);
 }
 
 /* === Case Study Page === */
@@ -893,17 +899,17 @@ nav.nav-scrolled {
 
 .contact-details a {
   display: inline-block;
-  border: 1.5px solid var(--peach-light);
+  border: 1.5px solid var(--teal);
   border-radius: 100px;
   padding: 0.55rem 1.6rem;
   min-width: 160px;
   text-align: center;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .contact-details a:hover {
-  background: var(--white);
-  color: var(--teal);
+  background: var(--teal);
+  color: var(--white);
 }
 
 /* === Password Gate Overlay === */
@@ -1019,6 +1025,7 @@ footer {
   --dark: #fafafa;
   --dark-soft: #a3a3a3;
   --white: #222222;
+  --pillar-bg: #e0e0e0;
 }
 
 [data-theme="dark"] nav {
@@ -1162,13 +1169,14 @@ footer {
   .about .fun-facts {
     border-radius: 0;
     margin: 0 calc(-1 * var(--space-md));
-    margin-bottom: calc(-1 * var(--space-xl));
+    padding: 24px 16px;
   }
 
   .pillars {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--space-md);
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     gap: var(--space-sm);
@@ -1183,12 +1191,14 @@ footer {
   .pillars .pillar {
     flex: 0 0 80%;
     scroll-snap-align: start;
+    padding: 24px 16px;
   }
 
   .case-grid {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--space-md);
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     gap: var(--space-sm);
@@ -1203,6 +1213,15 @@ footer {
   .case-grid .case-card {
     flex: 0 0 85%;
     scroll-snap-align: start;
+    padding: 24px 16px;
+  }
+
+  .case-takeaway {
+    padding: 24px 16px;
+  }
+
+  .diamond-phase {
+    padding: 24px 16px;
   }
 
   .diamond-phases {
