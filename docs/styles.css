@@ -224,7 +224,7 @@ nav .nav-divider {
 }
 
 .nav-shape {
-  font-size: 14px;
+  font-size: 18px;
   color: var(--dark-soft);
   transition: color 0.2s ease;
   text-decoration: none;
@@ -880,6 +880,11 @@ nav .nav-divider {
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.case-content .reveal {
+  opacity: 1;
+  transform: none;
 }
 
 .reveal-stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
