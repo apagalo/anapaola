@@ -230,7 +230,7 @@ nav .nav-divider {
   font-size: clamp(1.1rem, 2vw, 1.35rem);
   color: var(--dark-soft);
   max-width: 50ch;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .hero .hero-meta {
@@ -350,14 +350,14 @@ nav .nav-divider {
 }
 
 .fun-facts {
-  background: var(--teal);
-  color: var(--white);
+  background: var(--sage-lighter);
+  color: var(--dark);
   border-radius: 24px;
-  padding: var(--space-xl) var(--space-lg);
+  padding: var(--space-lg);
 }
 
 .fun-facts h3 {
-  color: var(--white);
+  color: var(--dark);
   margin-bottom: var(--space-md);
 }
 
@@ -368,14 +368,15 @@ nav .nav-divider {
 
 .fun-facts td {
   padding: 0.6rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
   font-size: 0.9rem;
+  color: var(--dark-soft);
 }
 
 .fun-facts td:first-child {
   font-weight: 600;
   width: 35%;
-  color: var(--sage-light);
+  color: var(--dark);
 }
 
 .fun-facts tr:last-child td {
@@ -408,7 +409,7 @@ nav .nav-divider {
   background: var(--teal);
   color: var(--white);
   border-radius: 24px;
-  padding: var(--space-lg) var(--space-md);
+  padding: 2rem var(--space-md);
 }
 
 .pillar h3 {
