@@ -130,5 +130,17 @@
     </div>
   </footer>
 
+<script>
+(function() {
+  var key = 'portfolio_auth';
+  if (sessionStorage.getItem(key) === 'true') return;
+  var pw = prompt('Enter password to view this portfolio:');
+  if (pw === 'findpeaceinthedetails') {
+    sessionStorage.setItem(key, 'true');
+  } else {
+    document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:Inter,sans-serif;color:#2d2d2d;"><p>Access denied.</p></div>';
+  }
+})();
+</script>
 </body>
 </html>
