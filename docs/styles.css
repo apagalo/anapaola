@@ -353,7 +353,7 @@ nav .nav-divider {
   background: var(--teal);
   color: var(--white);
   border-radius: 24px;
-  padding: var(--space-lg);
+  padding: var(--space-xl) var(--space-lg);
 }
 
 .fun-facts h3 {
