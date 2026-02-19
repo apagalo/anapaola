@@ -17,6 +17,9 @@
   <nav>
     <div class="container">
       <a href="#" class="nav-name">Ana Paola <img src="assets/smiley.svg" alt="" class="nav-smiley"></a>
+      <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#capabilities">What I Do</a></li>
@@ -274,8 +277,35 @@
 <script>
 (function() {
   var nav = document.querySelector('nav');
+  var hamburger = document.querySelector('.nav-hamburger');
   var lastScroll = 0;
   var isMobile = function() { return window.innerWidth <= 768; };
+
+  // Hamburger menu toggle
+  hamburger.addEventListener('click', function() {
+    nav.classList.toggle('nav-open');
+    var isOpen = nav.classList.contains('nav-open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close on link click
+  document.querySelectorAll('nav .nav-links a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      nav.classList.remove('nav-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+      nav.classList.remove('nav-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  });
 
   // Scroll-hide nav on mobile + nav shadow on desktop
   window.addEventListener('scroll', function() {
