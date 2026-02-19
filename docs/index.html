@@ -338,6 +338,7 @@
     var a = li.querySelector('a');
     if (!a) return;
     var href = a.getAttribute('href');
+    if (!href || href.charAt(0) !== '#') return;
     var sec = document.querySelector(href);
     if (sec) sections.push({ el: sec, li: li });
   });
