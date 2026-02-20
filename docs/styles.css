@@ -1269,10 +1269,9 @@ footer .container {
 
   /* Override reveal animations when carousel is active */
   .carousel-init .reveal {
-    opacity: 0 !important;
+    opacity: 1 !important;
     transform: none !important;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.4s ease !important;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1) !important;
     animation: none !important;
     transition-delay: 0ms !important;
   }
@@ -1284,30 +1283,45 @@ footer .container {
     width: 100%;
     padding: 24px 16px;
     pointer-events: none;
+    opacity: 1 !important;
   }
 
+  /* Top card — in flow so container has height */
   .carousel-init > .card-active {
     position: relative !important;
-    opacity: 1 !important;
     pointer-events: auto;
-    z-index: 3;
+    z-index: 10;
     transform: none !important;
   }
 
+  /* Peeking behind — fully opaque, just scaled + offset */
   .carousel-init > .card-next {
-    opacity: 0.5 !important;
-    z-index: 2;
-    transform: scale(0.94) translateY(12px) !important;
+    z-index: 9;
+    transform: scale(0.95) translateY(10px) !important;
   }
 
   .carousel-init > .card-after {
-    opacity: 0.25 !important;
+    z-index: 8;
+    transform: scale(0.90) translateY(20px) !important;
+  }
+
+  /* Hidden cards in the rest of the deck */
+  .carousel-init > .card-hidden {
     z-index: 1;
     transform: scale(0.88) translateY(24px) !important;
+    visibility: hidden;
   }
 
   .carousel-init > .card-swiping {
     transition: none !important;
+    z-index: 10;
+  }
+
+  /* Card animating to the side and behind */
+  .carousel-init > .card-exiting {
+    z-index: 0 !important;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s ease !important;
   }
 
   /* Shapes colorful by default on mobile (no hover) */
