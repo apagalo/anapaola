@@ -415,10 +415,9 @@
 })();
 </script>
 <script>
-// Swipeable stacked card carousel (mobile only)
+// Swipeable stacked card carousel — Tinder style (mobile only)
 (function() {
   var isMobile = function() { return window.innerWidth <= 768; };
-  var ALL = ['card-active','card-next','card-after','card-hidden','card-swiping','card-exiting'];
 
   function initCarousel(container) {
     var cards = Array.from(container.children).filter(function(el) {
@@ -442,25 +441,19 @@
     var threshold = 50;
     var didSwipe = false;
 
-    function setCard(card, cls) {
-      ALL.forEach(function(c) { card.classList.remove(c); });
+    function clean(card) {
+      card.classList.remove('card-active', 'card-next', 'card-after', 'card-swiping');
       card.style.transform = '';
+      card.style.opacity = '';
       card.style.transition = '';
-      if (cls) card.classList.add(cls);
     }
 
     function update() {
-      var len = cards.length;
       cards.forEach(function(card, i) {
-        if (i === current) {
-          setCard(card, 'card-active');
-        } else if (i === (current + 1) % len) {
-          setCard(card, 'card-next');
-        } else if (i === (current + 2) % len) {
-          setCard(card, 'card-after');
-        } else {
-          setCard(card, 'card-hidden');
-        }
+        clean(card);
+        if (i === current) card.classList.add('card-active');
+        else if (i === (current + 1) % cards.length) card.classList.add('card-next');
+        else if (i === (current + 2) % cards.length) card.classList.add('card-after');
       });
     }
 
@@ -497,7 +490,7 @@
       e.preventDefault();
       deltaX = dx;
       didSwipe = true;
-      var rotate = deltaX * 0.03;
+      var rotate = deltaX * 0.05;
       cards[current].style.transform = 'translateX(' + deltaX + 'px) rotate(' + rotate + 'deg)';
     }, { passive: false });
 
@@ -511,31 +504,28 @@
       active.classList.remove('card-swiping');
 
       if (Math.abs(deltaX) > threshold) {
-        // Swipe accepted — card slides to the side and goes behind
+        // Tinder swipe — fly off screen and fade
         animating = true;
         var dir = deltaX > 0 ? 1 : -1;
         var nextIndex = deltaX < 0 ? current + 1 : current - 1;
 
-        // Animate the card off to the side
-        active.classList.add('card-exiting');
-        active.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-        active.style.transform = 'translateX(' + (dir * 120) + '%) rotate(' + (dir * 8) + 'deg)';
+        active.style.transition = 'transform 0.35s ease-out, opacity 0.35s ease-out';
+        active.style.transform = 'translateX(' + (dir * window.innerWidth) + 'px) rotate(' + (dir * 15) + 'deg)';
+        active.style.opacity = '0';
 
-        // After it reaches the side, snap it behind the deck
         setTimeout(function() {
-          setCard(active, 'card-hidden');
+          clean(active);
           goTo(nextIndex);
-        }, 420);
+        }, 360);
       } else {
         // Snap back
-        active.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        active.style.transition = 'transform 0.25s ease';
         active.style.transform = '';
-        setTimeout(function() { active.style.transition = ''; }, 300);
+        setTimeout(function() { active.style.transition = ''; }, 250);
       }
       deltaX = 0;
     });
 
-    // Prevent link clicks right after swiping
     container.addEventListener('click', function(e) {
       if (didSwipe) {
         e.preventDefault();
@@ -551,7 +541,7 @@
       var isDesktop = !isMobile();
       if (isDesktop && !wasDesktop) {
         container.classList.remove('carousel-init');
-        cards.forEach(function(card) { setCard(card, null); });
+        cards.forEach(function(card) { clean(card); });
       } else if (!isDesktop && wasDesktop) {
         container.classList.add('carousel-init');
         update();
