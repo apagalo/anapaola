@@ -1259,21 +1259,21 @@ footer .container {
     padding: 80px var(--space-md);
   }
 
-  /* Stacked card carousel — Tinder style */
-  .pillars.carousel-init,
-  .case-grid.carousel-init {
+  /* === Tinder-style card carousel === */
+  .carousel-init {
     position: relative;
-    display: block;
-    overflow: hidden;
+    overflow: visible;
   }
 
-  /* Override reveal animations when carousel is active */
-  .carousel-init .reveal {
+  /* Kill reveal animations inside carousel */
+  .carousel-init > .reveal {
     animation: none !important;
     transition-delay: 0ms !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
-  /* All cards same size, stacked on top of each other */
+  /* All cards: absolute, same size, stacked */
   .carousel-init > * {
     position: absolute;
     top: 0;
@@ -1281,32 +1281,33 @@ footer .container {
     width: 100%;
     padding: 24px 16px;
     pointer-events: none;
-    opacity: 1 !important;
+    opacity: 1;
     z-index: 1;
-    transform: none !important;
   }
 
-  /* Active card — relative so container keeps its height */
-  .carousel-init > .card-active {
-    position: relative !important;
+  /* Top card — interactive */
+  .carousel-init > .card-top {
+    z-index: 3;
     pointer-events: auto;
-    z-index: 10;
   }
 
-  /* Next card sits right behind, same size, ready to show */
-  .carousel-init > .card-next {
-    z-index: 9;
+  /* Card directly behind */
+  .carousel-init > .card-under {
+    z-index: 2;
   }
 
-  /* Third card behind that */
-  .carousel-init > .card-after {
-    z-index: 8;
-  }
-
-  /* While dragging — no CSS transition, JS controls transform */
-  .carousel-init > .card-swiping {
+  /* While finger is down — kill transitions */
+  .carousel-init > .card-dragging {
     transition: none !important;
-    z-index: 10;
+    z-index: 3;
+    pointer-events: auto;
+  }
+
+  /* Flying off screen */
+  .carousel-init > .card-flying {
+    z-index: 4;
+    pointer-events: none;
+    transition: transform 0.4s ease-out, opacity 0.3s ease-out;
   }
 
   /* Shapes colorful by default on mobile (no hover) */

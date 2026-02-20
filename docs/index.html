@@ -415,153 +415,157 @@
 })();
 </script>
 <script>
-// Swipeable stacked card carousel — Tinder style (mobile only)
+// Tinder-style swipeable card carousel (mobile only)
 (function() {
   var isMobile = function() { return window.innerWidth <= 768; };
 
   function initCarousel(container) {
-    var cards = Array.from(container.children).filter(function(el) {
-      return el.nodeType === 1;
-    });
+    var cards = Array.from(container.children).filter(function(c) { return c.nodeType === 1; });
     if (cards.length < 2) return;
 
+    // Setup
     container.classList.add('carousel-init');
-    cards.forEach(function(card) {
-      card.classList.add('visible');
-      card.style.animationDelay = '0ms';
-      card.style.transitionDelay = '0ms';
-    });
+    cards.forEach(function(c) { c.classList.add('visible'); });
 
-    var current = 0;
-    var startX = 0;
-    var startY = 0;
-    var deltaX = 0;
-    var locked = false;
-    var animating = false;
-    var threshold = 50;
-    var didSwipe = false;
+    // Order tracks which card index is on top. order[0] = top card index
+    var order = cards.map(function(_, i) { return i; });
+    var startX, startY, dx, dragging, locked, busy;
 
-    function clean(card) {
-      card.classList.remove('card-active', 'card-next', 'card-after', 'card-swiping');
-      card.style.transform = '';
-      card.style.opacity = '';
-      card.style.transition = '';
-    }
+    function reset() { startX = 0; startY = 0; dx = 0; dragging = false; locked = false; }
+    reset();
+    busy = false;
 
-    function update() {
-      cards.forEach(function(card, i) {
-        clean(card);
-        if (i === current) card.classList.add('card-active');
-        else if (i === (current + 1) % cards.length) card.classList.add('card-next');
-        else if (i === (current + 2) % cards.length) card.classList.add('card-after');
+    // Set container height to match tallest card
+    function setHeight() {
+      container.style.height = '';
+      var max = 0;
+      cards.forEach(function(c) {
+        c.style.position = 'relative';
+        max = Math.max(max, c.offsetHeight);
+        c.style.position = '';
       });
+      container.style.height = max + 'px';
+    }
+    setHeight();
+    window.addEventListener('resize', function() { if (isMobile()) setHeight(); });
+
+    function clearCard(c) {
+      c.classList.remove('card-top', 'card-under', 'card-dragging', 'card-flying');
+      c.style.transform = '';
+      c.style.opacity = '';
     }
 
-    function goTo(index) {
-      current = ((index % cards.length) + cards.length) % cards.length;
-      update();
-      animating = false;
+    function layout() {
+      cards.forEach(function(c) { clearCard(c); });
+      // Top card
+      cards[order[0]].classList.add('card-top');
+      // Card behind
+      if (order.length > 1) cards[order[1]].classList.add('card-under');
     }
 
+    // Swipe the top card: fly it off, move it to end of order
+    function swipeOff(dir) {
+      busy = true;
+      var top = cards[order[0]];
+      top.classList.remove('card-top', 'card-dragging');
+      top.classList.add('card-flying');
+      top.style.transform = 'translateX(' + (dir * window.innerWidth * 1.2) + 'px) rotate(' + (dir * 20) + 'deg)';
+      top.style.opacity = '0';
+
+      setTimeout(function() {
+        clearCard(top);
+        // Move swiped card to end of order (carousel)
+        order.push(order.shift());
+        layout();
+        busy = false;
+      }, 400);
+    }
+
+    // Touch handlers
     container.addEventListener('touchstart', function(e) {
-      if (!isMobile() || animating) return;
+      if (!isMobile() || busy) return;
+      reset();
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
-      deltaX = 0;
-      locked = false;
-      didSwipe = false;
     }, { passive: true });
 
     container.addEventListener('touchmove', function(e) {
-      if (!isMobile() || animating) return;
-      var dx = e.touches[0].clientX - startX;
-      var dy = e.touches[0].clientY - startY;
+      if (!isMobile() || busy) return;
+      var mx = e.touches[0].clientX - startX;
+      var my = e.touches[0].clientY - startY;
 
-      if (!locked && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
-        if (Math.abs(dy) > Math.abs(dx)) {
-          deltaX = 0;
-          return;
-        }
+      // Direction lock: first significant move decides
+      if (!locked && !dragging) {
+        if (Math.abs(mx) < 8 && Math.abs(my) < 8) return;
+        if (Math.abs(my) > Math.abs(mx)) return; // vertical — bail
         locked = true;
-        cards[current].classList.add('card-swiping');
+        dragging = true;
+        cards[order[0]].classList.add('card-dragging');
       }
-      if (!locked) return;
 
+      if (!dragging) return;
       e.preventDefault();
-      deltaX = dx;
-      didSwipe = true;
-      var rotate = deltaX * 0.05;
-      cards[current].style.transform = 'translateX(' + deltaX + 'px) rotate(' + rotate + 'deg)';
+      dx = mx;
+      var rot = dx * 0.06;
+      cards[order[0]].style.transform = 'translateX(' + dx + 'px) rotate(' + rot + 'deg)';
     }, { passive: false });
 
     container.addEventListener('touchend', function() {
-      if (!isMobile() || animating || !locked) {
-        locked = false;
-        return;
-      }
-      locked = false;
-      var active = cards[current];
-      active.classList.remove('card-swiping');
+      if (!isMobile() || busy || !dragging) { reset(); return; }
+      var top = cards[order[0]];
+      top.classList.remove('card-dragging');
 
-      if (Math.abs(deltaX) > threshold) {
-        // Tinder swipe — fly off screen and fade
-        animating = true;
-        var dir = deltaX > 0 ? 1 : -1;
-        var nextIndex = deltaX < 0 ? current + 1 : current - 1;
-
-        active.style.transition = 'transform 0.35s ease-out, opacity 0.35s ease-out';
-        active.style.transform = 'translateX(' + (dir * window.innerWidth) + 'px) rotate(' + (dir * 15) + 'deg)';
-        active.style.opacity = '0';
-
-        setTimeout(function() {
-          clean(active);
-          goTo(nextIndex);
-        }, 360);
+      if (Math.abs(dx) > 60) {
+        // Swipe accepted
+        swipeOff(dx > 0 ? 1 : -1);
       } else {
         // Snap back
-        active.style.transition = 'transform 0.25s ease';
-        active.style.transform = '';
-        setTimeout(function() { active.style.transition = ''; }, 250);
+        top.style.transition = 'transform 0.3s ease';
+        top.style.transform = '';
+        setTimeout(function() { top.style.transition = ''; }, 300);
       }
-      deltaX = 0;
+      reset();
     });
 
+    // Prevent link clicks after swipe
+    var lastDx = 0;
+    container.addEventListener('touchmove', function() { lastDx = dx; }, { passive: true });
     container.addEventListener('click', function(e) {
-      if (didSwipe) {
-        e.preventDefault();
-        e.stopPropagation();
-        didSwipe = false;
-      }
+      if (Math.abs(lastDx) > 15) { e.preventDefault(); e.stopPropagation(); }
+      lastDx = 0;
     }, true);
 
-    update();
+    layout();
 
+    // Cleanup on desktop
     var wasDesktop = !isMobile();
     window.addEventListener('resize', function() {
-      var isDesktop = !isMobile();
-      if (isDesktop && !wasDesktop) {
+      var desk = !isMobile();
+      if (desk && !wasDesktop) {
         container.classList.remove('carousel-init');
-        cards.forEach(function(card) { clean(card); });
-      } else if (!isDesktop && wasDesktop) {
+        container.style.height = '';
+        cards.forEach(clearCard);
+      } else if (!desk && wasDesktop) {
         container.classList.add('carousel-init');
-        update();
+        setHeight();
+        layout();
       }
-      wasDesktop = isDesktop;
+      wasDesktop = desk;
     });
   }
 
-  function tryInit() {
+  function init() {
     if (!isMobile()) return;
-    var pillars = document.querySelector('.pillars');
-    var caseGrid = document.querySelector('.case-grid');
-    if (pillars) initCarousel(pillars);
-    if (caseGrid) initCarousel(caseGrid);
+    var p = document.querySelector('.pillars');
+    var c = document.querySelector('.case-grid');
+    if (p) initCarousel(p);
+    if (c) initCarousel(c);
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() { setTimeout(tryInit, 600); });
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(init, 600); });
   } else {
-    setTimeout(tryInit, 600);
+    setTimeout(init, 600);
   }
 })();
 </script>
