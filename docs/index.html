@@ -23,6 +23,23 @@
       utm_medium:new URLSearchParams(location.search).get('utm_medium'),
       utm_campaign:new URLSearchParams(location.search).get('utm_campaign')
     });
+    document.addEventListener('click',function(e){
+      var card=e.target.closest('.case-card');
+      if(card){
+        posthog.capture('case_study_click',{
+          case_study:card.querySelector('h3').textContent,
+          href:card.getAttribute('href')
+        });
+        return;
+      }
+      var link=e.target.closest('a[href*="linkedin.com"],a[href^="mailto:"]');
+      if(link){
+        posthog.capture('contact_click',{
+          type:link.href.indexOf('mailto:')===0?'email':'linkedin',
+          href:link.href
+        });
+      }
+    });
   </script>
 </head>
 <body>
