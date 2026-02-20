@@ -11,6 +11,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Jeju+Myeongjo&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
   <script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){if(t==='dark')document.documentElement.setAttribute('data-theme','dark')}else if(matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark')}else{var h=new Date().getHours();if(h>=19||h<7)document.documentElement.setAttribute('data-theme','dark')}})()</script>
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_2amvHJ1LDjwcec88BgRTLGowcCnIBWhyBRzRHXPjrVr',{
+      api_host:'https://eu.i.posthog.com',
+      capture_pageview:false
+    });
+    posthog.capture('$pageview',{
+      referrer:document.referrer,
+      utm_source:new URLSearchParams(location.search).get('utm_source'),
+      utm_medium:new URLSearchParams(location.search).get('utm_medium'),
+      utm_campaign:new URLSearchParams(location.search).get('utm_campaign')
+    });
+  </script>
 </head>
 <body>
 
