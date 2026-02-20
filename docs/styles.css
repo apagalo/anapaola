@@ -1287,7 +1287,7 @@ footer .container {
   .case-card .case-shape[data-shape="spark"]    { color: #8FBFA8; }
 
   .case-takeaway {
-    padding: 24px 16px;
+    padding: 2rem var(--space-md);
   }
 
   .diamond-phase {
@@ -1368,10 +1368,10 @@ footer .container {
   nav .nav-name {
     position: absolute;
     left: var(--space-md);
-    top: 0;
-    height: 60px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   }
 
   nav .nav-hamburger {
