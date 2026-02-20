@@ -417,22 +417,38 @@
 <script>
 // Swipeable stacked card carousel (mobile only)
 (function() {
+  var isMobile = function() { return window.innerWidth <= 768; };
+
   function initCarousel(container) {
     var cards = Array.from(container.children).filter(function(el) {
       return el.nodeType === 1;
     });
     if (cards.length < 2) return;
 
+    // Mark container as carousel
+    container.classList.add('carousel-init');
+
+    // Force all cards visible (override reveal)
+    cards.forEach(function(card) {
+      card.classList.add('visible');
+      card.style.animationDelay = '0ms';
+      card.style.transitionDelay = '0ms';
+    });
+
     var current = 0;
     var startX = 0;
+    var startY = 0;
     var deltaX = 0;
-    var swiping = false;
-    var threshold = 60;
+    var locked = false; // locked to horizontal swipe
+    var animating = false;
+    var threshold = 50;
 
     function update() {
       cards.forEach(function(card, i) {
         card.classList.remove('card-active', 'card-next', 'card-after', 'card-swiping');
         card.style.transform = '';
+        card.style.opacity = '';
+        card.style.transition = '';
         if (i === current) {
           card.classList.add('card-active');
         } else if (i === (current + 1) % cards.length) {
@@ -446,96 +462,112 @@
     function goTo(index) {
       current = ((index % cards.length) + cards.length) % cards.length;
       update();
+      animating = false;
     }
 
-    // Touch events on the active card area
     container.addEventListener('touchstart', function(e) {
-      if (window.innerWidth > 768) return;
+      if (!isMobile() || animating) return;
       startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
       deltaX = 0;
-      swiping = true;
-      var active = cards[current];
-      if (active) active.classList.add('card-swiping');
+      locked = false;
     }, { passive: true });
 
     container.addEventListener('touchmove', function(e) {
-      if (!swiping || window.innerWidth > 768) return;
-      deltaX = e.touches[0].clientX - startX;
-      var active = cards[current];
-      if (active) {
-        var rotate = deltaX * 0.06;
-        active.style.transform = 'translateX(' + deltaX + 'px) rotate(' + rotate + 'deg)';
+      if (!isMobile() || animating) return;
+      var dx = e.touches[0].clientX - startX;
+      var dy = e.touches[0].clientY - startY;
+
+      // Decide direction lock on first significant move
+      if (!locked && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+        if (Math.abs(dy) > Math.abs(dx)) {
+          // Vertical scroll — let browser handle, abort swipe
+          deltaX = 0;
+          return;
+        }
+        locked = true;
+        cards[current].classList.add('card-swiping');
       }
-    }, { passive: true });
+
+      if (!locked) return;
+
+      // Prevent vertical scroll while swiping card
+      e.preventDefault();
+      deltaX = dx;
+      var rotate = deltaX * 0.04;
+      cards[current].style.transform = 'translateX(' + deltaX + 'px) rotate(' + rotate + 'deg)';
+    }, { passive: false });
 
     container.addEventListener('touchend', function() {
-      if (!swiping || window.innerWidth > 768) return;
-      swiping = false;
+      if (!isMobile() || animating || !locked) {
+        locked = false;
+        return;
+      }
+      locked = false;
       var active = cards[current];
+      active.classList.remove('card-swiping');
 
       if (Math.abs(deltaX) > threshold) {
-        // Swipe far enough — animate out and go to next/prev
+        animating = true;
         var dir = deltaX > 0 ? 1 : -1;
-        if (active) {
-          active.classList.remove('card-swiping');
-          active.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-          active.style.transform = 'translateX(' + (dir * 400) + 'px) rotate(' + (dir * 15) + 'deg)';
-          active.style.opacity = '0';
-        }
-        setTimeout(function() {
-          if (active) {
-            active.style.transition = '';
-            active.style.transform = '';
-            active.style.opacity = '';
-          }
-          if (deltaX < 0) goTo(current + 1);
-          else goTo(current - 1);
-        }, 300);
+        active.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+        active.style.transform = 'translateX(' + (dir * window.innerWidth) + 'px) rotate(' + (dir * 12) + 'deg)';
+        active.style.opacity = '0';
+
+        var nextIndex = deltaX < 0 ? current + 1 : current - 1;
+        setTimeout(function() { goTo(nextIndex); }, 320);
       } else {
         // Snap back
-        if (active) {
-          active.classList.remove('card-swiping');
-          active.style.transform = '';
-        }
+        active.style.transition = 'transform 0.25s ease';
+        active.style.transform = '';
+        setTimeout(function() { active.style.transition = ''; }, 250);
       }
       deltaX = 0;
     });
 
-    // Init
+    // Prevent clicks from firing after a swipe
+    container.addEventListener('click', function(e) {
+      if (Math.abs(deltaX) > 10) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+
     update();
 
-    // Re-check on resize (disable carousel on desktop)
-    var wasDesktop = window.innerWidth > 768;
+    // Resize handler
+    var wasDesktop = !isMobile();
     window.addEventListener('resize', function() {
-      var isDesktop = window.innerWidth > 768;
+      var isDesktop = !isMobile();
       if (isDesktop && !wasDesktop) {
-        // Switched to desktop — remove all carousel classes
+        container.classList.remove('carousel-init');
         cards.forEach(function(card) {
           card.classList.remove('card-active', 'card-next', 'card-after', 'card-swiping');
           card.style.transform = '';
+          card.style.opacity = '';
+          card.style.transition = '';
         });
       } else if (!isDesktop && wasDesktop) {
+        container.classList.add('carousel-init');
         update();
       }
       wasDesktop = isDesktop;
     });
   }
 
-  // Only init on mobile
   function tryInit() {
-    if (window.innerWidth <= 768) {
-      var pillars = document.querySelector('.pillars');
-      var caseGrid = document.querySelector('.case-grid');
-      if (pillars) initCarousel(pillars);
-      if (caseGrid) initCarousel(caseGrid);
-    }
+    if (!isMobile()) return;
+    var pillars = document.querySelector('.pillars');
+    var caseGrid = document.querySelector('.case-grid');
+    if (pillars) initCarousel(pillars);
+    if (caseGrid) initCarousel(caseGrid);
   }
 
-  // Wait for reveal animations to complete, then init
+  // Wait for DOM + reveal animations
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() { setTimeout(tryInit, 800); });
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(tryInit, 600); });
   } else {
-    setTimeout(tryInit, 800);
+    setTimeout(tryInit, 600);
   }
 })();
 </script>

@@ -1259,92 +1259,54 @@ footer .container {
     padding: 80px var(--space-md);
   }
 
-  /* Stacked card carousel — pillars */
-  .pillars {
+  /* Stacked card carousel — shared */
+  .pillars.carousel-init,
+  .case-grid.carousel-init {
     position: relative;
     display: block;
     overflow: visible;
   }
 
-  .pillars .pillar {
+  /* Override reveal animations when carousel is active */
+  .carousel-init .reveal {
+    opacity: 0 !important;
+    transform: none !important;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s ease !important;
+    animation: none !important;
+    transition-delay: 0ms !important;
+  }
+
+  .carousel-init > * {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     padding: 24px 16px;
-    opacity: 0;
     pointer-events: none;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.4s ease;
-    will-change: transform;
-    touch-action: pan-y;
   }
 
-  .pillars .pillar.card-active {
-    position: relative;
-    opacity: 1;
+  .carousel-init > .card-active {
+    position: relative !important;
+    opacity: 1 !important;
     pointer-events: auto;
     z-index: 3;
+    transform: none !important;
   }
 
-  .pillars .pillar.card-next {
-    opacity: 0.6;
-    pointer-events: none;
+  .carousel-init > .card-next {
+    opacity: 0.5 !important;
     z-index: 2;
-    transform: scale(0.94) translateY(12px);
+    transform: scale(0.94) translateY(12px) !important;
   }
 
-  .pillars .pillar.card-after {
-    opacity: 0.3;
-    pointer-events: none;
+  .carousel-init > .card-after {
+    opacity: 0.25 !important;
     z-index: 1;
-    transform: scale(0.88) translateY(24px);
+    transform: scale(0.88) translateY(24px) !important;
   }
 
-  /* Stacked card carousel — case cards */
-  .case-grid {
-    position: relative;
-    display: block;
-    overflow: visible;
-  }
-
-  .case-grid .case-card {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 24px 16px;
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.4s ease;
-    will-change: transform;
-    touch-action: pan-y;
-  }
-
-  .case-grid .case-card.card-active {
-    position: relative;
-    opacity: 1;
-    pointer-events: auto;
-    z-index: 3;
-  }
-
-  .case-grid .case-card.card-next {
-    opacity: 0.6;
-    pointer-events: none;
-    z-index: 2;
-    transform: scale(0.94) translateY(12px);
-  }
-
-  .case-grid .case-card.card-after {
-    opacity: 0.3;
-    pointer-events: none;
-    z-index: 1;
-    transform: scale(0.88) translateY(24px);
-  }
-
-  /* Swiping state — card follows finger */
-  .card-swiping {
+  .carousel-init > .card-swiping {
     transition: none !important;
   }
 
@@ -1471,16 +1433,16 @@ footer .container {
   }
 
   nav.nav-open .nav-links {
-    max-height: 400px;
+    max-height: 500px;
     opacity: 1;
-    padding-bottom: var(--space-sm);
+    padding-top: 48px;
+    padding-bottom: 48px;
   }
 
   nav .nav-links a {
-    font-size: 22px;
+    font-size: 28px;
     font-weight: 400;
-    padding: 0.3rem 0;
-    padding-bottom: 0;
+    padding: 0.4rem 0;
   }
 
   nav .nav-links a::after {
@@ -1498,20 +1460,21 @@ footer .container {
     opacity: 0;
     transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
                 opacity 0.3s ease;
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
     margin-top: 60px;
     padding: 0 var(--space-md);
   }
 
   nav.nav-open .nav-shapes {
-    max-height: 100px;
+    max-height: 200px;
     opacity: 1;
-    padding-bottom: var(--space-xs);
+    padding-top: 48px;
+    padding-bottom: 24px;
   }
 
   .nav-shape {
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .nav-contact {
@@ -1521,14 +1484,15 @@ footer .container {
     transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
                 opacity 0.3s ease;
     display: block;
-    font-size: 22px;
+    font-size: 28px;
     padding: 0 var(--space-md);
+    text-align: center;
   }
 
   nav.nav-open .nav-contact {
-    max-height: 60px;
+    max-height: 80px;
     opacity: 1;
-    padding-bottom: var(--space-sm);
+    padding-bottom: 48px;
   }
 
   /* Backdrop overlay — separate element on body, fullscreen */
