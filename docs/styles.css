@@ -1212,12 +1212,9 @@ footer .container {
 /* === Responsive === */
 
 @media (max-width: 768px) {
-  html {
-    overflow-x: hidden;
-  }
-
   section {
     padding: 80px 0;
+    overflow-x: clip;
   }
 
   .pillars,
