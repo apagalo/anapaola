@@ -1283,23 +1283,11 @@ footer .container {
 
   .case-grid {
     display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding-left: var(--space-md);
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    flex-direction: column;
     gap: var(--space-sm);
-    padding: 0 var(--space-md);
-    margin: 0 calc(-1 * var(--space-md));
-  }
-
-  .case-grid::-webkit-scrollbar {
-    display: none;
   }
 
   .case-grid .case-card {
-    flex: 0 0 85%;
-    scroll-snap-align: start;
     padding: 24px 16px;
   }
 
@@ -1321,6 +1309,13 @@ footer .container {
 
   .diamond-phases {
     grid-template-columns: 1fr;
+  }
+
+  /* Footer — links on top, copyright below */
+  footer .container {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 48px;
   }
 
   /* Hamburger — 2 lines, compact */
