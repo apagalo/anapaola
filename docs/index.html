@@ -285,35 +285,40 @@
   var lastScroll = 0;
   var isMobile = function() { return window.innerWidth <= 768; };
 
+  // Backdrop overlay (separate from nav so it covers full viewport)
+  var backdrop = document.createElement('div');
+  backdrop.className = 'nav-backdrop';
+  document.body.appendChild(backdrop);
+
+  function openNav() {
+    nav.classList.add('nav-open');
+    backdrop.classList.add('active');
+    hamburger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeNav() {
+    nav.classList.remove('nav-open');
+    backdrop.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+
   // Hamburger menu toggle
   hamburger.addEventListener('click', function() {
-    nav.classList.toggle('nav-open');
-    var isOpen = nav.classList.contains('nav-open');
-    hamburger.setAttribute('aria-expanded', isOpen);
+    if (nav.classList.contains('nav-open')) closeNav();
+    else openNav();
   });
 
   // Close on link click
   document.querySelectorAll('nav .nav-links a').forEach(function(link) {
-    link.addEventListener('click', function() {
-      nav.classList.remove('nav-open');
-      hamburger.setAttribute('aria-expanded', 'false');
-    });
+    link.addEventListener('click', closeNav);
   });
 
-  // Close on overlay click (clicking outside nav content)
-  document.addEventListener('click', function(e) {
-    if (nav.classList.contains('nav-open') && !nav.contains(e.target)) {
-      nav.classList.remove('nav-open');
-      hamburger.setAttribute('aria-expanded', 'false');
-    }
-  });
+  // Close on backdrop click
+  backdrop.addEventListener('click', closeNav);
 
   // Close on Escape
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
-      nav.classList.remove('nav-open');
-      hamburger.setAttribute('aria-expanded', 'false');
-    }
+    if (e.key === 'Escape' && nav.classList.contains('nav-open')) closeNav();
   });
 
   // Scroll-hide nav on mobile + nav shadow on desktop
@@ -407,6 +412,131 @@
       switching = false;
     }, 600);
   });
+})();
+</script>
+<script>
+// Swipeable stacked card carousel (mobile only)
+(function() {
+  function initCarousel(container) {
+    var cards = Array.from(container.children).filter(function(el) {
+      return el.nodeType === 1;
+    });
+    if (cards.length < 2) return;
+
+    var current = 0;
+    var startX = 0;
+    var deltaX = 0;
+    var swiping = false;
+    var threshold = 60;
+
+    function update() {
+      cards.forEach(function(card, i) {
+        card.classList.remove('card-active', 'card-next', 'card-after', 'card-swiping');
+        card.style.transform = '';
+        if (i === current) {
+          card.classList.add('card-active');
+        } else if (i === (current + 1) % cards.length) {
+          card.classList.add('card-next');
+        } else if (i === (current + 2) % cards.length) {
+          card.classList.add('card-after');
+        }
+      });
+    }
+
+    function goTo(index) {
+      current = ((index % cards.length) + cards.length) % cards.length;
+      update();
+    }
+
+    // Touch events on the active card area
+    container.addEventListener('touchstart', function(e) {
+      if (window.innerWidth > 768) return;
+      startX = e.touches[0].clientX;
+      deltaX = 0;
+      swiping = true;
+      var active = cards[current];
+      if (active) active.classList.add('card-swiping');
+    }, { passive: true });
+
+    container.addEventListener('touchmove', function(e) {
+      if (!swiping || window.innerWidth > 768) return;
+      deltaX = e.touches[0].clientX - startX;
+      var active = cards[current];
+      if (active) {
+        var rotate = deltaX * 0.06;
+        active.style.transform = 'translateX(' + deltaX + 'px) rotate(' + rotate + 'deg)';
+      }
+    }, { passive: true });
+
+    container.addEventListener('touchend', function() {
+      if (!swiping || window.innerWidth > 768) return;
+      swiping = false;
+      var active = cards[current];
+
+      if (Math.abs(deltaX) > threshold) {
+        // Swipe far enough — animate out and go to next/prev
+        var dir = deltaX > 0 ? 1 : -1;
+        if (active) {
+          active.classList.remove('card-swiping');
+          active.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+          active.style.transform = 'translateX(' + (dir * 400) + 'px) rotate(' + (dir * 15) + 'deg)';
+          active.style.opacity = '0';
+        }
+        setTimeout(function() {
+          if (active) {
+            active.style.transition = '';
+            active.style.transform = '';
+            active.style.opacity = '';
+          }
+          if (deltaX < 0) goTo(current + 1);
+          else goTo(current - 1);
+        }, 300);
+      } else {
+        // Snap back
+        if (active) {
+          active.classList.remove('card-swiping');
+          active.style.transform = '';
+        }
+      }
+      deltaX = 0;
+    });
+
+    // Init
+    update();
+
+    // Re-check on resize (disable carousel on desktop)
+    var wasDesktop = window.innerWidth > 768;
+    window.addEventListener('resize', function() {
+      var isDesktop = window.innerWidth > 768;
+      if (isDesktop && !wasDesktop) {
+        // Switched to desktop — remove all carousel classes
+        cards.forEach(function(card) {
+          card.classList.remove('card-active', 'card-next', 'card-after', 'card-swiping');
+          card.style.transform = '';
+        });
+      } else if (!isDesktop && wasDesktop) {
+        update();
+      }
+      wasDesktop = isDesktop;
+    });
+  }
+
+  // Only init on mobile
+  function tryInit() {
+    if (window.innerWidth <= 768) {
+      var pillars = document.querySelector('.pillars');
+      var caseGrid = document.querySelector('.case-grid');
+      if (pillars) initCarousel(pillars);
+      if (caseGrid) initCarousel(caseGrid);
+    }
+  }
+
+  // Wait for reveal animations to complete, then init
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(tryInit, 800); });
+  } else {
+    setTimeout(tryInit, 800);
+  }
 })();
 </script>
 </body>

@@ -1259,36 +1259,93 @@ footer .container {
     padding: 80px var(--space-md);
   }
 
+  /* Stacked card carousel — pillars */
   .pillars {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding-left: var(--space-md);
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    gap: var(--space-sm);
-    padding: 0 var(--space-md);
-    margin: 0 calc(-1 * var(--space-md));
-  }
-
-  .pillars::-webkit-scrollbar {
-    display: none;
+    position: relative;
+    display: block;
+    overflow: visible;
   }
 
   .pillars .pillar {
-    flex: 0 0 80%;
-    scroll-snap-align: start;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     padding: 24px 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s ease;
+    will-change: transform;
+    touch-action: pan-y;
   }
 
+  .pillars .pillar.card-active {
+    position: relative;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 3;
+  }
+
+  .pillars .pillar.card-next {
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 2;
+    transform: scale(0.94) translateY(12px);
+  }
+
+  .pillars .pillar.card-after {
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 1;
+    transform: scale(0.88) translateY(24px);
+  }
+
+  /* Stacked card carousel — case cards */
   .case-grid {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
+    position: relative;
+    display: block;
+    overflow: visible;
   }
 
   .case-grid .case-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     padding: 24px 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s ease;
+    will-change: transform;
+    touch-action: pan-y;
+  }
+
+  .case-grid .case-card.card-active {
+    position: relative;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 3;
+  }
+
+  .case-grid .case-card.card-next {
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 2;
+    transform: scale(0.94) translateY(12px);
+  }
+
+  .case-grid .case-card.card-after {
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 1;
+    transform: scale(0.88) translateY(24px);
+  }
+
+  /* Swiping state — card follows finger */
+  .card-swiping {
+    transition: none !important;
   }
 
   /* Shapes colorful by default on mobile (no hover) */
@@ -1401,7 +1458,8 @@ footer .container {
   nav .nav-links {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     gap: var(--space-xs);
     max-height: 0;
     overflow: hidden;
@@ -1473,20 +1531,20 @@ footer .container {
     padding-bottom: var(--space-sm);
   }
 
-  /* Backdrop overlay — blurs content behind open nav */
-  nav::before {
-    content: '';
+  /* Backdrop overlay — separate element on body, fullscreen */
+  .nav-backdrop {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.35s ease;
-    z-index: -1;
+    z-index: 99;
   }
 
-  nav.nav-open::before {
+  .nav-backdrop.active {
     opacity: 1;
     pointer-events: auto;
   }
