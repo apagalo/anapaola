@@ -1276,6 +1276,9 @@ footer .container {
   .carousel-init {
     position: relative;
     overflow: visible;
+    touch-action: pan-y;
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   /* Shapes colorful by default on mobile (no hover) */

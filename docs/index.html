@@ -559,6 +559,17 @@
       dragging = false; locked = false; dx = 0;
     });
 
+    // Recover if browser cancels touch (e.g. iOS back gesture, incoming call)
+    container.addEventListener('touchcancel', function() {
+      if (dragging) {
+        var top = cards[order[0]];
+        top.style.transition = 'transform 0.3s ease';
+        top.style.transform = 'none';
+        setTimeout(function() { top.style.transition = 'none'; }, 300);
+      }
+      dragging = false; locked = false; dx = 0; busy = false;
+    });
+
     // Block click navigation right after a swipe
     container.addEventListener('click', function(e) {
       if (swiped) { e.preventDefault(); e.stopPropagation(); swiped = false; }
