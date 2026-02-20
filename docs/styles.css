@@ -1212,8 +1212,17 @@ footer .container {
 /* === Responsive === */
 
 @media (max-width: 768px) {
+  html {
+    overflow-x: hidden;
+  }
+
   section {
     padding: 80px 0;
+  }
+
+  .pillars,
+  .case-grid {
+    grid-template-columns: 1fr;
   }
 
   nav {
@@ -1259,52 +1268,10 @@ footer .container {
     padding: 80px var(--space-md);
   }
 
-  /* === Tinder-style card carousel === */
+  /* Tinder carousel — minimal CSS, JS controls everything */
   .carousel-init {
     position: relative;
     overflow: visible;
-  }
-
-  /* All cards: absolute, same size, hidden by default */
-  .carousel-init > * {
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 24px 16px;
-    pointer-events: none;
-    opacity: 0 !important;
-    transform: none !important;
-    transition: none !important;
-    z-index: 1;
-  }
-
-  /* Top card — visible + interactive */
-  .carousel-init > .card-top {
-    opacity: 1 !important;
-    z-index: 3;
-    pointer-events: auto;
-  }
-
-  /* Card behind — visible, ready to show when top is swiped */
-  .carousel-init > .card-under {
-    opacity: 1 !important;
-    z-index: 2;
-  }
-
-  /* While finger is dragging — no CSS transitions */
-  .carousel-init > .card-dragging {
-    opacity: 1 !important;
-    z-index: 3;
-    pointer-events: auto;
-  }
-
-  /* Flying off screen — starts visible, JS animates to opacity:0 */
-  .carousel-init > .card-flying {
-    opacity: 1 !important;
-    z-index: 4;
-    pointer-events: none;
-    transition: transform 0.4s ease-out, opacity 0.3s ease-out !important;
   }
 
   /* Shapes colorful by default on mobile (no hover) */

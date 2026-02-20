@@ -415,7 +415,7 @@
 })();
 </script>
 <script>
-// Tinder-style swipeable card carousel (mobile only)
+// Tinder card carousel (mobile only)
 (function() {
   var isMobile = function() { return window.innerWidth <= 768; };
 
@@ -423,148 +423,158 @@
     var cards = Array.from(container.children).filter(function(c) { return c.nodeType === 1; });
     if (cards.length < 2) return;
 
-    // Strip reveal/stagger so they can't interfere
+    // 1. Kill reveal system — remove classes so IntersectionObserver ignores them
     container.classList.remove('reveal-stagger');
     cards.forEach(function(c) {
       c.classList.remove('reveal');
-      c.classList.add('visible');
-      c.style.animation = 'none';
+      c.classList.remove('visible');
+    });
+
+    // 2. Switch container to block so cards render at full width for measurement
+    container.style.display = 'block';
+    void container.offsetHeight; // force reflow
+
+    // 3. Measure tallest card at full width
+    var maxH = 0;
+    cards.forEach(function(c) {
       c.style.opacity = '1';
       c.style.transform = 'none';
+      maxH = Math.max(maxH, c.offsetHeight);
     });
 
-    // Measure height BEFORE adding carousel-init (cards still in flow)
-    var maxH = 0;
-    cards.forEach(function(c) { maxH = Math.max(maxH, c.offsetHeight); });
+    // 4. Set up container
+    container.classList.add('carousel-init');
+    container.style.display = '';
     container.style.height = maxH + 'px';
 
-    // Now switch to absolute positioning
-    container.classList.add('carousel-init');
-
-    // Clear the inline styles we set for measurement — CSS classes take over
+    // 5. Position all cards absolute
     cards.forEach(function(c) {
-      c.style.opacity = '';
-      c.style.transform = '';
+      c.style.position = 'absolute';
+      c.style.top = '0';
+      c.style.left = '0';
+      c.style.width = '100%';
+      c.style.display = 'none';
+      c.style.boxSizing = 'border-box';
     });
 
-    // Card order — order[0] is top of deck
+    // 6. Add dot indicators
+    var dots = document.createElement('div');
+    dots.style.cssText = 'display:flex;justify-content:center;gap:6px;padding:16px 0 0;';
+    cards.forEach(function() {
+      var dot = document.createElement('span');
+      dot.style.cssText = 'width:6px;height:6px;border-radius:50%;background:var(--dark-soft);opacity:0.2;transition:opacity 0.3s;';
+      dots.appendChild(dot);
+    });
+    container.after(dots);
+
+    // Deck state
     var order = cards.map(function(_, i) { return i; });
     var startX = 0, startY = 0, dx = 0;
-    var dragging = false, locked = false, busy = false;
-    var swipeHappened = false;
+    var dragging = false, locked = false, busy = false, swiped = false;
 
-    function clearInline(c) {
-      c.style.transform = '';
-      c.style.opacity = '';
-    }
-
-    function layout() {
-      cards.forEach(function(c) {
-        c.classList.remove('card-top', 'card-under', 'card-dragging', 'card-flying');
-        clearInline(c);
+    function updateDots() {
+      Array.from(dots.children).forEach(function(d, i) {
+        d.style.opacity = (i === order[0]) ? '0.8' : '0.2';
       });
-      cards[order[0]].classList.add('card-top');
-      if (order.length > 1) cards[order[1]].classList.add('card-under');
     }
 
-    function swipeOff(dir) {
+    function showLayout() {
+      cards.forEach(function(c) {
+        c.style.display = 'none';
+        c.style.transform = 'none';
+        c.style.opacity = '1';
+        c.style.transition = 'none';
+        c.style.zIndex = '1';
+        c.style.pointerEvents = 'none';
+      });
+      if (order.length > 1) {
+        var under = cards[order[1]];
+        under.style.display = '';
+        under.style.zIndex = '2';
+      }
+      var top = cards[order[0]];
+      top.style.display = '';
+      top.style.zIndex = '3';
+      top.style.pointerEvents = 'auto';
+      updateDots();
+    }
+
+    function flyOff(dir) {
       busy = true;
-      var topCard = cards[order[0]];
-      topCard.classList.remove('card-top', 'card-dragging');
-      topCard.classList.add('card-flying');
-
-      // Force reflow so transition kicks in
-      topCard.offsetHeight;
-
-      topCard.style.transform = 'translateX(' + (dir * window.innerWidth * 1.3) + 'px) rotate(' + (dir * 18) + 'deg)';
-      topCard.style.opacity = '0';
-
+      var top = cards[order[0]];
+      top.style.transition = 'transform 0.4s ease-out, opacity 0.35s ease-out';
+      top.style.transform = 'translateX(' + (dir * window.innerWidth * 1.3) + 'px) rotate(' + (dir * 18) + 'deg)';
+      top.style.opacity = '0';
+      top.style.pointerEvents = 'none';
       setTimeout(function() {
-        topCard.classList.remove('card-flying');
-        clearInline(topCard);
         order.push(order.shift());
-        layout();
+        showLayout();
         busy = false;
       }, 420);
     }
 
+    // Touch start
     container.addEventListener('touchstart', function(e) {
       if (!isMobile() || busy) return;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
-      dx = 0;
-      dragging = false;
-      locked = false;
-      swipeHappened = false;
+      dx = 0; dragging = false; locked = false; swiped = false;
     }, { passive: true });
 
+    // Touch move — direction lock (horizontal swipe vs vertical scroll)
     container.addEventListener('touchmove', function(e) {
       if (!isMobile() || busy) return;
       var mx = e.touches[0].clientX - startX;
       var my = e.touches[0].clientY - startY;
-
       if (!locked) {
         if (Math.abs(mx) < 10 && Math.abs(my) < 10) return;
-        if (Math.abs(my) > Math.abs(mx)) { locked = true; return; }
         locked = true;
+        if (Math.abs(my) > Math.abs(mx)) return;
         dragging = true;
-        cards[order[0]].classList.remove('card-top');
-        cards[order[0]].classList.add('card-dragging');
       }
-
       if (!dragging) return;
       e.preventDefault();
       dx = mx;
-      swipeHappened = true;
-      cards[order[0]].style.transform = 'translateX(' + dx + 'px) rotate(' + (dx * 0.05) + 'deg)';
+      swiped = true;
+      var top = cards[order[0]];
+      top.style.transition = 'none';
+      top.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx * 0.05) + 'deg)';
     }, { passive: false });
 
+    // Touch end
     container.addEventListener('touchend', function() {
       if (!isMobile() || busy || !dragging) {
-        dragging = false;
-        locked = false;
+        dragging = false; locked = false;
         return;
       }
-
-      var topCard = cards[order[0]];
-
       if (Math.abs(dx) > 60) {
-        // Swipe — keep card-dragging visible until card-flying takes over
-        swipeOff(dx > 0 ? 1 : -1);
+        flyOff(dx > 0 ? 1 : -1);
       } else {
-        // Snap back
-        topCard.classList.remove('card-dragging');
-        topCard.classList.add('card-top');
-        topCard.style.transition = 'transform 0.3s ease';
-        topCard.style.transform = '';
-        setTimeout(function() { topCard.style.transition = ''; }, 300);
+        var top = cards[order[0]];
+        top.style.transition = 'transform 0.3s ease';
+        top.style.transform = 'none';
+        setTimeout(function() { top.style.transition = 'none'; }, 300);
       }
-
-      dragging = false;
-      locked = false;
-      dx = 0;
+      dragging = false; locked = false; dx = 0;
     });
 
-    // Block link clicks after swipe
+    // Block click navigation right after a swipe
     container.addEventListener('click', function(e) {
-      if (swipeHappened) {
-        e.preventDefault();
-        e.stopPropagation();
-        swipeHappened = false;
-      }
+      if (swiped) { e.preventDefault(); e.stopPropagation(); swiped = false; }
     }, true);
 
-    layout();
+    showLayout();
 
-    // Resize: teardown on desktop, reinit on mobile
+    // Teardown on desktop resize
     window.addEventListener('resize', function() {
       if (!isMobile()) {
         container.classList.remove('carousel-init');
         container.style.height = '';
-        cards.forEach(function(c) {
-          c.classList.remove('card-top', 'card-under', 'card-dragging', 'card-flying');
-          clearInline(c);
-        });
+        container.style.display = '';
+        cards.forEach(function(c) { c.style.cssText = ''; });
+        dots.style.display = 'none';
+      } else {
+        dots.style.display = 'flex';
       }
     });
   }
@@ -577,7 +587,6 @@
     if (g) initCarousel(g);
   }
 
-  // Wait for content to render so height measurement is correct
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() { setTimeout(init, 500); });
   } else {
