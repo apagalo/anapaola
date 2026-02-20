@@ -429,14 +429,23 @@
       c.classList.remove('reveal');
       c.classList.add('visible');
       c.style.animation = 'none';
+      c.style.opacity = '1';
+      c.style.transform = 'none';
     });
 
-    container.classList.add('carousel-init');
-
-    // Measure height before going absolute
+    // Measure height BEFORE adding carousel-init (cards still in flow)
     var maxH = 0;
     cards.forEach(function(c) { maxH = Math.max(maxH, c.offsetHeight); });
     container.style.height = maxH + 'px';
+
+    // Now switch to absolute positioning
+    container.classList.add('carousel-init');
+
+    // Clear the inline styles we set for measurement — CSS classes take over
+    cards.forEach(function(c) {
+      c.style.opacity = '';
+      c.style.transform = '';
+    });
 
     // Card order — order[0] is top of deck
     var order = cards.map(function(_, i) { return i; });
@@ -518,11 +527,13 @@
       }
 
       var topCard = cards[order[0]];
-      topCard.classList.remove('card-dragging');
 
       if (Math.abs(dx) > 60) {
+        // Swipe — keep card-dragging visible until card-flying takes over
         swipeOff(dx > 0 ? 1 : -1);
       } else {
+        // Snap back
+        topCard.classList.remove('card-dragging');
         topCard.classList.add('card-top');
         topCard.style.transition = 'transform 0.3s ease';
         topCard.style.transform = '';

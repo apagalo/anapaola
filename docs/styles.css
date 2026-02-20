@@ -1299,8 +1299,9 @@ footer .container {
     pointer-events: auto;
   }
 
-  /* Flying off screen — JS sets inline transform + opacity */
+  /* Flying off screen — starts visible, JS animates to opacity:0 */
   .carousel-init > .card-flying {
+    opacity: 1 !important;
     z-index: 4;
     pointer-events: none;
     transition: transform 0.4s ease-out, opacity 0.3s ease-out !important;
