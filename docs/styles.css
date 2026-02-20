@@ -1371,18 +1371,39 @@ footer .container {
     border-radius: 100px;
   }
 
-  /* Top row: name left, hamburger right, full width */
+  /* Container: relative so name + hamburger anchor to top row */
   nav .container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    min-height: 60px;
     width: 100%;
-    flex-wrap: wrap;
+    position: relative;
   }
 
-  /* Links expand below the top row */
+  /* Name + hamburger pinned in the top 60px row, won't move on expand */
+  nav .nav-name {
+    position: absolute;
+    left: var(--space-md);
+    top: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+  }
+
+  nav .nav-hamburger {
+    position: absolute;
+    right: var(--space-md);
+    top: 0;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Links expand below the 60px top row */
   nav .nav-links {
-    flex-basis: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -1391,15 +1412,15 @@ footer .container {
     overflow: hidden;
     opacity: 0;
     transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.3s ease,
-                padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 0;
+                opacity 0.3s ease;
+    margin-top: 60px;
+    padding: 0 var(--space-md);
   }
 
   nav.nav-open .nav-links {
     max-height: 400px;
     opacity: 1;
-    padding: var(--space-xs) 0 var(--space-sm);
+    padding-bottom: var(--space-sm);
   }
 
   nav .nav-links a {
@@ -1419,22 +1440,21 @@ footer .container {
 
   /* Case study nav — shapes + contact below top row */
   .nav-shapes {
-    flex-basis: 100%;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
     transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.3s ease,
-                padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity 0.3s ease;
     justify-content: flex-start;
     flex-wrap: wrap;
-    padding: 0;
+    margin-top: 60px;
+    padding: 0 var(--space-md);
   }
 
   nav.nav-open .nav-shapes {
     max-height: 100px;
     opacity: 1;
-    padding: var(--space-xs) 0;
+    padding-bottom: var(--space-xs);
   }
 
   .nav-shape {
@@ -1442,22 +1462,20 @@ footer .container {
   }
 
   .nav-contact {
-    flex-basis: 100%;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
     transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.3s ease,
-                padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity 0.3s ease;
     display: block;
     font-size: 22px;
-    padding: 0;
+    padding: 0 var(--space-md);
   }
 
   nav.nav-open .nav-contact {
     max-height: 60px;
     opacity: 1;
-    padding: 0 0 var(--space-sm);
+    padding-bottom: var(--space-sm);
   }
 
   /* Backdrop overlay — blurs content behind open nav */
