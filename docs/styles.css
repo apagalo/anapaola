@@ -1225,6 +1225,10 @@ footer .container {
     grid-template-columns: 1fr;
   }
 
+  .case-card {
+    padding: 2rem var(--space-md);
+  }
+
   nav {
     left: 12px;
     right: 12px;

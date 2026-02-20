@@ -447,12 +447,13 @@
     container.style.display = '';
     container.style.height = maxH + 'px';
 
-    // 5. Position all cards absolute
+    // 5. Position all cards absolute, equal height
     cards.forEach(function(c) {
       c.style.position = 'absolute';
       c.style.top = '0';
       c.style.left = '0';
       c.style.width = '100%';
+      c.style.minHeight = maxH + 'px';
       c.style.display = 'none';
       c.style.boxSizing = 'border-box';
     });
