@@ -171,13 +171,16 @@
     if (isMobile()) {
       var current = window.pageYOffset;
       if (current > lastScroll && current > 80) {
-        nav.style.transform = 'translateY(-100%)';
+        nav.style.transform = 'translateY(calc(-100% - 12px))';
+        nav.style.opacity = '0';
       } else {
         nav.style.transform = 'translateY(0)';
+        nav.style.opacity = '1';
       }
       lastScroll = current;
     } else {
       nav.style.transform = 'translateY(0)';
+      nav.style.opacity = '1';
     }
   });
 })();
