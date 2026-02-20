@@ -8,10 +8,10 @@
 
 ## Reference
 This project uses skills and pipelines from my AI Operating System:
-- Skills: ~/second-brain-designer/skills/
-- Pipelines: ~/second-brain-designer/pipelines/
-- Templates: ~/second-brain-designer/templates/
-- My voice: ~/second-brain-designer/me/voice.md
+- Skills: ~/atlas-os/skills/
+- Pipelines: ~/atlas-os/pipelines/
+- Templates: ~/atlas-os/templates/
+- My voice: ~/atlas-os/me/voice.md
 
 ## Ana Paola — Profile Summary
 
