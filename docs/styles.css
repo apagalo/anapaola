@@ -1265,49 +1265,45 @@ footer .container {
     overflow: visible;
   }
 
-  /* Kill reveal animations inside carousel */
-  .carousel-init > .reveal {
-    animation: none !important;
-    transition-delay: 0ms !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  /* All cards: absolute, same size, stacked */
+  /* All cards: absolute, same size, hidden by default */
   .carousel-init > * {
-    position: absolute;
+    position: absolute !important;
     top: 0;
     left: 0;
     width: 100%;
     padding: 24px 16px;
     pointer-events: none;
-    opacity: 1;
+    opacity: 0 !important;
+    transform: none !important;
+    transition: none !important;
     z-index: 1;
   }
 
-  /* Top card — interactive */
+  /* Top card — visible + interactive */
   .carousel-init > .card-top {
+    opacity: 1 !important;
     z-index: 3;
     pointer-events: auto;
   }
 
-  /* Card directly behind */
+  /* Card behind — visible, ready to show when top is swiped */
   .carousel-init > .card-under {
+    opacity: 1 !important;
     z-index: 2;
   }
 
-  /* While finger is down — kill transitions */
+  /* While finger is dragging — no CSS transitions */
   .carousel-init > .card-dragging {
-    transition: none !important;
+    opacity: 1 !important;
     z-index: 3;
     pointer-events: auto;
   }
 
-  /* Flying off screen */
+  /* Flying off screen — JS sets inline transform + opacity */
   .carousel-init > .card-flying {
     z-index: 4;
     pointer-events: none;
-    transition: transform 0.4s ease-out, opacity 0.3s ease-out;
+    transition: transform 0.4s ease-out, opacity 0.3s ease-out !important;
   }
 
   /* Shapes colorful by default on mobile (no hover) */
