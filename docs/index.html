@@ -44,12 +44,18 @@
 </head>
 <body>
 
+<!-- Ambient glow orbs (mouse-following, scroll-color-aware) -->
+<div class="glow-bg" aria-hidden="true">
+  <div class="glow-orb glow-orb--primary"></div>
+  <div class="glow-orb glow-orb--secondary"></div>
+</div>
+
 <!-- Flower clip-path (rounded 12-petal starburst, slowly spinning) -->
 <svg width="0" height="0" style="position:absolute">
   <defs>
     <clipPath id="flower-clip" clipPathUnits="objectBoundingBox">
       <path d="M0.596 0.143 Q0.75 0.067,0.762 0.238 Q0.933 0.25,0.857 0.404 Q1.0 0.5,0.857 0.596 Q0.933 0.75,0.762 0.762 Q0.75 0.933,0.596 0.857 Q0.5 1.0,0.404 0.857 Q0.25 0.933,0.238 0.762 Q0.067 0.75,0.143 0.596 Q0.0 0.5,0.143 0.404 Q0.067 0.25,0.238 0.238 Q0.25 0.067,0.404 0.143 Q0.5 0.0,0.596 0.143Z">
-        <animateTransform attributeName="transform" type="rotate" from="0 0.5 0.5" to="360 0.5 0.5" dur="60s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="rotate" from="0 0.5 0.5" to="360 0.5 0.5" dur="180s" repeatCount="indefinite"/>
       </path>
     </clipPath>
   </defs>
@@ -91,18 +97,22 @@
         </div>
       </div>
     </div>
+    <a href="#about" class="scroll-hint" aria-label="Scroll down">
+      <span class="scroll-hint-text">Scroll</span>
+      <span class="scroll-hint-line"></span>
+    </a>
   </section>
 
   <!-- About -->
   <section class="about" id="about">
     <div class="container">
-      <div class="about-text reveal">
-        <p class="label">About me</p>
-        <h2>From Lima to Stockholm,<br>from marketing to DesignOps</h2>
-        <p>I'm a Senior Design Operations professional at <strong>Electrolux Group</strong>, where I've spent the past 3+ years building and scaling the DesignOps function for global design teams.</p>
-        <p>My work spans <strong>resource allocation, budget management, workflow design, and cross-functional coordination</strong> — all in service of helping 30 designers across 50+ concurrent projects do their best work.</p>
-        <p>I came to DesignOps from an unusual path. I started in marketing and communications in Peru, moved to Stockholm for a university exchange, and discovered that the most impactful work happens at the intersection of <strong>strategy and execution</strong>. That background gives me a natural bridge between creative teams and business leadership.</p>
-        <p>I use a <strong>triple diamond design thinking framework</strong> (Understand → Create → Develop) to approach operational challenges. I'm data-driven (Power BI dashboards I built from scratch), collaborative (workshops and cross-functional rituals), and always looking for ways to improve how teams work together.</p>
+      <div class="about-text reveal-stagger">
+        <p class="label reveal">About me</p>
+        <h2 class="reveal-blur">From Lima to Stockholm,<br>from marketing to DesignOps</h2>
+        <p class="reveal">I'm a Senior Design Operations professional at <strong>Electrolux Group</strong>, where I've spent the past 3+ years building and scaling the DesignOps function for global design teams.</p>
+        <p class="reveal">My work spans <strong>resource allocation, budget management, workflow design, and cross-functional coordination</strong> — all in service of helping 30 designers across 50+ concurrent projects do their best work.</p>
+        <p class="reveal">I came to DesignOps from an unusual path. I started in marketing and communications in Peru, moved to Stockholm for a university exchange, and discovered that the most impactful work happens at the intersection of <strong>strategy and execution</strong>. That background gives me a natural bridge between creative teams and business leadership.</p>
+        <p class="reveal">I use a <strong>triple diamond design thinking framework</strong> (Understand → Create → Develop) to approach operational challenges. I'm data-driven (Power BI dashboards I built from scratch), collaborative (workshops and cross-functional rituals), and always looking for ways to improve how teams work together.</p>
       </div>
       <div class="fun-facts reveal">
         <h3>Side facts</h3>
@@ -121,8 +131,8 @@
   <!-- Capabilities -->
   <section class="capabilities" id="capabilities">
     <div class="container">
-      <p class="label label--centered">What I do</p>
-      <h2>Three Pillars of DesignOps</h2>
+      <p class="label label--centered reveal">What I do</p>
+      <h2 class="reveal-blur">Three Pillars of DesignOps</h2>
       <div class="pillars reveal-stagger">
         <div class="pillar reveal">
           <h3>People</h3>
@@ -161,8 +171,8 @@
   <!-- Case Studies -->
   <section class="case-studies" id="work">
     <div class="container">
-      <p class="label label--centered">Work</p>
-      <h2>Selected Case Studies</h2>
+      <p class="label label--centered reveal">Work</p>
+      <h2 class="reveal-blur">Selected Case Studies</h2>
       <div class="case-grid reveal-stagger">
 
         <a href="case-studies/01-global-design-ops.html" class="case-card reveal">
@@ -244,12 +254,12 @@
   <!-- Resume -->
   <section class="resume-section" id="resume">
     <div class="container">
-      <div class="reveal">
-        <p class="label label--centered">Resume</p>
-        <h2>Experience at a Glance</h2>
-        <p>3+ years of progressive DesignOps experience at Electrolux Group.<br>
+      <div class="reveal-stagger">
+        <p class="label label--centered reveal">Resume</p>
+        <h2 class="reveal-blur">Experience at a Glance</h2>
+        <p class="reveal">3+ years of progressive DesignOps experience at Electrolux Group.<br>
         Business Administration & Marketing from UPC (top 20%). Exchange at Stockholm University.</p>
-        <div class="resume-btn-wrap">
+        <div class="resume-btn-wrap reveal">
           <!-- Replace # with actual PDF link -->
           <a href="#" class="btn btn--primary">Download PDF</a>
         </div>
@@ -351,7 +361,10 @@
     if (e.key === 'Escape' && nav.classList.contains('nav-open')) closeNav();
   });
 
-  // Scroll-hide nav on mobile + nav shadow on desktop
+  // Scroll hint reference
+  var scrollHint = document.querySelector('.scroll-hint');
+
+  // Scroll-hide nav on mobile + nav shadow on desktop + docking + scroll hint
   window.addEventListener('scroll', function() {
     var current = window.pageYOffset;
 
@@ -360,6 +373,20 @@
       nav.classList.add('nav-scrolled');
     } else {
       nav.classList.remove('nav-scrolled');
+    }
+
+    // Nav docking — slide up from 40px to 12px on desktop
+    if (!isMobile()) {
+      if (current > 30) {
+        nav.classList.add('nav-docked');
+      } else {
+        nav.classList.remove('nav-docked');
+      }
+    }
+
+    // Hide scroll hint after small scroll
+    if (scrollHint) {
+      scrollHint.classList.toggle('hidden', current > 100);
     }
 
     if (isMobile()) {
@@ -389,9 +416,14 @@
   function updateActive() {
     var scrollPos = window.pageYOffset + 120;
     var active = null;
-    sections.forEach(function(s) {
-      if (s.el.offsetTop <= scrollPos) active = s;
-    });
+    // If scrolled to bottom, activate last section (Resume)
+    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2) {
+      active = sections[sections.length - 1];
+    } else {
+      sections.forEach(function(s) {
+        if (s.el.offsetTop <= scrollPos) active = s;
+      });
+    }
     links.forEach(function(li) { li.classList.remove('active'); });
     if (active) active.li.classList.add('active');
   }
@@ -402,7 +434,7 @@
 </script>
 <script>
 (function() {
-  var reveals = document.querySelectorAll('.reveal');
+  var reveals = document.querySelectorAll('.reveal, .reveal-blur');
   if (!('IntersectionObserver' in window)) {
     reveals.forEach(function(el) { el.classList.add('visible'); });
     return;
@@ -414,8 +446,171 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.12 });
   reveals.forEach(function(el) { observer.observe(el); });
+})();
+</script>
+<script>
+// Scroll-driven background color transition (microsoft.ai-style)
+(function() {
+  var sectionData = [
+    { sel: '.hero',           light: [240,238,238], dark: [30,30,30] },
+    { sel: '.about',          light: [250,244,244], dark: [24,24,24] },
+    { sel: '.capabilities',   light: [30,27,24],    dark: [15,14,13] },
+    { sel: '.case-studies',   light: [250,244,244], dark: [24,24,24] },
+    { sel: '.resume-section', light: [237,232,226], dark: [28,26,24] }
+  ];
+
+  var sections = sectionData.map(function(s) {
+    return { el: document.querySelector(s.sel), light: s.light, dark: s.dark };
+  }).filter(function(s) { return s.el; });
+
+  if (!sections.length) return;
+
+  var positions = [];
+  function cache() {
+    positions = sections.map(function(s) {
+      return { top: s.el.offsetTop, bot: s.el.offsetTop + s.el.offsetHeight };
+    });
+  }
+  cache();
+
+  function isDark() {
+    return document.documentElement.getAttribute('data-theme') === 'dark';
+  }
+
+  function smoothstep(t) { return t * t * (3 - 2 * t); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function rgb(r, g, b) { return 'rgb(' + Math.round(r) + ',' + Math.round(g) + ',' + Math.round(b) + ')'; }
+
+  function blend(c1, c2, t) {
+    return rgb(lerp(c1[0],c2[0],t), lerp(c1[1],c2[1],t), lerp(c1[2],c2[2],t));
+  }
+
+  function update() {
+    var scrollY = window.pageYOffset;
+    var dark = isDark();
+    var center = scrollY + window.innerHeight * 0.45;
+
+    // Default to first section color
+    var col = dark ? sections[0].dark : sections[0].light;
+
+    for (var i = 0; i < sections.length; i++) {
+      var c = dark ? sections[i].dark : sections[i].light;
+      var top = positions[i].top;
+      var bot = positions[i].bot;
+
+      if (center < top) break; // haven't reached this section yet
+
+      if (center >= top && center < bot) {
+        // Inside this section — check if we're in the transition zone at the top
+        var zone = Math.min(window.innerHeight * 0.5, (bot - top) * 0.4);
+        if (i > 0 && center < top + zone) {
+          // Blend from previous section into this one
+          var prev = dark ? sections[i - 1].dark : sections[i - 1].light;
+          var t = smoothstep((center - top) / zone);
+          col = [lerp(prev[0],c[0],t), lerp(prev[1],c[1],t), lerp(prev[2],c[2],t)];
+        } else {
+          col = c;
+        }
+        break;
+      }
+
+      // Past this section — carry its color forward
+      col = c;
+    }
+
+    document.body.style.backgroundColor = rgb(col[0], col[1], col[2]);
+
+    // Toggle dark-zone class for capabilities text color
+    if (positions[2]) {
+      var capTop = positions[2].top;
+      var capBot = positions[2].bot;
+      var margin = window.innerHeight * 0.4;
+      var inDarkZone = !dark && center > capTop - margin && center < capBot;
+      document.body.classList.toggle('zone-dark', inDarkZone);
+    }
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() { update(); ticking = false; });
+      ticking = true;
+    }
+  });
+
+  window.addEventListener('resize', function() { cache(); update(); });
+  update();
+
+  // Re-calc on theme change
+  new MutationObserver(function() { update(); }).observe(
+    document.documentElement, { attributes: true, attributeFilter: ['data-theme'] }
+  );
+})();
+</script>
+<!-- Ambient Glow: mouse-tracking + drift -->
+<script>
+(function() {
+  if (window.innerWidth <= 768) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var primary = document.querySelector('.glow-orb--primary');
+  var secondary = document.querySelector('.glow-orb--secondary');
+  if (!primary || !secondary) return;
+
+  var mouseX = window.innerWidth / 2;
+  var mouseY = window.innerHeight / 2;
+  var pX = mouseX, pY = mouseY;
+  var sX = mouseX, sY = mouseY;
+  var hasMouse = false;
+  var time = 0;
+
+  document.addEventListener('mousemove', function(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    hasMouse = true;
+  });
+
+  // Start orbs centered
+  primary.style.transform = 'translate(' + (pX - 300) + 'px,' + (pY - 300) + 'px)';
+  secondary.style.transform = 'translate(' + (sX - 240) + 'px,' + (sY - 240) + 'px)';
+
+  function tick() {
+    time += 0.008;
+
+    // Gentle drift when no mouse input
+    var driftX = Math.sin(time * 0.7) * 60;
+    var driftY = Math.cos(time * 0.5) * 40;
+    var driftX2 = Math.cos(time * 0.6) * 80;
+    var driftY2 = Math.sin(time * 0.4) * 50;
+
+    var targetX = hasMouse ? mouseX : (window.innerWidth / 2 + driftX);
+    var targetY = hasMouse ? mouseY : (window.innerHeight / 2 + driftY);
+    var targetX2 = hasMouse ? mouseX : (window.innerWidth / 2 + driftX2);
+    var targetY2 = hasMouse ? mouseY : (window.innerHeight / 2 + driftY2);
+
+    // Add subtle drift even when following mouse
+    if (hasMouse) {
+      targetX += driftX * 0.3;
+      targetY += driftY * 0.3;
+      targetX2 += driftX2 * 0.4;
+      targetY2 += driftY2 * 0.4;
+    }
+
+    // Lerp — primary follows faster, secondary trails
+    pX += (targetX - pX) * 0.045;
+    pY += (targetY - pY) * 0.045;
+    sX += (targetX2 - sX) * 0.02;
+    sY += (targetY2 - sY) * 0.02;
+
+    primary.style.transform = 'translate(' + (pX - 300) + 'px,' + (pY - 300) + 'px)';
+    secondary.style.transform = 'translate(' + (sX - 240) + 'px,' + (sY - 240) + 'px)';
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
 })();
 </script>
 <!-- Theme Toggle -->
