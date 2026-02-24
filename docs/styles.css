@@ -487,42 +487,10 @@ nav .nav-divider {
 }
 
 .pillar {
-  background:
-    linear-gradient(125deg, rgba(255,255,255,0.08) 0%, transparent 40%),
-    linear-gradient(245deg, rgba(255,255,255,0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 20% 80%, rgba(255,255,255,0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 60% 60%, rgba(255,255,255,0.04) 0%, transparent 40%),
-    var(--pillar-bg);
-  background-size:
-    100% 100%,
-    100% 100%,
-    80% 70%,
-    70% 80%,
-    60% 60%;
+  background: var(--pillar-bg);
   color: var(--white);
   border-radius: 12px;
   padding: 2rem var(--space-md);
-  position: relative;
-  overflow: hidden;
-}
-
-.pillar::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='4' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
-  background-size: cover;
-  opacity: 0.08;
-  mix-blend-mode: overlay;
-  pointer-events: none;
-}
-
-.pillar h3,
-.pillar ul {
-  position: relative;
-  z-index: 1;
 }
 
 .pillar h3 {
