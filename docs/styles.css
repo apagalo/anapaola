@@ -1334,6 +1334,10 @@ footer .container {
 /* === Responsive === */
 
 @media (max-width: 768px) {
+  .scroll-hint {
+    display: none;
+  }
+
   section {
     padding: 80px 0;
     overflow-x: clip;
