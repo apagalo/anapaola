@@ -279,6 +279,47 @@
   </footer>
 
 <script>
+// Boyfriend overlay
+(function() {
+  var bfKey = 'bf_acknowledged';
+  if (sessionStorage.getItem(bfKey) === 'true') return;
+
+  var ov = document.createElement('div');
+  ov.className = 'pw-overlay';
+  ov.style.zIndex = '10001';
+
+  function showMain() {
+    ov.innerHTML =
+      '<div class="pw-card" style="text-align:center">' +
+        '<h3 style="font-size:1.6rem;margin-bottom:1.2rem">Patrick is the best boyfriend in the world</h3>' +
+        '<div style="display:flex;gap:12px;justify-content:center">' +
+          '<button id="bf-disagree" style="background:transparent;border:1px solid rgba(0,0,0,0.15);color:var(--dark-soft);padding:0.7rem 1.5rem;border-radius:100px;cursor:pointer;font-size:0.9rem">Disagree</button>' +
+          '<button id="bf-agree" style="padding:0.7rem 1.5rem;border-radius:100px;cursor:pointer;font-size:0.9rem">No doubt</button>' +
+        '</div>' +
+      '</div>';
+    document.getElementById('bf-agree').addEventListener('click', function() {
+      sessionStorage.setItem(bfKey, 'true');
+      ov.remove();
+    });
+    document.getElementById('bf-disagree').addEventListener('click', showWarning);
+  }
+
+  function showWarning() {
+    ov.innerHTML =
+      '<div class="pw-card" style="text-align:center">' +
+        '<h3 style="font-size:1.4rem;margin-bottom:1.2rem">Are you really sure you want to go down this road?</h3>' +
+        '<div style="display:flex;gap:12px;justify-content:center">' +
+          '<button id="bf-no" style="padding:0.7rem 1.5rem;border-radius:100px;cursor:pointer;font-size:0.9rem">No</button>' +
+        '</div>' +
+      '</div>';
+    document.getElementById('bf-no').addEventListener('click', showMain);
+  }
+
+  document.body.appendChild(ov);
+  showMain();
+})();
+</script>
+<script>
 (function() {
   var key = 'portfolio_auth';
   if (sessionStorage.getItem(key) === 'true') return;
