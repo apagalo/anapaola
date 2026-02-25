@@ -75,14 +75,14 @@
 
   <!-- Case Content -->
   <section class="case-content">
-    <div class="container--narrow reveal">
+    <div class="container--narrow">
 
-      <h2>Situation</h2>
-      <p>Design awards — iF, Red Dot, Good Design, and others — serve a dual purpose for a global design organization. Externally, they validate the quality of work and raise the brand's profile among design-conscious consumers and industry peers. Internally, they give designers recognition for exceptional output and help leadership communicate the value of the design function to the broader business.</p>
-      <p>At Electrolux Group, the design team was producing award-worthy work across the Wellbeing, SDA, and Brand Expression portfolios. But there was no systematic approach to identifying which projects should be submitted, preparing submission materials, managing the review process, or tracking results. When submissions did happen, they were driven by individual designers or leads who happened to take the initiative — meaning many strong projects were never put forward.</p>
+      <h2 class="reveal-blur">Situation</h2>
+      <p class="reveal">Design awards — iF, Red Dot, Good Design, and others — serve a dual purpose for a global design organization. Externally, they validate the quality of work and raise the brand's profile among design-conscious consumers and industry peers. Internally, they give designers recognition for exceptional output and help leadership communicate the value of the design function to the broader business.</p>
+      <p class="reveal">At Electrolux Group, the design team was producing award-worthy work across the Wellbeing, SDA, and Brand Expression portfolios. But there was no systematic approach to identifying which projects should be submitted, preparing submission materials, managing the review process, or tracking results. When submissions did happen, they were driven by individual designers or leads who happened to take the initiative — meaning many strong projects were never put forward.</p>
 
-      <h2>Challenge</h2>
-      <ul>
+      <h2 class="reveal-blur">Challenge</h2>
+      <ul class="reveal">
         <li><strong>No submission process:</strong> There was no defined workflow for identifying, preparing, or reviewing award submissions across the design organization</li>
         <li><strong>Inconsistent quality:</strong> Without a structured preparation process, submission materials varied widely in quality — some were polished, others were rushed together before deadlines</li>
         <li><strong>Missed deadlines:</strong> Award submission windows are fixed and competitive. Without a centralized calendar and tracking system, the team regularly missed opportunities</li>
@@ -91,36 +91,36 @@
         <li><strong>No tracking:</strong> There was no centralized record of what had been submitted, where, or with what results — making it impossible to learn from past cycles</li>
       </ul>
 
-      <h2>Approach</h2>
+      <h2 class="reveal-blur">Approach</h2>
 
-      <h3>Understand</h3>
-      <ul>
+      <h3 class="reveal">Understand</h3>
+      <ul class="reveal">
         <li>Mapped the existing (informal) awards submission process: who was involved, how projects were selected, what materials were prepared, and where things typically fell apart</li>
         <li>Researched the major design award programs relevant to Electrolux's product categories — their timelines, requirements, evaluation criteria, and submission formats</li>
         <li>Spoke with design leads across portfolios to understand which projects they considered award-worthy and what barriers prevented them from submitting</li>
       </ul>
 
-      <h3>Create</h3>
-      <ul>
+      <h3 class="reveal">Create</h3>
+      <ul class="reveal">
         <li>Designed an end-to-end awards submission workflow covering: project identification, internal nomination, material preparation, review and quality gate, submission, and results tracking</li>
         <li>Built a centralized awards calendar that mapped all relevant submission deadlines across the year, with preparation milestones working backward from each deadline</li>
         <li>Created standardized templates for submission materials — project descriptions, photography briefs, impact narratives — so that quality was consistent regardless of which team prepared the entry</li>
         <li>Established an internal review process where submissions were evaluated before going out, ensuring only the strongest work represented the organization</li>
       </ul>
 
-      <h3>Develop</h3>
-      <ul>
+      <h3 class="reveal">Develop</h3>
+      <ul class="reveal">
         <li>Rolled out the workflow across all three portfolios, with design leads as the primary nomination channel</li>
         <li>Coordinated the first structured submission cycle, managing the full pipeline from nomination through to submission</li>
         <li>After the first cycle, gathered feedback from participants and refined the process — simplifying where it felt heavy, adding structure where gaps appeared</li>
         <li>Established a tracking system to record submissions, results, and lessons learned for future cycles</li>
       </ul>
 
-      <h2>My Role</h2>
-      <p>I owned the design awards program end to end — from designing the workflow and building the tools, to coordinating submissions across teams, managing the internal review process, and tracking results. I was the single point of coordination between design leads, the projects themselves, and the external award organizations. This role required both operational rigor (deadlines, templates, tracking) and relationship skills (motivating teams to participate, managing the review process diplomatically).</p>
+      <h2 class="reveal-blur">My Role</h2>
+      <p class="reveal">I owned the design awards program end to end — from designing the workflow and building the tools, to coordinating submissions across teams, managing the internal review process, and tracking results. I was the single point of coordination between design leads, the projects themselves, and the external award organizations. This role required both operational rigor (deadlines, templates, tracking) and relationship skills (motivating teams to participate, managing the review process diplomatically).</p>
 
-      <h2>Impact</h2>
-      <ul>
+      <h2 class="reveal-blur">Impact</h2>
+      <ul class="reveal">
         <li>Established Electrolux Group's first structured design awards submission workflow, replacing ad hoc, individual-driven efforts</li>
         <li>Increased the volume and quality of submissions by making the process clear, repeatable, and supported with templates and timelines</li>
         <li>Raised the design function's external visibility through consistent participation in major international design awards</li>
@@ -129,13 +129,13 @@
       </ul>
 
       <!-- Key Takeaway -->
-      <div class="case-takeaway">
+      <div class="case-takeaway reveal">
         <h3>Key Takeaway</h3>
         <p>Recognition doesn't happen by accident — it happens by design. The best creative work in any organization often goes unrecognized simply because nobody built the system to surface it. An awards program isn't just about trophies; it's about making great work visible, giving designers recognition they've earned, and helping the design function demonstrate its value to the business. The operational skill is in making participation effortless for the people doing the creative work.</p>
       </div>
 
       <!-- Case Navigation -->
-      <div class="case-nav">
+      <div class="case-nav reveal">
         <a href="02-power-bi-dashboards.html">&larr; Prev: Power BI Dashboards</a>
         <a href="04-team-strengths-gaps.html">Next: Team Strengths & Gaps &rarr;</a>
       </div>
@@ -241,21 +241,64 @@
 })();
 </script>
 <script>
+// Scroll-driven reveal — elements animate proportionally to scroll position
 (function() {
-  var reveals = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) {
-    reveals.forEach(function(el) { el.classList.add('visible'); });
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal, .reveal-blur').forEach(function(el) {
+      el.classList.add('visible');
+    });
     return;
   }
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+
+  var els = [];
+
+  function gather() {
+    els = [];
+    document.querySelectorAll('.reveal, .reveal-blur').forEach(function(el) {
+      els.push({ el: el, isBlur: el.classList.contains('reveal-blur') });
     });
-  }, { threshold: 0.15 });
-  reveals.forEach(function(el) { observer.observe(el); });
+  }
+  gather();
+
+  function clamp(v) { return Math.max(0, Math.min(1, v)); }
+  function ease(t) { return t * t * (3 - 2 * t); }
+
+  function update() {
+    var wh = window.innerHeight;
+
+    for (var i = 0; i < els.length; i++) {
+      var item = els[i];
+      var rect = item.el.getBoundingClientRect();
+
+      var raw = (wh - rect.top) / (wh * 0.35);
+      var t = clamp(ease(clamp(raw)));
+
+      var opacity = t;
+      var y = (1 - t) * 40;
+
+      if (item.isBlur) {
+        var blur = (1 - t) * 10;
+        y = (1 - t) * 12;
+        item.el.style.opacity = opacity;
+        item.el.style.transform = 'translateY(' + y + 'px)';
+        item.el.style.filter = 'blur(' + blur + 'px)';
+      } else {
+        item.el.style.opacity = opacity;
+        item.el.style.transform = 'translateY(' + y + 'px)';
+      }
+    }
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() { update(); ticking = false; });
+      ticking = true;
+    }
+  });
+
+  window.addEventListener('resize', function() { gather(); update(); });
+  update();
 })();
 </script>
 <!-- Theme Toggle -->

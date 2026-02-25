@@ -75,14 +75,14 @@
 
   <!-- Case Content -->
   <section class="case-content">
-    <div class="container--narrow reveal">
+    <div class="container--narrow">
 
-      <h2>Situation</h2>
-      <p>Managing a design team of 30 people across multiple product lines means constantly balancing what the team can do today against what it needs to do tomorrow. At Electrolux Group, the Wellbeing and SDA portfolios span a wide range of design disciplines — from industrial design and user research to brand expression and digital interfaces.</p>
-      <p>Design leads had an intuitive sense of their individual team members' strengths, but there was no shared, structured view of capabilities across the entire organization. When new projects came in or priorities shifted, staffing decisions relied on personal knowledge and informal conversations rather than a systematic understanding of where the team was strong and where it had gaps.</p>
+      <h2 class="reveal-blur">Situation</h2>
+      <p class="reveal">Managing a design team of 30 people across multiple product lines means constantly balancing what the team can do today against what it needs to do tomorrow. At Electrolux Group, the Wellbeing and SDA portfolios span a wide range of design disciplines — from industrial design and user research to brand expression and digital interfaces.</p>
+      <p class="reveal">Design leads had an intuitive sense of their individual team members' strengths, but there was no shared, structured view of capabilities across the entire organization. When new projects came in or priorities shifted, staffing decisions relied on personal knowledge and informal conversations rather than a systematic understanding of where the team was strong and where it had gaps.</p>
 
-      <h2>Challenge</h2>
-      <ul>
+      <h2 class="reveal-blur">Challenge</h2>
+      <ul class="reveal">
         <li><strong>Invisible capabilities:</strong> No centralized view of what skills and expertise existed across the 30-person team</li>
         <li><strong>Reactive staffing:</strong> Project assignments were based on availability rather than the best fit of skills to project needs</li>
         <li><strong>Hiring blind spots:</strong> Without a clear picture of existing capabilities, it was difficult to make strategic hiring decisions</li>
@@ -90,34 +90,34 @@
         <li><strong>Cross-team blindness:</strong> The 5 design leads knew their own teams well, but had limited insight into capabilities on other teams — making cross-team collaboration harder to initiate</li>
       </ul>
 
-      <h2>Approach</h2>
+      <h2 class="reveal-blur">Approach</h2>
 
-      <h3>Understand</h3>
-      <ul>
+      <h3 class="reveal">Understand</h3>
+      <ul class="reveal">
         <li>Conducted structured conversations with each of the 5 design leads to map the strengths, specializations, and development areas of their team members</li>
         <li>Reviewed project histories to understand which types of work the team handled confidently and where external support or workarounds were frequently needed</li>
         <li>Benchmarked against industry frameworks for design team competencies to ensure the assessment covered relevant skill dimensions</li>
       </ul>
 
-      <h3>Create</h3>
-      <ul>
+      <h3 class="reveal">Create</h3>
+      <ul class="reveal">
         <li>Developed a capabilities matrix that mapped individual and team-level strengths against the skills required by the current and upcoming project portfolio</li>
         <li>Identified clear clusters: areas where the team was deep (core strengths to protect and leverage) and areas where gaps existed (opportunities for hiring, training, or partnership)</li>
         <li>Created visual representations that made the data accessible for leadership discussions — not just a spreadsheet, but a tool that told a clear story</li>
       </ul>
 
-      <h3>Develop</h3>
-      <ul>
+      <h3 class="reveal">Develop</h3>
+      <ul class="reveal">
         <li>Presented findings to design leadership, framing gaps not as problems but as strategic inputs for team development and resource planning</li>
         <li>Integrated the strengths and gaps data into resource allocation decisions — ensuring projects were staffed based on capability fit, not just availability</li>
         <li>Established a cadence for revisiting the analysis as the team evolved, new hires joined, and project demands shifted</li>
       </ul>
 
-      <h2>My Role</h2>
-      <p>I led the entire review process — from designing the assessment framework, to conducting the research with design leads, to synthesizing and presenting the findings to leadership. I translated raw capability data into actionable insights that directly influenced hiring priorities, training investments, and project staffing decisions.</p>
+      <h2 class="reveal-blur">My Role</h2>
+      <p class="reveal">I led the entire review process — from designing the assessment framework, to conducting the research with design leads, to synthesizing and presenting the findings to leadership. I translated raw capability data into actionable insights that directly influenced hiring priorities, training investments, and project staffing decisions.</p>
 
-      <h2>Impact</h2>
-      <ul>
+      <h2 class="reveal-blur">Impact</h2>
+      <ul class="reveal">
         <li>Gave leadership the first structured, organization-wide view of design team capabilities and gaps</li>
         <li>Enabled strategic staffing decisions — projects matched to the right skills, not just the first available designer</li>
         <li>Informed hiring priorities by highlighting capability gaps that couldn't be closed through training alone</li>
@@ -126,13 +126,13 @@
       </ul>
 
       <!-- Key Takeaway -->
-      <div class="case-takeaway">
+      <div class="case-takeaway reveal">
         <h3>Key Takeaway</h3>
         <p>You can't build a strong team by accident. Understanding what your team is great at — and where it's stretched thin — is the foundation for smart staffing, strategic hiring, and meaningful professional development. The most valuable part of this work wasn't the spreadsheet — it was the conversations it enabled between leadership about where the team needed to go next.</p>
       </div>
 
       <!-- Case Navigation -->
-      <div class="case-nav">
+      <div class="case-nav reveal">
         <a href="03-design-awards.html">&larr; Previous: Design Awards</a>
         <a href="05-brand-expression-research.html">Next: Brand Expression Research &rarr;</a>
       </div>
@@ -238,21 +238,64 @@
 })();
 </script>
 <script>
+// Scroll-driven reveal — elements animate proportionally to scroll position
 (function() {
-  var reveals = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) {
-    reveals.forEach(function(el) { el.classList.add('visible'); });
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal, .reveal-blur').forEach(function(el) {
+      el.classList.add('visible');
+    });
     return;
   }
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+
+  var els = [];
+
+  function gather() {
+    els = [];
+    document.querySelectorAll('.reveal, .reveal-blur').forEach(function(el) {
+      els.push({ el: el, isBlur: el.classList.contains('reveal-blur') });
     });
-  }, { threshold: 0.15 });
-  reveals.forEach(function(el) { observer.observe(el); });
+  }
+  gather();
+
+  function clamp(v) { return Math.max(0, Math.min(1, v)); }
+  function ease(t) { return t * t * (3 - 2 * t); }
+
+  function update() {
+    var wh = window.innerHeight;
+
+    for (var i = 0; i < els.length; i++) {
+      var item = els[i];
+      var rect = item.el.getBoundingClientRect();
+
+      var raw = (wh - rect.top) / (wh * 0.35);
+      var t = clamp(ease(clamp(raw)));
+
+      var opacity = t;
+      var y = (1 - t) * 40;
+
+      if (item.isBlur) {
+        var blur = (1 - t) * 10;
+        y = (1 - t) * 12;
+        item.el.style.opacity = opacity;
+        item.el.style.transform = 'translateY(' + y + 'px)';
+        item.el.style.filter = 'blur(' + blur + 'px)';
+      } else {
+        item.el.style.opacity = opacity;
+        item.el.style.transform = 'translateY(' + y + 'px)';
+      }
+    }
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() { update(); ticking = false; });
+      ticking = true;
+    }
+  });
+
+  window.addEventListener('resize', function() { gather(); update(); });
+  update();
 })();
 </script>
 <!-- Theme Toggle -->

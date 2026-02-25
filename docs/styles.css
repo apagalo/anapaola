@@ -1002,12 +1002,6 @@ nav .nav-divider {
   will-change: opacity, transform, filter;
 }
 
-.case-content .reveal,
-.case-content .reveal-blur {
-  opacity: 1;
-  transform: none;
-  filter: none;
-}
 
 /* === Hero Entrance Animation === */
 

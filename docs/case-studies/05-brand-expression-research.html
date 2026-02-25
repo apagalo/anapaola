@@ -75,48 +75,48 @@
 
   <!-- Case Content -->
   <section class="case-content">
-    <div class="container--narrow reveal">
+    <div class="container--narrow">
 
-      <h2>Situation</h2>
-      <p>Brand expression at a company like Electrolux Group isn't just a visual identity exercise — it's about how the brand shows up in every product, every interface, and every customer touchpoint across global markets. The Brand Expression portfolio within the design organization was responsible for defining and evolving this identity, but the work was primarily driven by creative intuition and internal stakeholder preferences rather than structured external research.</p>
-      <p>As Design Projects Coordinator overseeing the Wellbeing, SDA, and Brand Expression portfolios, I saw an opportunity to bring more rigor to how brand decisions were informed — grounding creative direction in market data, competitive intelligence, and trend analysis rather than opinion alone.</p>
+      <h2 class="reveal-blur">Situation</h2>
+      <p class="reveal">Brand expression at a company like Electrolux Group isn't just a visual identity exercise — it's about how the brand shows up in every product, every interface, and every customer touchpoint across global markets. The Brand Expression portfolio within the design organization was responsible for defining and evolving this identity, but the work was primarily driven by creative intuition and internal stakeholder preferences rather than structured external research.</p>
+      <p class="reveal">As Design Projects Coordinator overseeing the Wellbeing, SDA, and Brand Expression portfolios, I saw an opportunity to bring more rigor to how brand decisions were informed — grounding creative direction in market data, competitive intelligence, and trend analysis rather than opinion alone.</p>
 
-      <h2>Challenge</h2>
-      <ul>
+      <h2 class="reveal-blur">Challenge</h2>
+      <ul class="reveal">
         <li><strong>No research foundation:</strong> Brand expression decisions were made without a structured input of external market research, competitive analysis, or trend data</li>
         <li><strong>Internal echo chamber:</strong> Creative direction was influenced heavily by internal stakeholders, with limited external validation of whether the brand was resonating with target audiences</li>
         <li><strong>Fragmented inputs:</strong> When research did happen, it was ad hoc — conducted by different people using different methods, with no consistent framework or centralized findings</li>
         <li><strong>Missed opportunities:</strong> Without a clear picture of market trends and competitive positioning, the brand expression team risked being reactive rather than forward-looking</li>
       </ul>
 
-      <h2>Approach</h2>
+      <h2 class="reveal-blur">Approach</h2>
 
-      <h3>Understand</h3>
-      <ul>
+      <h3 class="reveal">Understand</h3>
+      <ul class="reveal">
         <li>Mapped the current state of brand research: what data existed, who was producing it, how it was being used (or not used) in design decisions</li>
         <li>Identified the key questions that brand expression decisions needed to answer — What are competitors doing? What are the emerging visual and experiential trends? How is the Electrolux brand perceived relative to the market?</li>
         <li>Engaged with design leads and brand stakeholders to understand their unmet information needs</li>
       </ul>
 
-      <h3>Create</h3>
-      <ul>
+      <h3 class="reveal">Create</h3>
+      <ul class="reveal">
         <li>Designed a structured brand research program that covered competitive analysis, trend monitoring, and market positioning</li>
         <li>Established a consistent methodology for gathering, analyzing, and presenting brand research so that findings were comparable across cycles</li>
         <li>Created research deliverables formatted for design leadership consumption — visual, scannable, and directly tied to decision points</li>
       </ul>
 
-      <h3>Develop</h3>
-      <ul>
+      <h3 class="reveal">Develop</h3>
+      <ul class="reveal">
         <li>Executed the initial research cycle, presenting findings to brand leadership and design teams</li>
         <li>Integrated research outputs into the brand expression design process — ensuring that creative direction was informed by external evidence</li>
         <li>Established a repeatable cadence so that brand research became an ongoing input rather than a one-time project</li>
       </ul>
 
-      <h2>My Role</h2>
-      <p>I directed the entire brand research initiative — from identifying the need, designing the research framework, coordinating execution, and presenting findings to leadership. I also connected the research outputs to operational planning, ensuring that brand insights flowed into the design team's project prioritization and creative briefs.</p>
+      <h2 class="reveal-blur">My Role</h2>
+      <p class="reveal">I directed the entire brand research initiative — from identifying the need, designing the research framework, coordinating execution, and presenting findings to leadership. I also connected the research outputs to operational planning, ensuring that brand insights flowed into the design team's project prioritization and creative briefs.</p>
 
-      <h2>Impact</h2>
-      <ul>
+      <h2 class="reveal-blur">Impact</h2>
+      <ul class="reveal">
         <li>Established Electrolux Group's first structured brand expression research program for the design organization</li>
         <li>Gave the brand team an external evidence base to complement internal creative direction</li>
         <li>Improved the quality of brand decisions by grounding them in competitive intelligence and market trend data</li>
@@ -125,13 +125,13 @@
       </ul>
 
       <!-- Key Takeaway -->
-      <div class="case-takeaway">
+      <div class="case-takeaway reveal">
         <h3>Key Takeaway</h3>
         <p>Creative work benefits from structure — not to constrain it, but to give it a stronger foundation. When brand decisions are backed by research, the creative team can push further with more confidence because they're building on evidence, not just instinct. The role of operations in a creative organization is to provide that evidence without slowing down the work.</p>
       </div>
 
       <!-- Case Navigation -->
-      <div class="case-nav">
+      <div class="case-nav reveal">
         <a href="04-team-strengths-gaps.html">&larr; Previous: Team Strengths &amp; Gaps</a>
         <a href="06-workflow-redesign.html">Next: Workflow Redesign &rarr;</a>
       </div>
@@ -237,21 +237,64 @@
 })();
 </script>
 <script>
+// Scroll-driven reveal — elements animate proportionally to scroll position
 (function() {
-  var reveals = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) {
-    reveals.forEach(function(el) { el.classList.add('visible'); });
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal, .reveal-blur').forEach(function(el) {
+      el.classList.add('visible');
+    });
     return;
   }
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+
+  var els = [];
+
+  function gather() {
+    els = [];
+    document.querySelectorAll('.reveal, .reveal-blur').forEach(function(el) {
+      els.push({ el: el, isBlur: el.classList.contains('reveal-blur') });
     });
-  }, { threshold: 0.15 });
-  reveals.forEach(function(el) { observer.observe(el); });
+  }
+  gather();
+
+  function clamp(v) { return Math.max(0, Math.min(1, v)); }
+  function ease(t) { return t * t * (3 - 2 * t); }
+
+  function update() {
+    var wh = window.innerHeight;
+
+    for (var i = 0; i < els.length; i++) {
+      var item = els[i];
+      var rect = item.el.getBoundingClientRect();
+
+      var raw = (wh - rect.top) / (wh * 0.35);
+      var t = clamp(ease(clamp(raw)));
+
+      var opacity = t;
+      var y = (1 - t) * 40;
+
+      if (item.isBlur) {
+        var blur = (1 - t) * 10;
+        y = (1 - t) * 12;
+        item.el.style.opacity = opacity;
+        item.el.style.transform = 'translateY(' + y + 'px)';
+        item.el.style.filter = 'blur(' + blur + 'px)';
+      } else {
+        item.el.style.opacity = opacity;
+        item.el.style.transform = 'translateY(' + y + 'px)';
+      }
+    }
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() { update(); ticking = false; });
+      ticking = true;
+    }
+  });
+
+  window.addEventListener('resize', function() { gather(); update(); });
+  update();
 })();
 </script>
 <!-- Theme Toggle -->
