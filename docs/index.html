@@ -433,21 +433,79 @@
 })();
 </script>
 <script>
+// Scroll-driven reveal — elements animate proportionally to scroll position
 (function() {
-  var reveals = document.querySelectorAll('.reveal, .reveal-blur');
-  if (!('IntersectionObserver' in window)) {
-    reveals.forEach(function(el) { el.classList.add('visible'); });
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal, .reveal-blur').forEach(function(el) {
+      el.classList.add('visible');
+    });
     return;
   }
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+
+  var els = [];
+
+  function gather() {
+    els = [];
+    document.querySelectorAll('.reveal, .reveal-blur').forEach(function(el) {
+      // Skip case-study page content
+      if (el.closest('.case-content')) return;
+      els.push({ el: el, isBlur: el.classList.contains('reveal-blur') });
     });
-  }, { threshold: 0.12 });
-  reveals.forEach(function(el) { observer.observe(el); });
+  }
+  gather();
+
+  function getStaggerDelay(el) {
+    var parent = el.parentElement;
+    if (!parent || !parent.classList.contains('reveal-stagger')) return 0;
+    var siblings = Array.from(parent.children).filter(function(c) {
+      return c.classList.contains('reveal') || c.classList.contains('reveal-blur');
+    });
+    var idx = siblings.indexOf(el);
+    return idx * 0.12; // each sibling offsets the progress by 12%
+  }
+
+  function clamp(v) { return Math.max(0, Math.min(1, v)); }
+  function ease(t) { return t * t * (3 - 2 * t); } // smoothstep
+
+  function update() {
+    var wh = window.innerHeight;
+
+    for (var i = 0; i < els.length; i++) {
+      var item = els[i];
+      var rect = item.el.getBoundingClientRect();
+
+      // Element progress: 0 when bottom of viewport meets element, 1 when element is 30% into viewport
+      var raw = (wh - rect.top) / (wh * 0.35);
+      // Apply stagger offset
+      var stagger = getStaggerDelay(item.el);
+      var t = clamp(ease(clamp(raw - stagger)));
+
+      var opacity = t;
+      var y = (1 - t) * 40;
+
+      if (item.isBlur) {
+        var blur = (1 - t) * 10;
+        y = (1 - t) * 12;
+        item.el.style.opacity = opacity;
+        item.el.style.transform = 'translateY(' + y + 'px)';
+        item.el.style.filter = 'blur(' + blur + 'px)';
+      } else {
+        item.el.style.opacity = opacity;
+        item.el.style.transform = 'translateY(' + y + 'px)';
+      }
+    }
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() { update(); ticking = false; });
+      ticking = true;
+    }
+  });
+
+  window.addEventListener('resize', function() { gather(); update(); });
+  update();
 })();
 </script>
 <script>
