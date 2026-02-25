@@ -1189,10 +1189,11 @@ nav.nav-scrolled {
 /* === Footer === */
 
 footer {
-  background: var(--dark);
+  background: transparent;
   color: var(--dark-soft);
   padding: var(--space-md) 0;
   font-size: 0.8rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 footer .container {
@@ -1306,8 +1307,9 @@ footer .container {
 }
 
 [data-theme="dark"] footer {
-  background: #141414;
+  background: transparent;
   color: #737373;
+  border-top-color: rgba(255, 255, 255, 0.06);
 }
 
 /* === Theme Toggle FAB === */
