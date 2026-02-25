@@ -456,7 +456,7 @@
   var sectionData = [
     { sel: '.hero',           light: [240,238,238], dark: [30,30,30] },
     { sel: '.about',          light: [250,244,244], dark: [24,24,24] },
-    { sel: '.capabilities',   light: [30,27,24],    dark: [15,14,13] },
+    { sel: '.capabilities',   light: [245,240,236],  dark: [15,14,13] },
     { sel: '.case-studies',   light: [250,244,244], dark: [24,24,24] },
     { sel: '.resume-section', light: [237,232,226], dark: [28,26,24] }
   ];
@@ -522,14 +522,6 @@
 
     document.body.style.backgroundColor = rgb(col[0], col[1], col[2]);
 
-    // Toggle dark-zone class for capabilities text color
-    if (positions[2]) {
-      var capTop = positions[2].top;
-      var capBot = positions[2].bot;
-      var margin = window.innerHeight * 0.4;
-      var inDarkZone = !dark && center > capTop - margin && center < capBot;
-      document.body.classList.toggle('zone-dark', inDarkZone);
-    }
   }
 
   var ticking = false;

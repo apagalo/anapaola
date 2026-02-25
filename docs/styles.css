@@ -168,14 +168,7 @@ footer {
   filter: blur(100px);
 }
 
-/* Capabilities dark zone — orbs become warm accent on dark */
-body.zone-dark .glow-orb--primary {
-  background: rgba(255, 200, 150, 0.06);
-}
-
-body.zone-dark .glow-orb--secondary {
-  background: rgba(160, 185, 220, 0.04);
-}
+/* Capabilities zone — orbs stay default in light mode */
 
 /* Dark theme — very subtle orbs */
 [data-theme="dark"] .glow-orb--primary {
@@ -624,14 +617,7 @@ nav .nav-divider {
   transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark zone — when body bg transitions to dark for capabilities */
-body.zone-dark .capabilities > .container > .label {
-  color: rgba(250, 250, 250, 0.55);
-}
-
-body.zone-dark .capabilities h2 {
-  color: #fafafa;
-}
+/* Dark zone — kept for dark theme only (no-op in light mode now) */
 
 .capabilities h2 {
   margin-bottom: var(--space-lg);
@@ -644,17 +630,17 @@ body.zone-dark .capabilities h2 {
 }
 
 .pillar {
-  background: rgba(48, 48, 48, 0.65);
+  background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  color: var(--white);
+  color: var(--dark);
   border-radius: 12px;
   padding: 2rem var(--space-md);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .pillar h3 {
-  color: var(--white);
+  color: var(--dark);
   margin-bottom: var(--space-sm);
 }
 
@@ -665,7 +651,7 @@ body.zone-dark .capabilities h2 {
 .pillar li {
   padding: 0.4rem 0;
   font-size: 0.9rem;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .pillar li:last-child {
