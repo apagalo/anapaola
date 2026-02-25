@@ -573,7 +573,10 @@ nav .nav-divider {
 }
 
 .fun-facts {
-  background: var(--sage-lighter);
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   color: var(--dark);
   border-radius: 12px;
   padding: var(--space-lg);
@@ -1254,6 +1257,11 @@ footer .container {
 
 [data-theme="dark"] .hero .hero-meta span {
   background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .fun-facts {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
 [data-theme="dark"] .fun-facts td {
