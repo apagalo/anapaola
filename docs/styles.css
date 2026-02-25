@@ -991,15 +991,13 @@ nav .nav-divider {
 
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
-  will-change: opacity, transform;
+  will-change: opacity;
 }
 
 .reveal-blur {
   opacity: 0;
   filter: blur(10px);
-  transform: translateY(12px);
-  will-change: opacity, transform, filter;
+  will-change: opacity, filter;
 }
 
 
@@ -1623,14 +1621,10 @@ html.theme-switching > body {
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
-    transform: none;
-    transition: none;
   }
   .reveal-blur {
     opacity: 1;
     filter: none;
-    transform: none;
-    transition: none;
   }
   .hero .hero-text h1,
   .hero .hero-text .tagline,

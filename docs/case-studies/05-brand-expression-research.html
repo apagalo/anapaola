@@ -270,17 +270,13 @@
       var t = clamp(ease(clamp(raw)));
 
       var opacity = t;
-      var y = (1 - t) * 40;
 
       if (item.isBlur) {
         var blur = (1 - t) * 10;
-        y = (1 - t) * 12;
         item.el.style.opacity = opacity;
-        item.el.style.transform = 'translateY(' + y + 'px)';
         item.el.style.filter = 'blur(' + blur + 'px)';
       } else {
         item.el.style.opacity = opacity;
-        item.el.style.transform = 'translateY(' + y + 'px)';
       }
     }
   }
