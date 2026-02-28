@@ -1557,11 +1557,11 @@ footer .container {
   to   { filter: blur(0); }
 }
 
-body {
+.page-content {
   animation: pageBlurIn 0.4s ease both;
 }
 
-body.page-exit {
+.page-content.page-exit {
   filter: blur(12px);
   transition: filter 0.3s ease;
 }
@@ -1599,10 +1599,10 @@ html.theme-switching > body {
   .glow-bg {
     display: none;
   }
-  body {
+  .page-content {
     animation: none;
   }
-  body.page-exit {
+  .page-content.page-exit {
     transition: none;
   }
 }

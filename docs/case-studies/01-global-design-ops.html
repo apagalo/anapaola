@@ -56,16 +56,6 @@
     </div>
   </nav>
 
-  <!-- Case Hero -->
-  <section class="case-hero">
-    <div class="container--narrow">
-      <div class="case-shape" data-shape="circle">●</div>
-      <h1>Scaling Design Operations Across a Global Organization</h1>
-      <p class="problem-statement">Electrolux Group's Wellbeing and Small Domestic Appliances (SDA) design teams — 30 designers managing 50+ concurrent projects across 5 design leads — operated with no centralized operational structure. Projects lacked visibility, workflows varied by team, and cross-functional coordination relied on informal channels — leading to misaligned priorities, duplicated efforts, and inconsistent delivery timelines.</p>
-      <a class="tldr-link" onclick="document.getElementById('tldr').classList.add('active')">TL;DR &rarr;</a>
-    </div>
-  </section>
-
   <!-- TLDR Overlay -->
   <div class="tldr-overlay" id="tldr" onclick="if(event.target===this)this.classList.remove('active')">
     <div class="tldr-card">
@@ -82,6 +72,17 @@
       </ul>
     </div>
   </div>
+
+  <div class="page-content">
+  <!-- Case Hero -->
+  <section class="case-hero">
+    <div class="container--narrow">
+      <div class="case-shape" data-shape="circle">●</div>
+      <h1>Scaling Design Operations Across a Global Organization</h1>
+      <p class="problem-statement">Electrolux Group's Wellbeing and Small Domestic Appliances (SDA) design teams — 30 designers managing 50+ concurrent projects across 5 design leads — operated with no centralized operational structure. Projects lacked visibility, workflows varied by team, and cross-functional coordination relied on informal channels — leading to misaligned priorities, duplicated efforts, and inconsistent delivery timelines.</p>
+      <a class="tldr-link" onclick="document.getElementById('tldr').classList.add('active')">TL;DR &rarr;</a>
+    </div>
+  </section>
 
   <!-- Case Content -->
   <section class="case-content">
@@ -144,6 +145,7 @@
       </div>
     </div>
   </footer>
+  </div><!-- .page-content -->
 
 <script>
 (function() {
@@ -329,7 +331,8 @@
     var href = link.getAttribute('href');
     if (!href || href.charAt(0) === '#' || href.startsWith('mailto:') || link.hasAttribute('download') || link.target === '_blank') return;
     e.preventDefault();
-    document.body.classList.add('page-exit');
+    var pc = document.querySelector('.page-content');
+    if (pc) pc.classList.add('page-exit');
     setTimeout(function() { window.location.href = href; }, 300);
   });
 })();

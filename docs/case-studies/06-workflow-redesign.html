@@ -56,16 +56,6 @@
     </div>
   </nav>
 
-  <!-- Case Hero -->
-  <section class="case-hero">
-    <div class="container--narrow">
-      <div class="case-shape" data-shape="spark">✦</div>
-      <h1>Redesigning Design Workflows for Continuous Improvement</h1>
-      <p class="problem-statement">As Electrolux Group's design organization scaled to 30 designers managing 50+ concurrent projects, existing workflows hadn't evolved to match. Processes that worked when teams were smaller began to break down — creating handoff gaps, unclear ownership, and inconsistent ways of working across 5 design leads and multiple portfolios.</p>
-      <a class="tldr-link" onclick="document.getElementById('tldr').classList.add('active')">TL;DR &rarr;</a>
-    </div>
-  </section>
-
   <!-- TLDR Overlay -->
   <div class="tldr-overlay" id="tldr" onclick="if(event.target===this)this.classList.remove('active')">
     <div class="tldr-card">
@@ -82,6 +72,17 @@
       </ul>
     </div>
   </div>
+
+  <div class="page-content">
+  <!-- Case Hero -->
+  <section class="case-hero">
+    <div class="container--narrow">
+      <div class="case-shape" data-shape="spark">✦</div>
+      <h1>Redesigning Design Workflows for Continuous Improvement</h1>
+      <p class="problem-statement">As Electrolux Group's design organization scaled to 30 designers managing 50+ concurrent projects, existing workflows hadn't evolved to match. Processes that worked when teams were smaller began to break down — creating handoff gaps, unclear ownership, and inconsistent ways of working across 5 design leads and multiple portfolios.</p>
+      <a class="tldr-link" onclick="document.getElementById('tldr').classList.add('active')">TL;DR &rarr;</a>
+    </div>
+  </section>
 
   <!-- Case Content -->
   <section class="case-content">
@@ -152,6 +153,7 @@
       </div>
     </div>
   </footer>
+  </div><!-- .page-content -->
 
 <script>
 (function() {
@@ -338,7 +340,8 @@
     var href = link.getAttribute('href');
     if (!href || href.charAt(0) === '#' || href.startsWith('mailto:') || link.hasAttribute('download') || link.target === '_blank') return;
     e.preventDefault();
-    document.body.classList.add('page-exit');
+    var pc = document.querySelector('.page-content');
+    if (pc) pc.classList.add('page-exit');
     setTimeout(function() { window.location.href = href; }, 300);
   });
 })();
