@@ -1,13 +1,5 @@
 /* === Ana Paola Portfolio — Design System === */
 
-@font-face {
-  font-family: 'Rhymes Display';
-  src: url('fonts/RhymesDisplay-Light.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   /* Colors — soft monochrome (inspired by kirschberg.co.nz) */
   --sage: #f0eeee;
@@ -24,7 +16,7 @@
   --pillar-bg: #303030;
 
   /* Typography */
-  --font-heading: 'Rhymes Display', 'Jeju Myeongjo', Georgia, 'Times New Roman', serif;
+  --font-heading: 'Jeju Myeongjo', Georgia, 'Times New Roman', serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* Spacing */
@@ -340,6 +332,11 @@ nav .nav-divider {
   align-items: center;
   padding-top: 110px;
   position: relative;
+  background-color: var(--sage-lighter);
+}
+
+[data-theme="dark"] .hero {
+  background-color: #1e1e1e;
 }
 
 .hero .container {
@@ -382,70 +379,6 @@ nav .nav-divider {
   display: flex;
   gap: var(--space-sm);
   margin-top: var(--space-md);
-}
-
-/* === Scroll Hint === */
-
-.scroll-hint {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--dark-soft);
-  text-decoration: none;
-  transition: opacity 0.5s ease;
-  animation: fadeUp 0.7s ease both;
-  animation-delay: 600ms;
-}
-
-.scroll-hint:hover {
-  color: var(--dark);
-}
-
-.scroll-hint.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.scroll-hint-text {
-  font-family: var(--font-body);
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.scroll-hint-line {
-  width: 1px;
-  height: 36px;
-  background: rgba(0,0,0,0.1);
-  position: relative;
-  overflow: hidden;
-}
-
-.scroll-hint-line::after {
-  content: '';
-  position: absolute;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--dark-soft);
-  animation: scrollLine 2s ease-in-out infinite;
-}
-
-@keyframes scrollLine {
-  0% { top: -100%; }
-  50% { top: 0; }
-  100% { top: 100%; }
-}
-
-[data-theme="dark"] .scroll-hint-line {
-  background: rgba(255,255,255,0.1);
 }
 
 .hero-photo {
@@ -987,6 +920,8 @@ nav .nav-divider {
   color: var(--dark);
 }
 
+
+
 /* === Scroll Reveal (scroll-driven, JS controls values) === */
 
 .reveal {
@@ -999,7 +934,6 @@ nav .nav-divider {
   filter: blur(10px);
   will-change: opacity, filter;
 }
-
 
 /* === Hero Entrance Animation === */
 
@@ -1181,7 +1115,7 @@ footer .container {
 }
 
 .footer-links a:hover {
-  color: var(--white);
+  color: var(--dark);
 }
 
 /* === Dark Theme === */
@@ -1334,10 +1268,6 @@ footer .container {
 /* === Responsive === */
 
 @media (max-width: 768px) {
-  .scroll-hint {
-    display: none;
-  }
-
   section {
     padding: 80px 0;
     overflow-x: clip;
@@ -1495,10 +1425,10 @@ footer .container {
   nav .nav-name {
     position: absolute;
     left: var(--space-md);
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
+    height: 60px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
   }
 
   nav .nav-hamburger {
@@ -1609,6 +1539,23 @@ footer .container {
   }
 }
 
+/* === Page Transition (blur in/out) === */
+
+@keyframes pageBlurIn {
+  from { filter: blur(12px); opacity: 0; }
+  to   { filter: blur(0);    opacity: 1; }
+}
+
+body {
+  animation: pageBlurIn 0.4s ease both;
+}
+
+body.page-exit {
+  filter: blur(12px);
+  opacity: 0;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
 /* === Theme Switch Animation === */
 
 @keyframes themeSwitch {
@@ -1639,13 +1586,13 @@ html.theme-switching > body {
   html.theme-switching > body {
     animation: none;
   }
-  .scroll-hint {
-    animation: none;
-  }
-  .scroll-hint-line::after {
-    animation: none;
-  }
   .glow-bg {
     display: none;
+  }
+  body {
+    animation: none;
+  }
+  body.page-exit {
+    transition: none;
   }
 }

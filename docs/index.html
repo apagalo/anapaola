@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ana Paola Galvez Lopez — Senior Design Operations</title>
   <meta name="description" content="Senior Design Operations professional building the operational backbone for global design teams. Currently at Electrolux Group, Stockholm.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Ana Paola Galvez Lopez — Senior Design Operations">
+  <meta property="og:description" content="Senior Design Operations professional building the operational backbone for global design teams. Currently at Electrolux Group, Stockholm.">
+  <meta property="og:image" content="https://anapaolagalvez.com/assets/og-image.png">
+  <meta property="og:url" content="https://anapaolagalvez.com/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ana Paola Galvez Lopez — Senior Design Operations">
+  <meta name="twitter:description" content="Senior Design Operations professional building the operational backbone for global design teams. Currently at Electrolux Group, Stockholm.">
+  <meta name="twitter:image" content="https://anapaolagalvez.com/assets/og-image.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👸🏽</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,7 +82,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#capabilities">What I Do</a></li>
         <li><a href="#work">Work</a></li>
-        <li><a href="#resume">Resume</a></li>
+        <li><a href="#connect">Connect</a></li>
         <li class="nav-divider" aria-hidden="true"></li>
         <li><a href="mailto:anapaolagalo@gmail.com">Contact</a></li>
       </ul>
@@ -97,16 +107,12 @@
         </div>
       </div>
     </div>
-    <a href="#about" class="scroll-hint" aria-label="Scroll down">
-      <span class="scroll-hint-text">Scroll</span>
-      <span class="scroll-hint-line"></span>
-    </a>
   </section>
 
   <!-- About -->
   <section class="about" id="about">
     <div class="container">
-      <div class="about-text reveal-stagger">
+      <div class="about-text">
         <p class="label reveal">About me</p>
         <h2 class="reveal-blur">From Lima to Stockholm,<br>from marketing to DesignOps</h2>
         <p class="reveal">I'm a Senior Design Operations professional at <strong>Electrolux Group</strong>, where I've spent the past 3+ years building and scaling the DesignOps function for global design teams.</p>
@@ -133,7 +139,7 @@
     <div class="container">
       <p class="label label--centered reveal">What I do</p>
       <h2 class="reveal-blur">Three Pillars of DesignOps</h2>
-      <div class="pillars reveal-stagger">
+      <div class="pillars">
         <div class="pillar reveal">
           <h3>People</h3>
           <ul>
@@ -173,7 +179,7 @@
     <div class="container">
       <p class="label label--centered reveal">Work</p>
       <h2 class="reveal-blur">Selected Case Studies</h2>
-      <div class="case-grid reveal-stagger">
+      <div class="case-grid">
 
         <a href="case-studies/01-global-design-ops.html" class="case-card reveal">
           <div class="case-shape" data-shape="circle">●</div>
@@ -252,16 +258,14 @@
   </section>
 
   <!-- Resume -->
-  <section class="resume-section" id="resume">
+  <section class="resume-section" id="connect">
     <div class="container">
-      <div class="reveal-stagger">
-        <p class="label label--centered reveal">Resume</p>
-        <h2 class="reveal-blur">Experience at a Glance</h2>
-        <p class="reveal">3+ years of progressive DesignOps experience at Electrolux Group.<br>
-        Business Administration & Marketing from UPC (top 20%). Exchange at Stockholm University.</p>
+      <div>
+        <p class="label label--centered reveal">Let's connect</p>
+        <h2 class="reveal-blur">Let's Catch Up</h2>
+        <p class="reveal">I'm always open to chatting about DesignOps, new opportunities, or just saying hi.</p>
         <div class="resume-btn-wrap reveal">
-          <!-- Replace # with actual PDF link -->
-          <a href="#" class="btn btn--primary">Download PDF</a>
+          <a href="mailto:anapaolagalo@gmail.com" class="btn btn--primary">Drop Me a Line</a>
         </div>
       </div>
     </div>
@@ -282,6 +286,13 @@
 (function() {
   var key = 'portfolio_auth';
   if (sessionStorage.getItem(key) === 'true') return;
+
+  // Allow URL-param bypass: ?key=findpeaceinthedetails
+  var urlKey = new URLSearchParams(window.location.search).get('key');
+  if (urlKey === 'findpeaceinthedetails') {
+    sessionStorage.setItem(key, 'true');
+    return;
+  }
 
   // Create styled password overlay
   var overlay = document.createElement('div');
@@ -361,10 +372,7 @@
     if (e.key === 'Escape' && nav.classList.contains('nav-open')) closeNav();
   });
 
-  // Scroll hint reference
-  var scrollHint = document.querySelector('.scroll-hint');
-
-  // Scroll-hide nav on mobile + nav shadow on desktop + docking + scroll hint
+  // Scroll-hide nav on mobile + nav shadow on desktop + docking
   window.addEventListener('scroll', function() {
     var current = window.pageYOffset;
 
@@ -382,11 +390,6 @@
       } else {
         nav.classList.remove('nav-docked');
       }
-    }
-
-    // Hide scroll hint after small scroll
-    if (scrollHint) {
-      scrollHint.classList.toggle('hidden', current > 100);
     }
 
     if (isMobile()) {
@@ -447,25 +450,14 @@
   function gather() {
     els = [];
     document.querySelectorAll('.reveal, .reveal-blur').forEach(function(el) {
-      // Skip case-study page content
       if (el.closest('.case-content')) return;
       els.push({ el: el, isBlur: el.classList.contains('reveal-blur') });
     });
   }
   gather();
 
-  function getStaggerDelay(el) {
-    var parent = el.parentElement;
-    if (!parent || !parent.classList.contains('reveal-stagger')) return 0;
-    var siblings = Array.from(parent.children).filter(function(c) {
-      return c.classList.contains('reveal') || c.classList.contains('reveal-blur');
-    });
-    var idx = siblings.indexOf(el);
-    return idx * 0.12; // each sibling offsets the progress by 12%
-  }
-
   function clamp(v) { return Math.max(0, Math.min(1, v)); }
-  function ease(t) { return t * t * (3 - 2 * t); } // smoothstep
+  function ease(t) { return t * t * (3 - 2 * t); }
 
   function update() {
     var wh = window.innerHeight;
@@ -474,20 +466,15 @@
       var item = els[i];
       var rect = item.el.getBoundingClientRect();
 
-      // Element progress: 0 when bottom of viewport meets element, 1 when element is 30% into viewport
       var raw = (wh - rect.top) / (wh * 0.35);
-      // Apply stagger offset
-      var stagger = getStaggerDelay(item.el);
-      var t = clamp(ease(clamp(raw - stagger)));
-
-      var opacity = t;
+      var t = clamp(ease(clamp(raw)));
 
       if (item.isBlur) {
         var blur = (1 - t) * 10;
-        item.el.style.opacity = opacity;
+        item.el.style.opacity = t;
         item.el.style.filter = 'blur(' + blur + 'px)';
       } else {
-        item.el.style.opacity = opacity;
+        item.el.style.opacity = t;
       }
     }
   }
@@ -875,6 +862,20 @@
   } else {
     setTimeout(init, 500);
   }
+})();
+</script>
+<script>
+// Page transition — blur out on navigation
+(function() {
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href]');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (!href || href.charAt(0) === '#' || href.startsWith('mailto:') || link.hasAttribute('download') || link.target === '_blank') return;
+    e.preventDefault();
+    document.body.classList.add('page-exit');
+    setTimeout(function() { window.location.href = href; }, 300);
+  });
 })();
 </script>
 </body>

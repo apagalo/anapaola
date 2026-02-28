@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redesigning Design Workflows — Ana Paola Galvez Lopez</title>
   <meta name="description" content="How Ana Paola mapped actual workflows, facilitated cross-functional workshops, and consolidated platforms to drive continuous improvement across Electrolux Group's design organization.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Redesigning Design Workflows — Ana Paola Galvez Lopez">
+  <meta property="og:description" content="How Ana Paola mapped actual workflows, facilitated cross-functional workshops, and consolidated platforms to drive continuous improvement across Electrolux Group's design organization.">
+  <meta property="og:image" content="https://anapaolagalvez.com/assets/og-image.png">
+  <meta property="og:url" content="https://anapaolagalvez.com/case-studies/06-workflow-redesign.html">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Redesigning Design Workflows — Ana Paola Galvez Lopez">
+  <meta name="twitter:description" content="How Ana Paola mapped actual workflows, facilitated cross-functional workshops, and consolidated platforms to drive continuous improvement across Electrolux Group's design organization.">
+  <meta name="twitter:image" content="https://anapaolagalvez.com/assets/og-image.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👸🏽</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -200,6 +210,14 @@
 (function() {
   var key = 'portfolio_auth';
   if (sessionStorage.getItem(key) === 'true') return;
+
+  // Allow URL-param bypass: ?key=findpeaceinthedetails
+  var urlKey = new URLSearchParams(window.location.search).get('key');
+  if (urlKey === 'findpeaceinthedetails') {
+    sessionStorage.setItem(key, 'true');
+    return;
+  }
+
   var overlay = document.createElement('div');
   overlay.className = 'pw-overlay';
   overlay.innerHTML =
@@ -309,6 +327,19 @@
       document.documentElement.classList.remove('theme-switching');
       switching = false;
     }, 600);
+  });
+})();
+</script>
+<script>
+(function() {
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href]');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (!href || href.charAt(0) === '#' || href.startsWith('mailto:') || link.hasAttribute('download') || link.target === '_blank') return;
+    e.preventDefault();
+    document.body.classList.add('page-exit');
+    setTimeout(function() { window.location.href = href; }, 300);
   });
 })();
 </script>

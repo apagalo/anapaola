@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scaling Design Operations Across a Global Organization — Ana Paola</title>
   <meta name="description" content="How I built DesignOps from scratch at Electrolux — from coordinator to senior ops leader over 3 years.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Scaling Design Operations Across a Global Organization — Ana Paola">
+  <meta property="og:description" content="How I built DesignOps from scratch at Electrolux — from coordinator to senior ops leader over 3 years.">
+  <meta property="og:image" content="https://anapaolagalvez.com/assets/og-image.png">
+  <meta property="og:url" content="https://anapaolagalvez.com/case-studies/01-global-design-ops.html">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Scaling Design Operations Across a Global Organization — Ana Paola">
+  <meta name="twitter:description" content="How I built DesignOps from scratch at Electrolux — from coordinator to senior ops leader over 3 years.">
+  <meta name="twitter:image" content="https://anapaolagalvez.com/assets/og-image.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👸🏽</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -192,6 +202,13 @@
 (function() {
   var key = 'portfolio_auth';
   if (sessionStorage.getItem(key) === 'true') return;
+
+  // Allow URL-param bypass: ?key=findpeaceinthedetails
+  var urlKey = new URLSearchParams(window.location.search).get('key');
+  if (urlKey === 'findpeaceinthedetails') {
+    sessionStorage.setItem(key, 'true');
+    return;
+  }
   var overlay = document.createElement('div');
   overlay.className = 'pw-overlay';
   overlay.innerHTML =
@@ -301,6 +318,19 @@
       document.documentElement.classList.remove('theme-switching');
       switching = false;
     }, 600);
+  });
+})();
+</script>
+<script>
+(function() {
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href]');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (!href || href.charAt(0) === '#' || href.startsWith('mailto:') || link.hasAttribute('download') || link.target === '_blank') return;
+    e.preventDefault();
+    document.body.classList.add('page-exit');
+    setTimeout(function() { window.location.href = href; }, 300);
   });
 })();
 </script>
