@@ -1542,8 +1542,8 @@ footer .container {
 /* === Page Transition (blur in/out) === */
 
 @keyframes pageBlurIn {
-  from { filter: blur(12px); opacity: 0; }
-  to   { filter: blur(0);    opacity: 1; }
+  from { filter: blur(12px); }
+  to   { filter: blur(0); }
 }
 
 body {
@@ -1552,8 +1552,7 @@ body {
 
 body.page-exit {
   filter: blur(12px);
-  opacity: 0;
-  transition: filter 0.3s ease, opacity 0.3s ease;
+  transition: filter 0.3s ease;
 }
 
 /* === Theme Switch Animation === */
