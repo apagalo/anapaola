@@ -332,11 +332,6 @@ nav .nav-divider {
   align-items: center;
   padding-top: 110px;
   position: relative;
-  background-color: var(--sage-lighter);
-}
-
-[data-theme="dark"] .hero {
-  background-color: #1e1e1e;
 }
 
 .hero .container {
