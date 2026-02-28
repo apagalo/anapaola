@@ -717,6 +717,8 @@ nav .nav-divider {
 .case-hero .case-shape {
   line-height: 1;
   margin-bottom: var(--space-xs);
+  animation: fadeUp 0.7s ease both;
+  animation-delay: 0ms;
 }
 
 /* Optical sizing + accent colors — hero shapes (visible by default) */
@@ -729,12 +731,21 @@ nav .nav-divider {
 
 .case-hero h1 {
   margin-bottom: var(--space-sm);
+  animation: fadeUp 0.7s ease both;
+  animation-delay: 0ms;
 }
 
 .case-hero .problem-statement {
   font-size: 1.1rem;
   color: var(--dark-soft);
   max-width: 70ch;
+  animation: fadeUp 0.7s ease both;
+  animation-delay: 150ms;
+}
+
+.case-hero .tldr-link {
+  animation: fadeUp 0.7s ease both;
+  animation-delay: 300ms;
 }
 
 .case-content {
