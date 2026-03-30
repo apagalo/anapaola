@@ -1314,6 +1314,12 @@ footer .container {
     padding: 80px var(--space-md);
   }
 
+  /* Disable reveal opacity on mobile — carousel controls visibility */
+  .case-grid .case-card.reveal,
+  .pillars .pillar.reveal {
+    opacity: 1;
+  }
+
   /* Tinder carousel — minimal CSS, JS controls everything */
   .carousel-init {
     position: relative;
