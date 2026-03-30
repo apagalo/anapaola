@@ -419,8 +419,10 @@
 
   function gather() {
     els = [];
+    var isMobile = window.innerWidth <= 768;
     document.querySelectorAll('.reveal, .reveal-blur').forEach(function(el) {
       if (el.closest('.case-content')) return;
+      if (isMobile && el.closest('.case-grid')) return;
       els.push({ el: el, isBlur: el.classList.contains('reveal-blur') });
     });
   }
