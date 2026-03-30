@@ -1266,14 +1266,16 @@ footer .container {
     grid-template-columns: 1fr;
   }
 
-  .case-card {
+  .case-card,
+  .pillar {
     padding: 2rem var(--space-md);
     background: #f5f0ec;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
 
-  [data-theme="dark"] .case-card {
+  [data-theme="dark"] .case-card,
+  [data-theme="dark"] .pillar {
     background: #1e1e1e;
   }
 
