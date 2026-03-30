@@ -518,8 +518,6 @@ nav .nav-divider {
 
 .about p strong.accent {
   color: var(--dark);
-  border-bottom: 1.5px solid var(--dark-soft);
-  padding-bottom: 1px;
 }
 
 .fun-facts {
