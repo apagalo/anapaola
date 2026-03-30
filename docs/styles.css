@@ -1366,6 +1366,22 @@ footer .container {
     gap: 48px;
   }
 
+  /* Hide hamburger on case study pages (nav-close is present) */
+  .nav-hamburger:has(~ .nav-close) {
+    display: none !important;
+  }
+
+  /* Position close icon like the hamburger */
+  .nav-close {
+    position: absolute;
+    right: var(--space-md);
+    top: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   /* Hamburger — 2 lines, compact */
   .nav-hamburger {
     display: flex;
