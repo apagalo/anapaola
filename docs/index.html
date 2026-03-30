@@ -718,11 +718,7 @@
         c.style.zIndex = '1';
         c.style.pointerEvents = 'none';
       });
-      if (order.length > 1) {
-        var under = cards[order[1]];
-        under.style.display = '';
-        under.style.zIndex = '2';
-      }
+      // Only show top card — transparent backgrounds cause text bleed with stacked cards
       var top = cards[order[0]];
       top.style.display = '';
       top.style.zIndex = '3';
