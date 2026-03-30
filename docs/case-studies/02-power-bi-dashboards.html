@@ -243,47 +243,6 @@
 })();
 </script>
 <script>
-(function() {
-  var key = 'portfolio_auth';
-  if (sessionStorage.getItem(key) === 'true') return;
-
-  // Allow URL-param bypass: ?key=findpeaceinthedetails
-  var urlKey = new URLSearchParams(window.location.search).get('key');
-  if (urlKey === 'findpeaceinthedetails') {
-    sessionStorage.setItem(key, 'true');
-    return;
-  }
-
-  var overlay = document.createElement('div');
-  overlay.className = 'pw-overlay';
-  overlay.innerHTML =
-    '<div class="pw-card">' +
-      '<h3>Welcome</h3>' +
-      '<p>Enter the password to view this portfolio.</p>' +
-      '<input type="password" id="pw-input" placeholder="Password" autocomplete="off">' +
-      '<button id="pw-submit">Enter</button>' +
-      '<p class="pw-error" id="pw-error">Incorrect password. Try again.</p>' +
-    '</div>';
-  document.body.appendChild(overlay);
-  var input = document.getElementById('pw-input');
-  var btn = document.getElementById('pw-submit');
-  var err = document.getElementById('pw-error');
-  function tryAuth() {
-    if (input.value === 'findpeaceinthedetails') {
-      sessionStorage.setItem(key, 'true');
-      overlay.remove();
-    } else {
-      err.style.display = 'block';
-      input.value = '';
-      input.focus();
-    }
-  }
-  btn.addEventListener('click', tryAuth);
-  input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryAuth(); });
-  input.focus();
-})();
-</script>
-<script>
 // Scroll-driven reveal — elements animate proportionally to scroll position
 (function() {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {

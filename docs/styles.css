@@ -1060,84 +1060,6 @@ nav.nav-scrolled {
   transform: translateX(4px);
 }
 
-/* === Password Gate Overlay === */
-
-.pw-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-body);
-}
-
-.pw-card {
-  background: var(--white);
-  border-radius: 12px;
-  padding: var(--space-xl) var(--space-lg);
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-}
-
-.pw-card h3 {
-  font-family: var(--font-body);
-  font-size: 1.4rem;
-  margin-bottom: var(--space-xs);
-  color: var(--dark);
-}
-
-.pw-card p {
-  font-size: 0.9rem;
-  color: var(--dark-soft);
-  margin-bottom: var(--space-md);
-  max-width: none;
-}
-
-.pw-card input {
-  width: 100%;
-  padding: 0.7rem 1rem;
-  border: 1.5px solid var(--sage-lighter);
-  border-radius: 8px;
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  outline: none;
-  transition: border-color 0.2s ease;
-  margin-bottom: var(--space-sm);
-}
-
-.pw-card input:focus {
-  border-color: var(--teal);
-}
-
-.pw-card button {
-  width: 100%;
-  padding: 0.7rem;
-  background: var(--teal);
-  color: var(--white);
-  border: none;
-  border-radius: 8px;
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.pw-card button:hover {
-  background: var(--teal-light);
-}
-
-.pw-error {
-  color: #c0392b;
-  font-size: 0.85rem;
-  margin-top: var(--space-xs);
-  display: none;
-}
-
 /* === Inline Style Cleanup Classes === */
 
 .label--centered {
@@ -1276,16 +1198,6 @@ footer .container {
 
 [data-theme="dark"] .case-nav {
   border-top-color: rgba(255, 255, 255, 0.08);
-}
-
-[data-theme="dark"] .pw-card input {
-  background: #262626;
-  color: #fafafa;
-  border-color: #404040;
-}
-
-[data-theme="dark"] .pw-card input:focus {
-  border-color: #fafafa;
 }
 
 [data-theme="dark"] footer {
