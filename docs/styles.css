@@ -1268,6 +1268,13 @@ footer .container {
 
   .case-card {
     padding: 2rem var(--space-md);
+    background: #f5f0ec;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  [data-theme="dark"] .case-card {
+    background: #1e1e1e;
   }
 
   nav {
