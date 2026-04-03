@@ -129,61 +129,6 @@ footer {
   z-index: 2;
 }
 
-/* === Ambient Glow (microsoft.ai-style) === */
-
-.glow-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.glow-orb {
-  position: absolute;
-  border-radius: 50%;
-  will-change: transform;
-  transition: background-color 1.2s ease;
-}
-
-.glow-orb--primary {
-  width: 600px;
-  height: 600px;
-  background: rgba(215, 195, 175, 0.14);
-  filter: blur(120px);
-}
-
-.glow-orb--secondary {
-  width: 480px;
-  height: 480px;
-  background: rgba(190, 200, 195, 0.1);
-  filter: blur(100px);
-}
-
-/* Capabilities zone — orbs stay default in light mode */
-
-/* Dark theme — very subtle orbs */
-[data-theme="dark"] .glow-orb--primary {
-  background: rgba(200, 170, 140, 0.05);
-}
-
-[data-theme="dark"] .glow-orb--secondary {
-  background: rgba(140, 160, 200, 0.04);
-}
-
-[data-theme="dark"] body.zone-dark .glow-orb--primary {
-  background: rgba(220, 180, 130, 0.035);
-}
-
-[data-theme="dark"] body.zone-dark .glow-orb--secondary {
-  background: rgba(120, 150, 200, 0.025);
-}
-
-/* Hide on mobile (no mouse to track) */
-@media (max-width: 768px) {
-  .glow-bg { display: none; }
-}
-
 /* === Navigation === */
 
 nav {
@@ -346,7 +291,8 @@ nav .nav-divider {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 110px;
+  padding-top: 140px;
+  padding-bottom: 40px;
   position: relative;
 }
 
@@ -892,7 +838,6 @@ nav .nav-divider {
   display: flex;
   justify-content: space-between;
   padding: var(--space-lg) 0;
-  border-top: 1px solid rgba(0,0,0,0.08);
   margin-top: var(--space-lg);
 }
 
@@ -1196,9 +1141,6 @@ footer .container {
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
-[data-theme="dark"] .case-nav {
-  border-top-color: rgba(255, 255, 255, 0.08);
-}
 
 [data-theme="dark"] footer {
   background: transparent;
@@ -1604,9 +1546,6 @@ html.theme-switching > body {
   }
   html.theme-switching > body {
     animation: none;
-  }
-  .glow-bg {
-    display: none;
   }
   .page-content {
     animation: none;

@@ -54,11 +54,6 @@
 </head>
 <body>
 
-<!-- Ambient glow orbs (mouse-following, scroll-color-aware) -->
-<div class="glow-bg" aria-hidden="true">
-  <div class="glow-orb glow-orb--primary"></div>
-  <div class="glow-orb glow-orb--secondary"></div>
-</div>
 
 <!-- Flower clip-path (rounded 12-petal starburst, slowly spinning) -->
 <svg width="0" height="0" style="position:absolute">
@@ -82,7 +77,6 @@
         <li><a href="#about">About</a></li>
         <li><a href="#capabilities">What I Do</a></li>
         <li><a href="#work">Work</a></li>
-        <li><a href="#connect">Connect</a></li>
         <li class="nav-divider" aria-hidden="true"></li>
         <li><a href="mailto:anapaolagalo@gmail.com">Contact</a></li>
       </ul>
@@ -552,70 +546,6 @@
   new MutationObserver(function() { update(); }).observe(
     document.documentElement, { attributes: true, attributeFilter: ['data-theme'] }
   );
-})();
-</script>
-<!-- Ambient Glow: mouse-tracking + drift -->
-<script>
-(function() {
-  if (window.innerWidth <= 768) return;
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  var primary = document.querySelector('.glow-orb--primary');
-  var secondary = document.querySelector('.glow-orb--secondary');
-  if (!primary || !secondary) return;
-
-  var mouseX = window.innerWidth / 2;
-  var mouseY = window.innerHeight / 2;
-  var pX = mouseX, pY = mouseY;
-  var sX = mouseX, sY = mouseY;
-  var hasMouse = false;
-  var time = 0;
-
-  document.addEventListener('mousemove', function(e) {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    hasMouse = true;
-  });
-
-  // Start orbs centered
-  primary.style.transform = 'translate(' + (pX - 300) + 'px,' + (pY - 300) + 'px)';
-  secondary.style.transform = 'translate(' + (sX - 240) + 'px,' + (sY - 240) + 'px)';
-
-  function tick() {
-    time += 0.008;
-
-    // Gentle drift when no mouse input
-    var driftX = Math.sin(time * 0.7) * 60;
-    var driftY = Math.cos(time * 0.5) * 40;
-    var driftX2 = Math.cos(time * 0.6) * 80;
-    var driftY2 = Math.sin(time * 0.4) * 50;
-
-    var targetX = hasMouse ? mouseX : (window.innerWidth / 2 + driftX);
-    var targetY = hasMouse ? mouseY : (window.innerHeight / 2 + driftY);
-    var targetX2 = hasMouse ? mouseX : (window.innerWidth / 2 + driftX2);
-    var targetY2 = hasMouse ? mouseY : (window.innerHeight / 2 + driftY2);
-
-    // Add subtle drift even when following mouse
-    if (hasMouse) {
-      targetX += driftX * 0.3;
-      targetY += driftY * 0.3;
-      targetX2 += driftX2 * 0.4;
-      targetY2 += driftY2 * 0.4;
-    }
-
-    // Lerp — primary follows faster, secondary trails
-    pX += (targetX - pX) * 0.045;
-    pY += (targetY - pY) * 0.045;
-    sX += (targetX2 - sX) * 0.02;
-    sY += (targetY2 - sY) * 0.02;
-
-    primary.style.transform = 'translate(' + (pX - 300) + 'px,' + (pY - 300) + 'px)';
-    secondary.style.transform = 'translate(' + (sX - 240) + 'px,' + (sY - 240) + 'px)';
-
-    requestAnimationFrame(tick);
-  }
-
-  requestAnimationFrame(tick);
 })();
 </script>
 <!-- Theme Toggle -->
