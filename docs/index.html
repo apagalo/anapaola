@@ -18,9 +18,9 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👸🏽</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Jeju+Myeongjo&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){if(t==='dark')document.documentElement.setAttribute('data-theme','dark')}else if(matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark')}else{var h=new Date().getHours();if(h>=19||h<7)document.documentElement.setAttribute('data-theme','dark')}})()</script>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Caveat:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="v2/styles.css">
+  <script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){if(t==='dark')document.documentElement.setAttribute('data-theme','dark')}else if(matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark')}})()</script>
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_2amvHJ1LDjwcec88BgRTLGowcCnIBWhyBRzRHXPjrVr',{
@@ -34,11 +34,11 @@
       utm_campaign:new URLSearchParams(location.search).get('utm_campaign')
     });
     document.addEventListener('click',function(e){
-      var card=e.target.closest('.case-card');
-      if(card){
+      var work=e.target.closest('.work-item');
+      if(work){
         posthog.capture('case_study_click',{
-          case_study:card.querySelector('h3').textContent,
-          href:card.getAttribute('href')
+          case_study:(work.querySelector('.work-title')||{}).textContent,
+          href:work.getAttribute('href')
         });
         return;
       }
@@ -54,253 +54,423 @@
 </head>
 <body>
 
+<!-- v2 Password Gate -->
+<style>
+  .pw-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #f6f6f3;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', -apple-system, sans-serif;
+  }
+  .pw-card {
+    background: #fff; padding: 40px 36px; max-width: 380px; width: 90%;
+    border: 1px solid #d4d1cb; border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(49,49,49,0.1);
+    text-align: center;
+  }
+  .pw-card h3 { font-family: 'Jeju Myeongjo', Georgia, serif; font-size: 26px; font-weight: 400; margin-bottom: 10px; color: #313131; }
+  .pw-card p { font-size: 14px; color: #6c6c6b; margin-bottom: 20px; }
+  .pw-card input {
+    width: 100%; padding: 12px 16px;
+    border: 1px solid #d4d1cb; border-radius: 100px;
+    font-size: 15px; font-family: inherit;
+    outline: none; margin-bottom: 12px;
+    background: #faf9f6; color: #313131;
+  }
+  .pw-card input:focus { border-color: #313131; }
+  .pw-card button {
+    width: 100%; padding: 12px 16px;
+    background: #313131; color: #f6f6f3;
+    border: none; border-radius: 100px;
+    font-family: 'Jeju Myeongjo', Georgia, serif; font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .pw-card button:hover { background: #1a1a1a; }
+  .pw-error { color: #c44; font-size: 13px; margin-top: 12px; display: none; }
+</style>
+<script>
+(function() {
+  var key = 'ana-v2-unlocked';
+  if (sessionStorage.getItem(key) === 'true') return;
+  document.documentElement.style.overflow = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    var overlay = document.createElement('div');
+    overlay.className = 'pw-overlay';
+    overlay.innerHTML =
+      '<div class="pw-card">' +
+        '<h3>Preview</h3>' +
+        '<p>This is an in-progress draft. Enter the password to continue.</p>' +
+        '<input type="password" id="pw-input" placeholder="Password" autocomplete="off">' +
+        '<button id="pw-submit">Enter</button>' +
+        '<p class="pw-error" id="pw-error">Incorrect password. Try again.</p>' +
+      '</div>';
+    document.body.appendChild(overlay);
+    var input = document.getElementById('pw-input');
+    var btn = document.getElementById('pw-submit');
+    var err = document.getElementById('pw-error');
+    function tryAuth() {
+      if (input.value === '260493') {
+        sessionStorage.setItem(key, 'true');
+        overlay.remove();
+        document.documentElement.style.overflow = '';
+      } else {
+        err.style.display = 'block';
+        input.value = '';
+        input.focus();
+      }
+    }
+    btn.addEventListener('click', tryAuth);
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryAuth(); });
+    input.focus();
+  });
+})();
+</script>
 
-<!-- Flower clip-path (rounded 12-petal starburst, slowly spinning) -->
-<svg width="0" height="0" style="position:absolute">
-  <defs>
-    <clipPath id="flower-clip" clipPathUnits="objectBoundingBox">
-      <path d="M0.596 0.143 Q0.75 0.067,0.762 0.238 Q0.933 0.25,0.857 0.404 Q1.0 0.5,0.857 0.596 Q0.933 0.75,0.762 0.762 Q0.75 0.933,0.596 0.857 Q0.5 1.0,0.404 0.857 Q0.25 0.933,0.238 0.762 Q0.067 0.75,0.143 0.596 Q0.0 0.5,0.143 0.404 Q0.067 0.25,0.238 0.238 Q0.25 0.067,0.404 0.143 Q0.5 0.0,0.596 0.143Z">
-        <animateTransform attributeName="transform" type="rotate" from="0 0.5 0.5" to="360 0.5 0.5" dur="180s" repeatCount="indefinite"/>
-      </path>
-    </clipPath>
-  </defs>
-</svg>
+<!-- Navigation -->
+<nav>
+  <div class="container">
+    <a href="#" class="nav-name">Ana Paola <img src="assets/smiley.svg" alt="" class="nav-smiley"></a>
+    <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#life">Life</a></li>
+      <li><a href="#capabilities">What I Do</a></li>
+      <li><a href="#work">Work</a></li>
+      <li class="nav-divider" aria-hidden="true"></li>
+      <li><a href="mailto:anapaolagalo@gmail.com">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <!-- Navigation -->
-  <nav>
-    <div class="container">
-      <a href="#" class="nav-name">Ana Paola <img src="assets/smiley.svg" alt="" class="nav-smiley"></a>
-      <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#capabilities">What I Do</a></li>
-        <li><a href="#work">Work</a></li>
-        <li class="nav-divider" aria-hidden="true"></li>
-        <li><a href="mailto:anapaolagalo@gmail.com">Contact</a></li>
+<div class="page-content">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-text">
+      <div class="hero-greeting">Hola, I'm Ana Paola</div>
+      <h1>
+        Curious by default.<br>
+        <em>Structured</em> by choice.
+      </h1>
+      <p class="hero-sub">
+        I connect the dots between strategy and execution, so nothing gets lost in translation.
+      </p>
+      <div class="hero-meta">
+        <span>Senior Design Operations</span>
+        <span>Electrolux Group</span>
+        <span>Stockholm, SE</span>
+      </div>
+    </div>
+
+    <div class="notes-area" id="notesArea">
+      <div class="sticky note-1" data-note="1">
+        <span class="label">from / to</span>
+        <div class="content">Lima <strong>→</strong> Stockholm<br>Marketing <strong>→</strong> Business</div>
+      </div>
+      <div class="sticky note-2" data-note="2">
+        <span class="label">fluent in</span>
+        <div class="content">ES · EN · PT · FR<br>(+ spreadsheets)</div>
+      </div>
+      <div class="sticky note-3" data-note="3">
+        <span class="label">currently</span>
+        <div class="content">Building systems for 30 designers &amp; 50+ projects</div>
+      </div>
+      <div class="sticky note-4" data-note="4">
+        <span class="label">secret talent</span>
+        <div class="content">Knows a surprising amount about medicine &amp; the human body</div>
+      </div>
+      <div class="sticky note-5" data-note="5">
+        <span class="label">loves</span>
+        <div class="content">My 5 dogs 🐕<br>&amp; tiramisu (always)</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Strategy</span><span>Execution</span><span>Systems</span><span>Clarity</span><span>Power BI</span><span>Facilitation</span><span>Portfolio Management</span><span>Data-Driven</span>
+    <span>Strategy</span><span>Execution</span><span>Systems</span><span>Clarity</span><span>Power BI</span><span>Facilitation</span><span>Portfolio Management</span><span>Data-Driven</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div style="grid-column: 1 / -1;">
+      <div class="eyebrow">About</div>
+      <h2 class="section-h2">From Lima to Stockholm, from marketing to <em>DesignOps</em></h2>
+    </div>
+
+    <div class="about-portrait reveal">
+      <div class="portrait-frame">
+        <div class="portrait-tape"></div>
+        <img src="assets/profile-img.png" alt="Ana Paola Galvez Lopez">
+      </div>
+      <div class="portrait-caption">Patrick is the best, 2026</div>
+    </div>
+
+    <div class="about-text">
+      <p class="reveal">
+        I don't come from a straight line. I started in marketing in Peru, moved to Stockholm, and ended up building DesignOps from scratch at a global company. <em>That path wasn't accidental. It reflects how I work: curious, cross-functional, and always looking for the system underneath the chaos.</em>
+      </p>
+
+      <p class="reveal">
+        At Electrolux Group, I scaled DesignOps for 30 designers across 50+ concurrent projects, introducing portfolio management, clarifying ownership, and building <strong>Power BI dashboards</strong> that made capacity and budget conversations honest. We went from reactive firefighting to a structure that gave designers clarity and leadership real visibility.
+      </p>
+      <p class="reveal">
+        What that taught me is that <strong>the most impactful work happens at the intersection of strategy and execution.</strong> Operations isn't about efficiency. It's about creating the conditions for good work to happen, consistently and sustainably. Strong systems should drive performance and foster trust in equal measure. <em>That's not a soft goal. It's a strategic one.</em>
+      </p>
+      <p class="reveal">
+        I'm now looking for my next challenge — somewhere I can bring analytical rigour, strategic thinking, and operational craft to a team that's serious about how they build.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- LIFE GALLERY -->
+<div class="gallery-wrap" id="life">
+  <div class="container">
+    <div class="gallery-header">
+      <div>
+        <div class="eyebrow">Off the Clock</div>
+        <h2 class="section-h2" style="margin-bottom: 0;">A few <em>favorite</em> things</h2>
+      </div>
+      <p>The life behind the dashboards — dogs, reading, matcha, journeling, and adventures with my partner.</p>
+    </div>
+  </div>
+  <div class="gallery-scroll">
+      <div class="gallery-card">
+        <div class="gallery-img has-bg-1">
+          <img src="assets/1.jpg" alt="Adventure time" loading="lazy" decoding="async">
+        </div>
+        <div class="gallery-caption">
+          <span>adventure time</span>
+          <span class="num">01</span>
+        </div>
+      </div>
+
+      <div class="gallery-card">
+        <div class="gallery-img has-bg-2">
+          <img src="assets/2.jpg" alt="The new life" loading="lazy" decoding="async">
+        </div>
+        <div class="gallery-caption">
+          <span>the new life</span>
+          <span class="num">02</span>
+        </div>
+      </div>
+
+      <div class="gallery-card">
+        <div class="gallery-img has-bg-3">
+          <img src="assets/3.jpg" alt="Trying to look smart" loading="lazy" decoding="async">
+        </div>
+        <div class="gallery-caption">
+          <span>trying to look smart</span>
+          <span class="num">03</span>
+        </div>
+      </div>
+
+      <div class="gallery-card">
+        <div class="gallery-img has-bg-4">
+          <img src="assets/4.jpg" alt="10km run" loading="lazy" decoding="async">
+        </div>
+        <div class="gallery-caption">
+          <span>10km run</span>
+          <span class="num">04</span>
+        </div>
+      </div>
+
+      <div class="gallery-card">
+        <div class="gallery-img has-bg-5">
+          <img src="assets/5.jpg" alt="Enjoy the liquid sunshine" loading="lazy" decoding="async">
+        </div>
+        <div class="gallery-caption">
+          <span>enjoy the liquid sunshine</span>
+          <span class="num">05</span>
+        </div>
+      </div>
+
+      <div class="gallery-card">
+        <div class="gallery-img has-bg-1">
+          <img src="assets/6.jpg" alt="Looking good for the cam" loading="lazy" decoding="async">
+        </div>
+        <div class="gallery-caption">
+          <span>looking good for the cam</span>
+          <span class="num">06</span>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- CAPABILITIES -->
+<section class="capabilities" id="capabilities">
+  <div class="container">
+    <div class="eyebrow">What I Do</div>
+    <h2 class="section-h2">Three pillars of <em>DesignOps</em></h2>
+
+    <div class="pillars">
+      <div class="pillar reveal">
+        <div class="pillar-icon">🤝</div>
+        <h3>People</h3>
+        <ul>
+          <li>Cross-functional team coordination across global teams</li>
+          <li>Workshop facilitation for alignment and continuous improvement</li>
+          <li>Stakeholder management across design, product, engineering</li>
+          <li>Team strengths &amp; gaps analysis</li>
+          <li>Vendor and partner relationships</li>
+        </ul>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar-icon">🧩</div>
+        <h3>Process</h3>
+        <ul>
+          <li>Workflow design and optimization for creative teams</li>
+          <li>Project intake, prioritization, resource allocation</li>
+          <li>Design awards submission workflows</li>
+          <li>Brand expression research programs</li>
+          <li>Continuous improvement loops and feedback systems</li>
+        </ul>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar-icon">🛠️</div>
+        <h3>Tools &amp; Data</h3>
+        <ul>
+          <li>Power BI dashboards for budget and resource visibility</li>
+          <li>Smartsheets and SharePoint platform management</li>
+          <li>Performance metrics and data-driven decisions</li>
+          <li>Budget management and financial oversight</li>
+          <li>AI tools and LLMs for operational acceleration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BELIEF -->
+<section class="belief">
+  <div class="container">
+    <p class="belief-quote">
+      I believe the gap between vision and reality is just <em>a missing system</em>.
+    </p>
+    <div class="belief-attribution">— the thing I keep coming back to</div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="container">
+    <div class="eyebrow">Selected Work</div>
+    <h2 class="section-h2">Case <em>studies</em></h2>
+
+    <div class="work-list">
+      <a href="case-studies/01-global-design-ops.html" class="work-item">
+        <div class="work-num">01</div>
+        <div>
+          <div class="work-title">Scaling Design Operations Across a Global Organization</div>
+          <div class="work-desc">Built DesignOps from scratch at Electrolux — from coordinator to senior ops leader over 3 years, supporting 30 designers and 50+ projects.</div>
+          <div class="work-tags">
+            <span class="work-tag">Global Ops</span>
+            <span class="work-tag">Process Maturity</span>
+            <span class="work-tag">Team Scaling</span>
+          </div>
+        </div>
+        <div class="work-arrow">→</div>
+      </a>
+
+      <a href="case-studies/02-power-bi-dashboards.html" class="work-item">
+        <div class="work-num">02</div>
+        <div>
+          <div class="work-title">Power BI Dashboards for Budget &amp; Utilization</div>
+          <div class="work-desc">Built a data-driven decision system from scratch for a 30-person design team managing 50+ projects.</div>
+          <div class="work-tags">
+            <span class="work-tag">Power BI</span>
+            <span class="work-tag">Data-Driven</span>
+            <span class="work-tag">Budget Mgmt</span>
+          </div>
+        </div>
+        <div class="work-arrow">→</div>
+      </a>
+
+      <a href="case-studies/04-team-strengths-gaps.html" class="work-item">
+        <div class="work-num">03</div>
+        <div>
+          <div class="work-title">Team Strengths &amp; Gaps Analysis</div>
+          <div class="work-desc">Led a structured review across 5 design leads to map team capabilities, surface skill gaps, and inform hiring and staffing decisions.</div>
+          <div class="work-tags">
+            <span class="work-tag">People Ops</span>
+            <span class="work-tag">Skills Matrix</span>
+            <span class="work-tag">Strategic Staffing</span>
+          </div>
+        </div>
+        <div class="work-arrow">→</div>
+      </a>
+    </div>
+
+    <div class="more-work reveal">
+      <h4>More case studies, warming up</h4>
+      <p>I have additional stories I'd love to walk you through in person:</p>
+      <ul>
+        <li>Design Awards Submission Workflow</li>
+        <li>Brand Expression Research</li>
+        <li>Redesigning Design Workflows</li>
+      </ul>
+      <a href="mailto:anapaolagalo@gmail.com" class="cta-pill">Get in touch →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="connect">
+  <div class="container">
+    <div class="contact-wave">👋</div>
+    <h2 class="section-h2 section-h2--centered">You made it this <em>far</em></h2>
+    <p>Might as well say hi. My inbox is always open — especially for roles where strategy meets systems.</p>
+    <a href="mailto:anapaolagalo@gmail.com" class="contact-btn">Say hola</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-left">
+        "To build a system is to believe in the future of the work that flows through it."
+      </div>
+      <ul class="footer-links">
+        <li><a href="https://www.linkedin.com/in/anapaolagalvez/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:anapaolagalo@gmail.com">Email</a></li>
       </ul>
     </div>
-  </nav>
-
-  <div class="page-content">
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-text">
-        <h1>Hi, I'm<br>Ana Paola</h1>
-        <p class="tagline">Curious by default. Structured by choice. I connect the dots between strategy and execution, so nothing gets lost in translation.</p>
-        <div class="hero-meta">
-          <span>Senior Design Operations</span>
-          <span>Electrolux Group</span>
-          <span>Stockholm</span>
-        </div>
-      </div>
-      <div class="hero-photo">
-        <div class="photo-frame">
-          <img src="assets/profile-img.png" alt="Ana Paola Galvez Lopez">
-        </div>
-      </div>
+    <div class="footer-copy">
+      <span>© 2026 Ana Paola Galvez Lopez</span>
+      <span>made with ❤ &amp; plenty of oat lattes in Stockholm</span>
     </div>
-  </section>
+  </div>
+</footer>
 
-  <!-- About -->
-  <section class="about" id="about">
-    <div class="container">
-      <div class="about-text">
-        <p class="label reveal">About me</p>
-        <h2 class="reveal-blur">From Lima to Stockholm,<br>from marketing to DesignOps</h2>
-        <p class="reveal">I don't come from a straight line. I started in marketing in Peru, moved to Stockholm, and ended up building DesignOps from scratch at a global company. That path wasn't accidental. It reflects how I work: <em>curious, cross-functional, and always looking for the system underneath the chaos</em>.</p>
-        <p class="reveal">At Electrolux Group, I scaled DesignOps for <strong>30 designers</strong> across <strong>50+ concurrent projects</strong>, introducing portfolio management, clarifying ownership, and building Power BI dashboards that made capacity and budget conversations honest. We went <em>from reactive firefighting to a structure that gave designers clarity</em> and leadership real visibility.</p>
-        <p class="reveal">What that taught me is that <strong class="accent">the most impactful work happens at the intersection of strategy and execution</strong>. Operations isn't about efficiency. It's about creating the conditions for good work to happen, consistently and sustainably. Strong systems should drive performance and foster trust in equal measure. <strong class="accent">That's not a soft goal. It's a strategic one.</strong></p>
-        <p class="reveal">I'm now looking for my next challenge, somewhere I can bring analytical rigour, strategic thinking, and operational craft to a team that's serious about how they build.</p>
-      </div>
-      <div class="fun-facts reveal">
-        <h3>Side facts</h3>
-        <table>
-          <tr><td>From</td><td>Peru</td></tr>
-          <tr><td>Speak</td><td>Spanish, English, Portuguese, French</td></tr>
-          <tr><td>Secret talent</td><td>Know a lot about medicine & the human body</td></tr>
-          <tr><td>First jobs</td><td>Pharmacy helper (7 yrs), barista (18 yrs), competitive dancer</td></tr>
-          <tr><td>Love</td><td>My 5 dogs & Tiramisu</td></tr>
-        </table>
-      </div>
-    </div>
-  </section>
+</div><!-- .page-content -->
 
-  <!-- Capabilities -->
-  <section class="capabilities" id="capabilities">
-    <div class="container">
-      <p class="label label--centered reveal">What I do</p>
-      <h2 class="reveal-blur">Three Pillars of DesignOps</h2>
-      <div class="pillars">
-        <div class="pillar reveal">
-          <h3>People</h3>
-          <ul>
-            <li>Cross-functional team coordination across global teams</li>
-            <li>Workshop facilitation for alignment and continuous improvement</li>
-            <li>Stakeholder management across design, product, and engineering</li>
-            <li>Team strengths & gaps analysis</li>
-            <li>Vendor and partner relationship management</li>
-          </ul>
-        </div>
-        <div class="pillar reveal">
-          <h3>Process</h3>
-          <ul>
-            <li>Workflow design and optimization for creative teams</li>
-            <li>Project intake, prioritization, and resource allocation</li>
-            <li>Design awards submission workflows</li>
-            <li>Brand expression research programs</li>
-            <li>Continuous improvement loops and feedback systems</li>
-          </ul>
-        </div>
-        <div class="pillar reveal">
-          <h3>Tools & Data</h3>
-          <ul>
-            <li>Power BI dashboards for budget and resource visibility</li>
-            <li>Smartsheets and SharePoint platform management</li>
-            <li>Performance metrics and data-driven decision making</li>
-            <li>Budget management and financial oversight</li>
-            <li>AI tools and LLMs for operational acceleration</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- Theme Toggle -->
+<button class="theme-toggle" aria-label="Toggle dark mode">
+  <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
 
-  <!-- Case Studies -->
-  <section class="case-studies" id="work">
-    <div class="container">
-      <p class="label label--centered reveal">Work</p>
-      <h2 class="reveal-blur">Selected Case Studies</h2>
-      <div class="case-grid">
-
-        <a href="case-studies/02-power-bi-dashboards.html" class="case-card reveal">
-          <div class="case-shape" data-shape="diamond">❖</div>
-          <h3>Power BI Dashboards for Budget & Utilization</h3>
-          <p>Built a data-driven decision system from scratch for a 30-person design team managing 50+ projects.</p>
-          <div class="case-tags">
-            <span class="case-tag">Power BI</span>
-            <span class="case-tag">Data-Driven</span>
-            <span class="case-tag">Budget Management</span>
-          </div>
-          <span class="read-more">Read case study <span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a href="mailto:anapaolagalo@gmail.com" class="case-card case-card--more reveal">
-          <div class="case-shape" data-shape="plus">+</div>
-          <h3>Want to See More?</h3>
-          <p>I have additional case studies I'd love to walk you through:</p>
-          <ul class="case-more-list">
-            <li>Scaling Design Operations Globally</li>
-            <li>Design Awards Submission Workflow</li>
-            <li>Team Strengths & Gaps Analysis</li>
-            <li>Brand Expression Research</li>
-            <li>Redesigning Design Workflows</li>
-          </ul>
-          <span class="read-more">Get in touch <span class="arrow">&rarr;</span></span>
-        </a>
-
-        <!-- Archived case studies (hidden from site, pages still exist)
-        <a href="case-studies/01-global-design-ops.html" class="case-card reveal">
-          <div class="case-shape" data-shape="circle">●</div>
-          <h3>Scaling Design Operations Across a Global Organization</h3>
-          <p>How I built DesignOps from scratch at Electrolux — from coordinator to senior ops leader over 3 years.</p>
-          <div class="case-tags">
-            <span class="case-tag">Global Operations</span>
-            <span class="case-tag">Process Maturity</span>
-            <span class="case-tag">Team Scaling</span>
-          </div>
-          <span class="read-more">Read case study <span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a href="case-studies/03-design-awards.html" class="case-card reveal">
-          <div class="case-shape" data-shape="triangle">▲</div>
-          <h3>Design Awards Submission Workflow</h3>
-          <p>Introduced a structured submission process that replaced ad hoc efforts with a repeatable, quality-driven system.</p>
-          <div class="case-tags">
-            <span class="case-tag">Workflow Design</span>
-            <span class="case-tag">Awards</span>
-            <span class="case-tag">Quality Gates</span>
-          </div>
-          <span class="read-more">Read case study <span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a href="case-studies/04-team-strengths-gaps.html" class="case-card reveal">
-          <div class="case-shape" data-shape="star">★</div>
-          <h3>Team Strengths & Gaps Analysis</h3>
-          <p>Led a review to identify capabilities and skill gaps across 5 design leads, informing hiring and staffing decisions.</p>
-          <div class="case-tags">
-            <span class="case-tag">People Ops</span>
-            <span class="case-tag">Skills Matrix</span>
-            <span class="case-tag">Strategic Staffing</span>
-          </div>
-          <span class="read-more">Read case study <span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a href="case-studies/05-brand-expression-research.html" class="case-card reveal">
-          <div class="case-shape" data-shape="heart">♥</div>
-          <h3>Brand Expression Research</h3>
-          <p>Directed research to refine brand positioning, establishing the first structured research program for the design org.</p>
-          <div class="case-tags">
-            <span class="case-tag">Brand Strategy</span>
-            <span class="case-tag">Research</span>
-            <span class="case-tag">Competitive Intel</span>
-          </div>
-          <span class="read-more">Read case study <span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a href="case-studies/06-workflow-redesign.html" class="case-card reveal">
-          <div class="case-shape" data-shape="spark">✦</div>
-          <h3>Redesigning Design Workflows</h3>
-          <p>Mapped actual workflows, facilitated workshops, and consolidated platforms to drive continuous improvement.</p>
-          <div class="case-tags">
-            <span class="case-tag">Workshop Facilitation</span>
-            <span class="case-tag">SharePoint</span>
-            <span class="case-tag">Continuous Improvement</span>
-          </div>
-          <span class="read-more">Read case study <span class="arrow">&rarr;</span></span>
-        </a>
-        -->
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Resume -->
-  <section class="resume-section" id="connect">
-    <div class="container">
-      <div>
-        <p class="label label--centered reveal">Let's connect</p>
-        <h2 class="reveal-blur">You Made It This Far</h2>
-        <p class="reveal">Might as well say hi. My inbox is always open.</p>
-        <div class="resume-btn-wrap reveal">
-          <a href="mailto:anapaolagalo@gmail.com" class="btn btn--primary">Say Hola 👋</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 Ana Paola Galvez Lopez</p>
-      <div class="footer-links">
-        <a href="https://www.linkedin.com/in/anapaolagalvez/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="mailto:anapaolagalo@gmail.com">Email</a>
-      </div>
-    </div>
-  </footer>
-  </div><!-- .page-content -->
+<!-- ========== SCRIPTS ========== -->
 
 <script>
+// NAV — hamburger, backdrop, scroll shadow, active link
 (function() {
   var nav = document.querySelector('nav');
   var hamburger = document.querySelector('.nav-hamburger');
-  var lastScroll = 0;
-  var isMobile = function() { return window.innerWidth <= 768; };
-
-  // Backdrop overlay (separate from nav so it covers full viewport)
   var backdrop = document.createElement('div');
   backdrop.className = 'nav-backdrop';
   document.body.appendChild(backdrop);
@@ -310,65 +480,37 @@
     backdrop.classList.add('active');
     hamburger.setAttribute('aria-expanded', 'true');
   }
-
   function closeNav() {
     nav.classList.remove('nav-open');
     backdrop.classList.remove('active');
     hamburger.setAttribute('aria-expanded', 'false');
   }
-
-  // Hamburger menu toggle
   hamburger.addEventListener('click', function() {
-    if (nav.classList.contains('nav-open')) closeNav();
-    else openNav();
+    nav.classList.contains('nav-open') ? closeNav() : openNav();
   });
-
-  // Close on link click
-  document.querySelectorAll('nav .nav-links a').forEach(function(link) {
-    link.addEventListener('click', closeNav);
+  document.querySelectorAll('nav .nav-links a').forEach(function(a) {
+    a.addEventListener('click', closeNav);
   });
-
-  // Close on backdrop click
   backdrop.addEventListener('click', closeNav);
-
-  // Close on Escape
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && nav.classList.contains('nav-open')) closeNav();
   });
 
-  // Scroll-hide nav on mobile + nav shadow on desktop + docking
+  var isMobile = function() { return window.innerWidth <= 768; };
+  var lastScroll = 0;
   window.addEventListener('scroll', function() {
-    var current = window.pageYOffset;
+    var y = window.pageYOffset;
+    nav.classList.toggle('nav-scrolled', y > 30);
 
-    // Nav shadow after scrolling past hero
-    if (current > window.innerHeight * 0.5) {
-      nav.classList.add('nav-scrolled');
-    } else {
-      nav.classList.remove('nav-scrolled');
-    }
-
-    // Nav docking — slide up from 40px to 12px on desktop
-    if (!isMobile()) {
-      if (current > 30) {
-        nav.classList.add('nav-docked');
-      } else {
-        nav.classList.remove('nav-docked');
-      }
-    }
-
-    if (isMobile()) {
-      if (current > lastScroll && current > 80) {
-        nav.style.transform = 'translateY(-100%)';
-      } else {
-        nav.style.transform = 'translateY(0)';
-      }
-      lastScroll = current;
+    if (y > lastScroll && y > 20) {
+      nav.style.transform = isMobile() ? 'translateY(-120%)' : 'translateY(-160%)';
     } else {
       nav.style.transform = 'translateY(0)';
     }
+    lastScroll = y;
   });
 
-  // Active section dot indicator
+  // Active link
   var links = document.querySelectorAll('nav .nav-links li:not(.nav-divider)');
   var sections = [];
   links.forEach(function(li) {
@@ -379,28 +521,84 @@
     var sec = document.querySelector(href);
     if (sec) sections.push({ el: sec, li: li });
   });
-
   function updateActive() {
     var scrollPos = window.pageYOffset + 120;
     var active = null;
-    // If scrolled to bottom, activate last section (Resume)
     if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2) {
       active = sections[sections.length - 1];
     } else {
-      sections.forEach(function(s) {
-        if (s.el.offsetTop <= scrollPos) active = s;
-      });
+      sections.forEach(function(s) { if (s.el.offsetTop <= scrollPos) active = s; });
     }
     links.forEach(function(li) { li.classList.remove('active'); });
     if (active) active.li.classList.add('active');
   }
-
   window.addEventListener('scroll', updateActive);
   updateActive();
 })();
 </script>
+
 <script>
-// Scroll-driven reveal — elements animate proportionally to scroll position
+// DRAGGABLE STICKY NOTES
+(function() {
+  var notes = document.querySelectorAll('.sticky');
+  var highestZ = 10;
+
+  notes.forEach(function(note) {
+    var isDragging = false, startX, startY, initialX, initialY, currentRotation = 0;
+
+    var style = window.getComputedStyle(note);
+    var tr = style.transform;
+    if (tr && tr !== 'none') {
+      var m = tr.match(/matrix\(([^)]+)\)/);
+      if (m) {
+        var parts = m[1].split(',').map(Number);
+        currentRotation = Math.atan2(parts[1], parts[0]) * (180 / Math.PI);
+      }
+    }
+
+    function startDrag(e) {
+      isDragging = true;
+      highestZ++;
+      note.style.zIndex = highestZ;
+      note.style.transition = 'none';
+      var ev = e.touches ? e.touches[0] : e;
+      startX = ev.clientX;
+      startY = ev.clientY;
+      initialX = note.offsetLeft;
+      initialY = note.offsetTop;
+      note.style.width = note.offsetWidth + 'px';
+      note.style.left = initialX + 'px';
+      note.style.top = initialY + 'px';
+      note.style.right = 'auto';
+      e.preventDefault();
+    }
+    function drag(e) {
+      if (!isDragging) return;
+      var ev = e.touches ? e.touches[0] : e;
+      var dx = ev.clientX - startX;
+      var dy = ev.clientY - startY;
+      note.style.left = (initialX + dx) + 'px';
+      note.style.top = (initialY + dy) + 'px';
+      note.style.transform = 'rotate(' + currentRotation + 'deg)';
+    }
+    function endDrag() {
+      if (!isDragging) return;
+      isDragging = false;
+      note.style.transition = '';
+    }
+
+    note.addEventListener('mousedown', startDrag);
+    note.addEventListener('touchstart', startDrag, { passive: false });
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('touchmove', drag, { passive: false });
+    document.addEventListener('mouseup', endDrag);
+    document.addEventListener('touchend', endDrag);
+  });
+})();
+</script>
+
+<script>
+// REVEAL ON SCROLL
 (function() {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll('.reveal, .reveal-blur').forEach(function(el) {
@@ -408,154 +606,25 @@
     });
     return;
   }
-
-  var els = [];
-
-  function gather() {
-    els = [];
-    var isMobile = window.innerWidth <= 768;
-    document.querySelectorAll('.reveal, .reveal-blur').forEach(function(el) {
-      if (el.closest('.case-content')) return;
-      if (isMobile && el.closest('.case-grid')) return;
-      els.push({ el: el, isBlur: el.classList.contains('reveal-blur') });
-    });
-  }
-  gather();
-
-  function clamp(v) { return Math.max(0, Math.min(1, v)); }
-  function ease(t) { return t * t * (3 - 2 * t); }
-
-  function update() {
-    var wh = window.innerHeight;
-
-    for (var i = 0; i < els.length; i++) {
-      var item = els[i];
-      var rect = item.el.getBoundingClientRect();
-
-      var raw = (wh - rect.top) / (wh * 0.35);
-      var t = clamp(ease(clamp(raw)));
-
-      if (item.isBlur) {
-        var blur = (1 - t) * 10;
-        item.el.style.opacity = t;
-        item.el.style.filter = 'blur(' + blur + 'px)';
-      } else {
-        item.el.style.opacity = t;
+  var els = document.querySelectorAll('.reveal, .reveal-blur');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
       }
-    }
-  }
-
-  var ticking = false;
-  window.addEventListener('scroll', function() {
-    if (!ticking) {
-      requestAnimationFrame(function() { update(); ticking = false; });
-      ticking = true;
-    }
-  });
-
-  window.addEventListener('resize', function() { gather(); update(); });
-  update();
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function(el) { io.observe(el); });
 })();
 </script>
+
+
 <script>
-// Scroll-driven background color transition (microsoft.ai-style)
-(function() {
-  var sectionData = [
-    { sel: '.hero',           light: [240,238,238], dark: [30,30,30] },
-    { sel: '.about',          light: [250,244,244], dark: [24,24,24] },
-    { sel: '.capabilities',   light: [245,240,236],  dark: [15,14,13] },
-    { sel: '.case-studies',   light: [250,244,244], dark: [24,24,24] },
-    { sel: '.resume-section', light: [237,232,226], dark: [28,26,24] }
-  ];
-
-  var sections = sectionData.map(function(s) {
-    return { el: document.querySelector(s.sel), light: s.light, dark: s.dark };
-  }).filter(function(s) { return s.el; });
-
-  if (!sections.length) return;
-
-  var positions = [];
-  function cache() {
-    positions = sections.map(function(s) {
-      return { top: s.el.offsetTop, bot: s.el.offsetTop + s.el.offsetHeight };
-    });
-  }
-  cache();
-
-  function isDark() {
-    return document.documentElement.getAttribute('data-theme') === 'dark';
-  }
-
-  function smoothstep(t) { return t * t * (3 - 2 * t); }
-  function lerp(a, b, t) { return a + (b - a) * t; }
-  function rgb(r, g, b) { return 'rgb(' + Math.round(r) + ',' + Math.round(g) + ',' + Math.round(b) + ')'; }
-
-  function blend(c1, c2, t) {
-    return rgb(lerp(c1[0],c2[0],t), lerp(c1[1],c2[1],t), lerp(c1[2],c2[2],t));
-  }
-
-  function update() {
-    var scrollY = window.pageYOffset;
-    var dark = isDark();
-    var center = scrollY + window.innerHeight * 0.45;
-
-    // Default to first section color
-    var col = dark ? sections[0].dark : sections[0].light;
-
-    for (var i = 0; i < sections.length; i++) {
-      var c = dark ? sections[i].dark : sections[i].light;
-      var top = positions[i].top;
-      var bot = positions[i].bot;
-
-      if (center < top) break; // haven't reached this section yet
-
-      if (center >= top && center < bot) {
-        // Inside this section — check if we're in the transition zone at the top
-        var zone = Math.min(window.innerHeight * 0.5, (bot - top) * 0.4);
-        if (i > 0 && center < top + zone) {
-          // Blend from previous section into this one
-          var prev = dark ? sections[i - 1].dark : sections[i - 1].light;
-          var t = smoothstep((center - top) / zone);
-          col = [lerp(prev[0],c[0],t), lerp(prev[1],c[1],t), lerp(prev[2],c[2],t)];
-        } else {
-          col = c;
-        }
-        break;
-      }
-
-      // Past this section — carry its color forward
-      col = c;
-    }
-
-    document.body.style.backgroundColor = rgb(col[0], col[1], col[2]);
-
-  }
-
-  var ticking = false;
-  window.addEventListener('scroll', function() {
-    if (!ticking) {
-      requestAnimationFrame(function() { update(); ticking = false; });
-      ticking = true;
-    }
-  });
-
-  window.addEventListener('resize', function() { cache(); update(); });
-  update();
-
-  // Re-calc on theme change
-  new MutationObserver(function() { update(); }).observe(
-    document.documentElement, { attributes: true, attributeFilter: ['data-theme'] }
-  );
-})();
-</script>
-<!-- Theme Toggle -->
-<button class="theme-toggle" aria-label="Toggle dark mode">
-  <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-  <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-</button>
-<script>
+// THEME TOGGLE
 (function() {
   var toggle = document.querySelector('.theme-toggle');
+  if (!toggle) return;
   var switching = false;
   toggle.addEventListener('click', function() {
     if (switching) return;
@@ -563,9 +632,10 @@
     document.documentElement.classList.add('theme-switching');
     setTimeout(function() {
       var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      var newTheme = isDark ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
+      var nt = isDark ? 'light' : 'dark';
+      if (nt === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      else document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', nt);
     }, 300);
     setTimeout(function() {
       document.documentElement.classList.remove('theme-switching');
@@ -574,8 +644,9 @@
   });
 })();
 </script>
+
 <script>
-// Tinder card carousel (mobile only)
+// MOBILE CARD CAROUSEL (pillars only, Tinder-style)
 (function() {
   var isMobile = function() { return window.innerWidth <= 768; };
 
@@ -583,18 +654,14 @@
     var cards = Array.from(container.children).filter(function(c) { return c.nodeType === 1; });
     if (cards.length < 2) return;
 
-    // 1. Kill reveal system — remove classes so IntersectionObserver ignores them
-    container.classList.remove('reveal-stagger');
     cards.forEach(function(c) {
       c.classList.remove('reveal');
       c.classList.remove('visible');
     });
 
-    // 2. Switch container to block so cards render at full width for measurement
     container.style.display = 'block';
-    void container.offsetHeight; // force reflow
+    void container.offsetHeight;
 
-    // 3. Measure tallest card at full width
     var maxH = 0;
     cards.forEach(function(c) {
       c.style.opacity = '1';
@@ -602,12 +669,10 @@
       maxH = Math.max(maxH, c.offsetHeight);
     });
 
-    // 4. Set up container
     container.classList.add('carousel-init');
     container.style.display = '';
     container.style.height = maxH + 'px';
 
-    // 5. Position all cards absolute, equal height
     cards.forEach(function(c) {
       c.style.position = 'absolute';
       c.style.top = '0';
@@ -618,24 +683,21 @@
       c.style.boxSizing = 'border-box';
     });
 
-    // 6. Add dot indicators
     var dots = document.createElement('div');
-    dots.style.cssText = 'display:flex;justify-content:center;gap:6px;padding:16px 0 0;';
+    dots.className = 'carousel-dots';
     cards.forEach(function() {
-      var dot = document.createElement('span');
-      dot.style.cssText = 'width:6px;height:6px;border-radius:50%;background:var(--dark-soft);opacity:0.2;transition:opacity 0.3s;';
-      dots.appendChild(dot);
+      var d = document.createElement('span');
+      dots.appendChild(d);
     });
     container.after(dots);
 
-    // Deck state
     var order = cards.map(function(_, i) { return i; });
     var startX = 0, startY = 0, dx = 0;
     var dragging = false, locked = false, busy = false, swiped = false;
 
     function updateDots() {
       Array.from(dots.children).forEach(function(d, i) {
-        d.style.opacity = (i === order[0]) ? '0.8' : '0.2';
+        d.classList.toggle('active', i === order[0]);
       });
     }
 
@@ -648,7 +710,6 @@
         c.style.zIndex = '1';
         c.style.pointerEvents = 'none';
       });
-      // Show under card as a subtle peek behind the top card
       if (order.length > 1) {
         var under = cards[order[1]];
         under.style.display = '';
@@ -673,7 +734,6 @@
       top.style.transform = 'translateX(' + (dir * window.innerWidth * 1.3) + 'px) rotate(' + (dir * 18) + 'deg)';
       top.style.opacity = '0';
       top.style.pointerEvents = 'none';
-      // Bring under card forward smoothly
       if (order.length > 1) {
         var under = cards[order[1]];
         under.style.transition = 'transform 0.4s ease-out, opacity 0.4s ease-out';
@@ -687,7 +747,6 @@
       }, 420);
     }
 
-    // Touch start
     container.addEventListener('touchstart', function(e) {
       if (!isMobile() || busy) return;
       startX = e.touches[0].clientX;
@@ -695,7 +754,6 @@
       dx = 0; dragging = false; locked = false; swiped = false;
     }, { passive: true });
 
-    // Touch move — direction lock (horizontal swipe vs vertical scroll)
     container.addEventListener('touchmove', function(e) {
       if (!isMobile() || busy) return;
       var mx = e.touches[0].clientX - startX;
@@ -713,7 +771,6 @@
       var top = cards[order[0]];
       top.style.transition = 'none';
       top.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx * 0.05) + 'deg)';
-      // Progressively reveal under card as user drags
       if (order.length > 1) {
         var progress = Math.min(Math.abs(dx) / 120, 1);
         var under = cards[order[1]];
@@ -723,12 +780,8 @@
       }
     }, { passive: false });
 
-    // Touch end
     container.addEventListener('touchend', function() {
-      if (!isMobile() || busy || !dragging) {
-        dragging = false; locked = false;
-        return;
-      }
+      if (!isMobile() || busy || !dragging) { dragging = false; locked = false; return; }
       if (Math.abs(dx) > 60) {
         flyOff(dx > 0 ? 1 : -1);
       } else {
@@ -736,7 +789,6 @@
         top.style.transition = 'transform 0.3s ease';
         top.style.transform = 'none';
         setTimeout(function() { top.style.transition = 'none'; }, 300);
-        // Snap under card back to peek position
         if (order.length > 1) {
           var under = cards[order[1]];
           under.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
@@ -747,7 +799,6 @@
       dragging = false; locked = false; dx = 0;
     });
 
-    // Recover if browser cancels touch (e.g. iOS back gesture, incoming call)
     container.addEventListener('touchcancel', function() {
       if (dragging) {
         var top = cards[order[0]];
@@ -764,14 +815,12 @@
       dragging = false; locked = false; dx = 0; busy = false;
     });
 
-    // Block click navigation right after a swipe
     container.addEventListener('click', function(e) {
       if (swiped) { e.preventDefault(); e.stopPropagation(); swiped = false; }
     }, true);
 
     showLayout();
 
-    // Teardown on desktop resize
     window.addEventListener('resize', function() {
       if (!isMobile()) {
         container.classList.remove('carousel-init');
@@ -788,9 +837,7 @@
   function init() {
     if (!isMobile()) return;
     var p = document.querySelector('.pillars');
-    var g = document.querySelector('.case-grid');
     if (p) initCarousel(p);
-    if (g) initCarousel(g);
   }
 
   if (document.readyState === 'loading') {
@@ -800,8 +847,9 @@
   }
 })();
 </script>
+
 <script>
-// Page transition — blur out on navigation
+// PAGE TRANSITION — blur out on internal nav
 (function() {
   document.addEventListener('click', function(e) {
     var link = e.target.closest('a[href]');
@@ -815,5 +863,6 @@
   });
 })();
 </script>
+
 </body>
 </html>
