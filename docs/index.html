@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ana Paola Galvez Lopez — Senior Design Operations</title>
+  <title>Ana Paola Galvez Lopez, Senior Design Operations</title>
   <meta name="description" content="Senior Design Operations professional building the operational backbone for global design teams. Currently at Electrolux Group, Stockholm.">
   <!-- Open Graph -->
-  <meta property="og:title" content="Ana Paola Galvez Lopez — Senior Design Operations">
+  <meta property="og:title" content="Ana Paola Galvez Lopez, Senior Design Operations">
   <meta property="og:description" content="Senior Design Operations professional building the operational backbone for global design teams. Currently at Electrolux Group, Stockholm.">
   <meta property="og:image" content="https://anapaolagalvez.com/assets/og-image.png">
   <meta property="og:url" content="https://anapaolagalvez.com/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ana Paola Galvez Lopez — Senior Design Operations">
+  <meta name="twitter:title" content="Ana Paola Galvez Lopez, Senior Design Operations">
   <meta name="twitter:description" content="Senior Design Operations professional building the operational backbone for global design teams. Currently at Electrolux Group, Stockholm.">
   <meta name="twitter:image" content="https://anapaolagalvez.com/assets/og-image.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👸🏽</text></svg>">
@@ -54,79 +54,6 @@
 </head>
 <body>
 
-<!-- v2 Password Gate -->
-<style>
-  .pw-overlay {
-    position: fixed; inset: 0; z-index: 9999;
-    background: #f6f6f3;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Inter', -apple-system, sans-serif;
-  }
-  .pw-card {
-    background: #fff; padding: 40px 36px; max-width: 380px; width: 90%;
-    border: 1px solid #d4d1cb; border-radius: 4px;
-    box-shadow: 0 10px 30px rgba(49,49,49,0.1);
-    text-align: center;
-  }
-  .pw-card h3 { font-family: 'Jeju Myeongjo', Georgia, serif; font-size: 26px; font-weight: 400; margin-bottom: 10px; color: #313131; }
-  .pw-card p { font-size: 14px; color: #6c6c6b; margin-bottom: 20px; }
-  .pw-card input {
-    width: 100%; padding: 12px 16px;
-    border: 1px solid #d4d1cb; border-radius: 100px;
-    font-size: 15px; font-family: inherit;
-    outline: none; margin-bottom: 12px;
-    background: #faf9f6; color: #313131;
-  }
-  .pw-card input:focus { border-color: #313131; }
-  .pw-card button {
-    width: 100%; padding: 12px 16px;
-    background: #313131; color: #f6f6f3;
-    border: none; border-radius: 100px;
-    font-family: 'Jeju Myeongjo', Georgia, serif; font-size: 15px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-  .pw-card button:hover { background: #1a1a1a; }
-  .pw-error { color: #c44; font-size: 13px; margin-top: 12px; display: none; }
-</style>
-<script>
-(function() {
-  var key = 'ana-v2-unlocked';
-  if (sessionStorage.getItem(key) === 'true') return;
-  document.documentElement.style.overflow = 'hidden';
-  document.addEventListener('DOMContentLoaded', function() {
-    var overlay = document.createElement('div');
-    overlay.className = 'pw-overlay';
-    overlay.innerHTML =
-      '<div class="pw-card">' +
-        '<h3>Preview</h3>' +
-        '<p>This is an in-progress draft. Enter the password to continue.</p>' +
-        '<input type="password" id="pw-input" placeholder="Password" autocomplete="off">' +
-        '<button id="pw-submit">Enter</button>' +
-        '<p class="pw-error" id="pw-error">Incorrect password. Try again.</p>' +
-      '</div>';
-    document.body.appendChild(overlay);
-    var input = document.getElementById('pw-input');
-    var btn = document.getElementById('pw-submit');
-    var err = document.getElementById('pw-error');
-    function tryAuth() {
-      if (input.value === '260493') {
-        sessionStorage.setItem(key, 'true');
-        overlay.remove();
-        document.documentElement.style.overflow = '';
-      } else {
-        err.style.display = 'block';
-        input.value = '';
-        input.focus();
-      }
-    }
-    btn.addEventListener('click', tryAuth);
-    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryAuth(); });
-    input.focus();
-  });
-})();
-</script>
-
 <!-- Navigation -->
 <nav>
   <div class="container">
@@ -137,8 +64,7 @@
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#life">Life</a></li>
-      <li><a href="#capabilities">What I Do</a></li>
-      <li><a href="#work">Work</a></li>
+      <li><a href="#capabilities">How I Work</a></li>
       <li class="nav-divider" aria-hidden="true"></li>
       <li><a href="mailto:anapaolagalo@gmail.com">Contact</a></li>
     </ul>
@@ -153,14 +79,14 @@
     <div class="hero-text">
       <div class="hero-greeting">Hola, I'm Ana Paola</div>
       <h1>
-        Curious by default.<br>
-        <em>Structured</em> by choice.
+        Analytical by heart.<br>
+        <em>Creative</em> by nature.
       </h1>
       <p class="hero-sub">
-        I connect the dots between strategy and execution, so nothing gets lost in translation.
+        I turn curiosity into questions, data into insights, and ideas into action.
       </p>
       <div class="hero-meta">
-        <span>Senior Design Operations</span>
+        <span>Operations + Market Intelligence</span>
         <span>Electrolux Group</span>
         <span>Stockholm, SE</span>
       </div>
@@ -180,12 +106,12 @@
         <div class="content">Building systems for 30 designers &amp; 50+ projects</div>
       </div>
       <div class="sticky note-4" data-note="4">
-        <span class="label">secret talent</span>
-        <div class="content">Knows a surprising amount about medicine &amp; the human body</div>
+        <span class="label">before ops</span>
+        <div class="content">I spent 7 semesters studying medicine. Something that shaped how I think under pressure.</div>
       </div>
       <div class="sticky note-5" data-note="5">
         <span class="label">loves</span>
-        <div class="content">My 5 dogs 🐕<br>&amp; tiramisu (always)</div>
+        <div class="content">My 4 dogs 🐕<br>&amp; a good amaretto sour</div>
       </div>
 
     </div>
@@ -205,7 +131,7 @@
   <div class="container">
     <div style="grid-column: 1 / -1;">
       <div class="eyebrow">About</div>
-      <h2 class="section-h2">From Lima to Stockholm, from marketing to <em>DesignOps</em></h2>
+      <h2 class="section-h2">From Lima to <em>Stockholm</em>,<br>From Medicine to <em>Operations</em></h2>
     </div>
 
     <div class="about-portrait reveal">
@@ -213,22 +139,40 @@
         <div class="portrait-tape"></div>
         <img src="assets/profile-img.png" alt="Ana Paola Galvez Lopez">
       </div>
-      <div class="portrait-caption">Patrick is the best, 2026</div>
+      <div class="portrait-caption">Happy in the Natural History Museum, London, 2024</div>
     </div>
 
     <div class="about-text">
       <p class="reveal">
-        I don't come from a straight line. I started in marketing in Peru, moved to Stockholm, and ended up building DesignOps from scratch at a global company. <em>That path wasn't accidental. It reflects how I work: curious, cross-functional, and always looking for the system underneath the chaos.</em>
+        I am Ana. Peruvian. Curious. Dreamer. Doer.
       </p>
 
       <p class="reveal">
-        At Electrolux Group, I scaled DesignOps for 30 designers across 50+ concurrent projects, introducing portfolio management, clarifying ownership, and building <strong>Power BI dashboards</strong> that made capacity and budget conversations honest. We went from reactive firefighting to a structure that gave designers clarity and leadership real visibility.
+        My career was not linear. I started studying Medicine, driven by my vocation for service. Seven semesters later, I realized something: I still wanted to contribute to people's lives, just in a different way.
       </p>
+
       <p class="reveal">
-        What that taught me is that <strong>the most impactful work happens at the intersection of strategy and execution.</strong> Operations isn't about efficiency. It's about creating the conditions for good work to happen, consistently and sustainably. Strong systems should drive performance and foster trust in equal measure. <em>That's not a soft goal. It's a strategic one.</em>
+        <strong>So I changed paths.</strong>
       </p>
+
       <p class="reveal">
-        I'm now looking for my next challenge — somewhere I can bring analytical rigour, strategic thinking, and operational craft to a team that's serious about how they build.
+        I moved into Business and Marketing, started my career in a small tech company in Peru, and eventually moved across the world to Stockholm, where I found my way into Operations. Along the way came new countries, industries and challenges, and new things to obsess over: business, strategy, data, and solving problems that don't have an obvious answer.
+      </p>
+
+      <p class="reveal">
+        <strong>A lot changed. The way I am didn't.</strong>
+      </p>
+
+      <p class="reveal">
+        I am still curious, proactive and probably a bit too excited by a new challenge. I like learning, making things happen and being around people who make me see things differently. New environments don't scare me much, if anything, they make me curious about what I can learn there.
+      </p>
+
+      <p class="reveal">
+        I also tend to analyze almost everything, even my own thoughts when journaling. Not to stay thinking forever, but to understand, find patterns, make a decision and move.
+      </p>
+
+      <p class="reveal">
+        And underneath all the changes, one thing has stayed particularly important to me: contributing to the world and, one day, bringing more of what I learn back to Peru.
       </p>
     </div>
   </div>
@@ -242,66 +186,66 @@
         <div class="eyebrow">Off the Clock</div>
         <h2 class="section-h2" style="margin-bottom: 0;">A few <em>favorite</em> things</h2>
       </div>
-      <p>The life behind the dashboards — dogs, reading, matcha, journeling, and adventures with my partner.</p>
+      <p>The life behind the dashboards: dogs, reading, matcha, journaling, and adventures with my partner, family and friends.</p>
     </div>
   </div>
   <div class="gallery-scroll">
       <div class="gallery-card">
         <div class="gallery-img has-bg-1">
-          <img src="assets/1.jpg" alt="Adventure time" loading="lazy" decoding="async">
+          <img src="assets/1.jpg" alt="desert dunes and good company" loading="lazy" decoding="async">
         </div>
         <div class="gallery-caption">
-          <span>adventure time</span>
+          <span>desert dunes and good company</span>
           <span class="num">01</span>
         </div>
       </div>
 
       <div class="gallery-card">
         <div class="gallery-img has-bg-2">
-          <img src="assets/2.jpg" alt="The new life" loading="lazy" decoding="async">
+          <img src="assets/2.jpg" alt="finding stillness" loading="lazy" decoding="async">
         </div>
         <div class="gallery-caption">
-          <span>the new life</span>
+          <span>finding stillness</span>
           <span class="num">02</span>
         </div>
       </div>
 
       <div class="gallery-card">
         <div class="gallery-img has-bg-3">
-          <img src="assets/3.jpg" alt="Trying to look smart" loading="lazy" decoding="async">
+          <img src="assets/3.jpg" alt="Sunday mornings" loading="lazy" decoding="async">
         </div>
         <div class="gallery-caption">
-          <span>trying to look smart</span>
+          <span>Sunday mornings</span>
           <span class="num">03</span>
         </div>
       </div>
 
       <div class="gallery-card">
         <div class="gallery-img has-bg-4">
-          <img src="assets/4.jpg" alt="10km run" loading="lazy" decoding="async">
+          <img src="assets/4.jpg" alt="Love Peru ❤" loading="lazy" decoding="async">
         </div>
         <div class="gallery-caption">
-          <span>10km run</span>
+          <span>Love Peru ❤</span>
           <span class="num">04</span>
         </div>
       </div>
 
       <div class="gallery-card">
         <div class="gallery-img has-bg-5">
-          <img src="assets/5.jpg" alt="Enjoy the liquid sunshine" loading="lazy" decoding="async">
+          <img src="assets/5.jpg" alt="Good event in town? Count me in." loading="lazy" decoding="async">
         </div>
         <div class="gallery-caption">
-          <span>enjoy the liquid sunshine</span>
+          <span>Good event in town? Count me in.</span>
           <span class="num">05</span>
         </div>
       </div>
 
       <div class="gallery-card">
         <div class="gallery-img has-bg-1">
-          <img src="assets/6.jpg" alt="Looking good for the cam" loading="lazy" decoding="async">
+          <img src="assets/6.jpg" alt="Suri posing for the pic" loading="lazy" decoding="async">
         </div>
         <div class="gallery-caption">
-          <span>looking good for the cam</span>
+          <span>Suri posing for the pic</span>
           <span class="num">06</span>
         </div>
       </div>
@@ -311,43 +255,46 @@
 <!-- CAPABILITIES -->
 <section class="capabilities" id="capabilities">
   <div class="container">
-    <div class="eyebrow">What I Do</div>
-    <h2 class="section-h2">Three pillars of <em>DesignOps</em></h2>
+    <div class="eyebrow">How I Work</div>
+    <h2 class="section-h2">Understand. Structure. <em>Build.</em></h2>
 
     <div class="pillars">
       <div class="pillar reveal">
-        <div class="pillar-icon">🤝</div>
-        <h3>People</h3>
+        <div class="pillar-icon">🔎</div>
+        <h3>Understand</h3>
+        <p>I like getting underneath the problem.</p>
         <ul>
-          <li>Cross-functional team coordination across global teams</li>
-          <li>Workshop facilitation for alignment and continuous improvement</li>
-          <li>Stakeholder management across design, product, engineering</li>
-          <li>Team strengths &amp; gaps analysis</li>
-          <li>Vendor and partner relationships</li>
+          <li>Business &amp; market analysis</li>
+          <li>Problem framing</li>
+          <li>Data analysis</li>
+          <li>Pattern recognition</li>
+          <li>Decision support</li>
         </ul>
       </div>
 
       <div class="pillar reveal">
         <div class="pillar-icon">🧩</div>
-        <h3>Process</h3>
+        <h3>Structure</h3>
+        <p>I turn ambiguity into a way forward.</p>
         <ul>
-          <li>Workflow design and optimization for creative teams</li>
-          <li>Project intake, prioritization, resource allocation</li>
-          <li>Design awards submission workflows</li>
-          <li>Brand expression research programs</li>
-          <li>Continuous improvement loops and feedback systems</li>
+          <li>Process design</li>
+          <li>Portfolio &amp; resource planning</li>
+          <li>Cross-functional alignment</li>
+          <li>Prioritization</li>
+          <li>Operating models</li>
         </ul>
       </div>
 
       <div class="pillar reveal">
         <div class="pillar-icon">🛠️</div>
-        <h3>Tools &amp; Data</h3>
+        <h3>Build</h3>
+        <p>I don't like stopping at the recommendation.</p>
         <ul>
-          <li>Power BI dashboards for budget and resource visibility</li>
-          <li>Smartsheets and SharePoint platform management</li>
-          <li>Performance metrics and data-driven decisions</li>
-          <li>Budget management and financial oversight</li>
-          <li>AI tools and LLMs for operational acceleration</li>
+          <li>Dashboards &amp; decision tools</li>
+          <li>AI-assisted development</li>
+          <li>Automation &amp; APIs</li>
+          <li>Rapid prototyping</li>
+          <li>Continuous iteration</li>
         </ul>
       </div>
     </div>
@@ -360,68 +307,20 @@
     <p class="belief-quote">
       I believe the gap between vision and reality is just <em>a missing system</em>.
     </p>
-    <div class="belief-attribution">— the thing I keep coming back to</div>
+    <div class="belief-attribution">the thing I keep coming back to</div>
   </div>
 </section>
 
 <!-- WORK -->
-<section id="work">
+<section id="work" style="display:none">
   <div class="container">
     <div class="eyebrow">Selected Work</div>
     <h2 class="section-h2">Case <em>studies</em></h2>
 
-    <div class="work-list">
-      <a href="case-studies/01-global-design-ops.html" class="work-item">
-        <div class="work-num">01</div>
-        <div>
-          <div class="work-title">Scaling Design Operations Across a Global Organization</div>
-          <div class="work-desc">Built DesignOps from scratch at Electrolux — from coordinator to senior ops leader over 3 years, supporting 30 designers and 50+ projects.</div>
-          <div class="work-tags">
-            <span class="work-tag">Global Ops</span>
-            <span class="work-tag">Process Maturity</span>
-            <span class="work-tag">Team Scaling</span>
-          </div>
-        </div>
-        <div class="work-arrow">→</div>
-      </a>
-
-      <a href="case-studies/02-power-bi-dashboards.html" class="work-item">
-        <div class="work-num">02</div>
-        <div>
-          <div class="work-title">Power BI Dashboards for Budget &amp; Utilization</div>
-          <div class="work-desc">Built a data-driven decision system from scratch for a 30-person design team managing 50+ projects.</div>
-          <div class="work-tags">
-            <span class="work-tag">Power BI</span>
-            <span class="work-tag">Data-Driven</span>
-            <span class="work-tag">Budget Mgmt</span>
-          </div>
-        </div>
-        <div class="work-arrow">→</div>
-      </a>
-
-      <a href="case-studies/04-team-strengths-gaps.html" class="work-item">
-        <div class="work-num">03</div>
-        <div>
-          <div class="work-title">Team Strengths &amp; Gaps Analysis</div>
-          <div class="work-desc">Led a structured review across 5 design leads to map team capabilities, surface skill gaps, and inform hiring and staffing decisions.</div>
-          <div class="work-tags">
-            <span class="work-tag">People Ops</span>
-            <span class="work-tag">Skills Matrix</span>
-            <span class="work-tag">Strategic Staffing</span>
-          </div>
-        </div>
-        <div class="work-arrow">→</div>
-      </a>
-    </div>
-
-    <div class="more-work reveal">
-      <h4>More case studies, warming up</h4>
-      <p>I have additional stories I'd love to walk you through in person:</p>
-      <ul>
-        <li>Design Awards Submission Workflow</li>
-        <li>Brand Expression Research</li>
-        <li>Redesigning Design Workflows</li>
-      </ul>
+    <div class="work-in-progress">
+      <div class="wip-icon">🛠</div>
+      <h3>Work in progress</h3>
+      <p>Case studies are being crafted with care. Come back soon, or reach out if you'd like a preview.</p>
       <a href="mailto:anapaolagalo@gmail.com" class="cta-pill">Get in touch →</a>
     </div>
   </div>
@@ -432,7 +331,7 @@
   <div class="container">
     <div class="contact-wave">👋</div>
     <h2 class="section-h2 section-h2--centered">You made it this <em>far</em></h2>
-    <p>Might as well say hi. My inbox is always open — especially for roles where strategy meets systems.</p>
+    <p>Might as well say hi. My inbox is always open, especially for roles where strategy meets systems.</p>
     <a href="mailto:anapaolagalo@gmail.com" class="contact-btn">Say hola</a>
   </div>
 </section>
@@ -451,7 +350,7 @@
     </div>
     <div class="footer-copy">
       <span>© 2026 Ana Paola Galvez Lopez</span>
-      <span>made with ❤ &amp; plenty of oat lattes in Stockholm</span>
+      <span>made with ❤ &amp; plenty of matcha lattes in Stockholm</span>
     </div>
   </div>
 </footer>
