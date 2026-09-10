@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scaling Design Operations Across a Global Organization — Ana Paola</title>
-  <meta name="description" content="How I built DesignOps from scratch at Electrolux — from coordinator to senior ops leader over 3 years.">
+  <title>Are Our Resources Following Our Priorities? — Ana Paola</title>
+  <meta name="description" content="Using operational data to uncover resource trade-offs, challenge assumptions and turn insights into decisions across a 70+ project portfolio.">
   <!-- Open Graph -->
-  <meta property="og:title" content="Scaling Design Operations Across a Global Organization — Ana Paola">
-  <meta property="og:description" content="How I built DesignOps from scratch at Electrolux — from coordinator to senior ops leader over 3 years.">
+  <meta property="og:title" content="Are Our Resources Following Our Priorities? — Ana Paola">
+  <meta property="og:description" content="Using operational data to uncover resource trade-offs, challenge assumptions and turn insights into decisions across a 70+ project portfolio.">
   <meta property="og:image" content="https://anapaolagalvez.com/assets/og-image.png">
   <meta property="og:url" content="https://anapaolagalvez.com/case-studies/01-global-design-ops.html">
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Scaling Design Operations Across a Global Organization — Ana Paola">
-  <meta name="twitter:description" content="How I built DesignOps from scratch at Electrolux — from coordinator to senior ops leader over 3 years.">
+  <meta name="twitter:title" content="Are Our Resources Following Our Priorities? — Ana Paola">
+  <meta name="twitter:description" content="Using operational data to uncover resource trade-offs, challenge assumptions and turn insights into decisions across a 70+ project portfolio.">
   <meta name="twitter:image" content="https://anapaolagalvez.com/assets/og-image.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👸🏽</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Jeju+Myeongjo&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
-  <script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){if(t==='dark')document.documentElement.setAttribute('data-theme','dark')}else if(matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark')}else{var h=new Date().getHours();if(h>=19||h<7)document.documentElement.setAttribute('data-theme','dark')}})()</script>
+  <link rel="stylesheet" href="../styles.css?v=3">
+  <script>(function(){if(localStorage.getItem('theme')!=='light')document.documentElement.setAttribute('data-theme','dark')})()</script>
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_2amvHJ1LDjwcec88BgRTLGowcCnIBWhyBRzRHXPjrVr',{
@@ -40,16 +40,13 @@
   <!-- Navigation -->
   <nav>
     <div class="container">
-      <a href="../index.html" class="nav-name">Ana Paola <img src="../assets/smiley.svg" alt="" class="nav-smiley"></a>
+      <a href="../index.html" class="nav-name">Ana Paola</a>
       <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <div class="nav-shapes">
-        <a href="01-global-design-ops.html" class="nav-shape active" data-shape="circle">●</a>
-        <a href="02-power-bi-dashboards.html" class="nav-shape" data-shape="diamond">❖</a>
-        <a href="03-design-awards.html" class="nav-shape" data-shape="triangle">▲</a>
-      </div>
-      <a href="mailto:anapaolagalo@gmail.com" class="nav-contact">Contact</a>
+      <a href="../index.html#work" class="nav-close" aria-label="Back to work">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </a>
     </div>
   </nav>
 
@@ -58,14 +55,13 @@
     <div class="tldr-card">
       <button class="tldr-close" onclick="document.getElementById('tldr').classList.remove('active')">&times;</button>
       <h3>TL;DR</h3>
-      <p><strong>Problem:</strong> 30 designers, 50+ projects, zero operational structure. Coordination was scattered across emails and ad hoc meetings.</p>
-      <p><strong>What I did:</strong> Built the DesignOps function from scratch over 3 years — starting with centralized project tracking, then standardizing workflows, then scaling into strategic operations.</p>
+      <p><strong>Problem:</strong> Innovation capacity had quietly dropped from ~30% to ~5% of a 70+ project portfolio, and no one had asked whether that shift was intentional.</p>
+      <p><strong>What I did:</strong> Used recurring resource, portfolio and budget reporting to diagnose the shift, validated it with the Innovation design lead, and framed the trade-off for leadership instead of letting short-term demand decide by default.</p>
       <p><strong>Impact:</strong></p>
       <ul>
-        <li>Single operational backbone for the entire design org</li>
-        <li>Reduced coordination overhead for 5 design leads</li>
-        <li>Full portfolio visibility for leadership decision-making</li>
-        <li>DesignOps maturity from ad hoc to strategic function</li>
+        <li>Design leadership explicitly decided to protect 50% of the Innovation lead's capacity while keeping Implementation the priority</li>
+        <li>Ad hoc support for projects outside the core portfolio moved to a clearer, formal request process</li>
+        <li>Budget conversations shifted from "what did we spend" to "where are we heading"</li>
       </ul>
     </div>
   </div>
@@ -75,8 +71,14 @@
   <section class="case-hero">
     <div class="container--narrow">
       <div class="case-shape" data-shape="circle">●</div>
-      <h1>Scaling Design Operations Across a Global Organization</h1>
-      <p class="problem-statement">Electrolux Group's Wellbeing and Small Domestic Appliances (SDA) design teams — 30 designers managing 50+ concurrent projects across 5 design leads — operated with no centralized operational structure. Projects lacked visibility, workflows varied by team, and cross-functional coordination relied on informal channels — leading to misaligned priorities, duplicated efforts, and inconsistent delivery timelines.</p>
+      <h1>Are Our Resources Following Our Priorities?</h1>
+      <p class="problem-statement">Using operational data to uncover resource trade-offs, challenge assumptions and turn insights into decisions across a 70+ project portfolio.</p>
+      <div class="case-tags">
+        <span class="case-tag">Strategy &amp; Operations</span>
+        <span class="case-tag">Data Analysis</span>
+        <span class="case-tag">Resource Allocation</span>
+        <span class="case-tag">Decision Support</span>
+      </div>
       <a class="tldr-link" onclick="document.getElementById('tldr').classList.add('active')">TL;DR &rarr;</a>
     </div>
   </section>
@@ -85,48 +87,101 @@
   <section class="case-content">
     <div class="container--narrow">
 
-      <h2 class="reveal-blur">Situation</h2>
-      <p class="reveal">Electrolux Group is a global leader in home appliances, with design teams distributed across Europe, Asia, and Latin America. The Wellbeing and SDA portfolios span product categories from air purifiers to kitchen appliances, each with distinct design requirements, stakeholder groups, and go-to-market timelines.</p>
-      <p class="reveal">When I joined as Design Projects Coordinator in 2022, the design organization had talented teams producing strong work — but the operational infrastructure connecting them was fragmented. With 30 designers across 5 teams handling 50+ projects simultaneously, there was no unified system for tracking work across portfolios, no standardized workflows, and limited visibility into how resources were being allocated. Designers reported time in Smartsheets, but the data wasn't structured for management use.</p>
+      <h2 class="reveal-blur">Context</h2>
+      <p class="reveal">I lead Design Operations at Electrolux Design for Product Line Wellbeing and SDA across Stockholm and Shanghai, with 70+ projects running across the portfolio.</p>
+      <p class="reveal">Design capacity is finite, and designers split their time across different types of work: bringing products to market, developing brand and design identity, exploring future innovation, and supporting initiatives outside our immediate portfolio.</p>
+      <p class="reveal">That makes one question particularly important:</p>
+      <p class="case-question reveal">Are we actually spending our time where we say our priorities are?</p>
+      <p class="reveal">To answer it, I use recurring resource, portfolio and budget reporting to look beyond individual projects and understand how capacity is behaving as a system.</p>
 
-      <h2 class="reveal-blur">Challenge</h2>
-      <p class="reveal">The core challenge was threefold. First, project coordination happened through scattered channels — email threads, ad hoc meetings, and individual trackers — making it nearly impossible to get a clear picture of what was happening across the full design portfolio. Second, each team had developed their own ways of working, which created friction whenever cross-functional collaboration was needed. Third, as the design organization grew, the lack of operational structure became a bottleneck. Senior designers and design leads spent significant time on coordination work rather than the creative and strategic work they were hired to do.</p>
-      <p class="reveal">The question was: how do you build an operational backbone for a global design team without slowing them down or forcing rigid processes onto creative work?</p>
+      <h2 class="reveal-blur">The Signal</h2>
+      <p class="case-lead reveal">Innovation had fallen from ~30% to ~5%.</p>
+      <p class="reveal">One of the reports tracks how Design capacity is distributed across different types of work. Over time, the allocation had shifted significantly.</p>
 
-      <h2 class="reveal-blur">Approach</h2>
-      <p class="reveal">I approached this as a maturity-building exercise — not a one-time fix, but a gradual layering of operational capability.</p>
+      <div class="case-table-wrap reveal">
+        <table class="case-table">
+          <thead>
+            <tr><th>Type of work</th><th>Previously</th><th>More recently</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Implementation</td><td>~60%</td><td>~70%</td></tr>
+            <tr><td>Innovation</td><td>~30%</td><td>~5%</td></tr>
+            <tr><td>Identity</td><td>~10%</td><td>~25%</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-      <h3 class="reveal">Phase 1 — Visibility (Coordinator role, 2022-2023)</h3>
-      <p class="reveal">I started by creating a clear picture of the current state. I built centralized project tracking across the Wellbeing, SDA, and Brand Expression portfolios. I standardized how projects were documented and reported, making it possible for leadership to see the full landscape for the first time. I also established a SharePoint platform as the single source of truth for design documentation, replacing the patchwork of local files and personal drives.</p>
+      <p class="reveal">The numbers alone weren't enough to say whether this was good or bad.</p>
+      <p class="reveal">Identity had increased during a rebranding, so part of that shift made sense. Implementation was also the immediate business priority.</p>
+      <p class="reveal">But Innovation falling to ~5% raised a different question, particularly for categories where innovation is part of the intended brand proposition:</p>
+      <p class="case-question reveal">Are we intentionally prioritizing today's delivery — or becoming reactive at the expense of tomorrow?</p>
 
-      <h3 class="reveal">Phase 2 — Process design (Design Operations, 2024-2025)</h3>
-      <p class="reveal">With visibility in place, I shifted to designing workflows that actually fit how global teams work. I mapped existing processes, identified bottlenecks, and introduced lightweight frameworks for project intake, resource requests, and cross-team handoffs. The goal was always to remove friction rather than add bureaucracy. I facilitated workshops with design leads across regions to co-create these workflows — ensuring buy-in and practical fit.</p>
+      <h2 class="reveal-blur">The Diagnosis</h2>
+      <p class="reveal">I wanted to understand the why before recommending the what.</p>
+      <p class="reveal">I spoke with the designer leading Innovation to validate what I was seeing in the resource data.</p>
+      <p class="reveal">His own research and observations supported the pattern: Innovation activity had reduced substantially, while immediate delivery requirements were absorbing more of the team's capacity.</p>
+      <p class="reveal">That helped frame the issue differently. The question wasn't whether Innovation or Implementation should win. The real question was:</p>
+      <p class="case-question reveal">What level of Innovation capacity do we deliberately want to protect while Implementation remains the priority?</p>
 
-      <h3 class="reveal">Phase 3 — Strategic operations (Senior Design Operations, 2025-present)</h3>
-      <p class="reveal">In my current role, I focus on the strategic layer. I work closely with design leadership to align operational priorities with business objectives, manage resource allocation across portfolios, and continuously improve the operational systems we built. I also lead initiatives around design awards coordination and brand research — activities that raise the visibility and influence of the design function within the broader organization.</p>
+      <h3 class="reveal">The Recommendation</h3>
+      <p class="reveal">I recommended making that trade-off explicit rather than allowing short-term demand to determine the allocation by default.</p>
+      <p class="reveal">That meant starting a conversation with Product Line leadership — particularly around Vacuum Cleaners — to understand the intended role of Innovation and what future-focused work we wanted to protect.</p>
+      <p class="reveal">The Innovation Design lead began developing a proposal for new Innovation work, aligned with the Head of Wellbeing &amp; SDA Design.</p>
 
-      <h2 class="reveal-blur">My Role</h2>
-      <p class="reveal">I owned the design operations function end to end across its evolution — from building the initial project tracking systems, to designing the workflows, to leading the operational strategy. I was the single point of accountability for ensuring design teams had the structure and support they needed to deliver effectively. This meant working across every level: hands-on with project data and tools, collaborative with design leads and managers, and strategic with senior leadership.</p>
+      <h3 class="reveal">The Decision</h3>
+      <p class="reveal">After discussing the trade-off with Design leadership, the decision was to keep Implementation as the priority while allocating 50% of the Innovation Design lead's capacity back to Innovation.</p>
 
-      <h2 class="reveal-blur">Impact</h2>
-      <ul class="reveal">
-        <li>Established a centralized operations function where none previously existed, serving as the operational backbone for a 30-person design team managing 50+ concurrent projects</li>
-        <li>Reduced coordination overhead for design leads by consolidating project tracking and documentation into a single platform</li>
-        <li>Improved cross-team alignment through standardized workflows and regular operational cadences</li>
-        <li>Increased project visibility for leadership, enabling more informed decision-making on priorities and resource allocation</li>
-        <li>Progressed the DesignOps maturity from ad hoc coordination to a structured, strategic function over a three-year period</li>
-      </ul>
+      <div class="case-callout reveal">
+        <p>It wasn't a decision to choose the future over today's delivery.</p>
+        <p>It was a decision to protect part of the future while still delivering today.</p>
+      </div>
+
+      <h2 class="reveal-blur">A Second Signal</h2>
+      <p class="case-lead reveal">Small commitments were adding up.</p>
+      <p class="reveal">The same reporting surfaced another resource question. Several designers were spending relatively small amounts of time supporting projects outside our core portfolio.</p>
+      <p class="reveal">Individually, those commitments looked minor. Aggregated across the team, they represented meaningful capacity.</p>
+      <p class="reveal">Rather than immediately recommending that we stop supporting those projects, I proposed understanding the demand first. I aggregated the hours being spent, forecasted future demand based on typical behavior, and investigated what type of Design support those projects actually required.</p>
+      <p class="reveal">The question became:</p>
+      <p class="case-question reveal">How can we keep supporting the wider organization without allowing informal commitments to quietly consume our capacity?</p>
+
+      <h3 class="reveal">The Recommendation</h3>
+      <p class="reveal">I recommended moving from ad-hoc support toward a clearer operating mechanism. I aligned with the Project Lead and we established a more formal way for projects to request and receive support from our designers, creating clearer expectations around the commitment required.</p>
+      <p class="reveal">The goal wasn't to stop collaboration. It was to make the trade-off visible, forecastable and intentional.</p>
+
+      <h2 class="reveal-blur">How I Approach the Problem</h2>
+
+      <div class="case-flow reveal">
+        <div class="flow-step"><strong>Signal</strong> <span>What is changing in the data?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Diagnose</strong> <span>Why is it happening?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Validate</strong> <span>Does the operational context support what the data suggests?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Implication</strong> <span>Why does it matter for the business?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Options</strong> <span>What could we do differently?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Recommend</strong> <span>What do I think we should do — and what trade-off does it create?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Align &amp; Act</strong> <span>Who needs to decide, and how do we turn the decision into action?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Measure Again</strong> <span>Did the allocation actually change?</span></div>
+      </div>
 
       <!-- Key Takeaway -->
       <div class="case-takeaway reveal">
-        <h3>Key Takeaway</h3>
-        <p>Building a DesignOps function isn't about imposing process on creative teams — it's about removing the operational friction that prevents them from doing their best work. The most effective approach is to start with visibility, earn trust through quick wins, and gradually layer in structure that teams actually want to use. The role of DesignOps is to make the organization around design work as well as the design itself.</p>
+        <h3>What I Took From It</h3>
+        <p>The number is rarely the interesting part.</p>
+        <p>Innovation at 5% is a number. Understanding what we might sacrifice by keeping it there is a strategic question.</p>
+        <p>A few hours spent on another project is a number. Seeing those hours accumulate across a team and changing how that capacity is committed is an operating question.</p>
+        <p>A budget forecast is a number. Seeing where we're heading early enough to respond turns it into a decision tool.</p>
+        <p>The part of data work I care about most is finding the question behind the number, forming a point of view, and turning it into something people can act on.</p>
       </div>
 
       <!-- Case Navigation -->
       <div class="case-nav reveal">
         <span></span>
-        <a href="02-power-bi-dashboards.html">Next: Power BI Dashboards &rarr;</a>
+        <span></span>
       </div>
 
     </div>

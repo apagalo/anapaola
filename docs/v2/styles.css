@@ -288,6 +288,26 @@ nav.nav-scrolled {
   border-radius: 50%;
 }
 
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 36px;
+  padding: 14px 28px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--font-serif);
+  font-size: 16px;
+  border-radius: 100px;
+  box-shadow: 0 8px 20px rgba(49, 49, 49, 0.16);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.hero-cta:hover {
+  transform: translateY(-3px);
+  background: #1a1a1a;
+  box-shadow: 0 14px 28px rgba(49, 49, 49, 0.22);
+}
+
 /* === STICKY NOTES === */
 
 .notes-area {
@@ -643,10 +663,10 @@ nav.nav-scrolled {
 }
 .pillar li:last-child { border-bottom: none; }
 
-/* === BELIEF === */
+/* === HOW I THINK === */
 
-.belief {
-  padding: 200px 0;
+.how-i-think {
+  padding: 160px 0;
   text-align: center;
   background: transparent;
   color: var(--ink);
@@ -656,24 +676,110 @@ nav.nav-scrolled {
   z-index: 2;
 }
 
-.belief-quote {
-  font-family: var(--font-serif);
-  font-size: clamp(32px, 4.5vw, 52px);
-  font-weight: 300;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-  max-width: 900px;
-  margin: 0 auto;
-  color: var(--ink);
-}
-.belief-quote em { font-style: italic; color: var(--accent); }
+.how-i-think .section-h2 { margin-top: 8px; }
 
-.belief-attribution {
-  font-family: var(--font-hand);
-  font-size: 20px;
-  color: var(--muted);
-  margin-top: 32px;
+.think-diagram {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 1 / 1;
+  margin: 72px auto 24px;
 }
+
+.think-arcs {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.think-arc {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.think-arc--loop {
+  stroke: var(--accent);
+  stroke-dasharray: 3 6;
+  stroke-linecap: round;
+}
+
+.think-arrowhead { fill: var(--muted); }
+.think-arrowhead--loop { fill: var(--accent); }
+
+.think-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 23%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.think-center-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.think-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  text-align: center;
+}
+
+.think-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin: 0 auto 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  background: var(--bg);
+}
+
+.think-title {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.think-sub {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.01em;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.think-loop-note {
+  font-family: var(--font-hand);
+  font-size: 19px;
+  color: var(--muted);
+  margin-top: 16px;
+}
+
+.think-list { display: none; }
 
 /* === WORK === */
 
@@ -738,6 +844,29 @@ nav.nav-scrolled {
   transition: transform 0.3s ease;
 }
 .work-item:hover .work-arrow { transform: translateX(8px); }
+
+.work-group {
+  position: relative;
+}
+
+.work-group::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 48px;
+  bottom: 48px;
+  width: 2px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+}
+
+.work-item--empty {
+  cursor: default;
+  color: var(--muted);
+}
+.work-item--empty:hover { background: none; padding-left: 24px; }
+.work-item--empty .work-title,
+.work-item--empty .work-desc { color: var(--muted); }
 
 .work-in-progress {
   margin-top: 48px;
@@ -1395,6 +1524,32 @@ html.theme-switching > body { animation: themeSwitch 0.6s ease; }
   /* Hide hamburger on case-study pages (nav-close is present instead) */
   nav:has(.nav-close) .nav-hamburger { display: none; }
   .nav-close { width: 40px; height: 40px; }
+
+  /* How I Think — swap radial diagram for a linear numbered list */
+  .think-diagram { display: none; }
+  .think-loop-note--desktop { display: none; }
+
+  .think-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 480px;
+    margin: 48px auto 0;
+    text-align: left;
+  }
+
+  .think-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 4px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .think-list-item .think-num { margin: 2px 0 0; flex: none; }
+  .think-list-item .think-title { margin-bottom: 2px; }
+
+  .think-list .think-loop-note { text-align: center; margin-top: 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

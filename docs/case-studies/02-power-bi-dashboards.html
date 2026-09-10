@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Power BI Dashboards for Budget & Utilization — Ana Paola</title>
-  <meta name="description" content="Built a data-driven decision system from scratch for a 30-person design team managing 50+ projects.">
+  <title>When the Reporting System Became the Problem — Ana Paola</title>
+  <meta name="description" content="After three years of using data to support portfolio decisions, a new challenge emerged: how do you create one global view when different teams don't work in the same way?">
   <!-- Open Graph -->
-  <meta property="og:title" content="Power BI Dashboards for Budget & Utilization — Ana Paola">
-  <meta property="og:description" content="Built a data-driven decision system from scratch for a 30-person design team managing 50+ projects.">
+  <meta property="og:title" content="When the Reporting System Became the Problem — Ana Paola">
+  <meta property="og:description" content="After three years of using data to support portfolio decisions, a new challenge emerged: how do you create one global view when different teams don't work in the same way?">
   <meta property="og:image" content="https://anapaolagalvez.com/assets/og-image.png">
   <meta property="og:url" content="https://anapaolagalvez.com/case-studies/02-power-bi-dashboards.html">
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Power BI Dashboards for Budget & Utilization — Ana Paola">
-  <meta name="twitter:description" content="Built a data-driven decision system from scratch for a 30-person design team managing 50+ projects.">
+  <meta name="twitter:title" content="When the Reporting System Became the Problem — Ana Paola">
+  <meta name="twitter:description" content="After three years of using data to support portfolio decisions, a new challenge emerged: how do you create one global view when different teams don't work in the same way?">
   <meta name="twitter:image" content="https://anapaolagalvez.com/assets/og-image.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👸🏽</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Jeju+Myeongjo&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
-  <script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){if(t==='dark')document.documentElement.setAttribute('data-theme','dark')}else if(matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark')}else{var h=new Date().getHours();if(h>=19||h<7)document.documentElement.setAttribute('data-theme','dark')}})()</script>
+  <link rel="stylesheet" href="../styles.css?v=3">
+  <script>(function(){if(localStorage.getItem('theme')!=='light')document.documentElement.setAttribute('data-theme','dark')})()</script>
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_2amvHJ1LDjwcec88BgRTLGowcCnIBWhyBRzRHXPjrVr',{
@@ -40,21 +40,10 @@
   <!-- Navigation -->
   <nav>
     <div class="container">
-      <a href="../index.html" class="nav-name">Ana Paola <img src="../assets/smiley.svg" alt="" class="nav-smiley"></a>
+      <a href="../index.html" class="nav-name">Ana Paola</a>
       <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <!-- Nav shapes (reserved for multi-case-study navigation)
-      <div class="nav-shapes">
-        <a href="01-global-design-ops.html" class="nav-shape" data-shape="circle">●</a>
-        <a href="02-power-bi-dashboards.html" class="nav-shape active" data-shape="diamond">❖</a>
-        <a href="03-design-awards.html" class="nav-shape" data-shape="triangle">▲</a>
-        <a href="04-team-strengths-gaps.html" class="nav-shape" data-shape="star">★</a>
-        <a href="05-brand-expression-research.html" class="nav-shape" data-shape="heart">♥</a>
-        <a href="06-workflow-redesign.html" class="nav-shape" data-shape="spark">✦</a>
-      </div>
-      <a href="mailto:anapaolagalo@gmail.com" class="nav-contact">Contact</a>
-      -->
       <a href="../index.html#work" class="nav-close" aria-label="Back to work">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </a>
@@ -66,14 +55,13 @@
     <div class="tldr-card">
       <button class="tldr-close" onclick="document.getElementById('tldr').classList.remove('active')">&times;</button>
       <h3>TL;DR</h3>
-      <p><strong>Problem:</strong> No visibility into team capacity, utilization, or budget. Leads made resource decisions on intuition from unstructured Smartsheets data.</p>
-      <p><strong>What I did:</strong> Self-taught Power BI, researched stakeholder needs, benchmarked tools, and built interactive dashboards from scratch using a triple diamond approach.</p>
+      <p><strong>Problem:</strong> The Power BI reporting system that powered three years of portfolio decisions couldn't scale as the organization became more heterogeneous — different teams, tools and workflows made one global view harder to build.</p>
+      <p><strong>What I did:</strong> Diagnosed the system itself rather than adding more dashboards, adopted a "standardize where it creates value, connect where differences need to remain" principle, and started using AI-assisted development to prototype an API-based reporting architecture beyond my own technical background.</p>
       <p><strong>Impact:</strong></p>
       <ul>
-        <li>Dashboards used in every planning and decision-making meeting</li>
-        <li>Proactive, data-driven resource allocation across 50+ projects</li>
-        <li>Replaced manual reporting with automated visualizations</li>
-        <li>Established a data-driven operational culture</li>
+        <li>Automated API data flows now running, connecting different source systems into a common reporting layer</li>
+        <li>Broader web-based reporting experience in active development</li>
+        <li>Exploring whether AI can help surface patterns and questions worth investigating across the global portfolio</li>
       </ul>
     </div>
   </div>
@@ -83,8 +71,14 @@
   <section class="case-hero">
     <div class="container--narrow">
       <div class="case-shape" data-shape="diamond">❖</div>
-      <h1>Data-Driven Resource Allocation: Power BI Dashboards for Budget & Utilization</h1>
-      <p class="problem-statement">A design team of 30 designers juggling 50+ concurrent projects had no clear visibility into capacity, utilization, or budget — forcing 5 design leads to make resource decisions based on intuition and manual Smartsheets data that wasn't structured for management use.</p>
+      <h1>When the Reporting System Became the Problem</h1>
+      <p class="problem-statement">After three years of using data to support portfolio decisions, a new challenge emerged: how do you create one global view when different teams don't work in the same way?</p>
+      <div class="case-tags">
+        <span class="case-tag">Systems Thinking</span>
+        <span class="case-tag">AI</span>
+        <span class="case-tag">APIs</span>
+        <span class="case-tag">Automation</span>
+      </div>
       <a class="tldr-link" onclick="document.getElementById('tldr').classList.add('active')">TL;DR &rarr;</a>
     </div>
   </section>
@@ -93,79 +87,117 @@
   <section class="case-content">
     <div class="container--narrow">
 
-      <h2 class="reveal-blur">Situation</h2>
-      <p class="reveal">Electrolux Group's Wellbeing design area operates at significant scale: 30 designers, 50+ ongoing projects at any given time, and 5 design leads who each manage a team. Designers reported their time in Smartsheets, but the data wasn't presented in a way that was useful for managers. There was no centralized view of how resources were being allocated, whether the team was over- or under-capacity, or how budgets were tracking against plans.</p>
-      <p class="reveal">The information existed — but it was locked in raw data that nobody could act on.</p>
+      <h2 class="reveal-blur">Context</h2>
+      <p class="reveal">The reporting behind the case #1 didn't appear overnight.</p>
+      <p class="reveal">It started around three years ago, when much of our operational analysis was still reactive: first a question came up, then information was pulled together in Excel, and an analysis was created for that particular need.</p>
+      <p class="reveal">While working across Design teams, I started experimenting with Power BI to turn recurring questions into recurring visibility.</p>
+      <p class="reveal">The Power BI reports became a recurring way to understand resources, portfolio, forecasts and budget and eventually enabled questions like the ones in the previous case.</p>
+      <p class="reveal">The idea also continued outside my scope. After I moved areas, another product line built Power BI capability locally to continue the reporting approach that had started there.</p>
+      <p class="reveal">For several years, it worked.</p>
+      <p class="reveal">Then the organization evolved.</p>
 
-      <h2 class="reveal-blur">Challenge</h2>
-      <p class="reveal">The challenges were specific and compounding:</p>
+      <h2 class="reveal-blur">The New Problem</h2>
+      <p class="case-lead reveal">One organization. Different operating realities.</p>
+      <p class="reveal">Today, creating global Design visibility means bringing together a much more heterogeneous environment.</p>
+      <p class="reveal">Physical and Digital Design don't necessarily work in the same way. Even individual product lines can use different tools, workflows, project structures and data sources.</p>
+      <p class="reveal">The reporting problem had changed. It was no longer simply:</p>
+      <p class="case-question reveal">How do we visualize the information?</p>
+      <p class="reveal">It became:</p>
+      <p class="case-question reveal">How do we create one coherent global view when the teams behind it don't all operate in the same way?</p>
+
+      <h2 class="reveal-blur">The Diagnosis</h2>
+      <p class="case-lead reveal">My first instinct wasn't to add more dashboards.</p>
+      <p class="reveal">I started looking at the system itself:</p>
       <ul class="reveal">
-        <li><strong>No capacity visibility:</strong> No way to see when project demands would exceed team capacity</li>
-        <li><strong>Intake uncertainty:</strong> No clarity on how many projects the team could realistically take on at any given time</li>
-        <li><strong>Blind resource allocation:</strong> Leads couldn't see resource allocation in advance or anticipate overbookings</li>
-        <li><strong>Manual reporting waste:</strong> Time spent on manual reporting that produced reports too general to be useful</li>
-        <li><strong>Missing detail:</strong> Reports lacked specifics on how people and budgets were actually being used</li>
-        <li><strong>No KPIs:</strong> No clear metrics to measure team utilization or budget performance</li>
+        <li>Where does the information live?</li>
+        <li>How do different teams actually work?</li>
+        <li>Which differences create unnecessary fragmentation?</li>
+        <li>What can reasonably be standardized?</li>
+        <li>And what needs to remain different?</li>
       </ul>
-      <p class="reveal">Design leads were flying blind, and the operational cost of that blindness was growing with every new project added to the queue.</p>
+      <p class="reveal">That distinction matters.</p>
+      <p class="reveal">Forcing every team into the same workflow just to simplify reporting could move the complexity from the report back onto the people doing the work.</p>
+      <p class="reveal">So the principle I started working with became:</p>
 
-      <h2 class="reveal-blur">Approach</h2>
-      <p class="reveal">I used a triple diamond design thinking framework — Understand, Create, Develop — to tackle this as a structured initiative rather than a quick fix.</p>
-
-      <!-- Diamond Phases Visual -->
-      <div class="diamond-phases">
-        <div class="diamond-phase active">
-          <h4>Understand</h4>
-          <p>Research needs, benchmark tools, align with peers</p>
-        </div>
-        <div class="diamond-phase active">
-          <h4>Create</h4>
-          <p>Select tooling, design layout, build dashboards</p>
-        </div>
-        <div class="diamond-phase active">
-          <h4>Develop</h4>
-          <p>Present, gather feedback, iterate and refine</p>
-        </div>
+      <div class="case-callout reveal">
+        <p>Standardize where it creates value. Connect where differences need to remain.</p>
       </div>
 
-      <h3 class="reveal">Understand</h3>
-      <ul class="reveal">
-        <li>Discussed with managers across the area to identify their specific reporting needs and pain points</li>
-        <li>Performed benchmarking with other internal departments and external companies to analyze how they leverage reporting data — including chart types, visual formats, and tools</li>
-        <li>Collaborated with DesignOps peers from other Electrolux product lines to compare challenges and share solutions for improving data visibility and reporting consistency</li>
-      </ul>
+      <h2 class="reveal-blur">Exploring the Solution</h2>
+      <p class="reveal">That principle made APIs particularly interesting.</p>
+      <p class="reveal">Instead of requiring information to be repeatedly moved and reshaped for reporting, APIs can connect to the systems where the work already happens and automate how that information flows into a common layer.</p>
+      <p class="reveal">The architecture I'm exploring looks like this:</p>
 
-      <h3 class="reveal">Create</h3>
-      <ul class="reveal">
-        <li>After benchmarking, determined that Power BI was the right tool for our needs</li>
-        <li>Designed the dashboard layout and visual hierarchy to make complex information feel simple and actionable</li>
-        <li>Self-taught Power BI through online tutorials and hands-on experimentation — and discovered how LLMs could accelerate the development process</li>
-        <li>After several weeks of trial and iteration, built a functional, data-driven tool that clearly visualizes the team's capacity, utilization, and dependencies across projects</li>
-      </ul>
+      <div class="case-flow reveal">
+        <div class="flow-step"><strong>Different teams &amp; workflows</strong></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Different source systems</strong></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>APIs</strong></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Automated data flows</strong></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Common reporting layer</strong></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Global portfolio visibility</strong></div>
+      </div>
 
-      <h3 class="reveal">Develop</h3>
-      <ul class="reveal">
-        <li>Presented the first version to area managers, who found it immediately useful for visualizing workload distribution and identifying bottlenecks</li>
-        <li>Incorporated their feedback on specific metrics and visual details into subsequent iterations</li>
-        <li>Evolved the dashboards through multiple rounds of refinement based on real usage</li>
-      </ul>
+      <p class="reveal">The goal isn't to make every team work identically. It's to create enough common structure above those differences to understand the organization as a whole.</p>
 
-      <h2 class="reveal-blur">My Role</h2>
-      <p class="reveal">I owned this initiative end to end — from stakeholder research through tool selection, self-learning, design, development, and iteration. I was the architect of the data model, the designer of the visual layout, and the person who drove adoption by embedding the dashboards into how the team actually works. This also required me to learn an entirely new tool (Power BI) and find ways to accelerate my own learning using AI tools.</p>
+      <h2 class="reveal-blur">Building Beyond the Tools I Already Knew</h2>
+      <p class="reveal">There was another constraint: I knew what I wanted to explore, but I'm not a software engineer.</p>
+      <p class="reveal">So I started using AI-assisted development to prototype and build, learning the technical pieces as the problem required them.</p>
+      <p class="reveal">The API connection is now working and automated data flows are running. I'm currently developing the broader web-based reporting experience.</p>
+      <p class="reveal">The system is still a work in progress.</p>
+      <p class="reveal">And that's important: I'm not starting with a finished answer. I'm testing whether the architecture actually solves the problem before treating it as one.</p>
 
-      <h2 class="reveal-blur">Impact</h2>
-      <ul class="reveal">
-        <li>Dashboards are now actively used in planning and decision-making meetings to allocate design resources across 50+ projects</li>
-        <li>Became the key reference point for understanding capacity, balancing workloads, and anticipating debt to other areas</li>
-        <li>Enabled design leads to make proactive, data-driven decisions instead of reactive, intuition-based ones</li>
-        <li>Replaced manual Smartsheets reporting with automated, interactive visualizations — saving significant time and improving accuracy</li>
-        <li>Established a data-driven operational culture within the design area, where resource and budget discussions are grounded in real numbers</li>
-      </ul>
+      <h2 class="reveal-blur">The Next Question</h2>
+      <p class="case-lead reveal">Can we go beyond showing more data?</p>
+      <p class="reveal">Connecting the information solves one layer of the problem.</p>
+      <p class="reveal">But three years of working with reporting has made me increasingly interested in another one.</p>
+      <p class="reveal">The most valuable moments haven't been when a dashboard showed us another number. They've been when a pattern made us ask a better question.</p>
+      <p class="reveal">So the next area I'm exploring is whether AI can eventually help identify patterns, anomalies and questions worth investigating across a global portfolio — moving the system closer to:</p>
+
+      <div class="case-flow case-flow--row reveal">
+        <div class="flow-step"><strong>Data</strong></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><strong>Visibility</strong></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><strong>Insight</strong></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><strong>Question</strong></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><strong>Decision</strong></div>
+      </div>
+
+      <p class="reveal"><em>AI-supported analysis is a direction I'm exploring, not a finished capability.</em></p>
+
+      <h2 class="reveal-blur">The Evolution</h2>
+      <p class="case-lead reveal">The tools changed because the questions changed.</p>
+
+      <div class="case-flow reveal">
+        <div class="flow-label">Then</div>
+        <div class="flow-step"><strong>How do we stop rebuilding the same analysis?</strong><span>Power BI</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>What is the data telling us?</strong><span>Recurring analysis</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>What should we do about it?</strong><span>Recommendations &amp; decisions</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-label">Now</div>
+        <div class="flow-step"><strong>How do we make this intelligence work across different teams and systems?</strong><span>APIs · Automation · Web</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-label">Next</div>
+        <div class="flow-step"><strong>Can the system help us find the questions worth asking?</strong><span>AI-supported analysis</span></div>
+      </div>
 
       <!-- Key Takeaway -->
       <div class="case-takeaway reveal">
-        <h3>Key Takeaway</h3>
-        <p>The most impactful operational tools aren't always the most sophisticated — they're the ones that answer the right questions at the right time. Building this system required more curiosity than expertise: understanding what managers actually needed, benchmarking how others solved similar problems, and being willing to learn a new tool from scratch. What began as an exploratory project became the operational backbone for a 30-person design team.</p>
+        <h3>What I Took From It</h3>
+        <p>Don't fall in love with the tool.</p>
+        <p>Power BI was the right answer for the problem we had at the time. It served us for years and helped create the foundation for the decision-making in the previous case.</p>
+        <p>But organizations evolve, and eventually the question evolved with it.</p>
+        <p>I don't want the tools I already know to determine the solutions I'm willing to consider.</p>
+        <p>I want to understand the problem first, explore what the system actually needs, and then learn or build what is required to solve it.</p>
       </div>
 
       <!-- Case Navigation -->
