@@ -3,17 +3,18 @@
    ============================================================ */
 
 :root {
-  --ground: #ffffff;
-  --tile: #f5f5f5;
-  --tile-art: #f1eee9;
-  --ink: #171717;
-  --ink-body: #4b4f58;
-  --ink-soft: #645d53;
-  --ink-muted: #8b857c;
-  --line: #e5e5e5;
-  --line-strong: #d6d3cd;
-  --footer-bg: #efede6;
-  --shadow-print: 0 1px 2px rgba(0,0,0,.06), 0 6px 18px rgba(0,0,0,.08);
+  --ground: #f8f4ec;
+  --paper: #fffdf8;
+  --tile: #efe9de;
+  --tile-art: #e7dfd1;
+  --ink: #1f1b16;
+  --ink-body: #4f483f;
+  --ink-soft: #675e52;
+  --ink-muted: #8d8475;
+  --line: #e6dfd2;
+  --line-strong: #d6ccbc;
+  --footer-bg: #efe9de;
+  --shadow-print: 0 1px 2px rgba(60,40,20,.08), 0 8px 22px rgba(60,40,20,.12);
   --col: 560px;
   --radius-tile: 16px;
   --ease: cubic-bezier(.3,.8,.3,1);
@@ -24,23 +25,24 @@
   --hl-yellow: rgba(253, 224, 71, 0.45);
   --hl-green: rgba(134, 239, 172, 0.45);
 
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --font-serif: "Noto Serif", Georgia, "Times New Roman", serif;
 }
 
 :root[data-theme="dark"] {
-  --ground: #121212;
-  --tile: #1a1a1a;
-  --tile-art: #232220;
-  --ink: #f1eee9;
-  --ink-body: #b9b5ae;
-  --ink-soft: #aaa297;
-  --ink-muted: #7d786f;
-  --line: #262626;
-  --line-strong: #353433;
-  --footer-bg: #0e0e0e;
-  --shadow-print: 0 1px 2px rgba(0,0,0,.4), 0 8px 22px rgba(0,0,0,.45);
+  --ground: #2b2926;
+  --paper: #3a3733;
+  --tile: #34312d;
+  --tile-art: #3d3a35;
+  --ink: #f1ece4;
+  --ink-body: #c7c0b5;
+  --ink-soft: #b3aa9d;
+  --ink-muted: #8f877b;
+  --line: #3e3a35;
+  --line-strong: #4c4741;
+  --footer-bg: #252320;
+  --shadow-print: 0 1px 2px rgba(0,0,0,.25), 0 8px 22px rgba(0,0,0,.3);
 
   --hl-blue: rgba(56, 189, 248, 0.28);
   --hl-orange: rgba(245, 158, 11, 0.32);
@@ -52,12 +54,16 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   background: var(--ground);
   color: var(--ink);
   font-family: var(--font-sans);
-  font-size: var(--fs, 15px);
-  line-height: calc(var(--fs, 15px) * 1.6);
+  font-size: var(--fs, 14px);
+  line-height: calc(var(--fs, 14px) * 1.6);
   -webkit-font-smoothing: antialiased;
   transition: background-color .25s ease, color .25s ease;
   overflow-x: hidden;
@@ -571,7 +577,9 @@ details.tldr strong { color: var(--ink); font-weight: 500; }
 
 /* ---------- Footer (quiet) ---------- */
 
-.foot { margin-top: 64px; padding: 0 0 84px; }
+.foot { margin-top: 48px; padding: 0 0 72px; }
+.page { flex: 1 0 auto; }
+@media (min-width: 1240px) { .foot { padding-bottom: 28px; } }
 .foot-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; margin-top: 20px; font-size: 12px; line-height: 18px; color: var(--ink-muted); }
 .foot-row a { color: inherit; text-decoration: none; }
 .foot-row a:hover { color: var(--ink); }
@@ -662,8 +670,7 @@ details.tldr strong { color: var(--ink); font-weight: 500; }
 .chips li { font-size: 12px; line-height: 18px; padding: 1px 9px; }
 
 /* ============================================================
-   Bento areas + design settings variants
-   (the settings panel is temporary, for picking a direction)
+   Home: bento areas, split layout, tinted cards
    ============================================================ */
 
 .bento {
@@ -680,148 +687,94 @@ details.tldr strong { color: var(--ink); font-weight: 500; }
 .t-tools { grid-area: tools; }
 
 :root {
-  --tx: var(--ink);
-  --tx-blue: #1d4ed8; --tx-orange: #c2410c; --tx-pink: #be185d; --tx-yellow: #a16207; --tx-green: #15803d;
-  --tint-prints: #f6efe4; --tint-case1: #eaf1fb; --tint-case2: #fbeef4; --tint-think: #edf5ea; --tint-tools: #fbf5df;
+  --tint-case1: #e5eaee; --tint-case2: #f3e5e3; --tint-think: #e6ebdd; --tint-tools: #f2e9d3;
 }
 :root[data-theme="dark"] {
-  --tx-blue: #93c5fd; --tx-orange: #fdba74; --tx-pink: #f9a8d4; --tx-yellow: #fde047; --tx-green: #86efac;
-  --tint-prints: #211d17; --tint-case1: #161c26; --tint-case2: #24181e; --tint-think: #172019; --tint-tools: #222012;
+  --tint-case1: #323539; --tint-case2: #3b3230; --tint-think: #33362d; --tint-tools: #3b362b;
 }
-mark.blue { --tx: var(--tx-blue); }
-mark.orange { --tx: var(--tx-orange); }
-mark.pink { --tx: var(--tx-pink); }
-mark.yellow { --tx: var(--tx-yellow); }
-mark.green { --tx: var(--tx-green); }
+.bento .tile { border-color: transparent; }
+.t-case1 { --tile-bg: var(--tint-case1); }
+.t-case2 { --tile-bg: var(--tint-case2); }
+.t-think { --tile-bg: var(--tint-think); }
+.t-tools { --tile-bg: var(--tint-tools); }
+.bento .case-art { background: rgba(255,255,255,.55); }
+[data-theme="dark"] .bento .case-art { background: rgba(255,255,255,.05); }
 
-/* ---- Font ---- */
-:root[data-font="inter"] { --font-sans: "Inter", system-ui, sans-serif; }
-:root[data-font="geist"] { --font-sans: "Geist", system-ui, sans-serif; }
-:root[data-font="plex"] { --font-sans: "IBM Plex Sans", system-ui, sans-serif; }
-:root[data-font="dm"] { --font-sans: "DM Sans", system-ui, sans-serif; }
-:root[data-font="newsreader"] { --font-sans: "Newsreader", Georgia, serif; }
-
-/* ---- Highlight + hover ---- */
-mark { transition: background-size .4s var(--ease), box-shadow .2s ease, color .2s ease, text-decoration-color .2s ease; }
-
-/* 1 Marker: full tint, hover doubles it */
-:root:not([data-hl]) mark:hover, [data-hl="marker"] mark:hover {
-  background-image:
-    linear-gradient(to bottom, transparent 10%, var(--hl, var(--hl-yellow)) 10%),
-    linear-gradient(to bottom, transparent 10%, var(--hl, var(--hl-yellow)) 10%);
-}
-
-/* 2 Low: highlighter band under the words, hover fills up */
-[data-hl="low"] mark {
-  background: linear-gradient(var(--hl), var(--hl)) no-repeat 0 100% / 100% 38%;
-}
-[data-hl="low"] mark:hover { background-size: 100% 92%; }
-
-/* 3 Sweep: thin coloured underline, hover sweeps the colour in */
-[data-hl="sweep"] mark {
-  background-image: linear-gradient(var(--hl), var(--hl)), linear-gradient(var(--tx), var(--tx));
-  background-repeat: no-repeat;
-  background-position: 0 100%, 0 100%;
-  background-size: 0% 100%, 100% 1.5px;
-}
-[data-hl="sweep"] mark:hover { background-size: 100% 100%, 100% 1.5px; }
-
-/* 4 Pill: rounded chip, hover adds a ring */
-[data-hl="pill"] mark { background: var(--hl); border-radius: 6px; padding: .05em .35em; margin: 0; }
-[data-hl="pill"] mark:hover { box-shadow: inset 0 0 0 1px var(--tx); }
-
-/* 5 Ink: coloured words + wavy underline, hover straightens it */
-[data-hl="ink"] mark {
-  background: none; padding: 0; margin: 0;
-  color: var(--tx);
-  text-decoration: underline wavy;
-  text-decoration-color: color-mix(in srgb, var(--tx) 45%, transparent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-}
-[data-hl="ink"] mark:hover { text-decoration-style: solid; text-decoration-color: var(--tx); }
-
-/* ---- Cards ---- */
-[data-card="outline"] { --tile-bg: var(--ground); }
-[data-card="outline"] .tile { border-color: var(--line-strong); }
-
-[data-card="shadow"] { --tile-bg: var(--ground); }
-[data-card="shadow"] .tile {
-  border-color: transparent;
-  box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 6px 20px rgba(0,0,0,.07);
-  transition: border-color .2s ease, scale .12s var(--ease), translate .25s var(--ease), box-shadow .25s ease;
-}
-[data-card="shadow"] .tile:hover { translate: 0 -2px; box-shadow: 0 2px 4px rgba(0,0,0,.06), 0 14px 32px rgba(0,0,0,.1); }
-[data-card="shadow"][data-theme="dark"] .tile { border-color: var(--line); }
-
-[data-card="flat"] { --radius-tile: 24px; }
-[data-card="flat"] .tile { border-color: transparent; }
-[data-card="flat"] .tile:hover { border-color: transparent; }
-[data-card="flat"] .case-art { border-radius: 16px; }
-
-[data-card="tinted"] .tile { border-color: transparent; }
-[data-card="tinted"] .t-prints { --tile-bg: var(--tint-prints); }
-[data-card="tinted"] .t-case1 { --tile-bg: var(--tint-case1); }
-[data-card="tinted"] .t-case2 { --tile-bg: var(--tint-case2); }
-[data-card="tinted"] .t-think { --tile-bg: var(--tint-think); }
-[data-card="tinted"] .t-tools { --tile-bg: var(--tint-tools); }
-[data-card="tinted"] .case-art { background: rgba(255,255,255,.6); }
-[data-card="tinted"][data-theme="dark"] .case-art { background: rgba(255,255,255,.04); }
-
-/* ---- Layout ---- */
-/* 2 Work first */
-[data-layout="work"] .bento { grid-template-areas: "case1 case1" "case2 case2" "photo prints" "think tools"; }
-
-/* 3 Mosaic: big portrait, two small tiles beside it */
-[data-layout="mosaic"] .bento {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-areas: "photo photo prints" "photo photo think" "case1 case1 case1" "case2 case2 case2" "tools tools tools";
-}
-[data-layout="mosaic"] .t-photo { aspect-ratio: auto; }
-[data-layout="mosaic"] .t-tools { aspect-ratio: 3 / 1; }
-[data-layout="mosaic"] .tile-list { padding: 12px; }
-[data-layout="mosaic"] .cycle { padding-bottom: 6px; }
-[data-layout="mosaic"] .cycle li { font-size: 12px; line-height: 18px; }
-[data-layout="mosaic"] .prints { inset: 40px 26px 12px 12px; }
-[data-layout="mosaic"] .print .cap { font-size: 9px; }
-
-/* 4 Split: intro sticks on the left, tiles scroll on the right */
+/* Split: intro sticks on the left, tiles scroll on the right */
 @media (min-width: 960px) {
-  [data-layout="split"] .page .col {
+  .home .page .col {
     max-width: 1080px;
     display: grid;
     grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
     column-gap: 72px;
     align-items: start;
   }
-  [data-layout="split"] .lead { grid-column: 1; grid-row: 1 / span 2; position: sticky; top: 14vh; }
-  [data-layout="split"] .cut { display: none; }
-  [data-layout="split"] .bento { grid-column: 2; grid-row: 1; }
-  [data-layout="split"] .say-hi { grid-column: 2; grid-row: 2; }
-  [data-layout="split"] .foot .col { max-width: 1080px; }
+  .home .lead { grid-column: 1; grid-row: 1 / span 2; position: sticky; top: 14vh; }
+  .home .cut { display: none; }
+  .home .bento { grid-column: 2; grid-row: 1; }
+  .home .say-hi { grid-column: 2; grid-row: 2; }
+  .home .foot .col { max-width: 1080px; }
 }
-
-/* 5 Stack: one tile per row */
-[data-layout="stack"] .bento { grid-template-columns: minmax(0, 1fr); grid-template-areas: "photo" "prints" "case1" "case2" "think" "tools"; }
-[data-layout="stack"] .t-photo { aspect-ratio: 16 / 9; }
-[data-layout="stack"] .t-photo img { object-position: 50% 30%; }
-[data-layout="stack"] .t-prints { aspect-ratio: 16 / 10; }
-[data-layout="stack"] .t-prints .prints { inset: 44px 22% 16px; }
-[data-layout="stack"] .t-think, [data-layout="stack"] .t-tools { aspect-ratio: 2 / 1; }
 
 @media (max-width: 520px) {
-  .bento, [data-layout="mosaic"] .bento {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-areas: "photo prints" "case1 case1" "case2 case2" "think think" "tools tools";
-  }
-  [data-layout="work"] .bento { grid-template-areas: "case1 case1" "case2 case2" "photo prints" "think think" "tools tools"; }
+  .bento { grid-template-areas: "photo prints" "case1 case1" "case2 case2" "think think" "tools tools"; }
   .t-think { aspect-ratio: 16 / 10; }
-  .t-tools, [data-layout="mosaic"] .t-tools { aspect-ratio: 5 / 4; }
-  [data-layout="mosaic"] .t-photo { aspect-ratio: 1; }
-  [data-layout="stack"] .t-prints .prints { inset: 36px 10px 10px; }
+  .t-tools { aspect-ratio: 5 / 4; }
 }
 
-/* ---- Settings dock + panel ---- */
+/* ---------- Off the clock: loose portrait prints, no box ---------- */
+.bento .t-prints { background: none; border-color: transparent; overflow: visible; }
+.t-prints .prints { position: absolute; inset: 0; }
+.t-prints .print {
+  inset: auto;
+  left: 50%; top: 50%;
+  width: min(66%, 212px);
+  translate: -50% -50%;
+  padding: 7px 7px 0;
+  border-radius: 4px;
+  background: var(--paper);
+  transform-origin: 50% 60%;
+  transition: transform .5s var(--ease), opacity .35s ease;
+}
+.t-prints .print-media { flex: none; aspect-ratio: 4 / 5; }
+.t-prints .print .cap { padding: 7px 2px 8px; font-size: 10px; }
+
+/* ---------- Card hover effects (switchable while we pick one) ---------- */
+.bento .tile {
+  transition: border-color .2s ease, scale .3s var(--ease), translate .3s var(--ease),
+              box-shadow .3s ease, opacity .3s ease, filter .3s ease, transform .2s ease-out;
+}
+.bento .tile::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 4;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.5), transparent 70%);
+  transition: opacity .3s ease;
+}
+[data-theme="dark"] .bento .tile::after { background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.09), transparent 70%); }
+.bento .t-prints::after { display: none; }
+
+/* 1 Lift */
+:root:not([data-hover]) .bento .tile:not(.t-prints):hover,
+[data-hover="lift"] .bento .tile:not(.t-prints):hover { translate: 0 -4px; box-shadow: 0 16px 32px -14px rgba(60,40,20,.3); }
+/* 2 Grow */
+[data-hover="grow"] .bento .tile:not(.t-prints):hover { scale: 1.025; }
+/* 3 Tilt (follows the cursor) */
+[data-hover="tilt"] .bento .tile:not(.t-prints) { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
+/* 4 Spotlight (soft light follows the cursor) */
+[data-hover="spot"] .bento .tile:not(.t-prints):hover::after { opacity: 1; }
+/* 5 Ring */
+[data-hover="ring"] .bento .tile:not(.t-prints):hover { box-shadow: 0 0 0 1.5px var(--ink); }
+/* 6 Focus (the other cards fade back) */
+[data-hover="focus"] .bento:has(.tile:hover) .tile:not(:hover) { opacity: .45; filter: saturate(.5); }
+
+/* Prints: a small nudge on hover so it still feels clickable */
+.t-prints:hover .print[aria-hidden="false"] { scale: 1.02; }
+.t-prints .print { transition: transform .5s var(--ease), opacity .35s ease, scale .3s var(--ease); }
+
+/* ---------- Settings dock + panel (temporary) ---------- */
 .dock { position: fixed; left: 16px; bottom: 16px; z-index: 60; display: flex; align-items: center; gap: 6px; }
 .dock .version-switch { position: relative; left: auto; bottom: auto; }
 .tweak-btn {
@@ -838,22 +791,20 @@ mark { transition: background-size .4s var(--ease), box-shadow .2s ease, color .
 }
 .tweak-btn:hover, .tweak-btn[aria-expanded="true"] { color: var(--ink); }
 .tweak-btn svg { width: 16px; height: 16px; }
-
 .tweaks {
   position: absolute; left: 0; bottom: calc(100% + 10px);
-  width: min(400px, calc(100vw - 32px));
+  width: min(340px, calc(100vw - 32px));
   padding: 10px 14px;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--ground);
   box-shadow: 0 12px 40px rgba(0,0,0,.14);
-  font: 13px/20px -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 13px; line-height: 20px;
   color: var(--ink);
 }
 .tweaks[hidden] { display: none; }
-.tw-head, .tw-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.tw-head { padding-bottom: 6px; }
-.tw-row { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 10px; align-items: start; padding: 8px 0; border-top: 1px dashed var(--line-strong); }
+.tw-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding-bottom: 6px; }
+.tw-row { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 10px; align-items: start; padding: 8px 0 4px; border-top: 1px dashed var(--line-strong); }
 .tw-label { padding-top: 2px; font-size: 12px; color: var(--ink-muted); }
 .tw-chips { display: flex; flex-wrap: wrap; gap: 4px; }
 .tw-chips button {
@@ -861,19 +812,11 @@ mark { transition: background-size .4s var(--ease), box-shadow .2s ease, color .
   border: 1px solid var(--line);
   border-radius: 999px;
   background: none;
-  font-family: inherit;
-  font-size: 12px;
-  line-height: 18px;
+  font-family: inherit; font-size: 12px; line-height: 18px;
   color: var(--ink-soft);
   cursor: pointer;
 }
 .tw-chips button:hover { color: var(--ink); border-color: var(--line-strong); }
 .tw-chips button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--ground); }
-.tweaks select { width: 100%; padding: 2px 6px; border: 1px solid var(--line); border-radius: 8px; background: var(--ground); color: var(--ink); font-family: inherit; font-size: 12px; line-height: 20px; }
-.tw-range { display: flex; align-items: center; gap: 10px; }
-.tw-range input { flex: 1; min-width: 0; margin: 0; accent-color: var(--ink); }
-.tw-range output { min-width: 38px; text-align: right; }
-.tw-foot { padding-top: 8px; border-top: 1px dashed var(--line-strong); }
-.tw-sum { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; text-transform: none; }
 .tw-reset { flex: none; border: 0; background: none; padding: 2px 0; cursor: pointer; }
 .tw-reset:hover { color: var(--ink); }

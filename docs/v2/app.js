@@ -1,4 +1,4 @@
-// V2 — theme, reveal, stacked prints, cycling list, bookshelf, letter shortcuts
+// V2: theme, reveal, prints, cycling list, bookshelf, sliders, esc to home, card hover
 (function () {
   var root = document.documentElement;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -46,13 +46,14 @@
     var prints = Array.prototype.slice.call(printsTile.querySelectorAll('.print'));
     var order = prints.map(function (_, i) { return i; });
     var busy = false;
+    // a loose, uneven pile: each layer sits at its own angle
+    var PILE = ['rotate(-2deg)', 'translate(12px,-6px) rotate(4deg)', 'translate(-10px,-8px) rotate(-6deg)', 'translate(0,-10px) rotate(2deg) scale(.96)'];
     function layout() {
       order.forEach(function (idx, pos) {
         var p = prints[idx];
-        var d = Math.min(pos, 2);
         p.style.zIndex = String(prints.length - pos);
         p.style.opacity = pos > 2 ? '0' : '1';
-        p.style.transform = 'translate(' + (d * 7) + 'px,' + (d * -7) + 'px) scale(' + (1 - d * 0.015) + ') rotate(' + (d * 1.2) + 'deg)';
+        p.style.transform = PILE[Math.min(pos, 3)];
         p.setAttribute('aria-hidden', pos === 0 ? 'false' : 'true');
       });
     }
@@ -60,17 +61,16 @@
       if (busy) return;
       busy = true;
       var top = prints[order[0]];
-      top.style.transform = 'translate(-14%, 6%) rotate(-9deg)';
+      top.style.transform = 'translate(-70%, 10%) rotate(-16deg)';
       top.style.opacity = '0';
       setTimeout(function () {
         order.push(order.shift());
         layout();
         busy = false;
-      }, reduce ? 0 : 260);
+      }, reduce ? 0 : 320);
     }
     layout();
     printsTile.addEventListener('click', next);
-    printsTile._activate = next;
   }
 
   // ---------- CYCLING LIST ----------
@@ -126,7 +126,6 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && shelf.classList.contains('is-open')) close();
     });
-    shelf._activate = function () { shelf.classList.contains('is-open') ? close() : open(0); };
   }
 
   // ---------- SLIDERS ----------
@@ -167,87 +166,42 @@
     });
   }
 
-  // ---------- DESIGN SETTINGS (temporary picker) ----------
+  // ---------- CARD HOVER: pointer position for tilt + spotlight ----------
+  document.querySelectorAll('.bento .tile:not(.t-prints)').forEach(function (tile) {
+    tile.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      var r = tile.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      tile.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
+      tile.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+      if (root.getAttribute('data-hover') === 'tilt' && !reduce) {
+        tile.style.setProperty('--ry', ((x - 0.5) * 8).toFixed(2) + 'deg');
+        tile.style.setProperty('--rx', ((0.5 - y) * 8).toFixed(2) + 'deg');
+      }
+    });
+    tile.addEventListener('pointerleave', function () {
+      tile.style.setProperty('--rx', '0deg');
+      tile.style.setProperty('--ry', '0deg');
+    });
+  });
+
+  // ---------- DESIGN SETTINGS (temporary picker for the card hover) ----------
   var panel = document.getElementById('tweaks');
   var tweakBtn = document.querySelector('.tweak-btn');
   if (panel && tweakBtn) {
-    var DEF = { font: 'system', size: 15, hl: 'marker', card: 'soft', layout: 'bento' };
-    var st = {};
-    try { st = JSON.parse(localStorage.getItem('v2-tweaks') || '{}') || {}; } catch (err) {}
-    var cur = {};
-    Object.keys(DEF).forEach(function (k) { cur[k] = st[k] != null ? st[k] : DEF[k]; });
-    var fontSel = panel.querySelector('[data-tweak="font"]');
-    var sizeIn = panel.querySelector('[data-tweak="size"]');
-    var sizeOut = panel.querySelector('output');
-    var sum = panel.querySelector('.tw-sum');
-
-    function label(k) {
-      if (k === 'font') return fontSel.options[fontSel.selectedIndex].text;
-      if (k === 'size') return cur.size + 'px';
-      var b = panel.querySelector('[data-tweak="' + k + '"] [data-v="' + cur[k] + '"]');
-      return b ? b.textContent : cur[k];
+    var chips = panel.querySelector('[data-tweak="hover"]');
+    function setHover(v, save) {
+      root.setAttribute('data-hover', v);
+      chips.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-v') === v ? 'true' : 'false'); });
+      try { save ? localStorage.setItem('v2-hover', v) : localStorage.removeItem('v2-hover'); } catch (err) {}
     }
-    function apply(save) {
-      if (cur.font === 'system') root.removeAttribute('data-font');
-      else { root.setAttribute('data-font', cur.font); if (window.V2_LOAD_FONT) window.V2_LOAD_FONT(cur.font); }
-      root.style.setProperty('--fs', cur.size + 'px');
-      ['hl', 'card', 'layout'].forEach(function (k) { root.setAttribute('data-' + k, cur[k]); });
-      fontSel.value = cur.font;
-      sizeIn.value = cur.size;
-      sizeOut.textContent = cur.size + 'px';
-      panel.querySelectorAll('.tw-chips').forEach(function (g) {
-        var k = g.getAttribute('data-tweak');
-        g.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-v') === cur[k] ? 'true' : 'false'); });
-      });
-      sum.textContent = ['font', 'size', 'hl', 'card', 'layout'].map(label).join(' · ');
-      if (save) try { localStorage.setItem('v2-tweaks', JSON.stringify(cur)); } catch (err) {}
-    }
-    function setOpen(on) {
-      panel.hidden = !on;
-      tweakBtn.setAttribute('aria-expanded', on ? 'true' : 'false');
-    }
+    function setOpen(on) { panel.hidden = !on; tweakBtn.setAttribute('aria-expanded', on ? 'true' : 'false'); }
+    setHover(root.getAttribute('data-hover') || 'lift', !!root.getAttribute('data-hover'));
     tweakBtn.addEventListener('click', function () { setOpen(panel.hidden); });
-    fontSel.addEventListener('change', function () { cur.font = fontSel.value; apply(true); });
-    sizeIn.addEventListener('input', function () { cur.size = +sizeIn.value; apply(true); });
-    panel.querySelectorAll('.tw-chips').forEach(function (g) {
-      g.addEventListener('click', function (e) {
-        var b = e.target.closest('button');
-        if (!b) return;
-        cur[g.getAttribute('data-tweak')] = b.getAttribute('data-v');
-        apply(true);
-      });
-    });
-    panel.querySelector('[data-tweak-reset]').addEventListener('click', function () {
-      cur = JSON.parse(JSON.stringify(DEF));
-      try { localStorage.removeItem('v2-tweaks'); } catch (err) {}
-      apply(false);
-    });
-    var copyBtn = panel.querySelector('[data-tweak-copy]');
-    copyBtn.addEventListener('click', function () {
-      var txt = sum.textContent;
-      function done() { copyBtn.textContent = 'Copied'; setTimeout(function () { copyBtn.textContent = 'Copy'; }, 1200); }
-      if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, function () {});
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && !panel.hidden) { setOpen(false); tweakBtn.focus(); }
-    });
-    document.addEventListener('click', function (e) {
-      if (!panel.hidden && !e.target.closest('.dock')) setOpen(false);
-    });
-    apply(false);
+    chips.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) setHover(b.getAttribute('data-v'), true); });
+    panel.querySelector('[data-tweak-reset]').addEventListener('click', function () { setHover('lift', false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { setOpen(false); tweakBtn.focus(); } });
+    document.addEventListener('click', function (e) { if (!panel.hidden && !e.target.closest('.dock')) setOpen(false); });
     if (location.hash === '#settings') setOpen(true);
   }
-
-  // ---------- LETTER SHORTCUTS ----------
-  document.addEventListener('keydown', function (e) {
-    if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
-    var t = e.target;
-    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
-    if (!/^[a-z]$/i.test(e.key)) return;
-    var tile = document.querySelector('[data-key="' + e.key.toUpperCase() + '"]');
-    if (!tile) return;
-    e.preventDefault();
-    if (tile._activate) { tile.focus({ preventScroll: true }); tile._activate(); }
-    else if (tile.href) window.location.href = tile.href;
-  });
 })();
