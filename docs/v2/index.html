@@ -18,8 +18,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../v2/styles.css?v=3">
-  <script>(function(){try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}})()</script>
+  <link rel="stylesheet" href="../v2/styles.css?v=4">
+  <script>(function(){var d=document.documentElement,s={};try{if(localStorage.getItem('theme')==='dark')d.setAttribute('data-theme','dark');s=JSON.parse(localStorage.getItem('v2-tweaks')||'{}')||{}}catch(e){}
+var F=window.V2_FONTS={inter:'Inter:wght@400;500;600',geist:'Geist:wght@400;500;600',plex:'IBM+Plex+Sans:wght@400;500;600',dm:'DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600',newsreader:'Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600'};
+window.V2_LOAD_FONT=function(f){if(!F[f]||document.getElementById('font-'+f))return;var l=document.createElement('link');l.id='font-'+f;l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family='+F[f]+'&display=swap';document.head.appendChild(l)};
+if(s.font){d.setAttribute('data-font',s.font);window.V2_LOAD_FONT(s.font)}
+if(s.size)d.style.setProperty('--fs',s.size+'px');
+['hl','card','layout'].forEach(function(k){if(s[k])d.setAttribute('data-'+k,s[k])})})()</script>
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_2amvHJ1LDjwcec88BgRTLGowcCnIBWhyBRzRHXPjrVr',{
@@ -55,6 +60,7 @@
 
 <main class="page">
   <div class="col">
+    <div class="lead">
     <div class="topbar">
       <a class="avatar" href="./" aria-label="Ana Paola, home"><img src="../assets/avatar.jpg" alt=""></a>
       <span class="seg" role="radiogroup" aria-label="Theme" data-theme-toggle style="--n:2;--i:0">
@@ -70,18 +76,19 @@
       <p>By day I lead design operations at <mark class="blue">Electrolux Group</mark>, which mostly means making sure 70+ projects across Stockholm and Shanghai get the people, budget and attention they actually need. Lately I'm rotating into <mark class="orange">Business Strategy &amp; Market Intelligence</mark>.</p>
       <p>Before that I studied <em>medicine</em> for seven semesters, switched to business and marketing in Lima, and moved across the world to Stockholm. Along the way I picked up <mark class="pink">four languages</mark> and a habit of turning numbers into decisions.</p>
     </div>
+    </div>
 
     <div class="cut rule-dashed" aria-hidden="true"></div>
 
     <div class="bento">
-    <a class="tile tile-photo reveal" href="about.html" data-key="A" aria-keyshortcuts="A" aria-label="About Ana Paola, press A">
+    <a class="tile tile-photo t-photo reveal" href="about.html" data-key="A" aria-keyshortcuts="A" aria-label="About Ana Paola, press A">
       <img src="../assets/profile-img.png" alt="">
       <span class="tile-title">From Lima to Stockholm</span>
       <span class="tile-chip">About [A]</span>
       <span class="tile-key" aria-hidden="true">A</span>
     </a>
 
-    <button type="button" class="tile reveal" data-prints data-key="L" aria-keyshortcuts="L" aria-label="Off the clock photos, press L or click for the next one">
+    <button type="button" class="tile t-prints reveal" data-prints data-key="L" aria-keyshortcuts="L" aria-label="Off the clock photos, press L or click for the next one">
       <span class="tile-label">Off the clock</span>
       <span class="prints">
           <span class="print">
@@ -113,7 +120,7 @@
       <span class="tile-key" aria-hidden="true">L</span>
     </button>
 
-    <a class="tile wide tile-case work-item reveal" href="case-studies/01-global-design-ops.html" data-key="W" aria-keyshortcuts="W">
+    <a class="tile wide tile-case t-case1 work-item reveal" href="case-studies/01-global-design-ops.html" data-key="W" aria-keyshortcuts="W">
       <span class="case-art" aria-hidden="true"><span class="rings"></span><span class="glyph">●</span></span>
       <span class="case-copy">
         <span class="tile-sub">Case study 01</span>
@@ -124,7 +131,7 @@
       <span class="tile-chip">Case study 01 [W]</span>
       <span class="tile-key" aria-hidden="true">W</span>
     </a>
-    <a class="tile wide tile-case work-item reveal" href="case-studies/02-power-bi-dashboards.html" data-key="R" aria-keyshortcuts="R">
+    <a class="tile wide tile-case t-case2 work-item reveal" href="case-studies/02-power-bi-dashboards.html" data-key="R" aria-keyshortcuts="R">
       <span class="case-art" aria-hidden="true"><span class="rings"></span><span class="glyph">❖</span></span>
       <span class="case-copy">
         <span class="tile-sub">Case study 02</span>
@@ -136,7 +143,7 @@
       <span class="tile-key" aria-hidden="true">R</span>
     </a>
 
-    <a class="tile tile-list reveal" href="about.html#how-i-think" data-key="H" aria-keyshortcuts="H" aria-label="How I think, press H">
+    <a class="tile tile-list t-think reveal" href="about.html#how-i-think" data-key="H" aria-keyshortcuts="H" aria-label="How I think, press H">
       <span class="tile-label">How I think</span>
       <ul class="cycle" data-cycle>
           <li><span class="mono">01</span>Frame</li>
@@ -150,7 +157,7 @@
       <span class="tile-key" aria-hidden="true">H</span>
     </a>
 
-    <div class="tile tile-shelf reveal" data-shelf data-key="T" tabindex="0" role="group" aria-label="Toolkit, press T. Pick a book to see what it is for.">
+    <div class="tile tile-shelf t-tools reveal" data-shelf data-key="T" tabindex="0" role="group" aria-label="Toolkit, press T. Pick a book to see what it is for.">
       <span class="tile-label">Toolkit</span>
       <div class="shelf">
         <div class="books">
@@ -199,12 +206,23 @@ PT · FR" data-for="For working across borders" data-text="Spanish, English, Por
   </div>
 </footer>
 
+<div class="dock">
 <div class="seg version-switch" role="group" aria-label="Site version" style="--n:2;--i:1">
   <span class="seg-thumb" aria-hidden="true"></span>
   <a href="../">V1</a>
   <a href="#" aria-current="true">V2</a>
 </div>
-
-<script src="app.js?v=3"></script>
+<button type="button" class="tweak-btn" aria-expanded="false" aria-controls="tweaks" aria-label="Design settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></button>
+<div class="tweaks" id="tweaks" role="dialog" aria-label="Design settings" hidden>
+  <div class="tw-head"><span class="mono">Design settings</span><button type="button" class="tw-reset mono" data-tweak-reset>Reset</button></div>
+  <div class="tw-row"><label class="tw-label" for="tw-font">Font</label><select id="tw-font" data-tweak="font"><option value="system">System (SF)</option><option value="inter">Inter</option><option value="geist">Geist</option><option value="plex">IBM Plex Sans</option><option value="dm">DM Sans</option><option value="newsreader">Newsreader (serif)</option></select></div>
+  <div class="tw-row"><label class="tw-label" for="tw-size">Size</label><div class="tw-range"><input id="tw-size" type="range" min="13" max="18" step="0.5" value="15" data-tweak="size"><output class="mono" for="tw-size">15px</output></div></div>
+  <div class="tw-row"><span class="tw-label">Highlight</span><div class="tw-chips" data-tweak="hl" role="group" aria-label="Highlight"><button type="button" data-v="marker" aria-pressed="true">Marker</button><button type="button" data-v="low" aria-pressed="false">Low</button><button type="button" data-v="sweep" aria-pressed="false">Sweep</button><button type="button" data-v="pill" aria-pressed="false">Pill</button><button type="button" data-v="ink" aria-pressed="false">Ink</button></div></div>
+  <div class="tw-row"><span class="tw-label">Cards</span><div class="tw-chips" data-tweak="card" role="group" aria-label="Cards"><button type="button" data-v="soft" aria-pressed="true">Soft</button><button type="button" data-v="outline" aria-pressed="false">Outline</button><button type="button" data-v="shadow" aria-pressed="false">Shadow</button><button type="button" data-v="flat" aria-pressed="false">Flat</button><button type="button" data-v="tinted" aria-pressed="false">Tinted</button></div></div>
+  <div class="tw-row"><span class="tw-label">Layout</span><div class="tw-chips" data-tweak="layout" role="group" aria-label="Layout"><button type="button" data-v="bento" aria-pressed="true">Bento</button><button type="button" data-v="work" aria-pressed="false">Work first</button><button type="button" data-v="mosaic" aria-pressed="false">Mosaic</button><button type="button" data-v="split" aria-pressed="false">Split</button><button type="button" data-v="stack" aria-pressed="false">Stack</button></div></div>
+  <div class="tw-foot"><code class="tw-sum mono"></code><button type="button" class="tw-reset mono" data-tweak-copy>Copy</button></div>
+</div>
+</div>
+<script src="app.js?v=4"></script>
 </body>
 </html>

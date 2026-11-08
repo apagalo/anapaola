@@ -167,6 +167,77 @@
     });
   }
 
+  // ---------- DESIGN SETTINGS (temporary picker) ----------
+  var panel = document.getElementById('tweaks');
+  var tweakBtn = document.querySelector('.tweak-btn');
+  if (panel && tweakBtn) {
+    var DEF = { font: 'system', size: 15, hl: 'marker', card: 'soft', layout: 'bento' };
+    var st = {};
+    try { st = JSON.parse(localStorage.getItem('v2-tweaks') || '{}') || {}; } catch (err) {}
+    var cur = {};
+    Object.keys(DEF).forEach(function (k) { cur[k] = st[k] != null ? st[k] : DEF[k]; });
+    var fontSel = panel.querySelector('[data-tweak="font"]');
+    var sizeIn = panel.querySelector('[data-tweak="size"]');
+    var sizeOut = panel.querySelector('output');
+    var sum = panel.querySelector('.tw-sum');
+
+    function label(k) {
+      if (k === 'font') return fontSel.options[fontSel.selectedIndex].text;
+      if (k === 'size') return cur.size + 'px';
+      var b = panel.querySelector('[data-tweak="' + k + '"] [data-v="' + cur[k] + '"]');
+      return b ? b.textContent : cur[k];
+    }
+    function apply(save) {
+      if (cur.font === 'system') root.removeAttribute('data-font');
+      else { root.setAttribute('data-font', cur.font); if (window.V2_LOAD_FONT) window.V2_LOAD_FONT(cur.font); }
+      root.style.setProperty('--fs', cur.size + 'px');
+      ['hl', 'card', 'layout'].forEach(function (k) { root.setAttribute('data-' + k, cur[k]); });
+      fontSel.value = cur.font;
+      sizeIn.value = cur.size;
+      sizeOut.textContent = cur.size + 'px';
+      panel.querySelectorAll('.tw-chips').forEach(function (g) {
+        var k = g.getAttribute('data-tweak');
+        g.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-v') === cur[k] ? 'true' : 'false'); });
+      });
+      sum.textContent = ['font', 'size', 'hl', 'card', 'layout'].map(label).join(' · ');
+      if (save) try { localStorage.setItem('v2-tweaks', JSON.stringify(cur)); } catch (err) {}
+    }
+    function setOpen(on) {
+      panel.hidden = !on;
+      tweakBtn.setAttribute('aria-expanded', on ? 'true' : 'false');
+    }
+    tweakBtn.addEventListener('click', function () { setOpen(panel.hidden); });
+    fontSel.addEventListener('change', function () { cur.font = fontSel.value; apply(true); });
+    sizeIn.addEventListener('input', function () { cur.size = +sizeIn.value; apply(true); });
+    panel.querySelectorAll('.tw-chips').forEach(function (g) {
+      g.addEventListener('click', function (e) {
+        var b = e.target.closest('button');
+        if (!b) return;
+        cur[g.getAttribute('data-tweak')] = b.getAttribute('data-v');
+        apply(true);
+      });
+    });
+    panel.querySelector('[data-tweak-reset]').addEventListener('click', function () {
+      cur = JSON.parse(JSON.stringify(DEF));
+      try { localStorage.removeItem('v2-tweaks'); } catch (err) {}
+      apply(false);
+    });
+    var copyBtn = panel.querySelector('[data-tweak-copy]');
+    copyBtn.addEventListener('click', function () {
+      var txt = sum.textContent;
+      function done() { copyBtn.textContent = 'Copied'; setTimeout(function () { copyBtn.textContent = 'Copy'; }, 1200); }
+      if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, function () {});
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !panel.hidden) { setOpen(false); tweakBtn.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (!panel.hidden && !e.target.closest('.dock')) setOpen(false);
+    });
+    apply(false);
+    if (location.hash === '#settings') setOpen(true);
+  }
+
   // ---------- LETTER SHORTCUTS ----------
   document.addEventListener('keydown', function (e) {
     if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
