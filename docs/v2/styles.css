@@ -1122,3 +1122,35 @@ html:has(.modal[open]) { overflow: hidden; }
 .theme-fade::view-transition-group(topbar) { animation-duration: .45s; }
 @keyframes theme-out { to { opacity: 0; } }
 @keyframes theme-in { from { opacity: 0; } }
+
+/* ---------- Mobile: How I think and Toolkit match, sheets open full screen ---------- */
+@media (max-width: 520px) {
+  .t-think, .t-tools { aspect-ratio: auto; height: 196px; }
+  .t-think { justify-content: flex-start; gap: 12px; padding: 14px 16px 16px; }
+  .t-think .cycle { padding-bottom: 0; }
+  .t-tools .tile-label { left: 16px; top: 14px; font-size: 13px; }
+  .t-think .tile-label { font-size: 13px; }
+}
+
+.book-sheet.is-full {
+  position: fixed; inset: 0; z-index: 200;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  align-content: start;
+  gap: 20px 16px;
+  padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+  border-radius: 0;
+  translate: 0 16px;
+}
+.book-sheet.is-full.is-shown { opacity: 1; visibility: visible; translate: 0 0; transition: opacity .3s ease, translate .4s var(--ease), visibility 0s; }
+.book-sheet.is-full .top { padding-bottom: 8px; }
+.book-sheet.is-full .close { width: 36px; height: 36px; font-size: 18px; }
+.book-sheet.is-full .book-cover { grid-row: 2; width: 72px; height: 104px; font-size: 11px; }
+.book-sheet.is-full .step-num { grid-row: 2; width: 64px; height: 64px; font-size: 20px; }
+.book-sheet.is-full .book-info { grid-row: 2 / 4; align-self: start; overflow: visible; }
+.book-sheet.is-full .book-info h3 { font-size: 22px; line-height: 30px; }
+.book-sheet.is-full .book-info .for { margin: 4px 0 14px; }
+.book-sheet.is-full .book-info p { font-size: 16px; line-height: 26px; }
+.book-sheet.is-full .pager { grid-row: 4; padding-top: 12px; border-top: 1px solid var(--tint-line); }
+.book-sheet.is-full .pager button { padding: 8px 0; font-size: 12px; }
+html:has(.book-sheet.is-full.is-shown) { overflow: hidden; }
+.book-sheet.is-full { grid-template-columns: auto minmax(0, 1fr); }

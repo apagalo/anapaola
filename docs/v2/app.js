@@ -110,19 +110,45 @@
   function sheetTile(tile, triggers, fill) {
     var sheet = tile.querySelector('.book-sheet');
     var count = sheet.querySelector('.count');
-    var current = -1;
+    var current = -1, back = null;
+    var phone = matchMedia('(max-width: 520px)');
+    // on phones the sheet leaves the tile and covers the whole screen
+    function goFull() {
+      if (sheet.parentNode === document.body) return;
+      sheet.style.setProperty('--tile-bg', getComputedStyle(tile).getPropertyValue('--tile-bg'));
+      document.body.appendChild(sheet);
+      sheet.classList.add('is-full');
+      sheet.setAttribute('role', 'dialog');
+      sheet.setAttribute('aria-modal', 'true');
+      void sheet.offsetWidth;
+      sheet.classList.add('is-shown');
+    }
+    function leaveFull() {
+      if (sheet.parentNode !== document.body) return;
+      sheet.classList.remove('is-shown');
+      clearTimeout(back);
+      back = setTimeout(function () {
+        sheet.classList.remove('is-full');
+        sheet.removeAttribute('role'); sheet.removeAttribute('aria-modal');
+        sheet.style.removeProperty('--tile-bg');
+        tile.appendChild(sheet);
+      }, reduce ? 0 : 320);
+    }
     function open(i) {
       current = (i + triggers.length) % triggers.length;
       fill(triggers[current], current);
       count.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(triggers.length).padStart(2, '0');
+      clearTimeout(back);
       tile.classList.add('is-open');
       sheet.removeAttribute('inert');
       sheet.setAttribute('aria-hidden', 'false');
+      if (phone.matches) { goFull(); sheet.querySelector('.close').focus({ preventScroll: true }); }
     }
     function close() {
       tile.classList.remove('is-open');
       sheet.setAttribute('inert', '');
       sheet.setAttribute('aria-hidden', 'true');
+      leaveFull();
       if (current >= 0) triggers[current].focus({ preventScroll: true });
     }
     triggers.forEach(function (b, i) {
