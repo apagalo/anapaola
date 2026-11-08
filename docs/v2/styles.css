@@ -1008,3 +1008,52 @@ html:has(.modal[open]) { overflow: hidden; }
 .modal .close:focus { outline: none; }
 .modal .close:focus-visible { outline: 1px solid var(--ink-muted); outline-offset: 2px; }
 .inner .prose { font-size: 16px; line-height: 27px; }
+
+/* ---------- Round E: softer menus, borders on every card, even padding ---------- */
+
+/* every card gets a quiet hairline that works on any tint */
+:root { --tint-line: rgba(70, 50, 25, .10); }
+:root[data-theme="dark"] { --tint-line: rgba(255, 245, 230, .08); }
+.bento .tile { border-color: var(--tint-line); }
+.bento .tile:hover { border-color: rgba(70, 50, 25, .16); }
+[data-theme="dark"] .bento .tile:hover { border-color: rgba(255, 245, 230, .13); }
+.hero-art { border: 1px solid var(--tint-line); }
+.book-sheet { padding: 16px; }
+
+/* case switcher: calm hover, current row marked by ink, not a block */
+.cs-menu { display: grid; gap: 2px; }
+.cs-menu a { transition: background-color .25s ease, color .25s ease; }
+.cs-menu a:hover { background: color-mix(in srgb, var(--tile) 55%, transparent); color: var(--ink); }
+.cs-menu a[aria-current] { background: none; color: var(--ink); }
+.cs-menu a[aria-current] .mono { color: var(--ink); }
+.cs-menu a[aria-current]:hover { background: color-mix(in srgb, var(--tile) 55%, transparent); }
+.case-switch summary { transition: background-color .25s ease; }
+.case-switch summary:hover, .case-switch[open] summary { background: color-mix(in srgb, var(--tile) 60%, transparent); }
+
+/* TL;DR chip and Home pill: border warms up, fill stays light */
+.tldr-chip, .back-btn { transition: background-color .25s ease, border-color .25s ease; }
+.tldr-chip:hover, .back-btn:hover { background: color-mix(in srgb, var(--tile) 45%, var(--paper)); border-color: color-mix(in srgb, var(--line-strong) 65%, var(--ink-muted)); }
+
+/* boxed blocks in the case body: even padding, no stray margins */
+.inner .case-body .case-callout { padding: 22px 24px; }
+.inner .case-body .case-callout p { margin: 0 0 8px; }
+.inner .case-body .case-takeaway { padding: 22px 24px; }
+.inner .case-body .case-takeaway h3 { margin: 0 0 10px; }
+.inner .case-body .case-callout > :last-child,
+.inner .case-body .case-takeaway > :last-child { margin-bottom: 0; }
+.bento .case-art { border: 1px solid var(--tint-line); }
+
+/* ---------- Home header: avatar + name left, theme switch right ---------- */
+.brand { justify-self: start; display: inline-flex; align-items: center; gap: 10px; min-width: 0; color: var(--ink); text-decoration: none; font-size: 13px; line-height: 20px; }
+.brand img { width: 32px; height: 32px; flex: none; border-radius: 9px; object-fit: cover; object-position: 50% 22%; border: 1px solid var(--line); background: var(--tile); }
+.brand > span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.home .page { padding-top: 0; }
+.home .lead > .intro:first-child { margin-top: 0; }
+.home .page .col { padding-top: 56px; }
+@media (min-width: 960px) {
+  .home .page .col { padding-top: 12vh; }
+  .home .lead { top: calc(61px + 10vh); }
+}
+@media (max-width: 420px) { .brand-last { display: none; } }
+.home-bar .crumb-inner { max-width: calc(var(--col) + 32px); }
+@media (min-width: 960px) { .home-bar .crumb-inner { max-width: 1080px; } }
