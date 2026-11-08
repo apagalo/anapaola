@@ -1049,10 +1049,10 @@ html:has(.modal[open]) { overflow: hidden; }
 .brand > span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .home .page { padding-top: 0; }
 .home .lead > .intro:first-child { margin-top: 0; }
-.home .page .col { padding-top: 56px; }
+.home .page .col { padding-top: 24px; }
 @media (min-width: 960px) {
-  .home .page .col { padding-top: 12vh; }
-  .home .lead { top: calc(61px + 10vh); }
+  .home .page .col { padding-top: 48px; }
+  .home .lead { top: calc(61px + 48px); }
 }
 @media (max-width: 420px) { .brand-last { display: none; } }
 .home-bar .crumb-inner { max-width: calc(var(--col) + 32px); }
