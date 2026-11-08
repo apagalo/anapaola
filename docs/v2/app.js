@@ -22,7 +22,16 @@
       var b = e.target.closest('[role="radio"]');
       if (!b) return;
       var t = b.getAttribute('data-value');
-      applyTheme(t);
+      var now = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      if (t === now) return;
+      // soft cross-fade between themes where the browser can do it
+      if (document.startViewTransition && !reduce) {
+        root.classList.add('theme-fade');
+        var vt = document.startViewTransition(function () { applyTheme(t); });
+        vt.finished.finally(function () { root.classList.remove('theme-fade'); });
+      } else {
+        applyTheme(t);
+      }
       try { localStorage.setItem('theme', t); } catch (err) {}
     });
   }
@@ -212,26 +221,34 @@
     document.addEventListener('click', function (e) { if (sw.open && !sw.contains(e.target)) sw.open = false; });
   }
 
-  // ---------- HEADER: hide while reading down, show again on the way up ----------
+  // ---------- HEADER: follows the scroll pixel by pixel, then settles ----------
   var bar = document.querySelector('.crumbbar');
   if (bar) {
-    var lastY = window.scrollY, ticking = false;
+    var lastY = Math.max(0, window.scrollY), off = 0, ticking = false, settle = null;
     function busyBar() {
       return bar.contains(document.activeElement) || document.querySelector('.case-switch[open]') || document.querySelector('dialog[open]');
     }
+    function setOff(v, animate) {
+      off = v;
+      bar.classList.toggle('is-snapping', !!animate);
+      bar.style.translate = off ? '0 ' + (-off) + 'px' : '';
+    }
     function onScroll() {
       ticking = false;
-      var y = Math.max(0, window.scrollY), dy = y - lastY;
-      if (y <= 0) { bar.classList.remove('is-hidden'); lastY = 0; return; }
-      if (Math.abs(dy) < 3) return;
-      if (dy > 0 && !busyBar()) bar.classList.add('is-hidden');
-      else if (dy < 0) bar.classList.remove('is-hidden');
+      var y = Math.max(0, window.scrollY), dy = y - lastY, h = bar.offsetHeight + 2;
       lastY = y;
+      if (busyBar() || y <= 0) { setOff(0, off > 0 && y > 0); return; }
+      setOff(Math.min(h, Math.max(0, off + dy)), false);
+      clearTimeout(settle);
+      // when scrolling stops halfway, finish the move in the nearer direction
+      settle = setTimeout(function () {
+        if (off > 0 && off < h) setOff(off > h / 2 && y > h ? h : 0, true);
+      }, 160);
     }
     window.addEventListener('scroll', function () {
       if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
     }, { passive: true });
-    bar.addEventListener('focusin', function () { bar.classList.remove('is-hidden'); });
+    bar.addEventListener('focusin', function () { setOff(0, true); });
   }
 
   // ---------- CARD HOVER: pointer position for tilt + spotlight ----------
