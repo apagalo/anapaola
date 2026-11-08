@@ -3,24 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ana Paola Galvez Lopez — Senior Design Operations</title>
+  <title>Ana Paola Galvez Lopez, Senior Design Operations</title>
   <meta name="description" content="Senior Design Operations professional building the operational backbone for global design teams. Currently at Electrolux Group, Stockholm.">
-  <!-- Open Graph -->
-  <meta property="og:title" content="Ana Paola Galvez Lopez — Senior Design Operations">
+  <meta property="og:title" content="Ana Paola Galvez Lopez, Senior Design Operations">
   <meta property="og:description" content="Senior Design Operations professional building the operational backbone for global design teams. Currently at Electrolux Group, Stockholm.">
   <meta property="og:image" content="https://anapaolagalvez.com/assets/og-image.png">
-  <meta property="og:url" content="https://anapaolagalvez.com/">
+  <meta property="og:url" content="https://anapaolagalvez.com/v2/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ana Paola Galvez Lopez — Senior Design Operations">
+  <meta name="twitter:title" content="Ana Paola Galvez Lopez, Senior Design Operations">
   <meta name="twitter:description" content="Senior Design Operations professional building the operational backbone for global design teams. Currently at Electrolux Group, Stockholm.">
   <meta name="twitter:image" content="https://anapaolagalvez.com/assets/og-image.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👸🏽</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Caveat:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3">
-  <script>(function(){if(localStorage.getItem('theme')!=='light')document.documentElement.setAttribute('data-theme','dark')})()</script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../v2/styles.css?v=3">
+  <script>(function(){try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}})()</script>
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_2amvHJ1LDjwcec88BgRTLGowcCnIBWhyBRzRHXPjrVr',{
@@ -54,815 +53,158 @@
 </head>
 <body>
 
-<!-- v2 Password Gate -->
-<style>
-  .pw-overlay {
-    position: fixed; inset: 0; z-index: 9999;
-    background: #f6f6f3;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Inter', -apple-system, sans-serif;
-  }
-  .pw-card {
-    background: #fff; padding: 40px 36px; max-width: 380px; width: 90%;
-    border: 1px solid #d4d1cb; border-radius: 4px;
-    box-shadow: 0 10px 30px rgba(49,49,49,0.1);
-    text-align: center;
-  }
-  .pw-card h3 { font-family: 'Jeju Myeongjo', Georgia, serif; font-size: 26px; font-weight: 400; margin-bottom: 10px; color: #313131; }
-  .pw-card p { font-size: 14px; color: #6c6c6b; margin-bottom: 20px; }
-  .pw-card input {
-    width: 100%; padding: 12px 16px;
-    border: 1px solid #d4d1cb; border-radius: 100px;
-    font-size: 15px; font-family: inherit;
-    outline: none; margin-bottom: 12px;
-    background: #faf9f6; color: #313131;
-  }
-  .pw-card input:focus { border-color: #313131; }
-  .pw-card button {
-    width: 100%; padding: 12px 16px;
-    background: #313131; color: #f6f6f3;
-    border: none; border-radius: 100px;
-    font-family: 'Jeju Myeongjo', Georgia, serif; font-size: 15px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-  .pw-card button:hover { background: #1a1a1a; }
-  .pw-error { color: #c44; font-size: 13px; margin-top: 12px; display: none; }
-</style>
-<script>
-(function() {
-  var key = 'ana-v2-unlocked';
-  if (sessionStorage.getItem(key) === 'true') return;
-  document.documentElement.style.overflow = 'hidden';
-  document.addEventListener('DOMContentLoaded', function() {
-    var overlay = document.createElement('div');
-    overlay.className = 'pw-overlay';
-    overlay.innerHTML =
-      '<div class="pw-card">' +
-        '<h3>Preview</h3>' +
-        '<p>This is an in-progress draft. Enter the password to continue.</p>' +
-        '<input type="password" id="pw-input" placeholder="Password" autocomplete="off">' +
-        '<button id="pw-submit">Enter</button>' +
-        '<p class="pw-error" id="pw-error">Incorrect password. Try again.</p>' +
-      '</div>';
-    document.body.appendChild(overlay);
-    var input = document.getElementById('pw-input');
-    var btn = document.getElementById('pw-submit');
-    var err = document.getElementById('pw-error');
-    function tryAuth() {
-      if (input.value === '260493') {
-        sessionStorage.setItem(key, 'true');
-        overlay.remove();
-        document.documentElement.style.overflow = '';
-      } else {
-        err.style.display = 'block';
-        input.value = '';
-        input.focus();
-      }
-    }
-    btn.addEventListener('click', tryAuth);
-    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryAuth(); });
-    input.focus();
-  });
-})();
-</script>
+<main class="page">
+  <div class="col">
+    <div class="topbar">
+      <a class="avatar" href="./" aria-label="Ana Paola, home"><img src="../assets/avatar.jpg" alt=""></a>
+      <span class="seg" role="radiogroup" aria-label="Theme" data-theme-toggle style="--n:2;--i:0">
+        <span class="seg-thumb" aria-hidden="true"></span>
+        <button type="button" role="radio" data-value="light" aria-checked="true" aria-label="Light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
+        <button type="button" role="radio" data-value="dark" aria-checked="false" aria-label="Dark" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+      </span>
+    </div>
 
-<!-- Navigation -->
-<nav>
-  <div class="container">
-    <a href="#" class="nav-name">Ana Paola <img src="../assets/smiley.svg" alt="" class="nav-smiley"></a>
-    <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+    <h1 class="intro">Hey there, I'm Ana Paola<span>an operations and strategy lead based in Stockholm</span></h1>
+
+    <div class="bio">
+      <p>By day I lead design operations at <mark class="blue">Electrolux Group</mark>, which mostly means making sure 70+ projects across Stockholm and Shanghai get the people, budget and attention they actually need. Lately I'm rotating into <mark class="orange">Business Strategy &amp; Market Intelligence</mark>.</p>
+      <p>Before that I studied <em>medicine</em> for seven semesters, switched to business and marketing in Lima, and moved across the world to Stockholm. Along the way I picked up <mark class="pink">four languages</mark> and a habit of turning numbers into decisions.</p>
+    </div>
+
+    <div class="cut rule-dashed" aria-hidden="true"></div>
+
+    <div class="bento">
+    <a class="tile tile-photo reveal" href="about.html" data-key="A" aria-keyshortcuts="A" aria-label="About Ana Paola, press A">
+      <img src="../assets/profile-img.png" alt="">
+      <span class="tile-title">From Lima to Stockholm</span>
+      <span class="tile-chip">About [A]</span>
+      <span class="tile-key" aria-hidden="true">A</span>
+    </a>
+
+    <button type="button" class="tile reveal" data-prints data-key="L" aria-keyshortcuts="L" aria-label="Off the clock photos, press L or click for the next one">
+      <span class="tile-label">Off the clock</span>
+      <span class="prints">
+          <span class="print">
+            <span class="print-media"><img src="../assets/1.jpg" alt="desert dunes and good company" loading="lazy" decoding="async"></span>
+            <span class="cap"><span>desert dunes and good company</span><span>01</span></span>
+          </span>
+          <span class="print">
+            <span class="print-media"><img src="../assets/2.jpg" alt="finding stillness" loading="lazy" decoding="async"></span>
+            <span class="cap"><span>finding stillness</span><span>02</span></span>
+          </span>
+          <span class="print">
+            <span class="print-media"><img src="../assets/3.jpg" alt="Sunday mornings" loading="lazy" decoding="async"></span>
+            <span class="cap"><span>Sunday mornings</span><span>03</span></span>
+          </span>
+          <span class="print">
+            <span class="print-media"><img src="../assets/4.jpg" alt="Love Peru ❤" loading="lazy" decoding="async"></span>
+            <span class="cap"><span>Love Peru ❤</span><span>04</span></span>
+          </span>
+          <span class="print">
+            <span class="print-media"><img src="../assets/5.jpg" alt="Good event in town? Count me in." loading="lazy" decoding="async"></span>
+            <span class="cap"><span>Good event in town? Count me in.</span><span>05</span></span>
+          </span>
+          <span class="print">
+            <span class="print-media"><img src="../assets/6.jpg" alt="Suri posing for the pic" loading="lazy" decoding="async"></span>
+            <span class="cap"><span>Suri posing for the pic</span><span>06</span></span>
+          </span>
+      </span>
+      <span class="tile-chip">Off the clock [L]</span>
+      <span class="tile-key" aria-hidden="true">L</span>
     </button>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#life">Life</a></li>
-      <li><a href="#capabilities">What I Do</a></li>
-      <li><a href="#work">Work</a></li>
-      <li class="nav-divider" aria-hidden="true"></li>
-      <li><a href="mailto:anapaolagalo@gmail.com">Contact</a></li>
-    </ul>
-  </div>
-</nav>
 
-<div class="page-content">
+    <a class="tile wide tile-case work-item reveal" href="case-studies/01-global-design-ops.html" data-key="W" aria-keyshortcuts="W">
+      <span class="case-art" aria-hidden="true"><span class="rings"></span><span class="glyph">●</span></span>
+      <span class="case-copy">
+        <span class="tile-sub">Case study 01</span>
+        <span class="title work-title">Are Our Resources Following Our Priorities?</span>
+        <span class="desc">Using operational data to uncover resource trade-offs, challenge assumptions and turn insights into decisions across a 70+ project portfolio.</span>
+        <span class="meta">Strategy &amp; Operations · Data Analysis</span>
+      </span>
+      <span class="tile-chip">Case study 01 [W]</span>
+      <span class="tile-key" aria-hidden="true">W</span>
+    </a>
+    <a class="tile wide tile-case work-item reveal" href="case-studies/02-power-bi-dashboards.html" data-key="R" aria-keyshortcuts="R">
+      <span class="case-art" aria-hidden="true"><span class="rings"></span><span class="glyph">❖</span></span>
+      <span class="case-copy">
+        <span class="tile-sub">Case study 02</span>
+        <span class="title work-title">When the Reporting System Became the Problem</span>
+        <span class="desc">After three years of using data to support portfolio decisions, a new challenge emerged: how do you create one global view when different teams don't work in the same way?</span>
+        <span class="meta">Systems Thinking · AI · APIs</span>
+      </span>
+      <span class="tile-chip">Case study 02 [R]</span>
+      <span class="tile-key" aria-hidden="true">R</span>
+    </a>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-text">
-      <div class="hero-greeting">Hola, I'm Ana Paola</div>
-      <h1>
-        Curious by default.<br>
-        <em>Structured</em> by choice.
-      </h1>
-      <p class="hero-sub">
-        I connect the dots between strategy and execution, so nothing gets lost in translation.
-      </p>
-      <div class="hero-meta">
-        <span>Senior Design Operations</span>
-        <span>Electrolux Group</span>
-        <span>Stockholm, SE</span>
-      </div>
-    </div>
-
-    <div class="notes-area" id="notesArea">
-      <div class="sticky note-1" data-note="1">
-        <span class="label">from / to</span>
-        <div class="content">Lima <strong>→</strong> Stockholm<br>Marketing <strong>→</strong> Business</div>
-      </div>
-      <div class="sticky note-2" data-note="2">
-        <span class="label">fluent in</span>
-        <div class="content">ES · EN · PT · FR<br>(+ spreadsheets)</div>
-      </div>
-      <div class="sticky note-3" data-note="3">
-        <span class="label">currently</span>
-        <div class="content">Building systems for 30 designers &amp; 50+ projects</div>
-      </div>
-      <div class="sticky note-4" data-note="4">
-        <span class="label">secret talent</span>
-        <div class="content">Knows a surprising amount about medicine &amp; the human body</div>
-      </div>
-      <div class="sticky note-5" data-note="5">
-        <span class="label">loves</span>
-        <div class="content">My 5 dogs 🐕<br>&amp; tiramisu (always)</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-track">
-    <span>Strategy</span><span>Execution</span><span>Systems</span><span>Clarity</span><span>Power BI</span><span>Facilitation</span><span>Portfolio Management</span><span>Data-Driven</span>
-    <span>Strategy</span><span>Execution</span><span>Systems</span><span>Clarity</span><span>Power BI</span><span>Facilitation</span><span>Portfolio Management</span><span>Data-Driven</span>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="container">
-    <div style="grid-column: 1 / -1;">
-      <div class="eyebrow">About</div>
-      <h2 class="section-h2">From Lima to Stockholm, from marketing to <em>DesignOps</em></h2>
-    </div>
-
-    <div class="about-portrait reveal">
-      <div class="portrait-frame">
-        <div class="portrait-tape"></div>
-        <img src="../assets/profile-img.png" alt="Ana Paola Galvez Lopez">
-      </div>
-      <div class="portrait-caption">Natural history museum Vienna, 2025</div>
-    </div>
-
-    <div class="about-text">
-      <p class="reveal">
-        I don't come from a straight line. I started in marketing in Peru, moved to Stockholm, and ended up building DesignOps from scratch at a global company. <em>That path wasn't accidental. It reflects how I work: curious, cross-functional, and always looking for the system underneath the chaos.</em>
-      </p>
-
-      <p class="reveal">
-        At Electrolux Group, I scaled DesignOps for 30 designers across 50+ concurrent projects, introducing portfolio management, clarifying ownership, and building <strong>Power BI dashboards</strong> that made capacity and budget conversations honest. We went from reactive firefighting to a structure that gave designers clarity and leadership real visibility.
-      </p>
-      <p class="reveal">
-        What that taught me is that <strong>the most impactful work happens at the intersection of strategy and execution.</strong> Operations isn't about efficiency. It's about creating the conditions for good work to happen, consistently and sustainably. Strong systems should drive performance and foster trust in equal measure. <em>That's not a soft goal. It's a strategic one.</em>
-      </p>
-      <p class="reveal">
-        I'm now looking for my next challenge — somewhere I can bring analytical rigour, strategic thinking, and operational craft to a team that's serious about how they build.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- LIFE GALLERY -->
-<div class="gallery-wrap" id="life">
-  <div class="container">
-    <div class="gallery-header">
-      <div>
-        <div class="eyebrow">Off the Clock</div>
-        <h2 class="section-h2" style="margin-bottom: 0;">A few <em>favorite</em> things</h2>
-      </div>
-      <p>The life behind the dashboards — dogs, reading, matcha, journeling, and adventures with my partner.</p>
-    </div>
-  </div>
-  <div class="gallery-scroll">
-      <div class="gallery-card">
-        <div class="gallery-img has-bg-1">
-          <img src="../assets/1.jpg" alt="Adventure time" loading="lazy" decoding="async">
-        </div>
-        <div class="gallery-caption">
-          <span>adventure time</span>
-          <span class="num">01</span>
-        </div>
-      </div>
-
-      <div class="gallery-card">
-        <div class="gallery-img has-bg-2">
-          <img src="../assets/2.jpg" alt="The new life" loading="lazy" decoding="async">
-        </div>
-        <div class="gallery-caption">
-          <span>the new life</span>
-          <span class="num">02</span>
-        </div>
-      </div>
-
-      <div class="gallery-card">
-        <div class="gallery-img has-bg-3">
-          <img src="../assets/3.jpg" alt="Trying to look smart" loading="lazy" decoding="async">
-        </div>
-        <div class="gallery-caption">
-          <span>trying to look smart</span>
-          <span class="num">03</span>
-        </div>
-      </div>
-
-      <div class="gallery-card">
-        <div class="gallery-img has-bg-4">
-          <img src="../assets/4.jpg" alt="10km run" loading="lazy" decoding="async">
-        </div>
-        <div class="gallery-caption">
-          <span>10km run</span>
-          <span class="num">04</span>
-        </div>
-      </div>
-
-      <div class="gallery-card">
-        <div class="gallery-img has-bg-5">
-          <img src="../assets/5.jpg" alt="Enjoy the liquid sunshine" loading="lazy" decoding="async">
-        </div>
-        <div class="gallery-caption">
-          <span>enjoy the liquid sunshine</span>
-          <span class="num">05</span>
-        </div>
-      </div>
-
-      <div class="gallery-card">
-        <div class="gallery-img has-bg-1">
-          <img src="../assets/6.jpg" alt="Looking good for the cam" loading="lazy" decoding="async">
-        </div>
-        <div class="gallery-caption">
-          <span>looking good for the cam</span>
-          <span class="num">06</span>
-        </div>
-      </div>
-    </div>
-</div>
-
-<!-- CAPABILITIES -->
-<section class="capabilities" id="capabilities">
-  <div class="container">
-    <div class="eyebrow">What I Do</div>
-    <h2 class="section-h2">Three pillars of <em>DesignOps</em></h2>
-
-    <div class="pillars">
-      <div class="pillar reveal">
-        <div class="pillar-icon">🤝</div>
-        <h3>People</h3>
-        <ul>
-          <li>Cross-functional team coordination across global teams</li>
-          <li>Workshop facilitation for alignment and continuous improvement</li>
-          <li>Stakeholder management across design, product, engineering</li>
-          <li>Team strengths &amp; gaps analysis</li>
-          <li>Vendor and partner relationships</li>
-        </ul>
-      </div>
-
-      <div class="pillar reveal">
-        <div class="pillar-icon">🧩</div>
-        <h3>Process</h3>
-        <ul>
-          <li>Workflow design and optimization for creative teams</li>
-          <li>Project intake, prioritization, resource allocation</li>
-          <li>Design awards submission workflows</li>
-          <li>Brand expression research programs</li>
-          <li>Continuous improvement loops and feedback systems</li>
-        </ul>
-      </div>
-
-      <div class="pillar reveal">
-        <div class="pillar-icon">🛠️</div>
-        <h3>Tools &amp; Data</h3>
-        <ul>
-          <li>Power BI dashboards for budget and resource visibility</li>
-          <li>Smartsheets and SharePoint platform management</li>
-          <li>Performance metrics and data-driven decisions</li>
-          <li>Budget management and financial oversight</li>
-          <li>AI tools and LLMs for operational acceleration</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BELIEF -->
-<section class="belief">
-  <div class="container">
-    <p class="belief-quote">
-      I believe the gap between vision and reality is just <em>a missing system</em>.
-    </p>
-    <div class="belief-attribution">— the thing I keep coming back to</div>
-  </div>
-</section>
-
-<!-- WORK -->
-<section id="work">
-  <div class="container">
-    <div class="eyebrow">Selected Work</div>
-    <h2 class="section-h2">Case <em>studies</em></h2>
-
-    <div class="work-list">
-      <a href="../case-studies/01-global-design-ops.html" class="work-item">
-        <div class="work-num">01</div>
-        <div>
-          <div class="work-title">Scaling Design Operations Across a Global Organization</div>
-          <div class="work-desc">Built DesignOps from scratch at Electrolux — from coordinator to senior ops leader over 3 years, supporting 30 designers and 50+ projects.</div>
-          <div class="work-tags">
-            <span class="work-tag">Global Ops</span>
-            <span class="work-tag">Process Maturity</span>
-            <span class="work-tag">Team Scaling</span>
-          </div>
-        </div>
-        <div class="work-arrow">→</div>
-      </a>
-
-      <a href="../case-studies/02-power-bi-dashboards.html" class="work-item">
-        <div class="work-num">02</div>
-        <div>
-          <div class="work-title">Power BI Dashboards for Budget &amp; Utilization</div>
-          <div class="work-desc">Built a data-driven decision system from scratch for a 30-person design team managing 50+ projects.</div>
-          <div class="work-tags">
-            <span class="work-tag">Power BI</span>
-            <span class="work-tag">Data-Driven</span>
-            <span class="work-tag">Budget Mgmt</span>
-          </div>
-        </div>
-        <div class="work-arrow">→</div>
-      </a>
-
-      <a href="../case-studies/04-team-strengths-gaps.html" class="work-item">
-        <div class="work-num">03</div>
-        <div>
-          <div class="work-title">Team Strengths &amp; Gaps Analysis</div>
-          <div class="work-desc">Led a structured review across 5 design leads to map team capabilities, surface skill gaps, and inform hiring and staffing decisions.</div>
-          <div class="work-tags">
-            <span class="work-tag">People Ops</span>
-            <span class="work-tag">Skills Matrix</span>
-            <span class="work-tag">Strategic Staffing</span>
-          </div>
-        </div>
-        <div class="work-arrow">→</div>
-      </a>
-    </div>
-
-    <div class="more-work reveal">
-      <h4>More case studies, warming up</h4>
-      <p>I have additional stories I'd love to walk you through in person:</p>
-      <ul>
-        <li>Design Awards Submission Workflow</li>
-        <li>Brand Expression Research</li>
-        <li>Redesigning Design Workflows</li>
+    <a class="tile tile-list reveal" href="about.html#how-i-think" data-key="H" aria-keyshortcuts="H" aria-label="How I think, press H">
+      <span class="tile-label">How I think</span>
+      <ul class="cycle" data-cycle>
+          <li><span class="mono">01</span>Frame</li>
+          <li><span class="mono">02</span>Structure</li>
+          <li><span class="mono">03</span>Investigate</li>
+          <li><span class="mono">04</span>Decide</li>
+          <li><span class="mono">05</span>Act</li>
+          <li><span class="mono">06</span>Learn</li>
       </ul>
-      <a href="mailto:anapaolagalo@gmail.com" class="cta-pill">Get in touch →</a>
-    </div>
-  </div>
-</section>
+      <span class="tile-chip">How I think [H]</span>
+      <span class="tile-key" aria-hidden="true">H</span>
+    </a>
 
-<!-- CONTACT -->
-<section class="contact" id="connect">
-  <div class="container">
-    <div class="contact-wave">👋</div>
-    <h2 class="section-h2 section-h2--centered">You made it this <em>far</em></h2>
-    <p>Might as well say hi. My inbox is always open — especially for roles where strategy meets systems.</p>
-    <a href="mailto:anapaolagalo@gmail.com" class="contact-btn">Say hola</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-left">
-        "To build a system is to believe in the future of the work that flows through it."
+    <div class="tile tile-shelf reveal" data-shelf data-key="T" tabindex="0" role="group" aria-label="Toolkit, press T. Pick a book to see what it is for.">
+      <span class="tile-label">Toolkit</span>
+      <div class="shelf">
+        <div class="books">
+            <button type="button" class="book" style="--bg:#f2c230;--fg:#3a2c00;--w:24px;--h:106px;--tilt:-2deg" data-title="Power BI" data-cover="Power
+BI" data-for="For portfolio decisions" data-text="Self-taught. The resource, portfolio and budget reports that leadership uses to decide where design time goes." aria-label="Power BI, for portfolio decisions"><span class="spine">Power BI</span><span class="glyph" aria-hidden="true">▤</span></button>
+            <button type="button" class="book" style="--bg:#2f5d50;--fg:#eef2e6;--w:19px;--h:93px;--tilt:0deg" data-title="SQL" data-cover="SQL" data-for="For getting underneath a number" data-text="Instead of waiting for someone to export the data, I go and get it." aria-label="SQL, for getting underneath a number"><span class="spine">SQL</span><span class="glyph" aria-hidden="true">⌘</span></button>
+            <button type="button" class="book" style="--bg:#1f3a68;--fg:#e6edfb;--w:27px;--h:117px;--tilt:0deg" data-title="Smartsheet" data-cover="Smart
+sheet" data-for="For keeping 70+ projects in view" data-text="Owners, deadlines and status for the whole portfolio in one shared place." aria-label="Smartsheet, for keeping 70+ projects in view"><span class="spine">Smartsheet</span><span class="glyph" aria-hidden="true">◫</span></button>
+            <button type="button" class="book" style="--bg:#e9dfc7;--fg:#243329;--w:22px;--h:99px;--tilt:1.5deg" data-title="Excel" data-cover="Excel" data-for="For quick what-if questions" data-text="Forecasts and budget models, long before anything earns a dashboard." aria-label="Excel, for quick what-if questions"><span class="spine">Excel</span><span class="glyph" aria-hidden="true">▦</span></button>
+            <button type="button" class="book" style="--bg:#e74c38;--fg:#fff0d8;--w:30px;--h:122px;--tilt:0deg" data-title="AI for Business" data-cover="AI for
+Business" data-for="For building beyond my background" data-text="Hyper Island, 2025. I use LLMs and AI-assisted development to prototype tools, like an API-based reporting layer." aria-label="AI for Business, for building beyond my background"><span class="spine">AI for Business</span><span class="glyph" aria-hidden="true">✦</span></button>
+            <button type="button" class="book" style="--bg:#edaacb;--fg:#65233d;--w:22px;--h:102px;--tilt:-1deg" data-title="Triple Diamond" data-cover="Triple
+Diamond" data-for="For structuring messy problems" data-text="Understand, Create, Develop. How I run workshops and redesign processes." aria-label="Triple Diamond, for structuring messy problems"><span class="spine">Triple Diamond</span><span class="glyph" aria-hidden="true">◇</span></button>
+            <button type="button" class="book" style="--bg:#cdd8bd;--fg:#2c3a22;--w:20px;--h:90px;--tilt:0deg" data-title="Journal" data-cover="Journal" data-for="For thinking things through" data-text="I analyze almost everything, even my own thoughts. Not to stay thinking forever, but to find patterns, decide and move." aria-label="Journal, for thinking things through"><span class="spine">Journal</span><span class="glyph" aria-hidden="true">✎</span></button>
+            <button type="button" class="book" style="--bg:#8fb3d9;--fg:#10263f;--w:24px;--h:110px;--tilt:2deg" data-title="ES · EN · PT · FR" data-cover="ES · EN
+PT · FR" data-for="For working across borders" data-text="Spanish, English, Portuguese and French (DELF B2). Plus spreadsheets." aria-label="ES · EN · PT · FR, for working across borders"><span class="spine">ES · EN · PT · FR</span><span class="glyph" aria-hidden="true">Aa</span></button>
+        </div>
       </div>
-      <ul class="footer-links">
-        <li><a href="https://www.linkedin.com/in/anapaolagalvez/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-        <li><a href="mailto:anapaolagalo@gmail.com">Email</a></li>
-      </ul>
+      <div class="book-sheet" aria-hidden="true" inert>
+        <div class="top"><span class="mono">What it's for</span><button type="button" class="close" aria-label="Close">×</button></div>
+        <div class="book-cover" aria-hidden="true"></div>
+        <div class="book-info"><h3></h3><div class="for mono"></div><p></p></div>
+        <div class="pager"><button type="button" data-prev>← Prev</button><span class="mono count"></span><button type="button" data-next>Next →</button></div>
+      </div>
+      <span class="tile-chip">Toolkit [T]</span>
+      <span class="tile-key" aria-hidden="true">T</span>
     </div>
-    <div class="footer-copy">
+    </div>
+
+    <div class="say-hi reveal">
+      <p class="intro">You made it this far<span>might as well say hi</span></p>
+      <p>My inbox is always open, especially for roles where strategy meets systems. I have more case studies warming up too: Design Awards Strategy, Brand Expression Insights and a Market Forecast for Small Domestic Appliances. Happy to walk you through them in person.</p>
+      <a class="btn" href="mailto:anapaolagalo@gmail.com">Say hola</a>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="col">
+    <div class="rule-dashed" aria-hidden="true"></div>
+    <div class="foot-row">
       <span>© 2026 Ana Paola Galvez Lopez</span>
-      <span>made with ❤ &amp; plenty of oat lattes in Stockholm</span>
+      <span><a href="mailto:anapaolagalo@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/anapaolagalvez/" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
     </div>
+    <p class="foot-note">made with ❤ &amp; plenty of matcha lattes in Stockholm</p>
   </div>
 </footer>
 
-</div><!-- .page-content -->
+<div class="seg version-switch" role="group" aria-label="Site version" style="--n:2;--i:1">
+  <span class="seg-thumb" aria-hidden="true"></span>
+  <a href="../">V1</a>
+  <a href="#" aria-current="true">V2</a>
+</div>
 
-<!-- Theme Toggle -->
-<button class="theme-toggle" aria-label="Toggle dark mode">
-  <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-  <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-</button>
-
-<!-- ========== SCRIPTS ========== -->
-
-<script>
-// NAV — hamburger, backdrop, scroll shadow, active link
-(function() {
-  var nav = document.querySelector('nav');
-  var hamburger = document.querySelector('.nav-hamburger');
-  var backdrop = document.createElement('div');
-  backdrop.className = 'nav-backdrop';
-  document.body.appendChild(backdrop);
-
-  function openNav() {
-    nav.classList.add('nav-open');
-    backdrop.classList.add('active');
-    hamburger.setAttribute('aria-expanded', 'true');
-  }
-  function closeNav() {
-    nav.classList.remove('nav-open');
-    backdrop.classList.remove('active');
-    hamburger.setAttribute('aria-expanded', 'false');
-  }
-  hamburger.addEventListener('click', function() {
-    nav.classList.contains('nav-open') ? closeNav() : openNav();
-  });
-  document.querySelectorAll('nav .nav-links a').forEach(function(a) {
-    a.addEventListener('click', closeNav);
-  });
-  backdrop.addEventListener('click', closeNav);
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && nav.classList.contains('nav-open')) closeNav();
-  });
-
-  var isMobile = function() { return window.innerWidth <= 768; };
-  var lastScroll = 0;
-  window.addEventListener('scroll', function() {
-    var y = window.pageYOffset;
-    nav.classList.toggle('nav-scrolled', y > 30);
-
-    if (y > lastScroll && y > 20) {
-      nav.style.transform = isMobile() ? 'translateY(-120%)' : 'translateY(-160%)';
-    } else {
-      nav.style.transform = 'translateY(0)';
-    }
-    lastScroll = y;
-  });
-
-  // Active link
-  var links = document.querySelectorAll('nav .nav-links li:not(.nav-divider)');
-  var sections = [];
-  links.forEach(function(li) {
-    var a = li.querySelector('a');
-    if (!a) return;
-    var href = a.getAttribute('href');
-    if (!href || href.charAt(0) !== '#') return;
-    var sec = document.querySelector(href);
-    if (sec) sections.push({ el: sec, li: li });
-  });
-  function updateActive() {
-    var scrollPos = window.pageYOffset + 120;
-    var active = null;
-    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2) {
-      active = sections[sections.length - 1];
-    } else {
-      sections.forEach(function(s) { if (s.el.offsetTop <= scrollPos) active = s; });
-    }
-    links.forEach(function(li) { li.classList.remove('active'); });
-    if (active) active.li.classList.add('active');
-  }
-  window.addEventListener('scroll', updateActive);
-  updateActive();
-})();
-</script>
-
-<script>
-// DRAGGABLE STICKY NOTES
-(function() {
-  var notes = document.querySelectorAll('.sticky');
-  var highestZ = 10;
-
-  notes.forEach(function(note) {
-    var isDragging = false, startX, startY, initialX, initialY, currentRotation = 0;
-
-    var style = window.getComputedStyle(note);
-    var tr = style.transform;
-    if (tr && tr !== 'none') {
-      var m = tr.match(/matrix\(([^)]+)\)/);
-      if (m) {
-        var parts = m[1].split(',').map(Number);
-        currentRotation = Math.atan2(parts[1], parts[0]) * (180 / Math.PI);
-      }
-    }
-
-    function startDrag(e) {
-      isDragging = true;
-      highestZ++;
-      note.style.zIndex = highestZ;
-      note.style.transition = 'none';
-      var ev = e.touches ? e.touches[0] : e;
-      startX = ev.clientX;
-      startY = ev.clientY;
-      initialX = note.offsetLeft;
-      initialY = note.offsetTop;
-      note.style.width = note.offsetWidth + 'px';
-      note.style.left = initialX + 'px';
-      note.style.top = initialY + 'px';
-      note.style.right = 'auto';
-      e.preventDefault();
-    }
-    function drag(e) {
-      if (!isDragging) return;
-      var ev = e.touches ? e.touches[0] : e;
-      var dx = ev.clientX - startX;
-      var dy = ev.clientY - startY;
-      note.style.left = (initialX + dx) + 'px';
-      note.style.top = (initialY + dy) + 'px';
-      note.style.transform = 'rotate(' + currentRotation + 'deg)';
-    }
-    function endDrag() {
-      if (!isDragging) return;
-      isDragging = false;
-      note.style.transition = '';
-    }
-
-    note.addEventListener('mousedown', startDrag);
-    note.addEventListener('touchstart', startDrag, { passive: false });
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('touchmove', drag, { passive: false });
-    document.addEventListener('mouseup', endDrag);
-    document.addEventListener('touchend', endDrag);
-  });
-})();
-</script>
-
-<script>
-// REVEAL ON SCROLL
-(function() {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.reveal, .reveal-blur').forEach(function(el) {
-      el.classList.add('visible');
-    });
-    return;
-  }
-  var els = document.querySelectorAll('.reveal, .reveal-blur');
-  var io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  els.forEach(function(el) { io.observe(el); });
-})();
-</script>
-
-
-<script>
-// THEME TOGGLE
-(function() {
-  var toggle = document.querySelector('.theme-toggle');
-  if (!toggle) return;
-  var switching = false;
-  toggle.addEventListener('click', function() {
-    if (switching) return;
-    switching = true;
-    document.documentElement.classList.add('theme-switching');
-    setTimeout(function() {
-      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      var nt = isDark ? 'light' : 'dark';
-      if (nt === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-      else document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem('theme', nt);
-    }, 300);
-    setTimeout(function() {
-      document.documentElement.classList.remove('theme-switching');
-      switching = false;
-    }, 600);
-  });
-})();
-</script>
-
-<script>
-// MOBILE CARD CAROUSEL (pillars only, Tinder-style)
-(function() {
-  var isMobile = function() { return window.innerWidth <= 768; };
-
-  function initCarousel(container) {
-    var cards = Array.from(container.children).filter(function(c) { return c.nodeType === 1; });
-    if (cards.length < 2) return;
-
-    cards.forEach(function(c) {
-      c.classList.remove('reveal');
-      c.classList.remove('visible');
-    });
-
-    container.style.display = 'block';
-    void container.offsetHeight;
-
-    var maxH = 0;
-    cards.forEach(function(c) {
-      c.style.opacity = '1';
-      c.style.transform = 'none';
-      maxH = Math.max(maxH, c.offsetHeight);
-    });
-
-    container.classList.add('carousel-init');
-    container.style.display = '';
-    container.style.height = maxH + 'px';
-
-    cards.forEach(function(c) {
-      c.style.position = 'absolute';
-      c.style.top = '0';
-      c.style.left = '0';
-      c.style.width = '100%';
-      c.style.minHeight = maxH + 'px';
-      c.style.display = 'none';
-      c.style.boxSizing = 'border-box';
-    });
-
-    var dots = document.createElement('div');
-    dots.className = 'carousel-dots';
-    cards.forEach(function() {
-      var d = document.createElement('span');
-      dots.appendChild(d);
-    });
-    container.after(dots);
-
-    var order = cards.map(function(_, i) { return i; });
-    var startX = 0, startY = 0, dx = 0;
-    var dragging = false, locked = false, busy = false, swiped = false;
-
-    function updateDots() {
-      Array.from(dots.children).forEach(function(d, i) {
-        d.classList.toggle('active', i === order[0]);
-      });
-    }
-
-    function showLayout() {
-      cards.forEach(function(c) {
-        c.style.display = 'none';
-        c.style.transform = 'none';
-        c.style.opacity = '1';
-        c.style.transition = 'none';
-        c.style.zIndex = '1';
-        c.style.pointerEvents = 'none';
-      });
-      if (order.length > 1) {
-        var under = cards[order[1]];
-        under.style.display = '';
-        under.style.zIndex = '2';
-        under.style.transform = 'scale(0.96) translateY(8px)';
-        under.style.opacity = '0.5';
-        under.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
-      }
-      var top = cards[order[0]];
-      top.style.display = '';
-      top.style.zIndex = '3';
-      top.style.opacity = '1';
-      top.style.transform = 'none';
-      top.style.pointerEvents = 'auto';
-      updateDots();
-    }
-
-    function flyOff(dir) {
-      busy = true;
-      var top = cards[order[0]];
-      top.style.transition = 'transform 0.4s ease-out, opacity 0.35s ease-out';
-      top.style.transform = 'translateX(' + (dir * window.innerWidth * 1.3) + 'px) rotate(' + (dir * 18) + 'deg)';
-      top.style.opacity = '0';
-      top.style.pointerEvents = 'none';
-      if (order.length > 1) {
-        var under = cards[order[1]];
-        under.style.transition = 'transform 0.4s ease-out, opacity 0.4s ease-out';
-        under.style.transform = 'scale(1) translateY(0)';
-        under.style.opacity = '1';
-      }
-      setTimeout(function() {
-        order.push(order.shift());
-        showLayout();
-        busy = false;
-      }, 420);
-    }
-
-    container.addEventListener('touchstart', function(e) {
-      if (!isMobile() || busy) return;
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      dx = 0; dragging = false; locked = false; swiped = false;
-    }, { passive: true });
-
-    container.addEventListener('touchmove', function(e) {
-      if (!isMobile() || busy) return;
-      var mx = e.touches[0].clientX - startX;
-      var my = e.touches[0].clientY - startY;
-      if (!locked) {
-        if (Math.abs(mx) < 10 && Math.abs(my) < 10) return;
-        locked = true;
-        if (Math.abs(my) > Math.abs(mx)) return;
-        dragging = true;
-      }
-      if (!dragging) return;
-      e.preventDefault();
-      dx = mx;
-      swiped = true;
-      var top = cards[order[0]];
-      top.style.transition = 'none';
-      top.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx * 0.05) + 'deg)';
-      if (order.length > 1) {
-        var progress = Math.min(Math.abs(dx) / 120, 1);
-        var under = cards[order[1]];
-        under.style.transition = 'none';
-        under.style.transform = 'scale(' + (0.96 + 0.04 * progress) + ') translateY(' + (8 - 8 * progress) + 'px)';
-        under.style.opacity = 0.5 + 0.5 * progress;
-      }
-    }, { passive: false });
-
-    container.addEventListener('touchend', function() {
-      if (!isMobile() || busy || !dragging) { dragging = false; locked = false; return; }
-      if (Math.abs(dx) > 60) {
-        flyOff(dx > 0 ? 1 : -1);
-      } else {
-        var top = cards[order[0]];
-        top.style.transition = 'transform 0.3s ease';
-        top.style.transform = 'none';
-        setTimeout(function() { top.style.transition = 'none'; }, 300);
-        if (order.length > 1) {
-          var under = cards[order[1]];
-          under.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-          under.style.transform = 'scale(0.96) translateY(8px)';
-          under.style.opacity = '0.5';
-        }
-      }
-      dragging = false; locked = false; dx = 0;
-    });
-
-    container.addEventListener('touchcancel', function() {
-      if (dragging) {
-        var top = cards[order[0]];
-        top.style.transition = 'transform 0.3s ease';
-        top.style.transform = 'none';
-        setTimeout(function() { top.style.transition = 'none'; }, 300);
-        if (order.length > 1) {
-          var under = cards[order[1]];
-          under.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-          under.style.transform = 'scale(0.96) translateY(8px)';
-          under.style.opacity = '0.5';
-        }
-      }
-      dragging = false; locked = false; dx = 0; busy = false;
-    });
-
-    container.addEventListener('click', function(e) {
-      if (swiped) { e.preventDefault(); e.stopPropagation(); swiped = false; }
-    }, true);
-
-    showLayout();
-
-    window.addEventListener('resize', function() {
-      if (!isMobile()) {
-        container.classList.remove('carousel-init');
-        container.style.height = '';
-        container.style.display = '';
-        cards.forEach(function(c) { c.style.cssText = ''; });
-        dots.style.display = 'none';
-      } else {
-        dots.style.display = 'flex';
-      }
-    });
-  }
-
-  function init() {
-    if (!isMobile()) return;
-    var p = document.querySelector('.pillars');
-    if (p) initCarousel(p);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() { setTimeout(init, 500); });
-  } else {
-    setTimeout(init, 500);
-  }
-})();
-</script>
-
-<script>
-// PAGE TRANSITION — blur out on internal nav
-(function() {
-  document.addEventListener('click', function(e) {
-    var link = e.target.closest('a[href]');
-    if (!link) return;
-    var href = link.getAttribute('href');
-    if (!href || href.charAt(0) === '#' || href.startsWith('mailto:') || link.hasAttribute('download') || link.target === '_blank') return;
-    e.preventDefault();
-    var pc = document.querySelector('.page-content');
-    if (pc) pc.classList.add('page-exit');
-    setTimeout(function() { window.location.href = href; }, 300);
-  });
-})();
-</script>
-
+<script src="app.js?v=3"></script>
 </body>
 </html>

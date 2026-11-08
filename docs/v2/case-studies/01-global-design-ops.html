@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Are Our Resources Following Our Priorities? — Ana Paola</title>
+  <meta name="description" content="Using operational data to uncover resource trade-offs, challenge assumptions and turn insights into decisions across a 70+ project portfolio.">
+  <meta property="og:title" content="Are Our Resources Following Our Priorities? — Ana Paola">
+  <meta property="og:description" content="Using operational data to uncover resource trade-offs, challenge assumptions and turn insights into decisions across a 70+ project portfolio.">
+  <meta property="og:image" content="https://anapaolagalvez.com/assets/og-image.png">
+  <meta property="og:url" content="https://anapaolagalvez.com/v2/case-studies/01-global-design-ops.html">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Are Our Resources Following Our Priorities? — Ana Paola">
+  <meta name="twitter:description" content="Using operational data to uncover resource trade-offs, challenge assumptions and turn insights into decisions across a 70+ project portfolio.">
+  <meta name="twitter:image" content="https://anapaolagalvez.com/assets/og-image.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👸🏽</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../v2/styles.css?v=3">
+  <script>(function(){try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}})()</script>
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_2amvHJ1LDjwcec88BgRTLGowcCnIBWhyBRzRHXPjrVr',{
+      api_host:'https://eu.i.posthog.com',
+      capture_pageview:false
+    });
+    posthog.capture('$pageview',{
+      referrer:document.referrer,
+      utm_source:new URLSearchParams(location.search).get('utm_source'),
+      utm_medium:new URLSearchParams(location.search).get('utm_medium'),
+      utm_campaign:new URLSearchParams(location.search).get('utm_campaign')
+    });
+    document.addEventListener('click',function(e){
+      var work=e.target.closest('.work-item');
+      if(work){
+        posthog.capture('case_study_click',{
+          case_study:(work.querySelector('.work-title')||{}).textContent,
+          href:work.getAttribute('href')
+        });
+        return;
+      }
+      var link=e.target.closest('a[href*="linkedin.com"],a[href^="mailto:"]');
+      if(link){
+        posthog.capture('contact_click',{
+          type:link.href.indexOf('mailto:')===0?'email':'linkedin',
+          href:link.href
+        });
+      }
+    });
+  </script>
+</head>
+<body data-home="../">
+
+<main class="page">
+  <div class="col">
+    <div class="topbar">
+      <a class="avatar" href="../" aria-label="Ana Paola, home"><img src="../../assets/avatar.jpg" alt=""></a>
+      <span class="seg" role="radiogroup" aria-label="Theme" data-theme-toggle style="--n:2;--i:0">
+        <span class="seg-thumb" aria-hidden="true"></span>
+        <button type="button" role="radio" data-value="light" aria-checked="true" aria-label="Light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
+        <button type="button" role="radio" data-value="dark" aria-checked="false" aria-label="Dark" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+      </span>
+    </div>
+
+    <a class="back mono" href="../">← Home <span class="esc">esc</span></a>
+
+    <header class="case-head">
+      <div class="glyph" aria-hidden="true">●</div>
+      <h1>Are Our Resources Following Our Priorities?</h1>
+      <p class="problem-statement">Using operational data to uncover resource trade-offs, challenge assumptions and turn insights into decisions across a 70+ project portfolio.</p>
+      <ul class="tags"><li class="tag">Strategy &amp; Operations</li><li class="tag">Data Analysis</li><li class="tag">Resource Allocation</li><li class="tag">Decision Support</li></ul>
+    </header>
+
+    <details class="tldr">
+      <summary class="mono">TL;DR</summary>
+      <div class="tldr-body">
+      <p><strong>Problem:</strong> Innovation capacity had quietly dropped from ~30% to ~5% of a 70+ project portfolio, and no one had asked whether that shift was intentional.</p>
+      <p><strong>What I did:</strong> Used recurring resource, portfolio and budget reporting to diagnose the shift, validated it with the Innovation design lead, and framed the trade-off for leadership instead of letting short-term demand decide by default.</p>
+      <p><strong>Impact:</strong></p>
+      <ul>
+        <li>Design leadership explicitly decided to protect 50% of the Innovation lead's capacity while keeping Implementation the priority</li>
+        <li>Ad hoc support for projects outside the core portfolio moved to a clearer, formal request process</li>
+        <li>Budget conversations shifted from "what did we spend" to "where are we heading"</li>
+      </ul>
+    </div>
+    </details>
+
+    <article class="case-body">
+
+      <h2 class="reveal">Context</h2>
+      <p class="reveal">I lead Design Operations at Electrolux Design for Product Line Wellbeing and SDA across Stockholm and Shanghai, with 70+ projects running across the portfolio.</p>
+      <p class="reveal">Design capacity is finite, and designers split their time across different types of work: bringing products to market, developing brand and design identity, exploring future innovation, and supporting initiatives outside our immediate portfolio.</p>
+      <p class="reveal">That makes one question particularly important:</p>
+      <p class="case-question reveal"><mark class="blue">Are we actually spending our time where we say our priorities are?</mark></p>
+      <p class="reveal">To answer it, I use recurring resource, portfolio and budget reporting to look beyond individual projects and understand how capacity is behaving as a system.</p>
+
+      <h2 class="reveal">The Signal</h2>
+      <p class="case-lead reveal">Innovation had fallen from ~30% to ~5%.</p>
+      <p class="reveal">One of the reports tracks how Design capacity is distributed across different types of work. Over time, the allocation had shifted significantly.</p>
+
+      <div class="case-table-wrap reveal">
+        <table class="case-table">
+          <thead>
+            <tr><th>Type of work</th><th>Previously</th><th>More recently</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Implementation</td><td>~60%</td><td>~70%</td></tr>
+            <tr><td>Innovation</td><td>~30%</td><td>~5%</td></tr>
+            <tr><td>Identity</td><td>~10%</td><td>~25%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="reveal">The numbers alone weren't enough to say whether this was good or bad.</p>
+      <p class="reveal">Identity had increased during a rebranding, so part of that shift made sense. Implementation was also the immediate business priority.</p>
+      <p class="reveal">But Innovation falling to ~5% raised a different question, particularly for categories where innovation is part of the intended brand proposition:</p>
+      <p class="case-question reveal"><mark class="blue">Are we intentionally prioritizing today's delivery — or becoming reactive at the expense of tomorrow?</mark></p>
+
+      <h2 class="reveal">The Diagnosis</h2>
+      <p class="reveal">I wanted to understand the why before recommending the what.</p>
+      <p class="reveal">I spoke with the designer leading Innovation to validate what I was seeing in the resource data.</p>
+      <p class="reveal">His own research and observations supported the pattern: Innovation activity had reduced substantially, while immediate delivery requirements were absorbing more of the team's capacity.</p>
+      <p class="reveal">That helped frame the issue differently. The question wasn't whether Innovation or Implementation should win. The real question was:</p>
+      <p class="case-question reveal"><mark class="blue">What level of Innovation capacity do we deliberately want to protect while Implementation remains the priority?</mark></p>
+
+      <h3 class="reveal">The Recommendation</h3>
+      <p class="reveal">I recommended making that trade-off explicit rather than allowing short-term demand to determine the allocation by default.</p>
+      <p class="reveal">That meant starting a conversation with Product Line leadership — particularly around Vacuum Cleaners — to understand the intended role of Innovation and what future-focused work we wanted to protect.</p>
+      <p class="reveal">The Innovation Design lead began developing a proposal for new Innovation work, aligned with the Head of Wellbeing &amp; SDA Design.</p>
+
+      <h3 class="reveal">The Decision</h3>
+      <p class="reveal">After discussing the trade-off with Design leadership, the decision was to keep Implementation as the priority while allocating 50% of the Innovation Design lead's capacity back to Innovation.</p>
+
+      <div class="case-callout reveal">
+        <p>It wasn't a decision to choose the future over today's delivery.</p>
+        <p>It was a decision to protect part of the future while still delivering today.</p>
+      </div>
+
+      <h2 class="reveal">A Second Signal</h2>
+      <p class="case-lead reveal">Small commitments were adding up.</p>
+      <p class="reveal">The same reporting surfaced another resource question. Several designers were spending relatively small amounts of time supporting projects outside our core portfolio.</p>
+      <p class="reveal">Individually, those commitments looked minor. Aggregated across the team, they represented meaningful capacity.</p>
+      <p class="reveal">Rather than immediately recommending that we stop supporting those projects, I proposed understanding the demand first. I aggregated the hours being spent, forecasted future demand based on typical behavior, and investigated what type of Design support those projects actually required.</p>
+      <p class="reveal">The question became:</p>
+      <p class="case-question reveal"><mark class="blue">How can we keep supporting the wider organization without allowing informal commitments to quietly consume our capacity?</mark></p>
+
+      <h3 class="reveal">The Recommendation</h3>
+      <p class="reveal">I recommended moving from ad-hoc support toward a clearer operating mechanism. I aligned with the Project Lead and we established a more formal way for projects to request and receive support from our designers, creating clearer expectations around the commitment required.</p>
+      <p class="reveal">The goal wasn't to stop collaboration. It was to make the trade-off visible, forecastable and intentional.</p>
+
+      <h2 class="reveal">How I Approach the Problem</h2>
+
+      <div class="case-flow reveal">
+        <div class="flow-step"><strong>Signal</strong> <span>What is changing in the data?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Diagnose</strong> <span>Why is it happening?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Validate</strong> <span>Does the operational context support what the data suggests?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Implication</strong> <span>Why does it matter for the business?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Options</strong> <span>What could we do differently?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Recommend</strong> <span>What do I think we should do — and what trade-off does it create?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Align &amp; Act</strong> <span>Who needs to decide, and how do we turn the decision into action?</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>Measure Again</strong> <span>Did the allocation actually change?</span></div>
+      </div>
+
+      <!-- Key Takeaway -->
+      <div class="case-takeaway reveal">
+        <h3>What I Took From It</h3>
+        <p>The number is rarely the interesting part.</p>
+        <p>Innovation at 5% is a number. Understanding what we might sacrifice by keeping it there is a strategic question.</p>
+        <p>A few hours spent on another project is a number. Seeing those hours accumulate across a team and changing how that capacity is committed is an operating question.</p>
+        <p>A budget forecast is a number. Seeing where we're heading early enough to respond turns it into a decision tool.</p>
+        <p>The part of data work I care about most is finding the question behind the number, forming a point of view, and turning it into something people can act on.</p>
+      </div>
+
+    
+    </article>
+
+    <div class="case-end">
+      <a class="btn ghost" href="../">← Home</a>
+      <a class="btn" href="mailto:anapaolagalo@gmail.com">Say hola</a>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="col">
+    <div class="rule-dashed" aria-hidden="true"></div>
+    <div class="foot-row">
+      <span>© 2026 Ana Paola Galvez Lopez</span>
+      <span><a href="mailto:anapaolagalo@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/anapaolagalvez/" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
+    </div>
+    <p class="foot-note">made with ❤ &amp; plenty of matcha lattes in Stockholm</p>
+  </div>
+</footer>
+
+<div class="seg version-switch" role="group" aria-label="Site version" style="--n:2;--i:1">
+  <span class="seg-thumb" aria-hidden="true"></span>
+  <a href="../../case-studies/01-global-design-ops.html">V1</a>
+  <a href="#" aria-current="true">V2</a>
+</div>
+
+<script src="../app.js?v=3"></script>
+</body>
+</html>

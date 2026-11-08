@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Caveat:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="v2/styles.css?v=3">
+  <link rel="stylesheet" href="v1-home.css?v=3">
   <script>(function(){if(localStorage.getItem('theme')!=='light')document.documentElement.setAttribute('data-theme','dark')})()</script>
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -895,5 +895,19 @@
 })();
 </script>
 
+<style>
+  /* Version switch (V1 / V2) */
+  .version-switch{--vs-bg:#f6f6f3;--vs-ink:#313131;--vs-muted:#6c6c6b;--vs-line:#d4d1cb;position:fixed;left:16px;bottom:16px;z-index:200;display:inline-grid;grid-auto-flow:column;grid-auto-columns:1fr;padding:3px;border:1px solid var(--vs-line);border-radius:999px;background:var(--vs-bg);box-shadow:0 6px 24px rgba(0,0,0,.08);isolation:isolate;font-family:ui-monospace,'SF Mono',Menlo,monospace}
+  [data-theme="dark"] .version-switch{--vs-bg:#262624;--vs-ink:#f1f0ec;--vs-muted:#a3a29c;--vs-line:#3e3d3a}
+  .version-switch .vs-thumb{position:absolute;z-index:0;top:3px;bottom:3px;left:3px;width:calc((100% - 6px)/2);border-radius:999px;background:var(--vs-ink)}
+  .version-switch a{position:relative;z-index:1;display:grid;place-items:center;min-width:38px;height:28px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:500;letter-spacing:.03em;color:var(--vs-muted);text-decoration:none}
+  .version-switch a[aria-current="true"]{color:var(--vs-bg)}
+  .version-switch a:hover:not([aria-current]){color:var(--vs-ink)}
+</style>
+<div class="version-switch" role="group" aria-label="Site version">
+  <span class="vs-thumb" aria-hidden="true"></span>
+  <a href="#" aria-current="true">V1</a>
+  <a href="v2/">V2</a>
+</div>
 </body>
 </html>
