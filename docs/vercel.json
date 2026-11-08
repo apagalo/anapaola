@@ -1,4 +1,11 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "redirects": [
+    { "source": "/", "destination": "/v2/", "permanent": false },
+    { "source": "/v2", "destination": "/v2/", "permanent": false },
+    { "source": "/index.html", "destination": "/v2/", "permanent": false },
+    { "source": "/case-studies/02-power-bi-dashboards", "destination": "/v2/case-studies/02-power-bi-dashboards", "permanent": false },
+    { "source": "/case-studies/02-power-bi-dashboards.html", "destination": "/v2/case-studies/02-power-bi-dashboards", "permanent": false },
+    { "source": "/case-studies/:path*", "destination": "/v2/", "permanent": false }
+  ]
 }

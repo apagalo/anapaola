@@ -687,7 +687,7 @@ em, .serif { font-family: var(--font-serif); font-style: italic; font-weight: 40
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 12px;
-  grid-template-areas: "photo prints" "case1 case1" "case2 case2" "think tools";
+  grid-template-areas: "photo prints" "case2 case2" "think tools";
 }
 .t-photo { grid-area: photo; }
 .t-prints { grid-area: prints; }
@@ -727,7 +727,7 @@ em, .serif { font-family: var(--font-serif); font-style: italic; font-weight: 40
 }
 
 @media (max-width: 520px) {
-  .bento { grid-template-areas: "photo prints" "case1 case1" "case2 case2" "think think" "tools tools"; }
+  .bento { grid-template-areas: "photo prints" "case2 case2" "think think" "tools tools"; }
   .t-think { aspect-ratio: 16 / 10; }
   .t-tools { aspect-ratio: 5 / 4; }
 }
@@ -1230,3 +1230,11 @@ html:has(.book-sheet.is-full.is-shown) { overflow: hidden; }
   .home .lead { top: max(61px, calc(var(--bar-vis, 61px) + 24px)); transition: top .28s cubic-bezier(.22, .8, .24, 1); }
 }
 @media (prefers-reduced-motion: reduce) { .home .lead { transition: none; } }
+
+/* ---------- Contact tile (replaces Toolkit) ---------- */
+.tile-talk { display: flex; align-items: center; padding: 24px; }
+.tile-talk .say-hi { margin-top: 0; }
+.tile-talk .say-hi p:last-of-type { margin-bottom: 16px; }
+@media (max-width: 720px) {
+  .t-tools.tile-talk { height: auto; aspect-ratio: auto; padding: 20px; }
+}
