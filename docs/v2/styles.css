@@ -1220,3 +1220,7 @@ html:has(.book-sheet.is-full.is-shown) { overflow: hidden; }
 .next-btn:hover { background: color-mix(in srgb, var(--tile) 50%, transparent); border-color: var(--line-strong); }
 .next-btn:hover svg { translate: 3px 0; }
 .next-btn:focus-visible { outline: 1px solid var(--ink-muted); outline-offset: 2px; }
+
+/* footer: same space under the text as between the line and the text */
+.foot, .foot { padding-bottom: 20px; }
+@media (min-width: 1240px) { .foot { padding-bottom: 20px; } }
