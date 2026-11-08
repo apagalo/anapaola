@@ -1206,3 +1206,17 @@ html:has(.book-sheet.is-full.is-shown) { overflow: hidden; }
 .book-sheet.is-full .pager { grid-row: 4; grid-column: 1; padding: 10px 16px max(10px, env(safe-area-inset-bottom)); border-top: 1px solid var(--tint-line); }
 @media (prefers-reduced-motion: reduce) { .book-sheet.is-full, .book-sheet.is-full > * { transition: none !important; } }
 .book-sheet .close, .book-sheet .close:focus-visible { border-radius: 999px; }
+
+/* end of a case: one quiet pill to the next case, centered in the text column */
+.case-end { justify-content: center; margin-top: 56px; }
+.next-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 40px; padding: 0 16px 0 20px;
+  border: 1px solid var(--line); border-radius: 999px;
+  color: var(--ink); text-decoration: none; font-size: 14px;
+  transition: background-color .25s ease, border-color .25s ease;
+}
+.next-btn svg { width: 16px; height: 16px; transition: translate .25s var(--ease); }
+.next-btn:hover { background: color-mix(in srgb, var(--tile) 50%, transparent); border-color: var(--line-strong); }
+.next-btn:hover svg { translate: 3px 0; }
+.next-btn:focus-visible { outline: 1px solid var(--ink-muted); outline-offset: 2px; }
