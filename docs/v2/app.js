@@ -258,6 +258,7 @@
       off = v;
       bar.classList.toggle('is-snapping', !!animate);
       bar.style.translate = off ? '0 ' + (-off) + 'px' : '';
+      root.style.setProperty('--bar-vis', Math.max(0, bar.offsetHeight - off) + 'px');
     }
     function onScroll() {
       ticking = false;

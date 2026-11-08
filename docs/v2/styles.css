@@ -1154,3 +1154,18 @@ html:has(.modal[open]) { overflow: hidden; }
 .book-sheet.is-full .pager button { padding: 8px 0; font-size: 12px; }
 html:has(.book-sheet.is-full.is-shown) { overflow: hidden; }
 .book-sheet.is-full { grid-template-columns: auto minmax(0, 1fr); }
+
+/* case headings stand on their own, no rule beside them */
+.case-body h2::after { display: none; }
+
+/* legend scrolls up with the page, then holds one header-height from the top
+   (a little lower while the header is showing, so it never touches it) */
+.legend { top: max(61px, calc(var(--bar-vis, 61px) + 24px)); transition: top .28s cubic-bezier(.22, .8, .24, 1); }
+@media (prefers-reduced-motion: reduce) { .legend { transition: none; } }
+
+/* header controls share one 32px height; on phones Home is a 32px circle */
+.back-btn { box-sizing: border-box; height: 32px; padding-top: 0; padding-bottom: 0; }
+.case-switch summary { min-height: 32px; box-sizing: border-box; }
+@media (max-width: 640px) {
+  .back-btn { width: 32px; padding: 0; justify-content: center; }
+}
