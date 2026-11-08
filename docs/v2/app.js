@@ -222,8 +222,9 @@
     function onScroll() {
       ticking = false;
       var y = Math.max(0, window.scrollY), dy = y - lastY;
-      if (Math.abs(dy) < 6) return;
-      if (dy > 0 && y > bar.offsetHeight + 40 && !busyBar()) bar.classList.add('is-hidden');
+      if (y <= 0) { bar.classList.remove('is-hidden'); lastY = 0; return; }
+      if (Math.abs(dy) < 3) return;
+      if (dy > 0 && !busyBar()) bar.classList.add('is-hidden');
       else if (dy < 0) bar.classList.remove('is-hidden');
       lastY = y;
     }
