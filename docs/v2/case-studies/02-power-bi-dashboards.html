@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../v2/styles.css?v=5">
+  <link rel="stylesheet" href="../../v2/styles.css?v=6">
   <script>(function(){var d=document.documentElement;try{if(localStorage.getItem('theme')==='dark')d.setAttribute('data-theme','dark');var h=localStorage.getItem('v2-hover');if(h)d.setAttribute('data-hover',h)}catch(e){}})()</script>
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -51,26 +51,30 @@
     });
   </script>
 </head>
-<body data-home="../">
+<body class="inner" data-home="../">
+
+<header class="crumbbar">
+  <div class="crumb-inner">
+    <a class="back-btn" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span>Home</span></a>
+    <nav class="crumbs mono" aria-label="Breadcrumb"><a href="../">Index</a><span aria-hidden="true">/</span><span>Selected work</span><span aria-hidden="true">/</span><span aria-current="page">Case 02</span></nav>
+    <div class="crumb-right"><span class="esc-hint mono">Esc</span>
+        <span class="seg" role="radiogroup" aria-label="Theme" data-theme-toggle style="--n:2;--i:0">
+          <span class="seg-thumb" aria-hidden="true"></span>
+          <button type="button" role="radio" data-value="light" aria-checked="true" aria-label="Light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
+          <button type="button" role="radio" data-value="dark" aria-checked="false" aria-label="Dark" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+        </span>
+    </div>
+  </div>
+</header>
 
 <main class="page">
-  <div class="col">
-    <div class="topbar">
-      <a class="avatar" href="../" aria-label="Ana Paola, home"><img src="../../assets/avatar.jpg" alt=""></a>
-      <span class="seg" role="radiogroup" aria-label="Theme" data-theme-toggle style="--n:2;--i:0">
-        <span class="seg-thumb" aria-hidden="true"></span>
-        <button type="button" role="radio" data-value="light" aria-checked="true" aria-label="Light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
-        <button type="button" role="radio" data-value="dark" aria-checked="false" aria-label="Dark" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
-      </span>
-    </div>
-
-    <a class="back mono" href="../">← Home <span class="esc">esc</span></a>
-
+  <div class="inner-wrap">
+    <dl class="legend"><div><dt>Type</dt><dd>Case study 02</dd></div><div><dt>Company</dt><dd>Electrolux Group</dd></div><div><dt>Focus</dt><dd>Systems Thinking<br>AI<br>APIs<br>Automation</dd></div><div><dt>Read</dt><dd>4 min</dd></div></dl>
+    <div class="inner-main">
+    <div class="hero-art t2" aria-hidden="true"><span class="rings"></span><span class="glyph">❖</span></div>
     <header class="case-head">
-      <div class="glyph" aria-hidden="true">❖</div>
       <h1>When the Reporting System Became the Problem</h1>
       <p class="problem-statement">After three years of using data to support portfolio decisions, a new challenge emerged: how do you create one global view when different teams don't work in the same way?</p>
-      <ul class="tags"><li class="tag">Systems Thinking</li><li class="tag">AI</li><li class="tag">APIs</li><li class="tag">Automation</li></ul>
     </header>
 
     <details class="tldr">
@@ -209,6 +213,7 @@
       <a class="btn ghost" href="../">← Home</a>
       <a class="btn" href="mailto:anapaolagalo@gmail.com">Say hola</a>
     </div>
+    </div>
   </div>
 </main>
 
@@ -228,6 +233,6 @@
   <a href="#" aria-current="true">V2</a>
 </div>
 
-<script src="../app.js?v=5"></script>
+<script src="../app.js?v=6"></script>
 </body>
 </html>
