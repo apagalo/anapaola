@@ -113,9 +113,15 @@
     var current = -1, back = null;
     var phone = matchMedia('(max-width: 520px)');
     // on phones the sheet leaves the tile and covers the whole screen
+    // the clip that matches the tile, so the sheet can grow out of it and shrink back
+    function tileClip() {
+      var r = tile.getBoundingClientRect(), w = document.documentElement.clientWidth, h = window.innerHeight;
+      return 'inset(' + r.top + 'px ' + (w - r.right) + 'px ' + (h - r.bottom) + 'px ' + r.left + 'px round 16px)';
+    }
     function goFull() {
       if (sheet.parentNode === document.body) return;
       sheet.style.setProperty('--tile-bg', getComputedStyle(tile).getPropertyValue('--tile-bg'));
+      sheet.style.setProperty('--from', tileClip());
       document.body.appendChild(sheet);
       sheet.classList.add('is-full');
       sheet.setAttribute('role', 'dialog');
@@ -125,14 +131,16 @@
     }
     function leaveFull() {
       if (sheet.parentNode !== document.body) return;
+      sheet.style.setProperty('--from', tileClip());
       sheet.classList.remove('is-shown');
       clearTimeout(back);
       back = setTimeout(function () {
         sheet.classList.remove('is-full');
         sheet.removeAttribute('role'); sheet.removeAttribute('aria-modal');
         sheet.style.removeProperty('--tile-bg');
+        sheet.style.removeProperty('--from');
         tile.appendChild(sheet);
-      }, reduce ? 0 : 320);
+      }, reduce ? 0 : 460);
     }
     function open(i) {
       current = (i + triggers.length) % triggers.length;

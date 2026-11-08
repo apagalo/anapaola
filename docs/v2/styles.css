@@ -1169,3 +1169,40 @@ html:has(.book-sheet.is-full.is-shown) { overflow: hidden; }
 @media (max-width: 640px) {
   .back-btn { width: 32px; padding: 0; justify-content: center; }
 }
+
+/* ---------- Mobile full-screen sheet v2: grows out of its tile, header like the case pages ---------- */
+.book-sheet.is-full {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  gap: 0;
+  padding: 0;
+  opacity: 1; visibility: visible; translate: 0 0;
+  clip-path: var(--from, inset(0 round 0));
+  transition: clip-path .45s cubic-bezier(.22, .8, .24, 1);
+  overflow-y: auto;
+}
+.book-sheet.is-full.is-shown { clip-path: inset(0 round 0); transition: clip-path .45s cubic-bezier(.22, .8, .24, 1); }
+.book-sheet.is-full > * { opacity: 0; transition: opacity .2s ease; }
+.book-sheet.is-full.is-shown > * { opacity: 1; transition: opacity .3s ease .18s; }
+
+/* header row: close where Home sits, name centered, same 32px controls */
+.book-sheet.is-full .top {
+  grid-row: 1;
+  display: grid; grid-template-columns: 32px minmax(0, 1fr) 32px; align-items: center; gap: 10px;
+  padding: max(14px, env(safe-area-inset-top)) 16px 14px;
+  border-bottom: 1px solid var(--tint-line);
+}
+.book-sheet.is-full .top .close { grid-column: 1; grid-row: 1; width: 32px; height: 32px; font-size: 16px; background: transparent; border-color: var(--tint-line); }
+.book-sheet.is-full .top .mono { grid-column: 2; grid-row: 1; text-align: center; font-family: var(--font-sans); font-size: 13px; line-height: 20px; letter-spacing: 0; text-transform: none; color: var(--ink); }
+
+/* book or step number on top, the text underneath */
+.book-sheet.is-full .book-cover,
+.book-sheet.is-full .step-num { grid-row: 2; grid-column: 1; margin: 32px 16px 0; justify-self: start; }
+.book-sheet.is-full .book-cover { width: 96px; height: 138px; font-size: 13px; }
+.book-sheet.is-full .step-num { width: 72px; height: 72px; font-size: 22px; }
+.book-sheet.is-full .book-info { grid-row: 3; grid-column: 1; padding: 24px 16px 32px; overflow: visible; }
+
+/* pager: divider runs edge to edge */
+.book-sheet.is-full .pager { grid-row: 4; grid-column: 1; padding: 10px 16px max(10px, env(safe-area-inset-bottom)); border-top: 1px solid var(--tint-line); }
+@media (prefers-reduced-motion: reduce) { .book-sheet.is-full, .book-sheet.is-full > * { transition: none !important; } }
+.book-sheet .close, .book-sheet .close:focus-visible { border-radius: 999px; }
