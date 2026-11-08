@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../v2/styles.css?v=6">
+  <link rel="stylesheet" href="../../v2/styles.css?v=7">
   <script>(function(){var d=document.documentElement;try{if(localStorage.getItem('theme')==='dark')d.setAttribute('data-theme','dark');var h=localStorage.getItem('v2-hover');if(h)d.setAttribute('data-hover',h)}catch(e){}})()</script>
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -55,9 +55,9 @@
 
 <header class="crumbbar">
   <div class="crumb-inner">
-    <a class="back-btn" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span>Home</span></a>
-    <nav class="crumbs mono" aria-label="Breadcrumb"><a href="../">Index</a><span aria-hidden="true">/</span><span>Selected work</span><span aria-hidden="true">/</span><span aria-current="page">Case 01</span></nav>
-    <div class="crumb-right"><span class="esc-hint mono">Esc</span>
+    <a class="back-btn" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9v11h13V9"/><path d="M10 20v-5.5h4V20"/></svg><span>Home</span></a>
+    <div class="crumb-center"><details class="case-switch"><summary aria-label="Switch case study"><span class="cs-title">Are Our Resources Following Our Priorities?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></summary><nav class="cs-menu" aria-label="Case studies"><a href="01-global-design-ops.html" aria-current="page"><span class="mono">01</span><span>Are Our Resources Following Our Priorities?</span></a><a href="02-power-bi-dashboards.html"><span class="mono">02</span><span>When the Reporting System Became the Problem</span></a></nav></details></div>
+    <div class="crumb-right">
         <span class="seg" role="radiogroup" aria-label="Theme" data-theme-toggle style="--n:2;--i:0">
           <span class="seg-thumb" aria-hidden="true"></span>
           <button type="button" role="radio" data-value="light" aria-checked="true" aria-label="Light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
@@ -69,7 +69,7 @@
 
 <main class="page">
   <div class="inner-wrap">
-    <dl class="legend"><div><dt>Type</dt><dd>Case study 01</dd></div><div><dt>Company</dt><dd>Electrolux Group</dd></div><div><dt>Focus</dt><dd>Strategy &amp; Operations<br>Data Analysis<br>Resource Allocation<br>Decision Support</dd></div><div><dt>Read</dt><dd>4 min</dd></div></dl>
+    <dl class="legend"><div><dt>Company</dt><dd>Electrolux Group</dd></div><div><dt>Focus</dt><dd>Strategy &amp; Operations<br>Data Analysis<br>Resource Allocation<br>Decision Support</dd></div><div><dt>Read</dt><dd>4 min<button type="button" class="tldr-chip mono" data-modal="tldr" aria-haspopup="dialog">TL;DR<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></button></dd></div></dl>
     <div class="inner-main">
     <div class="hero-art t1" aria-hidden="true"><span class="rings"></span><span class="glyph">●</span></div>
     <header class="case-head">
@@ -77,19 +77,6 @@
       <p class="problem-statement">Using operational data to uncover resource trade-offs, challenge assumptions and turn insights into decisions across a 70+ project portfolio.</p>
     </header>
 
-    <details class="tldr">
-      <summary class="mono">TL;DR</summary>
-      <div class="tldr-body">
-      <p><strong>Problem:</strong> Innovation capacity had quietly dropped from ~30% to ~5% of a 70+ project portfolio, and no one had asked whether that shift was intentional.</p>
-      <p><strong>What I did:</strong> Used recurring resource, portfolio and budget reporting to diagnose the shift, validated it with the Innovation design lead, and framed the trade-off for leadership instead of letting short-term demand decide by default.</p>
-      <p><strong>Impact:</strong></p>
-      <ul>
-        <li>Design leadership explicitly decided to protect 50% of the Innovation lead's capacity while keeping Implementation the priority</li>
-        <li>Ad hoc support for projects outside the core portfolio moved to a clearer, formal request process</li>
-        <li>Budget conversations shifted from "what did we spend" to "where are we heading"</li>
-      </ul>
-    </div>
-    </details>
 
     <article class="case-body">
 
@@ -205,12 +192,25 @@
   </div>
 </footer>
 
+<dialog class="modal" id="tldr" aria-labelledby="tldr-h">
+  <div class="modal-head"><span class="mono" id="tldr-h">TL;DR</span><button type="button" class="close" data-close aria-label="Close">×</button></div>
+  <div class="tldr-body">
+      <p><strong>Problem:</strong> Innovation capacity had quietly dropped from ~30% to ~5% of a 70+ project portfolio, and no one had asked whether that shift was intentional.</p>
+      <p><strong>What I did:</strong> Used recurring resource, portfolio and budget reporting to diagnose the shift, validated it with the Innovation design lead, and framed the trade-off for leadership instead of letting short-term demand decide by default.</p>
+      <p><strong>Impact:</strong></p>
+      <ul>
+        <li>Design leadership explicitly decided to protect 50% of the Innovation lead's capacity while keeping Implementation the priority</li>
+        <li>Ad hoc support for projects outside the core portfolio moved to a clearer, formal request process</li>
+        <li>Budget conversations shifted from "what did we spend" to "where are we heading"</li>
+      </ul>
+    </div>
+</dialog>
 <div class="seg version-switch" role="group" aria-label="Site version" style="--n:2;--i:1">
   <span class="seg-thumb" aria-hidden="true"></span>
   <a href="../../case-studies/01-global-design-ops.html">V1</a>
   <a href="#" aria-current="true">V2</a>
 </div>
 
-<script src="../app.js?v=6"></script>
+<script src="../app.js?v=7"></script>
 </body>
 </html>

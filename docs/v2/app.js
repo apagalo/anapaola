@@ -73,58 +73,88 @@
     printsTile.addEventListener('click', next);
   }
 
-  // ---------- CYCLING LIST ----------
+  // ---------- CYCLING LIST (hover pauses on the item under the pointer) ----------
   document.querySelectorAll('[data-cycle]').forEach(function (list) {
-    var items = list.querySelectorAll('li');
-    var i = 0;
+    var items = Array.prototype.slice.call(list.querySelectorAll('li'));
+    var i = 0, timer = null, held = false;
     function show() { items.forEach(function (li, j) { li.classList.toggle('on', j === i); }); }
-    show();
-    if (reduce || items.length < 2) return;
-    setInterval(function () { i = (i + 1) % items.length; show(); }, 1700);
+    function stop() { clearInterval(timer); timer = null; }
+    function start() {
+      stop();
+      if (reduce || items.length < 2) return;
+      timer = setInterval(function () {
+        if (held || list.closest('.is-open')) return;
+        i = (i + 1) % items.length; show();
+      }, 1700);
+    }
+    list._go = function (j) { i = j; show(); };
+    items.forEach(function (li, j) {
+      li.addEventListener('pointerenter', function () { held = true; i = j; show(); });
+      li.addEventListener('focusin', function () { held = true; i = j; show(); });
+    });
+    list.addEventListener('pointerleave', function () { held = false; start(); });
+    list.addEventListener('focusout', function (e) { if (!list.contains(e.relatedTarget)) { held = false; start(); } });
+    show(); start();
   });
 
-  // ---------- BOOKSHELF ----------
-  var shelf = document.querySelector('[data-shelf]');
-  if (shelf) {
-    var books = Array.prototype.slice.call(shelf.querySelectorAll('.book'));
-    var sheet = shelf.querySelector('.book-sheet');
-    var cover = sheet.querySelector('.book-cover');
-    var title = sheet.querySelector('h3');
-    var forLine = sheet.querySelector('.for');
-    var text = sheet.querySelector('.book-info p');
+  // ---------- SHEETS: a card that slides over a tile (Toolkit books, How I think steps) ----------
+  function sheetTile(tile, triggers, fill) {
+    var sheet = tile.querySelector('.book-sheet');
     var count = sheet.querySelector('.count');
     var current = -1;
     function open(i) {
-      current = (i + books.length) % books.length;
-      var b = books[current];
-      cover.style.setProperty('--bg', b.style.getPropertyValue('--bg'));
-      cover.style.setProperty('--fg', b.style.getPropertyValue('--fg'));
-      cover.textContent = b.dataset.cover || b.dataset.title;
-      title.textContent = b.dataset.title;
-      forLine.textContent = b.dataset.for;
-      text.textContent = b.dataset.text;
-      count.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(books.length).padStart(2, '0');
-      shelf.classList.add('is-open');
+      current = (i + triggers.length) % triggers.length;
+      fill(triggers[current], current);
+      count.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(triggers.length).padStart(2, '0');
+      tile.classList.add('is-open');
       sheet.removeAttribute('inert');
       sheet.setAttribute('aria-hidden', 'false');
     }
     function close() {
-      shelf.classList.remove('is-open');
+      tile.classList.remove('is-open');
       sheet.setAttribute('inert', '');
       sheet.setAttribute('aria-hidden', 'true');
-      if (current >= 0) books[current].focus({ preventScroll: true });
+      if (current >= 0) triggers[current].focus({ preventScroll: true });
     }
-    books.forEach(function (b, i) {
+    triggers.forEach(function (b, i) {
       b.addEventListener('click', function (e) { e.stopPropagation(); open(i); });
     });
     sheet.querySelector('.close').addEventListener('click', function (e) { e.stopPropagation(); close(); });
     sheet.querySelector('[data-prev]').addEventListener('click', function (e) { e.stopPropagation(); open(current - 1); });
     sheet.querySelector('[data-next]').addEventListener('click', function (e) { e.stopPropagation(); open(current + 1); });
-    shelf.addEventListener('click', function (e) {
-      if (!shelf.classList.contains('is-open') && !e.target.closest('.book')) open(0);
-    });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && shelf.classList.contains('is-open')) close();
+      if (e.key === 'Escape' && tile.classList.contains('is-open')) close();
+    });
+    return { open: open };
+  }
+
+  var shelf = document.querySelector('[data-shelf]');
+  if (shelf) {
+    var bs = shelf.querySelector('.book-sheet');
+    var cover = bs.querySelector('.book-cover');
+    var shelfSheet = sheetTile(shelf, Array.prototype.slice.call(shelf.querySelectorAll('.book')), function (b) {
+      cover.style.setProperty('--bg', b.style.getPropertyValue('--bg'));
+      cover.style.setProperty('--fg', b.style.getPropertyValue('--fg'));
+      cover.textContent = b.dataset.cover || b.dataset.title;
+      bs.querySelector('h3').textContent = b.dataset.title;
+      bs.querySelector('.for').textContent = b.dataset.for;
+      bs.querySelector('.book-info p').textContent = b.dataset.text;
+    });
+    shelf.addEventListener('click', function (e) {
+      if (!shelf.classList.contains('is-open') && !e.target.closest('.book')) shelfSheet.open(0);
+    });
+  }
+
+  var stepsTile = document.querySelector('[data-steps]');
+  if (stepsTile) {
+    var ss = stepsTile.querySelector('.book-sheet');
+    var cyc = stepsTile.querySelector('[data-cycle]');
+    sheetTile(stepsTile, Array.prototype.slice.call(stepsTile.querySelectorAll('.cycle button')), function (b, i) {
+      ss.querySelector('.step-num').textContent = String(i + 1).padStart(2, '0');
+      ss.querySelector('h3').textContent = b.dataset.title;
+      ss.querySelector('.for').textContent = b.dataset.for;
+      ss.querySelector('.book-info p').textContent = b.dataset.text;
+      if (cyc && cyc._go) cyc._go(i);
     });
   }
 
@@ -160,10 +190,26 @@
   if (home) {
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Escape' || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (document.querySelector('dialog[open]')) return;
       var open = document.querySelector('details[open]');
-      if (open && open.contains(document.activeElement)) { open.open = false; return; }
+      if (open) { open.open = false; return; }
       window.location.href = home;
     });
+  }
+
+  // ---------- MODALS (TL;DR) ----------
+  document.querySelectorAll('[data-modal]').forEach(function (btn) {
+    var dlg = document.getElementById(btn.getAttribute('data-modal'));
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+    btn.addEventListener('click', function () { dlg.showModal(); });
+    dlg.querySelector('[data-close]').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  });
+
+  // ---------- CASE SWITCHER: close on outside click ----------
+  var sw = document.querySelector('.case-switch');
+  if (sw) {
+    document.addEventListener('click', function (e) { if (sw.open && !sw.contains(e.target)) sw.open = false; });
   }
 
   // ---------- CARD HOVER: pointer position for tilt + spotlight ----------
