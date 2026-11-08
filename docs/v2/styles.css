@@ -1057,3 +1057,20 @@ html:has(.modal[open]) { overflow: hidden; }
 @media (max-width: 420px) { .brand-last { display: none; } }
 .home-bar .crumb-inner { max-width: calc(var(--col) + 32px); }
 @media (min-width: 960px) { .home-bar .crumb-inner { max-width: 1080px; } }
+
+/* ---------- Page transitions: header stays put, content fades and rises in ---------- */
+@view-transition { navigation: auto; }
+.crumbbar { view-transition-name: topbar; }
+::view-transition-old(root) { animation: page-out .2s ease both; }
+::view-transition-new(root) { animation: page-in .45s cubic-bezier(.22, .8, .24, 1) .05s both; }
+::view-transition-group(topbar) { animation-duration: .35s; }
+@keyframes page-out { to { opacity: 0; } }
+@keyframes page-in { from { opacity: 0; translate: 0 10px; } }
+/* browsers without cross-page transitions still get a soft fade-in */
+@supports not (view-transition-name: none) {
+  main { animation: page-in .45s cubic-bezier(.22, .8, .24, 1) both; }
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  main { animation: none; }
+}
