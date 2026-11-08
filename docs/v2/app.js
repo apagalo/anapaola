@@ -212,6 +212,27 @@
     document.addEventListener('click', function (e) { if (sw.open && !sw.contains(e.target)) sw.open = false; });
   }
 
+  // ---------- HEADER: hide while reading down, show again on the way up ----------
+  var bar = document.querySelector('.crumbbar');
+  if (bar) {
+    var lastY = window.scrollY, ticking = false;
+    function busyBar() {
+      return bar.contains(document.activeElement) || document.querySelector('.case-switch[open]') || document.querySelector('dialog[open]');
+    }
+    function onScroll() {
+      ticking = false;
+      var y = Math.max(0, window.scrollY), dy = y - lastY;
+      if (Math.abs(dy) < 6) return;
+      if (dy > 0 && y > bar.offsetHeight + 40 && !busyBar()) bar.classList.add('is-hidden');
+      else if (dy < 0) bar.classList.remove('is-hidden');
+      lastY = y;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+    }, { passive: true });
+    bar.addEventListener('focusin', function () { bar.classList.remove('is-hidden'); });
+  }
+
   // ---------- CARD HOVER: pointer position for tilt + spotlight ----------
   document.querySelectorAll('.bento .tile:not(.t-prints)').forEach(function (tile) {
     tile.addEventListener('pointermove', function (e) {

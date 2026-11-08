@@ -1074,3 +1074,12 @@ html:has(.modal[open]) { overflow: hidden; }
   @view-transition { navigation: none; }
   main { animation: none; }
 }
+
+/* ---------- Header hides on scroll down, returns on scroll up ---------- */
+.crumbbar { transition: translate .35s cubic-bezier(.22, .8, .24, 1), box-shadow .35s ease; }
+.crumbbar.is-hidden { translate: 0 calc(-100% - 2px); }
+@media (prefers-reduced-motion: reduce) { .crumbbar { transition: none; } }
+
+/* Home pill sits back: no fill, same hairline as the header divider */
+.back-btn { background: transparent; border-color: var(--line); }
+.back-btn:hover { background: color-mix(in srgb, var(--tile) 50%, transparent); border-color: var(--line-strong); }
