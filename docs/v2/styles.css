@@ -1224,3 +1224,9 @@ html:has(.book-sheet.is-full.is-shown) { overflow: hidden; }
 /* footer: same space under the text as between the line and the text */
 .foot, .foot { padding-bottom: 20px; }
 @media (min-width: 1240px) { .foot { padding-bottom: 20px; } }
+
+/* home intro: scrolls up with the page, then holds like the case legend */
+@media (min-width: 960px) {
+  .home .lead { top: max(61px, calc(var(--bar-vis, 61px) + 24px)); transition: top .28s cubic-bezier(.22, .8, .24, 1); }
+}
+@media (prefers-reduced-motion: reduce) { .home .lead { transition: none; } }
